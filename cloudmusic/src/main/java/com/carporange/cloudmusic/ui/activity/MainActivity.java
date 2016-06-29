@@ -62,6 +62,6 @@ public class MainActivity extends BaseActivity implements MainFragment.OnHomeCli
 
     @Override
     public void onHomeClick() {
-        mDrawerLayout.openDrawer(Gravity.LEFT);
+        mDrawerLayout.openDrawer(Gravity.LEFT);//此处是将主页面的按钮事件,在activity里面处理,  也可学习点击设置按钮时候的处理方式
     }
 }
