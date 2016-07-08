@@ -71,4 +71,19 @@ public class MainActivity extends BaseActivity implements MainFragment.OnHomeCli
         T.showShort(this, "退出程序点击了");
     }
 
+        long time = 0;
+/*    @Override
+    public void onBackPressed() {
+        if (System.currentTimeMillis() - time > 2000) {
+            T.showShort(this, "再按一次退出程序");
+            time = System.currentTimeMillis();
+        } else {
+            System.exit(0);
+        }
+    }*/
+
+    @Override
+    public void onBackPressed() {//此处要把super.onBackPressed()去掉,要不然还是执行父类的退出
+        T.showShort(this, "小样你还想退出吗?");
+    }
 }
