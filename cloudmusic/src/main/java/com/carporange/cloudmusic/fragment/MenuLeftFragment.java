@@ -1,6 +1,8 @@
 package com.carporange.cloudmusic.fragment;
 
+import android.app.Activity;
 import android.app.Fragment;
+import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.widget.LinearLayoutManager;
@@ -23,15 +25,26 @@ import java.util.List;
 /**
  * Created by liuhui on 2016/6/27.
  */
-public class MenuLeftFragment extends Fragment {
+public class MenuLeftFragment extends Fragment implements View.OnClickListener {
 
     private RecyclerView mRecyclerView;
     private View mContentView;
-
+    public OnLeftClickListener mOnHomeClickListener;
     public MenuLeftFragment() {
 
     }
 
+   /* @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+    mOnHomeClickListener = (OnLeftClickListener) context;  //
+    }*/
+
+    @Override
+    public void onAttach(Activity activity) {
+        super.onAttach(activity);
+        mOnHomeClickListener = (OnLeftClickListener) activity;
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -48,6 +61,7 @@ public class MenuLeftFragment extends Fragment {
             }
         });
         initViews();
+        mContentView.findViewById(R.id.exit).setOnClickListener(this);
         return mContentView;
     }
 
@@ -83,4 +97,12 @@ public class MenuLeftFragment extends Fragment {
         mRecyclerView.setAdapter(adapter);
     }
 
+    @Override
+    public void onClick(View v) {
+        mOnHomeClickListener.onLeftClick();
+    }
+
+    public interface OnLeftClickListener {
+        void onLeftClick();
+    }
 }

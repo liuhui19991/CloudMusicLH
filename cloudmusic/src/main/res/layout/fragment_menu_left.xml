@@ -32,6 +32,7 @@
             android:background="?attr/divider_color"/>
 
         <TextView
+            android:id="@+id/exit"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
