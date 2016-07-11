@@ -5,24 +5,24 @@ import android.view.View;
 
 /**
  * View的背景色Setter
- * @author mrsimple
  *
+ * @author mrsimple
  */
 public class ViewBackgroundColorSetter extends ViewSetter {
 
-	public ViewBackgroundColorSetter(View target, int resId) {
-		super(target, resId);
-	}
-	
-	public ViewBackgroundColorSetter(int viewId, int resId) {
-		super(viewId, resId);
-	}
+    public ViewBackgroundColorSetter(View target, int resId) {
+        super(target, resId);
+    }
 
-	@Override
-	public void setValue(Theme newTheme, int themeId) {
-		if ( mView != null ) {
-			mView.setBackgroundColor(getColor(newTheme));
-		}
-	}
+    public ViewBackgroundColorSetter(int viewId, int resId) {
+        super(viewId, resId);
+    }
+
+    @Override
+    public void setValue(Theme newTheme, int themeId) {
+        if (mView != null) {
+            mView.setBackgroundColor(getColor(newTheme));
+        }
+    }
 
 }

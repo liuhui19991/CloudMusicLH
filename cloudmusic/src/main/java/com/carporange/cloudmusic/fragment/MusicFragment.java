@@ -20,10 +20,17 @@ public class MusicFragment extends BaseFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        if (mContentView == null) {
-            mContentView = inflater.inflate(R.layout.fragment_music, container, false);
-        }
-        return mContentView;
+        return super.onCreateView(inflater, container, savedInstanceState);
+    }
+
+    @Override
+    protected void onVisible() {
+
+    }
+
+    @Override
+    public int getLayoutId() {
+        return R.layout.fragment_music;
     }
 
 }

@@ -3,17 +3,10 @@ package com.carporange.cloudmusic.util;
 import android.content.Context;
 import android.os.Environment;
 import android.text.TextUtils;
-import android.util.EventLogTags;
 import android.util.Log;
 
 import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
 import java.math.BigDecimal;
-import java.net.URL;
-import java.net.URLConnection;
 
 /**
  * Created by liuhui on 2016/6/27.
@@ -22,6 +15,7 @@ public class CacheUtil {
 
     public static String mVoiceDir = "voice";
     private static final String TAG = "CacheUtil";
+
     //该方法会判断当前sd卡是否存在，然后选择缓存地址
     public static File getDiskCacheDir(Context context, String uniqueName) {
         String cachePath;
@@ -32,8 +26,8 @@ public class CacheUtil {
             cachePath = context.getCacheDir().getPath();  //20160624注
         }*/
         Log.e(TAG, "getDiskCacheDir:1" + TextUtils.isEmpty(""));
-        Log.e(TAG, "getDiskCacheDir:2"+TextUtils.isEmpty(null));
-        System.out.println(TextUtils.isEmpty("")+"========"+TextUtils.isEmpty(null));
+        Log.e(TAG, "getDiskCacheDir:2" + TextUtils.isEmpty(null));
+        System.out.println(TextUtils.isEmpty("") + "========" + TextUtils.isEmpty(null));
         cachePath = context.getCacheDir().getPath();
         return new File(cachePath + File.separator + uniqueName);
     }

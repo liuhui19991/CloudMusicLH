@@ -30,7 +30,7 @@ public class MenuLeftRvAdapter extends RecyclerView.Adapter<MenuLeftRvAdapter.Ba
     private List<BaseMenuItem> mList;
     private OnSwitchListener mSwitchListner;
 
-    public interface OnSwitchListener{
+    public interface OnSwitchListener {
         void onSwitch(boolean isChecked);
     }
 
@@ -91,7 +91,7 @@ public class MenuLeftRvAdapter extends RecyclerView.Adapter<MenuLeftRvAdapter.Ba
                 final ImageTextSwitchMenuItem menuItem2 = (ImageTextSwitchMenuItem) menuItem;
                 viewHolder2.tv_content.setText(menuItem2.getContent());
                 viewHolder2.switchCompat.setChecked(menuItem2.isChecked());
-                if(mSwitchListner != null) {
+                if (mSwitchListner != null) {
                     viewHolder2.switchCompat.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
                         @Override
                         public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
@@ -145,6 +145,7 @@ public class MenuLeftRvAdapter extends RecyclerView.Adapter<MenuLeftRvAdapter.Ba
 
     public class ImageTextSwitchViewHolder extends ImageTextViewHolder {
         public SwitchCompat switchCompat;
+
         public ImageTextSwitchViewHolder(View itemView) {
             super(itemView);
             switchCompat = (SwitchCompat) itemView.findViewById(R.id.switch_compat);
@@ -155,18 +156,21 @@ public class MenuLeftRvAdapter extends RecyclerView.Adapter<MenuLeftRvAdapter.Ba
         public static BaseMenuItem createDividerrMenu() {
             return new BaseMenuItem();
         }
+
         public static AvatarMenuItem createAvatarMenu() {
             return new AvatarMenuItem();
         }
+
         public static ImageTextMenuItem createImageTextMenu(String content) {
             return new ImageTextMenuItem(content);
         }
+
         public static ImageTextSwitchMenuItem createImageTextSwitchMenu(String content, boolean isChecked) {
             return new ImageTextSwitchMenuItem(content, isChecked);
         }
     }
 
-    public static class BaseMenuItem{
+    public static class BaseMenuItem {
 
         protected BaseMenuItem() {
 
@@ -215,9 +219,10 @@ public class MenuLeftRvAdapter extends RecyclerView.Adapter<MenuLeftRvAdapter.Ba
     public static class ImageTextMenuItem extends BaseMenuItem {
         protected String content;
 
-        protected  ImageTextMenuItem(String content) {
+        protected ImageTextMenuItem(String content) {
             this.content = content;
         }
+
         public String getContent() {
             return content;
         }
@@ -225,6 +230,7 @@ public class MenuLeftRvAdapter extends RecyclerView.Adapter<MenuLeftRvAdapter.Ba
         public void setContent(String content) {
             this.content = content;
         }
+
         public int getType() {
             return ITEM_TYPE_IMAGE_TEXT;
         }
@@ -232,10 +238,12 @@ public class MenuLeftRvAdapter extends RecyclerView.Adapter<MenuLeftRvAdapter.Ba
 
     public static class ImageTextSwitchMenuItem extends ImageTextMenuItem {
         private boolean isChecked;
-        protected  ImageTextSwitchMenuItem(String content, boolean isChecked) {
+
+        protected ImageTextSwitchMenuItem(String content, boolean isChecked) {
             super(content);
             this.isChecked = isChecked;
         }
+
         public boolean isChecked() {
             return isChecked;
         }
@@ -243,6 +251,7 @@ public class MenuLeftRvAdapter extends RecyclerView.Adapter<MenuLeftRvAdapter.Ba
         public void setIsChecked(boolean isChecked) {
             this.isChecked = isChecked;
         }
+
         public int getType() {
             return ITEM_TYPE_IMAGE_TEXT_SWITCH;
         }

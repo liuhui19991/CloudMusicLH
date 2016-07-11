@@ -2,16 +2,9 @@ package com.carporange.cloudmusic.fragment;
 
 
 import android.app.Activity;
-import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.view.ViewParent;
-import android.widget.ImageView;
 import android.widget.RadioGroup;
 
 import com.carporange.cloudmusic.R;
@@ -22,12 +15,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 
 /**
  * Created by liuhui on 2016/6/27.
  */
-public class MainFragment extends BaseFragment{
+public class MainFragment extends BaseFragment {
     private Activity mActivity;
     @BindView(R.id.viewPager_main)
     ViewPager mViewPager;
@@ -44,15 +36,8 @@ public class MainFragment extends BaseFragment{
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        if (mContentView == null) {
-            mContentView = inflater.inflate(R.layout.fragment_main, container, false);
-            ButterKnife.bind(this, mContentView);
-            initViews();
-            setListeners();
-        }
-        return mContentView;
+    public int getLayoutId() {
+        return R.layout.fragment_main;
     }
 
     @Override
@@ -60,7 +45,8 @@ public class MainFragment extends BaseFragment{
         super.onDetach();
     }
 
-    private void initViews() {
+    @Override
+    protected void initViews() {
         List<Fragment> list = new ArrayList<>();
         list.add(new DiscoverFragment());
         list.add(new MusicFragment());
@@ -71,7 +57,13 @@ public class MainFragment extends BaseFragment{
         mRadioGroup.check(R.id.rb_discover);
     }
 
-    private void setListeners() {
+    @Override
+    protected void onVisible() {
+
+    }
+
+    @Override
+    public void setListeners() {
         mViewPager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {

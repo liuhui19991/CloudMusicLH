@@ -1,38 +1,30 @@
 package com.carporange.cloudmusic.fragment;
 
 import android.app.Activity;
-import android.app.Fragment;
-import android.content.Context;
-import android.os.Bundle;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.Gravity;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.carporange.cloudmusic.R;
 import com.carporange.cloudmusic.adapter.MenuLeftRvAdapter;
 import com.carporange.cloudmusic.ui.activity.MainActivity;
+import com.carporange.cloudmusic.ui.base.BaseFragment;
 import com.carporange.cloudmusic.util.SpUtil;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 /**
  * Created by liuhui on 2016/6/27.
  */
-public class MenuLeftFragment extends Fragment {//这个类在布局文件中绑定了类名
+public class MenuLeftFragment extends BaseFragment {//这个类在布局文件中绑定了类名
 
     private RecyclerView mRecyclerView;
-    private View mContentView;
     public OnLeftClickListener mOnLeftClickListener;
 
     public MenuLeftFragment() {
@@ -57,17 +49,17 @@ public class MenuLeftFragment extends Fragment {//这个类在布局文件中绑
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        if (mContentView == null) {
-            mContentView = inflater.inflate(R.layout.fragment_menu_left, container, false);
-            ButterKnife.bind(this, mContentView);//绑定黄油刀
-            initViews();
-        }
-        return mContentView;
+    public int getLayoutId() {
+        return R.layout.fragment_menu_left;
     }
 
-    private void initViews() {
+    @Override
+    protected void onVisible() {
+
+    }
+
+    @Override
+    public void initViews() {
         mRecyclerView = (RecyclerView) mContentView.findViewById(R.id.recycler_view);
         List<MenuLeftRvAdapter.BaseMenuItem> menuItemList = new ArrayList<>();
         MenuLeftRvAdapter.AvatarMenuItem avatarMenuItem = MenuLeftRvAdapter.MenuItemFactory.createAvatarMenu();
@@ -110,6 +102,7 @@ public class MenuLeftFragment extends Fragment {//这个类在布局文件中绑
     @OnClick(R.id.exit)
     public void myExit(View v) {//退出按钮的点击事件执行的方法,这里的参数可以不写
         mOnLeftClickListener.onLeftClick();
+//        EventBus.getDefault().post(new ExitEvent());//使用EventBus进行点击退出应用的事件传递
     }
 
     public interface OnLeftClickListener {

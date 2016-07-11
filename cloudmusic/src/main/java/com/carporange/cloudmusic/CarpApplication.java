@@ -7,8 +7,9 @@ import android.app.Application;
  * email:987424501@qq.com
  * phone:18298376275
  */
-public class CarpApplication extends Application{
+public class CarpApplication extends Application {
     private static CarpApplication application;
+
     public static CarpApplication getInstance() {
         return application;
     }

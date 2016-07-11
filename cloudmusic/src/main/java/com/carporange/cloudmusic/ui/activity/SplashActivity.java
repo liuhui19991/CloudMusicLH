@@ -2,14 +2,29 @@ package com.carporange.cloudmusic.ui.activity;
 
 import android.content.Intent;
 import android.os.SystemClock;
+import android.view.animation.AlphaAnimation;
+import android.view.animation.Animation;
+import android.view.animation.AnimationSet;
+import android.view.animation.ScaleAnimation;
+import android.widget.LinearLayout;
 
 import com.carporange.cloudmusic.R;
 import com.carporange.cloudmusic.ui.base.BaseActivity;
+
+import butterknife.BindView;
 
 /**
  * Created by liuhui on 2016/6/27.
  */
 public class SplashActivity extends BaseActivity {
+    @BindView(R.id.background)
+    LinearLayout mLinearLayout;
+
+    @Override
+    protected int getLayoutId() {
+        return R.layout.activity_splash;
+    }
+
     @Override
     public void initActionBar() {
 
@@ -17,12 +32,21 @@ public class SplashActivity extends BaseActivity {
 
     @Override
     public void initViews() {
-            setContentView(R.layout.activity_splash);
+        AlphaAnimation alphaAnimation = new AlphaAnimation(0f, 1.0f);
+        alphaAnimation.setDuration(2000);
+        ScaleAnimation scaleAnimation = new ScaleAnimation(0.6f, 1.0f, 0.6f, 1f,
+                Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f);
+        scaleAnimation.setDuration(2000);
+        AnimationSet animationSet = new AnimationSet(true);
+        animationSet.addAnimation(alphaAnimation);
+        animationSet.addAnimation(scaleAnimation);
+        mLinearLayout.startAnimation(animationSet);
+
         new Thread(new Runnable() {
             @Override
             public void run() {
                 SystemClock.sleep(2000);
-                startActivity(new Intent(SplashActivity.this,MainActivity.class));
+                startActivity(new Intent(SplashActivity.this, MainActivity.class));
                 finish();
             }
         }).start();

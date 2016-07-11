@@ -11,6 +11,7 @@ public class SpUtil {
     public static void put(String key, String value) {
         CarpApplication.getInstance().getSharedPreferences("data", Context.MODE_PRIVATE).edit().putString(key, value).apply();
     }
+
     public static void put(String key, boolean value) {
         CarpApplication.getInstance().getSharedPreferences("data", Context.MODE_PRIVATE).edit().putBoolean(key, value).apply();
     }
