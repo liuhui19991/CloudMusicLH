@@ -21,16 +21,18 @@ import com.carporange.cloudmusic.ui.base.BaseFragment;
 import java.util.ArrayList;
 import java.util.List;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
 /**
  * Created by liuhui on 2016/6/27.
  */
-public class MainFragment extends BaseFragment implements View.OnClickListener{
-
-    private ImageView mHomeImage;
-    private OnHomeClickListener mOnHomeClickListener;
+public class MainFragment extends BaseFragment{
     private Activity mActivity;
-    private ViewPager mViewPager;
-    private RadioGroup mRadioGroup;
+    @BindView(R.id.viewPager_main)
+    ViewPager mViewPager;
+    @BindView(R.id.radioGroup)
+    RadioGroup mRadioGroup;
 
     public MainFragment() {
     }
@@ -39,14 +41,14 @@ public class MainFragment extends BaseFragment implements View.OnClickListener{
     public void onAttach(Activity activity) {
         super.onAttach(activity);
         mActivity = activity;
-        mOnHomeClickListener = (OnHomeClickListener) mActivity;
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        if(mContentView == null) {
+        if (mContentView == null) {
             mContentView = inflater.inflate(R.layout.fragment_main, container, false);
+            ButterKnife.bind(this, mContentView);
             initViews();
             setListeners();
         }
@@ -56,13 +58,9 @@ public class MainFragment extends BaseFragment implements View.OnClickListener{
     @Override
     public void onDetach() {
         super.onDetach();
-        mOnHomeClickListener = null;
     }
 
     private void initViews() {
-        mHomeImage = findView(R.id.actionbar_home);
-        mHomeImage.setOnClickListener(this);
-        mViewPager = findView(R.id.viewPager_main);
         List<Fragment> list = new ArrayList<>();
         list.add(new DiscoverFragment());
         list.add(new MusicFragment());
@@ -70,7 +68,6 @@ public class MainFragment extends BaseFragment implements View.OnClickListener{
         FragmentPagerAdapter fpa = new CarpFragmentPagerAdapter(list, getChildFragmentManager());
         mViewPager.setOffscreenPageLimit(3);
         mViewPager.setAdapter(fpa);
-        mRadioGroup = findView(R.id.radioGroup);
         mRadioGroup.check(R.id.rb_discover);
     }
 
@@ -118,21 +115,4 @@ public class MainFragment extends BaseFragment implements View.OnClickListener{
             }
         });
     }
-
-    @Override
-    public void onClick(View v) {
-        switch (v.getId()) {
-            case R.id.actionbar_home:
-                if(mOnHomeClickListener != null) {
-                    mOnHomeClickListener.onHomeClick();
-                }
-                break;
-        }
-    }
-
-    public interface OnHomeClickListener{
-        void onHomeClick();
-    }
-
-
 }

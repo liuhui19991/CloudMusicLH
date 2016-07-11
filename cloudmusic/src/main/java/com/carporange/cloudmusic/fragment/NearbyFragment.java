@@ -16,7 +16,9 @@ public class NearbyFragment extends BaseFragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_nearby,container,false);
-        return view;
+        if (mContentView == null) {
+            mContentView = inflater.inflate(R.layout.fragment_nearby, container, false);
+        }
+        return mContentView;
     }
 }

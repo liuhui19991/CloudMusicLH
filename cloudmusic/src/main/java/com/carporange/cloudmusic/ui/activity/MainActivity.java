@@ -7,6 +7,7 @@ import android.support.v4.widget.DrawerLayout;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 
 import com.carporange.cloudmusic.R;
 import com.carporange.cloudmusic.fragment.MainFragment;
@@ -16,13 +17,19 @@ import com.carporange.cloudmusic.util.DensityUtil;
 import com.carporange.cloudmusic.util.L;
 import com.carporange.cloudmusic.util.T;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
+
 /**
  * Created by liuhui on 2016/6/27.
  */
-public class MainActivity extends BaseActivity implements MainFragment.OnHomeClickListener,MenuLeftFragment.OnLeftClickListener{
+public class MainActivity extends BaseActivity implements MenuLeftFragment.OnLeftClickListener {
 
-    private DrawerLayout mDrawerLayout;
-    private View mFragmentLeft;
+    @BindView(R.id.drawer_layout)
+    DrawerLayout mDrawerLayout;
+    @BindView(R.id.fragment_left)
+    View mFragmentLeft;
     private Fragment mMainFragment;
 
     @Override
@@ -33,10 +40,9 @@ public class MainActivity extends BaseActivity implements MainFragment.OnHomeCli
     @Override
     public void initViews() {
         setContentView(R.layout.activity_main);
-        mFragmentLeft = findViewById(R.id.fragment_left);
+        ButterKnife.bind(this);
         ViewGroup.LayoutParams layoutParams = mFragmentLeft.getLayoutParams();
         layoutParams.width = DensityUtil.getDisplayWidth(this) * 4 / 5;
-        mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         FragmentManager fm = getSupportFragmentManager();
         if (mMainFragment == null) {
             mMainFragment = new MainFragment();
@@ -45,7 +51,16 @@ public class MainActivity extends BaseActivity implements MainFragment.OnHomeCli
     }
 
     public DrawerLayout getDrawerLayout() {
+        mDrawerLayout.openDrawer(Gravity.LEFT);
         return mDrawerLayout;
+    }
+
+    /**
+     * 开启侧边栏
+     */
+    @OnClick(R.id.actionbar_home)
+    public void openDrawerLayout() {
+        mDrawerLayout.openDrawer(Gravity.LEFT);
     }
 
     @Override
@@ -58,20 +73,14 @@ public class MainActivity extends BaseActivity implements MainFragment.OnHomeCli
 //        ab.setDisplayHomeAsUpEnabled(true);
     }
 
-
     @Override
-    public void onHomeClick() {
-        mDrawerLayout.openDrawer(Gravity.LEFT);//此处是将主页面的按钮事件,在activity里面处理,  也可学习点击设置按钮时候的处理方式
-    }
-
-    @Override
-    public void onLeftClick() {//侧边栏的点击对象
+    public void onLeftClick() {////此处是将侧边栏按钮事件,在activity里面处理,  也可学习点击设置按钮时候的处理方式
         mDrawerLayout.closeDrawer(Gravity.LEFT);
         L.e("侧边栏传来的退出");
         T.showShort(this, "退出程序点击了");
     }
 
-        long time = 0;
+    long time = 0;
 /*    @Override
     public void onBackPressed() {
         if (System.currentTimeMillis() - time > 2000) {

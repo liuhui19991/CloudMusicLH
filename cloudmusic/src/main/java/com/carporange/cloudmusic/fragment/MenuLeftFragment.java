@@ -22,46 +22,48 @@ import com.carporange.cloudmusic.util.SpUtil;
 import java.util.ArrayList;
 import java.util.List;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
+
 /**
  * Created by liuhui on 2016/6/27.
  */
-public class MenuLeftFragment extends Fragment implements View.OnClickListener {
+public class MenuLeftFragment extends Fragment {//这个类在布局文件中绑定了类名
 
     private RecyclerView mRecyclerView;
     private View mContentView;
-    public OnLeftClickListener mOnHomeClickListener;
+    public OnLeftClickListener mOnLeftClickListener;
+
     public MenuLeftFragment() {
 
     }
 
-   /* @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-    mOnHomeClickListener = (OnLeftClickListener) context;  //
-    }*/
+    /* @Override
+     public void onAttach(Context context) {
+         super.onAttach(context);
+     mOnHomeClickListener = (OnLeftClickListener) context;  //
+     }*/
+    @Override
+    public void onDetach() {
+        super.onDetach();
+        mOnLeftClickListener = null;
+    }
 
     @Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);
-        mOnHomeClickListener = (OnLeftClickListener) activity;
+        mOnLeftClickListener = (OnLeftClickListener) activity;
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        mContentView = inflater.inflate(R.layout.fragment_menu_left, container, false);
-        TextView tv = (TextView) mContentView.findViewById(R.id.tv_setting);
-        tv.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                MainActivity mainActivity = (MainActivity) getActivity();
-                DrawerLayout drawerLayout = mainActivity.getDrawerLayout();
-                drawerLayout.closeDrawer(Gravity.LEFT);
-                Toast.makeText(mainActivity, "设置", Toast.LENGTH_SHORT).show();
-            }
-        });
-        initViews();
-        mContentView.findViewById(R.id.exit).setOnClickListener(this);
+        if (mContentView == null) {
+            mContentView = inflater.inflate(R.layout.fragment_menu_left, container, false);
+            ButterKnife.bind(this, mContentView);//绑定黄油刀
+            initViews();
+        }
         return mContentView;
     }
 
@@ -97,9 +99,17 @@ public class MenuLeftFragment extends Fragment implements View.OnClickListener {
         mRecyclerView.setAdapter(adapter);
     }
 
-    @Override
-    public void onClick(View v) {
-        mOnHomeClickListener.onLeftClick();
+    @OnClick(R.id.tv_setting)
+    public void mySetting() {//设置按钮的点击事件执行的方法
+        MainActivity mainActivity = (MainActivity) getActivity();
+        DrawerLayout drawerLayout = mainActivity.getDrawerLayout();
+        drawerLayout.closeDrawer(Gravity.LEFT);
+        Toast.makeText(mainActivity, "设置", Toast.LENGTH_SHORT).show();
+    }
+
+    @OnClick(R.id.exit)
+    public void myExit(View v) {//退出按钮的点击事件执行的方法,这里的参数可以不写
+        mOnLeftClickListener.onLeftClick();
     }
 
     public interface OnLeftClickListener {

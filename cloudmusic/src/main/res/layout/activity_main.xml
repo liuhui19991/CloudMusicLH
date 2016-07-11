@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v4.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.v4.widget.DrawerLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/drawer_layout"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+  >
 
 
     <LinearLayout
@@ -10,13 +12,16 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
+        <include layout="@layout/toolbar_hometop_layout"/>
+
         <FrameLayout
             android:id="@+id/framelayout"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="1"/>
+            android:layout_weight="1"
+            />
 
-        <include layout="@layout/bottom_play_layout"/>
+        <!--<include layout="@layout/bottom_play_layout"/>    底边栏的播放条-->
 
     </LinearLayout>
 

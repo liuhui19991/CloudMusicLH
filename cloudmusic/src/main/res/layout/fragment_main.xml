@@ -1,11 +1,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical">
-
-    <include
-        android:id="@+id/toolbar"
-        layout="@layout/toolbar_homepage_layout"/>
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="vertical">
 
     <android.support.v4.view.ViewPager
         android:id="@+id/viewPager_main"
@@ -13,4 +9,7 @@
         android:layout_height="0dp"
         android:layout_weight="1"/>
 
+    <include
+        android:id="@+id/toolbar"
+        layout="@layout/toolbar_homepage_layout"/>
 </LinearLayout>

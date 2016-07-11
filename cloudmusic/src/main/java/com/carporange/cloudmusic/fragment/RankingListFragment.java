@@ -39,12 +39,10 @@ public class RankingListFragment extends BaseFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        if (view == null) {
-            view = inflater.inflate(R.layout.fragment_ranking_list, container, false);
-            initView();
+        if (mContentView == null) {
+            mContentView = inflater.inflate(R.layout.fragment_ranking_list, container, false);
         }
-        return view;
+        return mContentView;
     }
 
     private void initView() {

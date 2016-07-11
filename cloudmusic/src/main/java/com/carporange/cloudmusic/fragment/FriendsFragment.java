@@ -17,11 +17,16 @@ import com.carporange.cloudmusic.ui.base.BaseFragment;
 import java.util.ArrayList;
 import java.util.List;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
 /**
  * Created by liuhui on 2016/6/27.
  */
 public class FriendsFragment extends BaseFragment {
+    @BindView(R.id.tabLayout)
     TabLayout mTabLayout;
+    @BindView(R.id.viewPager_discovery)
     ViewPager mViewPager;
 
     @Nullable
@@ -29,14 +34,13 @@ public class FriendsFragment extends BaseFragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         if (mContentView == null) {
             mContentView = inflater.inflate(R.layout.fragment_friends, container, false);
+            ButterKnife.bind(this, mContentView);
             initViews();
         }
         return mContentView;
     }
 
     private void initViews() {
-        mTabLayout = findView(R.id.tabLayout);
-        mViewPager = findView(R.id.viewPager_discovery);
         FriendsFragmentPagerAdapter fpa = new FriendsFragmentPagerAdapter(getChildFragmentManager());
         fpa.addFragment(new DynamicFragment(), "动态");
         fpa.addFragment(new NearbyFragment(), "附近");
