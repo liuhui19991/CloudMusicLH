@@ -27,7 +27,7 @@
         <item name="src_icon_message">@drawable/icon_message_night</item>
         <item name="toolbar_color">@color/bottom_bg_night</item>
     </style>
-        <!--自定义的waitdialog和本项目中WaitDialog这个类没有关系-->
+    <!--自定义的waitdialog和本项目中WaitDialog这个类没有关系-->
     <style name="TRANSDIALOG" parent="@android:style/Theme.Dialog">
         <item name="android:backgroundDimEnabled">false</item>
         <item name="android:windowNoTitle">true</item>
