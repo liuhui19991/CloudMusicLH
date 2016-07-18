@@ -2,6 +2,7 @@ package com.carporange.cloudmusic.fragment;
 
 
 import android.graphics.Color;
+import android.view.View;
 
 import com.carporange.cloudmusic.R;
 import com.carporange.cloudmusic.ui.base.BaseFragment;
@@ -39,6 +40,12 @@ public class SongMenuFragment extends BaseFragment {
 
         // 改变圆心颜色。
         mCircleProgress.setInCircleColor(Color.TRANSPARENT);
+        mCircleProgress.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+//                mCircleProgress.setInCircleColor(Color.parseColor("#897654"));//点击时候改变进度圆内圆的颜色
+            }
+        });
     }
 
     @Override

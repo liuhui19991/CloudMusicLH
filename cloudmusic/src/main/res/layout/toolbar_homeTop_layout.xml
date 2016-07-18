@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.v7.widget.Toolbar xmlns:android="http://schemas.android.com/apk/res/android"
                                    android:layout_width="match_parent"
-                                   android:paddingTop="@dimen/dp_25"
                                    android:layout_height="65dp"
                                    android:background="?attr/toolbar_color"
-                                   android:gravity="center_vertical">
+                                   android:gravity="center_vertical"
+                                   android:paddingTop="@dimen/dp_25">
 
     <TextView
         android:id="@+id/tv_title"
@@ -12,19 +12,19 @@
         android:layout_height="match_parent"
         android:layout_gravity="center"
         android:text="@string/title"
-        android:textSize="@dimen/dp_25"
         android:textColor="@color/white"
+        android:textSize="@dimen/dp_25"
         />
 
     <ImageView
         android:id="@+id/actionbar_home"
         android:layout_width="@dimen/toolbar_real_height"
         android:layout_height="match_parent"
-        android:src="@drawable/actionbar_menu"
-        android:scaleType="center"
         android:layout_gravity="start"
+        android:background="@drawable/background_actionbar_image_selector"
         android:clickable="true"
-        android:background="@drawable/background_actionbar_image_selector"/>
+        android:scaleType="center"
+        android:src="@drawable/actionbar_menu"/>
 
     <ImageView
         android:layout_width="@dimen/toolbar_real_height"

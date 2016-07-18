@@ -8,9 +8,12 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:text="个性推荐"/>
+
     <com.carporange.cloudmusic.widget.CircleImageView
         android:layout_width="66dp"
         android:layout_height="66dp"
+        android:layout_marginLeft="@dimen/dp_35"
+        android:layout_marginTop="@dimen/dp_35"
         android:src="@mipmap/circlepicture"
         />
 
