@@ -4,17 +4,24 @@
              android:layout_height="match_parent"
              tools:context="com.carporange.cloudmusic.fragment.PersonalRecommendationFragment">
 
-    <TextView
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="个性推荐"/>
+        android:orientation="vertical">
 
-    <com.carporange.cloudmusic.widget.CircleImageView
-        android:layout_width="66dp"
-        android:layout_height="66dp"
-        android:layout_marginLeft="@dimen/dp_35"
-        android:layout_marginTop="@dimen/dp_35"
-        android:src="@mipmap/circlepicture"
-        />
+        <com.carporange.cloudmusic.widget.CircleImageView
+            android:layout_width="66dp"
+            android:layout_height="66dp"
+            android:layout_marginLeft="@dimen/dp_35"
+            android:layout_marginTop="@dimen/dp_8"
+            android:src="@mipmap/circlepicture"
+            />
 
+        <Button
+            android:id="@+id/btn_bottom_dialog_control"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp_8"
+            android:text="Dialog 显示/隐藏"/>
+    </LinearLayout>
 </FrameLayout>
