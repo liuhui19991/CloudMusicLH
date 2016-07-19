@@ -1,6 +1,7 @@
 package com.carporange.cloudmusic.fragment;
 
 
+import android.app.Dialog;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomSheetBehavior;
 import android.support.design.widget.BottomSheetDialog;
@@ -24,12 +25,27 @@ import butterknife.OnClick;
  */
 public class PersonalRecommendationFragment extends BaseFragment {
     private BottomSheetDialog mBottomSheetDialog;
+    private Dialog mWaitDialog;
+    private boolean canCancel = true;
 
     public PersonalRecommendationFragment() {
     }
 
     @Override
     protected void onVisible() {
+        initWaitDialog();
+    }
+
+    private void initWaitDialog() {//展示我自定义的等待对话框
+        if (mWaitDialog == null) {
+            mWaitDialog = new Dialog(getActivity(), R.style.TRANSDIALOG);
+        }
+        mWaitDialog.setContentView(R.layout.trans_dialog);
+        mWaitDialog.getWindow().setBackgroundDrawableResource(R.color.transparent);
+        mWaitDialog.setCancelable(canCancel);
+        if (mWaitDialog != null) {
+            mWaitDialog.show();
+        }
     }
 
     @Override
@@ -37,6 +53,7 @@ public class PersonalRecommendationFragment extends BaseFragment {
         createBottomSheetDialog();
 
     }
+
     private void createBottomSheetDialog() {
         mBottomSheetDialog = new BottomSheetDialog(getActivity());
         View view = LayoutInflater.from(getActivity()).inflate(R.layout.dialog_bottom_sheet, null, false);

@@ -33,7 +33,7 @@ import com.carporange.cloudmusic.R;
 
 /**
  * 自定义的圆形进度条
- * Created by liuhui on 2016/7/15.
+ * Created by liuhui on 2015/7/15.
  */
 public class CircleTextProgressbar extends TextView {
 

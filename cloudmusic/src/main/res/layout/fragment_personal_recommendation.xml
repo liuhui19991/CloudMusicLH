@@ -23,5 +23,14 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/dp_8"
             android:text="Dialog 显示/隐藏"/>
+
     </LinearLayout>
+    <com.carporange.cloudmusic.widget.LoadingView
+        android:id="@+id/lodingView"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:background="@drawable/loading"
+        android:layout_marginTop="76dp"
+        android:layout_gravity="center"
+        />
 </FrameLayout>
