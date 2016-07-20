@@ -17,6 +17,7 @@ package com.carporange.cloudmusic.util;
 
 import android.app.Activity;
 import android.support.annotation.StringRes;
+import android.support.design.widget.Snackbar;
 
 /**
  * 展示Snackbar的工具类
@@ -25,11 +26,11 @@ import android.support.annotation.StringRes;
 public class S {
 
     public static void show(Activity context, CharSequence msg) {
-        android.support.design.widget.Snackbar.make(context.getWindow().getDecorView(), msg, android.support.design.widget.Snackbar.LENGTH_LONG).show();
+        Snackbar.make(context.getWindow().getDecorView(), msg, Snackbar.LENGTH_LONG).show();
     }
 
     public static void show(Activity context, @StringRes int stringId) {
-        android.support.design.widget.Snackbar.make(context.getWindow().getDecorView(), stringId, android.support.design.widget.Snackbar.LENGTH_LONG).show();
+        Snackbar.make(context.getWindow().getDecorView(), stringId, Snackbar.LENGTH_LONG).show();
     }
 
 }
