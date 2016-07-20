@@ -1,6 +1,7 @@
 package com.carporange.cloudmusic.util;
 
 import android.app.Activity;
+import android.app.Fragment;
 import android.content.Context;
 import android.support.annotation.DrawableRes;
 import android.view.View;
@@ -17,7 +18,9 @@ import com.carporange.cloudmusic.R;
  */
 public class GlideUtil {
     private static final String TAG = "GlideUtil";
+
     /**
+     * 在activity中展示
      *
      * @param view
      * @param url
@@ -27,15 +30,34 @@ public class GlideUtil {
     }
 
     /**
-     *
-     * @param view  要展示的控件
-     * @param url  要展示的地址
-     * @param defaultImage  默认显示的图片
+     * 在Fragment中展示
+     * @param fragment
+     * @param url
+     */
+    public static void displayInFragment(Fragment fragment, ImageView view, String url) {
+        displayUrlFragment(fragment, view, url, R.mipmap.default_pic);
+    }
+
+    private static void displayUrlFragment(Fragment fragment, ImageView view, String url, int default_pic) {
+        if (fragment == null) {
+            L.e(TAG, "GlideUtil -> displayInFragment -> fragment is null");
+            return;
+        }
+        Glide.with(fragment)
+                .load(url)
+                .placeholder(R.mipmap.default_pic)
+                .into(view);
+    }
+
+    /**
+     * @param view         要展示的控件
+     * @param url          要展示的地址
+     * @param defaultImage 默认显示的图片
      */
     private static void displayUrl(final ImageView view, String url, @DrawableRes int defaultImage) {
         // 不能崩
         if (view == null) {
-            L.e(TAG, "GlideUtils -> display -> imageView is null");
+            L.e(TAG, "GlideUtil -> display -> imageView is null");
             return;
         }
         Context context = view.getContext();
@@ -68,12 +90,14 @@ public class GlideUtil {
             e.printStackTrace();
         }
     }
+
     /**
      * 没有默认图片----有填充样式，低优先级加载
+     *
      * @param context
      * @param iv
      * @param path
-     * @param center true 可能会完全填充，但图像可能不会完整显示使用较多 false 自适应填充
+     * @param center  true 可能会完全填充，但图像可能不会完整显示使用较多 false 自适应填充
      */
     public static void loadLowPriority(Context context, ImageView iv, String path, boolean center) {
 
