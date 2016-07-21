@@ -49,8 +49,16 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
      * @param position
      */
     @Override
-    public void onBindViewHolder(ViewHolder holder, int position) {
+    public void onBindViewHolder(final ViewHolder holder, int position) {
         holder.mTextView.setText(datas.get(position));
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (mListener != null) {
+                    mListener.onItemCclick(holder.itemView, holder.getLayoutPosition());
+                }
+            }
+        });
     }
 
     /**
@@ -64,20 +72,14 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
     /**
      * 自定义的ViewHolder，持有每个Item的的所有界面元素
      */
-    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+    public class ViewHolder extends RecyclerView.ViewHolder{
         public TextView mTextView;
 
         public ViewHolder(View view) {
             super(view);
-            view.setOnClickListener(this);
             mTextView = (TextView) view.findViewById(R.id.text);
         }
 
-        @Override
-        public void onClick(View v) {
-            if (mListener != null) {
-                mListener.onItemCclick(v, getAdapterPosition());
-            }
-        }
+
     }
 }

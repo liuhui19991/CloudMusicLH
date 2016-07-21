@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
@@ -11,7 +12,6 @@ import android.view.View;
 
 import com.carporange.cloudmusic.R;
 import com.carporange.cloudmusic.adapter.MyAdapter;
-import com.carporange.cloudmusic.util.L;
 import com.carporange.cloudmusic.util.S;
 import com.jcodecraeer.xrecyclerview.ProgressStyle;
 import com.jcodecraeer.xrecyclerview.XRecyclerView;
@@ -43,10 +43,8 @@ public class BeautfulActivity extends AppCompatActivity {
     }
 
     private void initView() {
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
 //        linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);//默认垂直排列,可以不用写
-        mXRecyclerView.setLayoutManager(linearLayoutManager);
-
+        mXRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         mXRecyclerView.setRefreshProgressStyle(ProgressStyle.BallSpinFadeLoader);
         mXRecyclerView.setLoadingMoreProgressStyle(ProgressStyle.SquareSpin);
 //        mXRecyclerView.setPullRefreshEnabled(false);//不允许下拉刷新
@@ -110,10 +108,9 @@ public class BeautfulActivity extends AppCompatActivity {
             @Override
             public void onItemCclick(View v, int position) {
                 S.show(BeautfulActivity.this, "点击" + position);
-                L.e("我是");
             }
         });
-
+//        mXRecyclerView.addItemDecoration(new DividerItemDecoration(this,DividerItemDecoration.VERTICAL_LIST));//设置分割线
     }
 
     /**
