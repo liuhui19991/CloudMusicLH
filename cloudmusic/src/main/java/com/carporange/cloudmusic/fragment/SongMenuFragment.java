@@ -1,14 +1,18 @@
 package com.carporange.cloudmusic.fragment;
 
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.view.View;
+import android.widget.TextView;
 
 import com.carporange.cloudmusic.R;
+import com.carporange.cloudmusic.ui.activity.BeautfulActivity;
 import com.carporange.cloudmusic.ui.base.BaseFragment;
 import com.carporange.cloudmusic.widget.CircleTextProgressbar;
 
 import butterknife.BindView;
+import butterknife.OnClick;
 
 /**
  * Created by liuhui on 2016/6/27.
@@ -74,5 +78,8 @@ public class SongMenuFragment extends BaseFragment {
         return R.layout.fragment_song_menu;
     }
 
-
+    @OnClick(R.id.go)
+    public void click() {
+        startActivity(new Intent(getContext(),BeautfulActivity.class));
+    }
 }

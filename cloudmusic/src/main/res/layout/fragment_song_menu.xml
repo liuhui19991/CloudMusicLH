@@ -5,29 +5,39 @@
              android:layout_height="match_parent"
              tools:context="com.carporange.cloudmusic.fragment.SongMenuFragment">
 
-    <TextView
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="歌单"/>
+        android:orientation="vertical">
 
-    <com.carporange.cloudmusic.widget.CircleTextProgressbar
-        android:id="@+id/circle_progress"
-        android:layout_width="88dp"
-        android:layout_height="88dp"
-        android:layout_gravity="center"
-        android:gravity="center"
-        android:text="0%"
-        />
+        <com.carporange.cloudmusic.widget.CircleTextProgressbar
+            android:id="@+id/circle_progress"
+            android:layout_width="88dp"
+            android:layout_height="88dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="@dimen/dp_35"
+            android:gravity="center"
+            android:text="0%"
+            />
 
-    <com.carporange.cloudmusic.widget.CircleTextProgressbar
-        android:id="@+id/circle_progress_opposite"
-        android:layout_width="88dp"
-        android:layout_height="88dp"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="@dimen/dp_35"
-        android:gravity="center"
-        android:clickable="true"
-        android:text="100%"
-        app:in_circle_color="@color/state_color"
-        />
+        <com.carporange.cloudmusic.widget.CircleTextProgressbar
+            android:id="@+id/circle_progress_opposite"
+            android:layout_width="88dp"
+            android:layout_height="88dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="@dimen/dp_35"
+            android:gravity="center"
+            android:text="100%"
+            app:in_circle_color="@color/state_color"
+            />
+
+        <TextView
+            android:id="@+id/go"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_35"
+            android:background="@drawable/background_actionbar_image_selector"
+            android:layout_marginTop="26dp"
+            android:gravity="center"
+            android:text="你想要的"/>
+    </LinearLayout>
 </FrameLayout>
