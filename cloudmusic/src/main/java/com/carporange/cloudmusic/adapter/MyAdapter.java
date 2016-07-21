@@ -10,6 +10,9 @@ import com.carporange.cloudmusic.R;
 
 import java.util.ArrayList;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
 /**
  * Created by liuhui on 2016/7/21.
  */
@@ -73,7 +76,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
      * 自定义的ViewHolder，持有每个Item的的所有界面元素
      */
     public class ViewHolder extends RecyclerView.ViewHolder{
-        public TextView mTextView;
+        TextView mTextView;
 
         public ViewHolder(View view) {
             super(view);

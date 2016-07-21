@@ -19,7 +19,7 @@
             app:contentScrim="?attr/colorPrimary"
             app:expandedTitleMarginEnd="64dp"
             app:expandedTitleMarginStart="48dp"
-            app:layout_scrollFlags="scroll|enterAlways">
+            app:layout_scrollFlags="scroll|exitUntilCollapsed">
             <!--app:layout_scrollFlags="scroll|enterAlways" 上拉隐藏下拉显示-->
            <!-- app:layout_scrollFlags="scroll|enterAlwaysCollapsed" 上拉一旦隐藏再不出现-->
             <!--app:layout_scrollFlags="scroll|exitUntilCollapsed"  上拉隐藏到固定高度,下拉时候再出现-->

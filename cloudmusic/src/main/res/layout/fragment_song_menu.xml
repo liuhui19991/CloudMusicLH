@@ -27,6 +27,7 @@
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="@dimen/dp_35"
             android:gravity="center"
+            android:clickable="true"
             android:text="100%"
             app:in_circle_color="@color/state_color"
             />
