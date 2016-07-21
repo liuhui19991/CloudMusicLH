@@ -7,8 +7,6 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.carporange.cloudmusic.R;
-import com.nineoldandroids.view.ViewHelper;
-import com.nineoldandroids.view.ViewPropertyAnimator;
 
 import java.util.ArrayList;
 
@@ -17,6 +15,11 @@ import java.util.ArrayList;
  */
 public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
     private ArrayList<String> datas;
+    ItemClickListener mListener;
+
+    public interface ItemClickListener {
+        void onItemCclick(View v, int position);
+    }
 
     public MyAdapter(ArrayList mlist) {
         datas = mlist;
@@ -35,6 +38,10 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
         return new ViewHolder(view);
     }
 
+    public void setOnItemClickListener(ItemClickListener listener) {
+        mListener = listener;
+    }
+
     /**
      * 将数据与界面进行绑定的操作
      *
@@ -43,12 +50,6 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
      */
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-//	        ViewHelper.setScaleX(holder.mTextView, 0.5f);
-//	        ViewHelper.setScaleY(holder.mTextView, 0.5f);
-//	        ViewHelper.setAlpha(holder.mTextView, 0.5f);
-//	        ViewPropertyAnimator.animate(holder.mTextView).scaleX(1.0f).setDuration(500).start();
-//	        ViewPropertyAnimator.animate(holder.mTextView).scaleY(1.0f).setDuration(500).start();
-//	        ViewPropertyAnimator.animate(holder.mTextView).alpha(1.0f).setDuration(500).start();
         holder.mTextView.setText(datas.get(position));
     }
 
@@ -63,12 +64,20 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
     /**
      * 自定义的ViewHolder，持有每个Item的的所有界面元素
      */
-    public static class ViewHolder extends RecyclerView.ViewHolder {
+    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         public TextView mTextView;
 
         public ViewHolder(View view) {
             super(view);
+            view.setOnClickListener(this);
             mTextView = (TextView) view.findViewById(R.id.text);
+        }
+
+        @Override
+        public void onClick(View v) {
+            if (mListener != null) {
+                mListener.onItemCclick(v, getAdapterPosition());
+            }
         }
     }
 }

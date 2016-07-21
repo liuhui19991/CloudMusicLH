@@ -48,7 +48,7 @@ public class BeautfulActivity extends AppCompatActivity {
         mXRecyclerView.setLayoutManager(linearLayoutManager);
 
         mXRecyclerView.setRefreshProgressStyle(ProgressStyle.BallSpinFadeLoader);
-        mXRecyclerView.setLoadingMoreProgressStyle(ProgressStyle.BallGridBeat);
+        mXRecyclerView.setLoadingMoreProgressStyle(ProgressStyle.SquareSpin);
 //        mXRecyclerView.setPullRefreshEnabled(false);//不允许下拉刷新
 //        mXRecyclerView.setArrowImageView(R.mipmap.iconfont_downgrey);//更换刷新箭头
         mXRecyclerView.setLoadingListener(new XRecyclerView.LoadingListener() {
@@ -106,6 +106,13 @@ public class BeautfulActivity extends AppCompatActivity {
 //        mXRecyclerView.addHeaderView(header);
         mAdapter = new MyAdapter(mListData);
         mXRecyclerView.setAdapter(mAdapter);
+        mAdapter.setOnItemClickListener(new MyAdapter.ItemClickListener() {
+            @Override
+            public void onItemCclick(View v, int position) {
+                S.show(BeautfulActivity.this, "点击" + position);
+                L.e("我是");
+            }
+        });
 
     }
 
