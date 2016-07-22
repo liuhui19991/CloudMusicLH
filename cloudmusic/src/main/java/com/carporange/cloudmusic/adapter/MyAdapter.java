@@ -82,7 +82,5 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
             super(view);
             mTextView = (TextView) view.findViewById(R.id.text);
         }
-
-
     }
 }
