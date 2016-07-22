@@ -64,13 +64,12 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
     @Override
     public void onBindViewHolder(final ViewHolder holder, final int position) {
         holder.checkBox.setTag(new Integer(position));//设置tag 否则划回来时选中消失
+        holder.imageView.setTag(new Integer(position));
         if (list != null) {
             holder.checkBox.setChecked(list.contains(position) ? true : false);
         } else {
             holder.checkBox.setChecked(false);
         }
-
-        holder.imageView.setTag(new Integer(position));
         if (redList != null) {
             holder.imageView.setVisibility(redList.contains(position) ? View.GONE : View.VISIBLE);
         } else {
@@ -97,25 +96,37 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
             @Override
             public void onClick(View v) {
                 if (mListener != null) {
-                    //checkbox
-                    if (holder.checkBox.isChecked()) {
-                        holder.checkBox.setChecked(false);
-                    } else {
-                        holder.checkBox.setChecked(true);
-                    }
-                    //小红点
-                    if (holder.imageView.getVisibility() == View.VISIBLE) {
-                        holder.imageView.setVisibility(View.GONE);
-                        if (!redList.contains(holder.imageView.getTag())) {
-                            redList.add(new Integer(position));
-                        }
-                    } else {
-                        holder.imageView.setVisibility(View.VISIBLE);
-                        if (redList.contains(holder.imageView.getTag())) {
-                            redList.remove(new Integer(position));
-                        }
-                    }
+                    clickCheckbox();
+                    clickRed();
                     mListener.onItemCclick(holder.itemView, holder.getLayoutPosition());
+                }
+            }
+
+            /**
+             * 条目点击时候checkbox的选中状态
+             */
+            private void clickCheckbox() {
+                if (holder.checkBox.isChecked()) {
+                    holder.checkBox.setChecked(false);
+                } else {
+                    holder.checkBox.setChecked(true);
+                }
+            }
+
+            /**
+             * 条目点击时候小红点的显示隐藏
+             */
+            private void clickRed() {
+                if (holder.imageView.getVisibility() == View.VISIBLE) {
+                    holder.imageView.setVisibility(View.GONE);
+                    if (!redList.contains(holder.imageView.getTag())) {
+                        redList.add(new Integer(position));
+                    }
+                } else {
+                    holder.imageView.setVisibility(View.VISIBLE);
+                    if (redList.contains(holder.imageView.getTag())) {
+                        redList.remove(new Integer(position));
+                    }
                 }
             }
         });
