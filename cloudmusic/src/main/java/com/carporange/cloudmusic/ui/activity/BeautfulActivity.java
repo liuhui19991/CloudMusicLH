@@ -69,12 +69,13 @@ public class BeautfulActivity extends AppCompatActivity {
 
             @Override
             public void onLoadMore() {
+                final int size = mListData.size();
                 if (times < 2) {
                     new Handler().postDelayed(new Runnable() {
                         @Override
                         public void run() {
                             for (int i = 0; i < 15; i++) {
-                                mListData.add("item" + (i + mListData.size()));
+                                mListData.add("item" + (i + size));
                             }
                             mXRecyclerView.loadMoreComplete();
                             mAdapter.notifyDataSetChanged();
@@ -85,7 +86,7 @@ public class BeautfulActivity extends AppCompatActivity {
                         @Override
                         public void run() {
                             for (int i = 0; i < 8; i++) {
-                                mListData.add("lastData" + (i + mListData.size()));
+                                mListData.add("lastData" + (i + size));
                             }
                             mXRecyclerView.setIsnomore(true);
                             mAdapter.notifyDataSetChanged();
