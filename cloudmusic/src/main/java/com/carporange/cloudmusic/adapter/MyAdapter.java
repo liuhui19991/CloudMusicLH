@@ -24,7 +24,12 @@ import butterknife.ButterKnife;
 public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
     private ArrayList<String> datas;
     ItemClickListener mListener;
+    /**
+     * 记录checkbox是否选中的list
+     */
     List<Integer> list = new ArrayList<>();
+    List<Integer> redList = new ArrayList<>();
+
     public interface ItemClickListener {
         void onItemCclick(View v, int position);
     }
@@ -59,10 +64,17 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
     @Override
     public void onBindViewHolder(final ViewHolder holder, final int position) {
         holder.checkBox.setTag(new Integer(position));//设置tag 否则划回来时选中消失
-        if (list == null) {
-            holder.checkBox.setChecked(false);
-        } else {
+        if (list != null) {
             holder.checkBox.setChecked(list.contains(position) ? true : false);
+        } else {
+            holder.checkBox.setChecked(false);
+        }
+
+        holder.imageView.setTag(new Integer(position));
+        if (redList != null) {
+            holder.imageView.setVisibility(redList.contains(position) ? View.GONE : View.VISIBLE);
+        } else {
+            holder.imageView.setVisibility(View.VISIBLE);
         }
         holder.textView.setText(datas.get(position));
         holder.checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
@@ -70,13 +82,13 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (isChecked) {
                     if (!list.contains(holder.checkBox.getTag())) {
-                        list.add(position);
-                        L.e("添加"+position+"--list--"+list);
+                        list.add(new Integer(position));
+                        L.e(position + "--添加list--" + list);
                     }
                 } else {
-                    if (list.contains(holder.checkBox.getTag())){
-                        list.remove(position);
-                        L.e("移除");
+                    if (list.contains(holder.checkBox.getTag())) {
+                        list.remove(new Integer(position));
+                        L.e(position + "--移除list--" + list);
                     }
                 }
             }
@@ -85,6 +97,24 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
             @Override
             public void onClick(View v) {
                 if (mListener != null) {
+                    //checkbox
+                    if (holder.checkBox.isChecked()) {
+                        holder.checkBox.setChecked(false);
+                    } else {
+                        holder.checkBox.setChecked(true);
+                    }
+                    //小红点
+                    if (holder.imageView.getVisibility() == View.VISIBLE) {
+                        holder.imageView.setVisibility(View.GONE);
+                        if (!redList.contains(holder.imageView.getTag())) {
+                            redList.add(new Integer(position));
+                        }
+                    } else {
+                        holder.imageView.setVisibility(View.VISIBLE);
+                        if (redList.contains(holder.imageView.getTag())) {
+                            redList.remove(new Integer(position));
+                        }
+                    }
                     mListener.onItemCclick(holder.itemView, holder.getLayoutPosition());
                 }
             }
@@ -105,11 +135,13 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
     public class ViewHolder extends RecyclerView.ViewHolder {
         TextView textView;
         CheckBox checkBox;
+        ImageView imageView;
 
         public ViewHolder(View view) {
             super(view);
             checkBox = (CheckBox) view.findViewById(R.id.cb);
             textView = (TextView) view.findViewById(R.id.text);
+            imageView = (ImageView) view.findViewById(R.id.image);
         }
     }
 }
