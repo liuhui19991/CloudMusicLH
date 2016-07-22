@@ -36,7 +36,7 @@
             android:id="@+id/go"
             android:layout_width="match_parent"
             android:layout_height="@dimen/dp_35"
-            android:background="@drawable/background_actionbar_image_selector"
+            android:background="@drawable/image_selector"
             android:layout_marginTop="26dp"
             android:gravity="center"
             android:text="你想要的"/>

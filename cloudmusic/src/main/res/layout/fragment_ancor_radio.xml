@@ -1,9 +1,26 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-             xmlns:tools="http://schemas.android.com/tools"
-             android:layout_width="match_parent"
-             android:layout_height="match_parent"
-             tools:context="com.carporange.cloudmusic.fragment.AnchorRadioFragment">
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:tools="http://schemas.android.com/tools"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="vertical"
+              tools:context="com.carporange.cloudmusic.fragment.AnchorRadioFragment">
 
+    <EditText
+        android:id="@+id/et"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="6dp"
+        android:background="@drawable/shaptext_background"
+        android:hint="@string/pwd"/>
 
-
-</FrameLayout>
+    <ImageView
+        android:layout_width="88dp"
+        android:layout_height="88dp"
+        android:layout_marginLeft="@dimen/dp_8"
+        android:layout_marginRight="@dimen/dp_8"
+        android:layout_marginTop="6dp"
+        android:background="@drawable/shaptext_background"
+        android:padding="1dp"
+        android:scaleType="centerInside"
+        android:src="@mipmap/headimg"/>   <!--加上 android:padding=”1dp”，效果更好！-->
+</LinearLayout>

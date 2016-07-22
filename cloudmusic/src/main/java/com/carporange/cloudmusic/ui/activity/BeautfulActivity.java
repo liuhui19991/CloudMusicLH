@@ -50,7 +50,7 @@ public class BeautfulActivity extends AppCompatActivity {
         mXRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         mXRecyclerView.setRefreshProgressStyle(ProgressStyle.BallSpinFadeLoader);
         mXRecyclerView.setLoadingMoreProgressStyle(ProgressStyle.BallBeat);
-//        mXRecyclerView.setPullRefreshEnabled(false);//不允许下拉刷新,这句话会使请求数据为空时候不显示空的View
+        mXRecyclerView.setPullRefreshEnabled(false);//不允许下拉刷新,这句话会使请求数据为空时候不显示空的View
 //        mXRecyclerView.setArrowImageView(R.mipmap.iconfont_downgrey);//更换刷新箭头
         mEmptyView = findViewById(R.id.text_empty);
         mXRecyclerView.setEmptyView(mEmptyView);//当没有数据时候显示eMptyView;
@@ -101,9 +101,9 @@ public class BeautfulActivity extends AppCompatActivity {
             }
         });
         mListData = new ArrayList<>();
-      /*  for (int i = 0; i < 10; i++) {
+        for (int i = 0; i < 10; i++) {
             mListData.add("RecyclerView" + i);
-        }*/
+        }
 //        View header =   LayoutInflater.from(this).inflate(R.layout.recyclerview_header, (ViewGroup)findViewById(android.R.id.content),false);
 //        View header1 =   LayoutInflater.from(this).inflate(R.layout.recyclerview_header1, (ViewGroup)findViewById(android.R.id.content),false);
 //        mXRecyclerView.addHeaderView(header1);  //先添加的在最上边

@@ -22,7 +22,7 @@
         android:layout_width="@dimen/toolbar_real_height"
         android:layout_height="match_parent"
         android:layout_gravity="start"
-        android:background="@drawable/background_actionbar_image_selector"
+        android:background="@drawable/image_selector"
         android:clickable="true"
         android:scaleType="center"
         android:src="@drawable/actionbar_menu"/>
@@ -31,7 +31,7 @@
         android:layout_width="@dimen/toolbar_real_height"
         android:layout_height="match_parent"
         android:layout_gravity="end"
-        android:background="@drawable/background_actionbar_image_selector"
+        android:background="@drawable/image_selector"
         android:clickable="true"
         android:scaleType="center"
         android:src="@drawable/actionbar_search"/>

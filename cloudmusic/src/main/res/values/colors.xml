@@ -22,5 +22,5 @@
 
     <color name="half_transparent">#20000000</color>
     <color name="transparent">#00000000</color>
-
+    <color name="divider_color">#FF4081</color>
 </resources>

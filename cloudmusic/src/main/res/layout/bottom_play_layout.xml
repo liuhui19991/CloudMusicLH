@@ -44,21 +44,21 @@
     <ImageView
         android:layout_width="48dp"
         android:layout_height="match_parent"
-        android:background="@drawable/background_actionbar_image_selector"
+        android:background="@drawable/image_selector"
         android:scaleType="centerCrop"
         android:src="@drawable/playbar_btn_playlist" />
 
     <ImageView
         android:layout_width="48dp"
         android:layout_height="match_parent"
-        android:background="@drawable/background_actionbar_image_selector"
+        android:background="@drawable/image_selector"
         android:scaleType="centerCrop"
         android:src="@drawable/playbar_btn_play" />
 
     <ImageView
         android:layout_width="48dp"
         android:layout_height="match_parent"
-        android:background="@drawable/background_actionbar_image_selector"
+        android:background="@drawable/image_selector"
         android:scaleType="centerCrop"
         android:src="@drawable/playbar_btn_next" />
 </LinearLayout>
