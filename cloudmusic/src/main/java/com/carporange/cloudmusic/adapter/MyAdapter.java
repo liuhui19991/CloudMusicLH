@@ -4,11 +4,16 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.carporange.cloudmusic.R;
+import com.carporange.cloudmusic.util.L;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -19,7 +24,7 @@ import butterknife.ButterKnife;
 public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
     private ArrayList<String> datas;
     ItemClickListener mListener;
-
+    List<Integer> list = new ArrayList<>();
     public interface ItemClickListener {
         void onItemCclick(View v, int position);
     }
@@ -52,8 +57,30 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
      * @param position
      */
     @Override
-    public void onBindViewHolder(final ViewHolder holder, int position) {
-        holder.mTextView.setText(datas.get(position));
+    public void onBindViewHolder(final ViewHolder holder, final int position) {
+        holder.checkBox.setTag(new Integer(position));//设置tag 否则划回来时选中消失
+        if (list == null) {
+            holder.checkBox.setChecked(false);
+        } else {
+            holder.checkBox.setChecked(list.contains(position) ? true : false);
+        }
+        holder.textView.setText(datas.get(position));
+        holder.checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked) {
+                    if (!list.contains(holder.checkBox.getTag())) {
+                        list.add(position);
+                        L.e("添加"+position+"--list--"+list);
+                    }
+                } else {
+                    if (list.contains(holder.checkBox.getTag())){
+                        list.remove(position);
+                        L.e("移除");
+                    }
+                }
+            }
+        });
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -75,12 +102,14 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
     /**
      * 自定义的ViewHolder，持有每个Item的的所有界面元素
      */
-    public class ViewHolder extends RecyclerView.ViewHolder{
-        TextView mTextView;
+    public class ViewHolder extends RecyclerView.ViewHolder {
+        TextView textView;
+        CheckBox checkBox;
 
         public ViewHolder(View view) {
             super(view);
-            mTextView = (TextView) view.findViewById(R.id.text);
+            checkBox = (CheckBox) view.findViewById(R.id.cb);
+            textView = (TextView) view.findViewById(R.id.text);
         }
     }
 }
