@@ -4,11 +4,13 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.Toolbar;
+import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.carporange.cloudmusic.R;
 import com.carporange.cloudmusic.adapter.DividerItemDecoration;
@@ -31,7 +33,7 @@ public class BeautfulActivity extends AppCompatActivity {
     private ArrayList<String> mListData;
     private MyAdapter mAdapter;
     private int refreshTime, times;
-
+    private View mEmptyView;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -48,8 +50,10 @@ public class BeautfulActivity extends AppCompatActivity {
         mXRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         mXRecyclerView.setRefreshProgressStyle(ProgressStyle.BallSpinFadeLoader);
         mXRecyclerView.setLoadingMoreProgressStyle(ProgressStyle.BallBeat);
-        mXRecyclerView.setPullRefreshEnabled(false);//不允许下拉刷新
+//        mXRecyclerView.setPullRefreshEnabled(false);//不允许下拉刷新,这句话会使请求数据为空时候不显示空的View
 //        mXRecyclerView.setArrowImageView(R.mipmap.iconfont_downgrey);//更换刷新箭头
+        mEmptyView = findViewById(R.id.text_empty);
+        mXRecyclerView.setEmptyView(mEmptyView);//当没有数据时候显示eMptyView;
         mXRecyclerView.setLoadingListener(new XRecyclerView.LoadingListener() {
             @Override
             public void onRefresh() {
@@ -97,12 +101,12 @@ public class BeautfulActivity extends AppCompatActivity {
             }
         });
         mListData = new ArrayList<>();
-        for (int i = 0; i < 10; i++) {
+      /*  for (int i = 0; i < 10; i++) {
             mListData.add("RecyclerView" + i);
-        }
+        }*/
 //        View header =   LayoutInflater.from(this).inflate(R.layout.recyclerview_header, (ViewGroup)findViewById(android.R.id.content),false);
 //        View header1 =   LayoutInflater.from(this).inflate(R.layout.recyclerview_header1, (ViewGroup)findViewById(android.R.id.content),false);
-//        mXRecyclerView.addHeaderView(header1);
+//        mXRecyclerView.addHeaderView(header1);  //先添加的在最上边
 //        mXRecyclerView.addHeaderView(header);
         mAdapter = new MyAdapter(mListData);
         mXRecyclerView.setAdapter(mAdapter);

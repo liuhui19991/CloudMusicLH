@@ -49,6 +49,14 @@
         android:layout_height="match_parent"
         android:foreground="?android:selectableItemBackground"
         app:layout_behavior="@string/appbar_scrolling_view_behavior"/>
-
+    <TextView
+        android:gravity="center"
+        android:id="@+id/text_empty"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_gravity="center"
+        android:background="#dcdcdc"
+        android:text="emptyView"
+        android:visibility="gone"/>
 
 </android.support.design.widget.CoordinatorLayout>
