@@ -1,12 +1,12 @@
 package com.carporange.cloudmusic.fragment;
 
 
-import android.inputmethodservice.Keyboard;
 import android.widget.EditText;
 
+import com.carporange.cloudmusic.CarpApplication;
 import com.carporange.cloudmusic.R;
 import com.carporange.cloudmusic.ui.base.BaseFragment;
-import com.carporange.cloudmusic.util.KeyBoardUtils;
+import com.carporange.cloudmusic.util.S;
 
 import butterknife.BindView;
 
@@ -23,6 +23,7 @@ public class AnchorRadioFragment extends BaseFragment {
 
     @Override
     protected void onVisible() {
+
     }
 
     @Override

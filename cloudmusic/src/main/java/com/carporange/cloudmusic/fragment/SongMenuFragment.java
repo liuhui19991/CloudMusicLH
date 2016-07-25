@@ -4,11 +4,12 @@ package com.carporange.cloudmusic.fragment;
 import android.content.Intent;
 import android.graphics.Color;
 import android.view.View;
-import android.widget.TextView;
 
+import com.carporange.cloudmusic.CarpApplication;
 import com.carporange.cloudmusic.R;
 import com.carporange.cloudmusic.ui.activity.BeautfulActivity;
 import com.carporange.cloudmusic.ui.base.BaseFragment;
+import com.carporange.cloudmusic.util.S;
 import com.carporange.cloudmusic.widget.CircleTextProgressbar;
 
 import butterknife.BindView;
@@ -54,6 +55,8 @@ public class SongMenuFragment extends BaseFragment {
 
     @Override
     protected void onVisible() {
+        S.show(getActivity(), CarpApplication.getInstance().getResources().getString(R.string.constant));
+//        S.show(getActivity(), CarpApplication.getInstance().getResources().getString(R.string.title));
         // 如果需要自动倒计时，就会自动走进度。
 //        mCircleProgress.start();//只能开启一次
         mCircleProgress.reStart();
