@@ -1,0 +1,70 @@
+package com.carporange.cloudmusic.ui.activity;
+
+import android.content.res.Resources;
+import android.graphics.BitmapFactory;
+import android.support.v7.widget.Toolbar;
+import android.util.DisplayMetrics;
+import android.view.MenuItem;
+
+import com.carporange.cloudmusic.R;
+import com.carporange.cloudmusic.knowledgemap.MapService;
+import com.carporange.cloudmusic.knowledgemap.MapView;
+import com.carporange.cloudmusic.knowledgemap.NodeService;
+import com.carporange.cloudmusic.knowledgemap.UIUtils;
+import com.carporange.cloudmusic.ui.base.BaseActivity;
+
+/**
+ * 知识地图阅读页
+ * Created by liuhui on 2016/7/25.
+ */
+public class KnowledgeActivity extends BaseActivity {
+    private Toolbar toolbar;
+    String resourceUrl = "http://resource.gbxx123.com/mindmap/1350751515873/1350751515873.json";
+
+    @Override
+    protected int getLayoutId() {
+        return R.layout.activity_knowledge;
+    }
+
+    @Override
+    public void initActionBar() {
+
+    }
+
+    @Override
+    public void initViews() {
+        // 知识地图相关
+        MapView commonMapView = (MapView)findViewById(R.id.map);
+
+        Resources res = getResources();
+        NodeService.close = BitmapFactory.decodeResource(res,
+                R.mipmap.common_node_close);
+        NodeService.open = BitmapFactory.decodeResource(res,
+                R.mipmap.common_node_open);
+
+        DisplayMetrics dm = UIUtils.getDisplayMetrics(this);
+        final MapService service = new MapService(commonMapView, null, dm);
+        service.startEngineFromUrl(resourceUrl);
+    }
+
+    @Override
+    protected void onDestroy() {
+        if (NodeService.close != null) {
+            NodeService.close.recycle();
+        }
+
+        if (NodeService.open != null) {
+            NodeService.open.recycle();
+        }
+        super.onDestroy();
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == android.R.id.home) {
+            finish();
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+}

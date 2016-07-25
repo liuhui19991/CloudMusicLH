@@ -39,6 +39,14 @@
             android:background="@drawable/image_selector"
             android:layout_marginTop="26dp"
             android:gravity="center"
-            android:text="你想要的"/>
+            android:text="@string/youwant"/>
+        <TextView
+            android:id="@+id/tomap"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_35"
+            android:background="@drawable/image_selector"
+            android:layout_marginTop="26dp"
+            android:gravity="center"
+            android:text="@string/tomap"/>
     </LinearLayout>
 </FrameLayout>

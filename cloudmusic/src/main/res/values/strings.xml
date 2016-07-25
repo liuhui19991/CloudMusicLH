@@ -6,4 +6,6 @@
     <string name="newarby">附近</string>
     <string name="title">一笑过千山</string>
     <string name="pwd">请输入密码</string>
+    <string name="youwant">你想要的</string>
+    <string name="tomap">知识地图</string>
 </resources>

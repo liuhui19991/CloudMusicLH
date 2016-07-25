@@ -8,6 +8,7 @@ import android.view.View;
 import com.carporange.cloudmusic.CarpApplication;
 import com.carporange.cloudmusic.R;
 import com.carporange.cloudmusic.ui.activity.BeautfulActivity;
+import com.carporange.cloudmusic.ui.activity.KnowledgeActivity;
 import com.carporange.cloudmusic.ui.base.BaseFragment;
 import com.carporange.cloudmusic.util.S;
 import com.carporange.cloudmusic.widget.CircleTextProgressbar;
@@ -84,5 +85,10 @@ public class SongMenuFragment extends BaseFragment {
     @OnClick(R.id.go)
     public void click() {
         startActivity(new Intent(getContext(),BeautfulActivity.class));
+    }
+
+    @OnClick(R.id.tomap)
+    void toMap() {
+        startActivity(new Intent(getContext(),KnowledgeActivity.class));
     }
 }
