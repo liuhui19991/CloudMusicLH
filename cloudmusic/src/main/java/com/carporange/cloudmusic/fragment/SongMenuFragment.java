@@ -3,14 +3,13 @@ package com.carporange.cloudmusic.fragment;
 
 import android.content.Intent;
 import android.graphics.Color;
+import android.support.design.widget.Snackbar;
 import android.view.View;
 
-import com.carporange.cloudmusic.CarpApplication;
 import com.carporange.cloudmusic.R;
 import com.carporange.cloudmusic.ui.activity.BeautfulActivity;
 import com.carporange.cloudmusic.ui.activity.KnowledgeActivity;
 import com.carporange.cloudmusic.ui.base.BaseFragment;
-import com.carporange.cloudmusic.util.S;
 import com.carporange.cloudmusic.widget.CircleTextProgressbar;
 
 import butterknife.BindView;
@@ -56,7 +55,12 @@ public class SongMenuFragment extends BaseFragment {
 
     @Override
     protected void onVisible() {
-        S.show(getActivity(), CarpApplication.getInstance().getResources().getString(R.string.constant));
+        Snackbar.make(mCircleProgress, "歌单", Snackbar.LENGTH_SHORT).setAction("点我", new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getActivity(), KnowledgeActivity.class));
+            }
+        }).show();
 //        S.show(getActivity(), CarpApplication.getInstance().getResources().getString(R.string.title));
         // 如果需要自动倒计时，就会自动走进度。
 //        mCircleProgress.start();//只能开启一次
@@ -84,11 +88,11 @@ public class SongMenuFragment extends BaseFragment {
 
     @OnClick(R.id.go)
     public void click() {
-        startActivity(new Intent(getContext(),BeautfulActivity.class));
+        startActivity(new Intent(getContext(), BeautfulActivity.class));
     }
 
     @OnClick(R.id.tomap)
     void toMap() {
-        startActivity(new Intent(getContext(),KnowledgeActivity.class));
+        startActivity(new Intent(getContext(), KnowledgeActivity.class));
     }
 }
