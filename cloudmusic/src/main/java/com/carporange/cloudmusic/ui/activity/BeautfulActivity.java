@@ -16,7 +16,6 @@ import com.carporange.cloudmusic.R;
 import com.carporange.cloudmusic.adapter.DividerItemDecoration;
 import com.carporange.cloudmusic.adapter.MyAdapter;
 import com.carporange.cloudmusic.util.AnimatorUtil;
-import com.carporange.cloudmusic.util.S;
 import com.carporange.cloudmusic.util.T;
 import com.jcodecraeer.xrecyclerview.ProgressStyle;
 import com.jcodecraeer.xrecyclerview.XRecyclerView;
@@ -48,6 +47,7 @@ public class BeautfulActivity extends AppCompatActivity {
         setContentView(R.layout.activity_beautful);
         ButterKnife.bind(this);
         final Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        toolbar.setTitle("RecyclerView");
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         initView();
@@ -58,7 +58,6 @@ public class BeautfulActivity extends AppCompatActivity {
         mAdapter.setOnItemClickListener(new MyAdapter.ItemClickListener() {
             @Override
             public void onItemCclick(View v, int position) {
-                S.show(BeautfulActivity.this, "点击" + position);
                 Intent intent = new Intent(BeautfulActivity.this, KnowledgeActivity.class);
                 if (position % 2 == 0) {
                     intent.putExtra("map", resourceUrl);

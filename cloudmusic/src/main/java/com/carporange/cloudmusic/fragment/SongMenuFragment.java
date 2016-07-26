@@ -55,7 +55,7 @@ public class SongMenuFragment extends BaseFragment {
 
     @Override
     protected void onVisible() {
-        Snackbar.make(mCircleProgress, "歌单", Snackbar.LENGTH_SHORT).setAction("点我", new View.OnClickListener() {
+        Snackbar.make(mCircleProgress, "歌单", Snackbar.LENGTH_LONG).setAction("点我", new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(getActivity(), KnowledgeActivity.class));
