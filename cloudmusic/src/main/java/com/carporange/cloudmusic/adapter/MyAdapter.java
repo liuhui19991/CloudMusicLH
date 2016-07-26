@@ -82,12 +82,10 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
                 if (isChecked) {
                     if (!list.contains(holder.checkBox.getTag())) {
                         list.add(new Integer(position));
-                        L.e(position + "--添加list--" + list);
                     }
                 } else {
                     if (list.contains(holder.checkBox.getTag())) {
                         list.remove(new Integer(position));
-                        L.e(position + "--移除list--" + list);
                     }
                 }
             }

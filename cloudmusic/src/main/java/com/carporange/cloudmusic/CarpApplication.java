@@ -23,6 +23,6 @@ public class CarpApplication extends Application {
         application = this;
         NoHttp.initialize(application);
         Logger.setTag("LH..");
-        Logger.setDebug(true);  //使网络请求打印log
+//        Logger.setDebug(true);  //使网络请求打印log
     }
 }

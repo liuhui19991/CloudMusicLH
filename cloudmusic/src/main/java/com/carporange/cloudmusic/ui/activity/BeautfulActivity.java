@@ -1,21 +1,23 @@
 package com.carporange.cloudmusic.ui.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.Nullable;
+import android.support.design.widget.FloatingActionButton;
+import android.support.v4.view.ViewPropertyAnimatorListener;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.Toolbar;
-import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.TextView;
 
 import com.carporange.cloudmusic.R;
 import com.carporange.cloudmusic.adapter.DividerItemDecoration;
 import com.carporange.cloudmusic.adapter.MyAdapter;
+import com.carporange.cloudmusic.util.AnimatorUtil;
 import com.carporange.cloudmusic.util.S;
+import com.carporange.cloudmusic.util.T;
 import com.jcodecraeer.xrecyclerview.ProgressStyle;
 import com.jcodecraeer.xrecyclerview.XRecyclerView;
 
@@ -30,10 +32,16 @@ import butterknife.ButterKnife;
 public class BeautfulActivity extends AppCompatActivity {
     @BindView(R.id.recyclerview)
     XRecyclerView mXRecyclerView;
+    @BindView(R.id.fab)
+    FloatingActionButton FAB;
     private ArrayList<String> mListData;
     private MyAdapter mAdapter;
     private int refreshTime, times;
     private View mEmptyView;
+    String resourceUrl = "http://resource.gbxx123.com/mindmap/1350751515873/1350751515873.json";
+    String url = "http://resource.gbxx123.com/mindmap/2016/7/1/1467336284092/1467336284092.json";
+    private LinearLayoutManager linearLayoutManager;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,11 +51,59 @@ public class BeautfulActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         initView();
+        initListener();
+    }
+
+    private void initListener() {
+        mAdapter.setOnItemClickListener(new MyAdapter.ItemClickListener() {
+            @Override
+            public void onItemCclick(View v, int position) {
+                S.show(BeautfulActivity.this, "点击" + position);
+                Intent intent = new Intent(BeautfulActivity.this, KnowledgeActivity.class);
+                if (position % 2 == 0) {
+                    intent.putExtra("map", resourceUrl);
+                } else {
+                    intent.putExtra("map", url);
+                }
+                startActivity(intent);
+            }
+        });
+        FAB.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                T.showShort(BeautfulActivity.this, "回到顶部");
+                linearLayoutManager.scrollToPosition(0);
+                hideFAB();
+            }
+        });
+    }
+
+    private void hideFAB() {
+        FAB.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                AnimatorUtil.scaleHide(FAB, new ViewPropertyAnimatorListener() {
+                    @Override
+                    public void onAnimationStart(View view) {
+                    }
+
+                    @Override
+                    public void onAnimationEnd(View view) {
+                        FAB.setVisibility(View.GONE);
+                    }
+
+                    @Override
+                    public void onAnimationCancel(View view) {
+                    }
+                });
+            }
+        }, 500);
     }
 
     private void initView() {
-//        linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);//默认垂直排列,可以不用写
-        mXRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+        linearLayoutManager = new LinearLayoutManager(this);
+        linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);//默认垂直排列,可以不用写
+        mXRecyclerView.setLayoutManager(linearLayoutManager);
         mXRecyclerView.setRefreshProgressStyle(ProgressStyle.BallSpinFadeLoader);
         mXRecyclerView.setLoadingMoreProgressStyle(ProgressStyle.BallBeat);
         mXRecyclerView.setPullRefreshEnabled(false);//不允许下拉刷新,这句话会使请求数据为空时候不显示空的View
@@ -110,12 +166,6 @@ public class BeautfulActivity extends AppCompatActivity {
 //        mXRecyclerView.addHeaderView(header);
         mAdapter = new MyAdapter(mListData);
         mXRecyclerView.setAdapter(mAdapter);
-        mAdapter.setOnItemClickListener(new MyAdapter.ItemClickListener() {
-            @Override
-            public void onItemCclick(View v, int position) {
-                S.show(BeautfulActivity.this, "点击" + position);
-            }
-        });
         mXRecyclerView.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.VERTICAL_LIST));//设置分割线
     }
 

@@ -8,4 +8,5 @@
     <string name="pwd">请输入密码</string>
     <string name="youwant">你想要的</string>
     <string name="tomap">知识地图</string>
+    <string name="scale_up_show_behavior">com.carporange.cloudmusic.widget.ScaleUpShowBehavior</string>
 </resources>
