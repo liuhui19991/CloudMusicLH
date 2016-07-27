@@ -7,6 +7,6 @@
     <string name="title">一笑过千山</string>
     <string name="pwd">请输入密码</string>
     <string name="youwant">你想要的</string>
-    <string name="tomap">知识地图</string>
+    <string name="tomap">视频</string>
     <string name="scale_up_show_behavior">com.carporange.cloudmusic.widget.ScaleUpShowBehavior</string>
 </resources>

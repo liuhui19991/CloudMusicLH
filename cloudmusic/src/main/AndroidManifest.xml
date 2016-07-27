@@ -19,10 +19,9 @@
             </intent-filter>
         </activity>
         <activity android:name=".ui.activity.MainActivity"/>
-        <activity
-            android:name=".ui.activity.BeautfulActivity"/>
-        <activity
-            android:name=".ui.activity.KnowledgeActivity"/>
+        <activity android:name=".ui.activity.BeautfulActivity"/>
+        <activity android:name=".ui.activity.KnowledgeActivity"/>
+        <activity android:name=".ui.activity.VideoPlayer"/>
 
     </application>
 

@@ -14,6 +14,8 @@ import com.carporange.cloudmusic.widget.CircleTextProgressbar;
 
 import butterknife.BindView;
 import butterknife.OnClick;
+import fm.jiecao.jcvideoplayer_lib.JCFullScreenActivity;
+import fm.jiecao.jcvideoplayer_lib.JCVideoPlayerStandard;
 
 /**
  * Created by liuhui on 2016/6/27.
@@ -93,6 +95,17 @@ public class SongMenuFragment extends BaseFragment {
 
     @OnClick(R.id.tomap)
     void toMap() {
-        startActivity(new Intent(getContext(), KnowledgeActivity.class));
+        JCFullScreenActivity.startActivity(getActivity(),
+                "http://2449.vod.myqcloud.com/2449_22ca37a6ea9011e5acaaf51d105342e3.f20.mp4",
+                JCVideoPlayerStandard.class, "来个慢动作");
+    }
+
+    @OnClick(R.id.tomap1)
+    void toVideo() {
+//        http://resource.gbxx123.com/minivideo/mp4/gq/2016/7/22/1469176714153/1469176714153.mp4
+        JCFullScreenActivity.startActivity(getActivity(),
+                "http://resource.gbxx123.com/minivideo/mp4/gq/2016/7/22/1469176714153/1469176714153.mp4",
+                JCVideoPlayerStandard.class, "来个慢动作");
+//       startActivity(new Intent(getActivity(), VideoPlayer.class));
     }
 }
