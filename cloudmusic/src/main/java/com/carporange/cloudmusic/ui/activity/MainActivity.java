@@ -1,5 +1,6 @@
 package com.carporange.cloudmusic.ui.activity;
 
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.widget.DrawerLayout;
@@ -60,13 +61,13 @@ public class MainActivity extends BaseActivity implements MenuLeftFragment.OnLef
         mTitle.setText(event.getmTitle());
     }
 
- /*   @Subscribe(threadMode = ThreadMode.MAIN) //使用EventBus进行点击退出应用的事件传递
-    public void onEvent(ExitEvent event) {
-        mDrawerLayout.closeDrawer(Gravity.LEFT);
-        S.show(this, "退出程序点击了");
-        T.showShort(this, "退出程序点击了");
-    }
-*/
+    /*   @Subscribe(threadMode = ThreadMode.MAIN) //使用EventBus进行点击退出应用的事件传递
+       public void onEvent(ExitEvent event) {
+           mDrawerLayout.closeDrawer(Gravity.LEFT);
+           S.show(this, "退出程序点击了");
+           T.showShort(this, "退出程序点击了");
+       }
+   */
     @Override
     protected void onDestroy() {
         super.onDestroy();
@@ -119,9 +120,21 @@ public class MainActivity extends BaseActivity implements MenuLeftFragment.OnLef
         }
     }*/
 
+    long time = 0;
+
     @Override
     public void onBackPressed() {//此处要把super.onBackPressed()去掉,要不然还是执行父类的退出
         T.showShort(this, "小样你还想退出吗?");
-        S.show(this, "小样你还想退出吗?");
+        if (System.currentTimeMillis() - time > 2000) {
+            T.showShort(MainActivity.this, "再按一次返回确认退出");
+            time = System.currentTimeMillis();
+        } else {
+            Snackbar.make(mTitle, "小样你还想退出吗?", Snackbar.LENGTH_LONG).setAction("click", new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    System.exit(0);
+                }
+            }).show();
+        }
     }
 }

@@ -37,7 +37,7 @@ public class BeautfulActivity extends AppCompatActivity {
     private MyAdapter mAdapter;
     private int refreshTime, times;
     private View mEmptyView;
-    String resourceUrl = "http://resource.gbxx123.com/mindmap/1350751515873/1350751515873.json";
+    String resourceUrl = "http://resource.gbxx123.com/mindmap/2016/5/30/1464610110060/1464610110060.json";
     String url = "http://resource.gbxx123.com/mindmap/2016/7/1/1467336284092/1467336284092.json";
     private LinearLayoutManager linearLayoutManager;
 
