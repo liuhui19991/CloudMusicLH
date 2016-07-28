@@ -3,11 +3,14 @@ package com.carporange.cloudmusic.ui.activity;
 import android.content.res.Resources;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.DisplayMetrics;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.LinearLayout;
 
 import com.carporange.cloudmusic.R;
 import com.carporange.cloudmusic.knowledgemap.MapService;
@@ -21,6 +24,8 @@ import com.carporange.cloudmusic.knowledgemap.UIUtils;
  */
 public class KnowledgeActivity extends AppCompatActivity {
     private String resourceUrl;
+    private Handler mHandler = new Handler();
+    private LinearLayout ll;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -30,13 +35,14 @@ public class KnowledgeActivity extends AppCompatActivity {
         toolbar.setTitle("");
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        ll = (LinearLayout) findViewById(R.id.ll);
         resourceUrl = getIntent().getStringExtra("map");
         initViews();
     }
 
     public void initViews() {
         // 知识地图相关
-        MapView commonMapView = (MapView) findViewById(R.id.map);
+        final MapView commonMapView = (MapView) findViewById(R.id.map);
 
         Resources res = getResources();
         NodeService.close = BitmapFactory.decodeResource(res,
@@ -47,6 +53,13 @@ public class KnowledgeActivity extends AppCompatActivity {
         DisplayMetrics dm = UIUtils.getDisplayMetrics(this);
         final MapService service = new MapService(commonMapView, null, dm);
         service.startEngineFromUrl(resourceUrl);
+        mHandler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                ll.setVisibility(View.GONE);
+                commonMapView.setVisibility(View.VISIBLE);
+            }
+        }, 1500);
     }
 
     @Override
