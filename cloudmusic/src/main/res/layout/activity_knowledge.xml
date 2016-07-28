@@ -38,22 +38,23 @@
         android:visibility="gone"
         app:layout_behavior="@string/appbar_scrolling_view_behavior"/>
 
-        <LinearLayout
-            android:id="@+id/ll"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-          android:gravity="center"
-            android:orientation="vertical">
+    <LinearLayout
+        android:id="@+id/ll"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:orientation="vertical">
 
-            <ProgressBar
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
+        <ProgressBar
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"/>
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/wait_dialog_title"/>
-        </LinearLayout>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/wait_dialog_title"/>
+    </LinearLayout>
 
 </android.support.design.widget.CoordinatorLayout>
     <!--<LinearLayout
