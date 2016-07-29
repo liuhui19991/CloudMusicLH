@@ -12,6 +12,7 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewParent;
 import android.view.ViewTreeObserver;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -30,7 +31,7 @@ public class ViewPagerCycle extends LinearLayout {
     private Context mContext;
     private ImageView mRedPoint;
     private ViewPager mViewPager;
-    private List<ImageView> mList;
+    private List mList;
     private LinearLayout mLinearLayout;
     /**
      * 前一个被选中的position的位置
@@ -86,15 +87,16 @@ public class ViewPagerCycle extends LinearLayout {
             };
 //            mHandler.sendEmptyMessageDelayed(0, 3000);//发送延时3秒的消息
         }
-
-        mRedPoint.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
-            @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
-            @Override
-            public void onGlobalLayout() {
-                mRedPoint.getViewTreeObserver().removeOnGlobalLayoutListener(this);
-                mPointDis = mLinearLayout.getChildAt(1).getLeft() - mLinearLayout.getChildAt(0).getLeft();
-            }
-        });
+        if (mList.size() > 1) {
+            mRedPoint.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
+                @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
+                @Override
+                public void onGlobalLayout() {
+                    mRedPoint.getViewTreeObserver().removeOnGlobalLayoutListener(this);
+                    mPointDis = mLinearLayout.getChildAt(1).getLeft() - mLinearLayout.getChildAt(0).getLeft();
+                }
+            });
+        }
         initData();//初始化数据
         mPageAdapter = new MyImageCyclePageAdapter();
         mViewPager.setAdapter(mPageAdapter);
@@ -213,9 +215,23 @@ public class ViewPagerCycle extends LinearLayout {
             container.removeView((View) object);
         }
 
+        /**
+         * 把自身从父View中移除
+         */
+        public void removeSelfFromParent(View view) {
+            if (view != null) {
+                ViewParent parent = view.getParent();
+                if (parent != null && parent instanceof ViewGroup) {
+                    ViewGroup group = (ViewGroup) parent;
+                    group.removeView(view);
+                }
+            }
+        }
+
         @Override
         public Object instantiateItem(ViewGroup container, final int position) {
-            ImageView iv = mList.get(position % mList.size());
+            ImageView iv = (ImageView) mList.get(position % mList.size());
+            ImageView imageView = new ImageView(getContext());
             iv.setTag("设置TAG");
             iv.setOnClickListener(new OnClickListener() {
                 @Override
@@ -223,6 +239,7 @@ public class ViewPagerCycle extends LinearLayout {
                     mViewpagerCycleListener.onClick(position, v);
                 }
             });
+
             container.addView(iv);
             return iv;
         }

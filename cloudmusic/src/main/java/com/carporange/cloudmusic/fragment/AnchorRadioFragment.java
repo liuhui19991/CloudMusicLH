@@ -31,7 +31,23 @@ public class AnchorRadioFragment extends BaseFragment {
 
     @Override
     protected void initViews() {//如果使用buttknife当从第一个页面直接点过来的时候获取不到对象
-        int[] images = {R.mipmap.a, R.mipmap.b, R.mipmap.c, R.mipmap.d, R.mipmap.e,};
+        //http://103.244.67.103:8080/upload/images/RollingPicture/20160627044213329.png
+        //"banners":[{"url":"","banner":"http://103.244.67.241/images/xxzg/banner.jpg"},
+        // {"url":"http://103.244.67.241/html/index1.html","banner":"http://103.244.67.241/images/xxzg/banner3.jpg"},
+        // {"url":"http://103.244.67.241/html/index2.html","banner":"http://103.244.67.241/images/xxzg/banner2.jpg"},
+        // {"url":"http://weibo.com/u/5582313184","banner":"http://103.244.67.241/images/xxzg/banner1.jpg"},
+        // {"url":"","banner":"http://103.244.67.241/images/xxzg/banner4.jpg"},
+        // {"url":"http://103.244.67.163/html/index3.html","banner":"http://103.244.67.241/images/xxzg/banner7.jpg"}]}
+        String[] strings = {
+                "http://103.244.67.241/images/xxzg/banner.jpg",
+                "http://103.244.67.241/images/xxzg/banner3.jpg",
+                "http://103.244.67.241/images/xxzg/banner2.jpg",
+                "http://103.244.67.241/images/xxzg/banner1.jpg",
+                "http://103.244.67.241/images/xxzg/banner4.jpg",
+                "http://103.244.67.241/images/xxzg/banner7.jpg"
+        };
+
+        int[] images = {R.mipmap.a, R.mipmap.b};
         ImageView iv;
         mList = new ArrayList<>();
         for (int i = 0; i < images.length; i++) {
