@@ -5,6 +5,11 @@
               android:orientation="vertical"
               tools:context="com.carporange.cloudmusic.fragment.AnchorRadioFragment">
 
+    <com.carporange.cloudmusic.widget.ViewPagerCycle
+        android:id="@+id/view_pager"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"/>
+
     <EditText
         android:id="@+id/et"
         android:layout_width="match_parent"

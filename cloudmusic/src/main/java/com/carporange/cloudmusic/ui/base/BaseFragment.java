@@ -48,7 +48,7 @@ public abstract class BaseFragment extends Fragment {
     }
 
     /**
-     * 遵循ViewPager预加载
+     * 不可见
      */
     public void onInvisible() {
 
