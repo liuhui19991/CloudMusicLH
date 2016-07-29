@@ -131,7 +131,7 @@ public class ViewPagerCycle extends LinearLayout {
             @Override
             public void onPageSelected(int position) {
                 int newposition = position % mList.size();
-                int leftMargin = newposition*mPointDis;
+                int leftMargin = newposition * mPointDis;
                 previousposition = newposition;//用完之后把position赋值给previousposition就是上一个viewpageer所在的地方了
                 RelativeLayout.LayoutParams params = (RelativeLayout.LayoutParams) mRedPoint.getLayoutParams();
                 mRedPoint.setImageResource(R.drawable.shape_point_red);
