@@ -13,14 +13,11 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
-import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 
 import com.carporange.cloudmusic.R;
-import com.carporange.cloudmusic.util.L;
-import com.carporange.cloudmusic.util.T;
 
 import java.util.List;
 
@@ -63,9 +60,9 @@ public class ViewPagerCycle extends LinearLayout {
     }
 
     /**
-     * 暂停轮播—用于节省资源
+     * 停止轮播—用于节省资源
      */
-    public void pauseImageCycle() {
+    public void stopImageCycle() {
         mHandler.removeCallbacksAndMessages(null);
     }
 

@@ -7,7 +7,6 @@ import android.widget.ImageView;
 
 import com.carporange.cloudmusic.R;
 import com.carporange.cloudmusic.ui.base.BaseFragment;
-import com.carporange.cloudmusic.util.L;
 import com.carporange.cloudmusic.util.T;
 import com.carporange.cloudmusic.widget.ViewPagerCycle;
 
@@ -64,8 +63,7 @@ public class AnchorRadioFragment extends BaseFragment {
     @Override
     public void onInvisible() {
         if (mViewPagerCycle != null) {
-            mViewPagerCycle.pauseImageCycle();//暂停轮播
-            L.e("停止轮播");
+            mViewPagerCycle.stopImageCycle();//暂停轮播
         }
     }
 
