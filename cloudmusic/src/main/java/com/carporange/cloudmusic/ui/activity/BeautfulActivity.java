@@ -6,7 +6,6 @@ import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.view.ViewPropertyAnimatorListener;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
@@ -15,6 +14,7 @@ import android.view.View;
 import com.carporange.cloudmusic.R;
 import com.carporange.cloudmusic.adapter.DividerItemDecoration;
 import com.carporange.cloudmusic.adapter.MyAdapter;
+import com.carporange.cloudmusic.ui.base.BaseActivity;
 import com.carporange.cloudmusic.util.AnimatorUtil;
 import com.carporange.cloudmusic.util.T;
 import com.jcodecraeer.xrecyclerview.ProgressStyle;
@@ -28,7 +28,7 @@ import butterknife.ButterKnife;
 /**
  * Created by liuhui on 2016/7/20.
  */
-public class BeautfulActivity extends AppCompatActivity {
+public class BeautfulActivity extends BaseActivity {
     @BindView(R.id.recyclerview)
     XRecyclerView mXRecyclerView;
     @BindView(R.id.fab)
@@ -42,64 +42,20 @@ public class BeautfulActivity extends AppCompatActivity {
     private LinearLayoutManager linearLayoutManager;
 
     @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_beautful);
-        ButterKnife.bind(this);
+    protected int getLayoutId() {
+        return R.layout.activity_beautful;
+    }
+
+    @Override
+    public void initActionBar() {
         final Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         toolbar.setTitle("RecyclerView");
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        initView();
-        initListener();
     }
 
-    private void initListener() {
-        mAdapter.setOnItemClickListener(new MyAdapter.ItemClickListener() {
-            @Override
-            public void onItemCclick(View v, int position) {
-                Intent intent = new Intent(BeautfulActivity.this, KnowledgeActivity.class);
-                if (position % 2 == 0) {
-                    intent.putExtra("map", resourceUrl);
-                } else {
-                    intent.putExtra("map", url);
-                }
-                startActivity(intent);
-            }
-        });
-        FAB.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                T.showShort(BeautfulActivity.this, "回到顶部");
-                linearLayoutManager.scrollToPosition(0);
-                hideFAB();
-            }
-        });
-    }
-
-    private void hideFAB() {
-        FAB.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                AnimatorUtil.scaleHide(FAB, new ViewPropertyAnimatorListener() {
-                    @Override
-                    public void onAnimationStart(View view) {
-                    }
-
-                    @Override
-                    public void onAnimationEnd(View view) {
-                        FAB.setVisibility(View.GONE);
-                    }
-
-                    @Override
-                    public void onAnimationCancel(View view) {
-                    }
-                });
-            }
-        }, 500);
-    }
-
-    private void initView() {
+    @Override
+    public void initViews() {
         linearLayoutManager = new LinearLayoutManager(this);
         linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);//默认垂直排列,可以不用写
         mXRecyclerView.setLayoutManager(linearLayoutManager);
@@ -166,21 +122,53 @@ public class BeautfulActivity extends AppCompatActivity {
         mAdapter = new MyAdapter(mListData);
         mXRecyclerView.setAdapter(mAdapter);
         mXRecyclerView.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.VERTICAL_LIST));//设置分割线
+        mAdapter.setOnItemClickListener(new MyAdapter.ItemClickListener() {
+            @Override
+            public void onItemCclick(View v, int position) {
+                Intent intent = new Intent(BeautfulActivity.this, KnowledgeActivity.class);
+                if (position % 2 == 0) {
+                    intent.putExtra("map", resourceUrl);
+                } else {
+                    intent.putExtra("map", url);
+                }
+                startActivity(intent);
+            }
+        });
+        FAB.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                T.showShort(BeautfulActivity.this, "回到顶部");
+                linearLayoutManager.scrollToPosition(0);
+                hideFAB();
+            }
+        });
     }
 
-    /**
-     * ToolBar中的返回按钮对应事件
-     *
-     * @param item
-     * @return
-     */
     @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case android.R.id.home:
-                onBackPressed();
-                return true;
-        }
-        return super.onOptionsItemSelected(item);
+    protected void initWindow() {//重写此方法,就不走基类的方法
+
     }
+
+    private void hideFAB() {
+        FAB.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                AnimatorUtil.scaleHide(FAB, new ViewPropertyAnimatorListener() {
+                    @Override
+                    public void onAnimationStart(View view) {
+                    }
+
+                    @Override
+                    public void onAnimationEnd(View view) {
+                        FAB.setVisibility(View.GONE);
+                    }
+
+                    @Override
+                    public void onAnimationCancel(View view) {
+                    }
+                });
+            }
+        }, 500);
+    }
+
 }

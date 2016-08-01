@@ -4,10 +4,7 @@ package com.carporange.cloudmusic.ui.activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.http.SslError;
-import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.view.KeyEvent;
 import android.view.View;
 import android.webkit.SslErrorHandler;
 import android.webkit.WebChromeClient;
@@ -18,7 +15,6 @@ import android.widget.ProgressBar;
 
 import com.carporange.cloudmusic.R;
 import com.carporange.cloudmusic.ui.base.BaseActivity;
-import com.carporange.cloudmusic.util.L;
 
 
 /**
@@ -127,7 +123,6 @@ public class WebPageActivity extends BaseActivity {
     @Override
     public void onPause() {
         super.onPause();
-
         webView.pauseTimers();
 
     }
@@ -137,17 +132,6 @@ public class WebPageActivity extends BaseActivity {
         super.onResume();
         webView.resumeTimers();
     }
-
-
-//    @Override
-//    public boolean onKeyDown(int keyCode, KeyEvent event) {
-//        if (keyCode == KeyEvent.KEYCODE_BACK) {
-//            webView.loadUrl("about:blank");
-//            finish();
-//            return true;
-//        }
-//        return false;
-//    }
 
     @Override
     public void onBackPressed() {

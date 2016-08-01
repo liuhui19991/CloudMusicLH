@@ -17,30 +17,33 @@ import com.carporange.cloudmusic.knowledgemap.MapService;
 import com.carporange.cloudmusic.knowledgemap.MapView;
 import com.carporange.cloudmusic.knowledgemap.NodeService;
 import com.carporange.cloudmusic.knowledgemap.UIUtils;
+import com.carporange.cloudmusic.ui.base.BaseActivity;
 
 /**
  * 知识地图阅读页
  * Created by liuhui on 2016/7/25.
  */
-public class KnowledgeActivity extends AppCompatActivity {
+public class KnowledgeActivity extends BaseActivity {
     private String resourceUrl;
     private Handler mHandler = new Handler();
     private LinearLayout ll;
 
     @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_knowledge);
+    protected int getLayoutId() {
+        return R.layout.activity_knowledge;
+    }
+
+    @Override
+    public void initActionBar() {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         toolbar.setTitle("");
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+    }
+    @Override
+    public void initViews() {
         ll = (LinearLayout) findViewById(R.id.ll);
         resourceUrl = getIntent().getStringExtra("map");
-        initViews();
-    }
-
-    public void initViews() {
         // 知识地图相关
         final MapView commonMapView = (MapView) findViewById(R.id.map);
 
@@ -74,12 +77,4 @@ public class KnowledgeActivity extends AppCompatActivity {
         super.onDestroy();
     }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        if (item.getItemId() == android.R.id.home) {
-            finish();
-            return true;
-        }
-        return super.onOptionsItemSelected(item);
-    }
 }
