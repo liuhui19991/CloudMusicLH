@@ -10,7 +10,6 @@ import com.carporange.cloudmusic.domain.ViewBanner;
 import com.carporange.cloudmusic.ui.activity.WebPageActivity;
 import com.carporange.cloudmusic.ui.base.BaseFragment;
 import com.carporange.cloudmusic.util.GsonUtil;
-import com.carporange.cloudmusic.util.T;
 import com.carporange.cloudmusic.widget.ViewPagerCycle;
 
 import java.util.List;
@@ -49,7 +48,6 @@ public class AnchorRadioFragment extends BaseFragment {
                 intent.putExtra("title", "新闻");
                 intent.putExtra("url", string);
                 startActivity(intent);
-                T.showShort(getActivity(), string + "位置" + position);
             }
         });
         if (mViewPagerCycle != null) {

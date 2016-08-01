@@ -38,11 +38,6 @@ public abstract class BaseActivity extends AppCompatActivity {
 
     public abstract void initViews();
 
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-    }
-
     /**
      * 这个方法是让状态栏变成透明色,让窗体可以填充,下面的19意思是19版本以上此方法有用,对应的dimens(v19)
      */
