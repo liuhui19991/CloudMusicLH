@@ -11,8 +11,8 @@
         >
         <!--  android:useLevel="false"  没有这句话圆就不封闭了 -->
         <gradient
-            android:centerColor="#ff6666"
-            android:endColor="#ff0000"
+            android:centerColor="#d9d9d9"
+            android:endColor="#666666"
             android:startColor="#cccccc"
             android:type="sweep">
 

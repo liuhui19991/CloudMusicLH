@@ -5,6 +5,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
+import android.view.View;
 import android.view.WindowManager;
 
 import com.carporange.cloudmusic.R;
@@ -63,5 +64,9 @@ public abstract class BaseActivity extends AppCompatActivity {
             return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    protected <V extends View> V findView(int id) {
+        return (V) this.findViewById(id);
     }
 }
