@@ -25,8 +25,8 @@
             android:screenOrientation="portrait"/>
         <activity android:name=".ui.activity.BeautfulActivity"/>
         <activity android:name=".ui.activity.KnowledgeActivity"/>
-        <activity android:name=".ui.activity.VideoPlayer"/>
-
+        <activity android:name=".ui.activity.VideoPlayerActivity"/>
+        <activity android:name=".ui.activity.WebPageActivity"/>
     </application>
 
 </manifest>

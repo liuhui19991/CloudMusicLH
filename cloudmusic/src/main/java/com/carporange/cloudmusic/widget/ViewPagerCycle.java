@@ -19,6 +19,9 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 
 import com.carporange.cloudmusic.R;
+import com.carporange.cloudmusic.domain.ViewBanner;
+import com.carporange.cloudmusic.util.GlideUtil;
+import com.carporange.cloudmusic.util.L;
 
 import java.util.List;
 
@@ -31,7 +34,7 @@ public class ViewPagerCycle extends LinearLayout {
     private Context mContext;
     private ImageView mRedPoint;
     private ViewPager mViewPager;
-    private List mList;
+    private List<ViewBanner.BannersBean> mList;
     private LinearLayout mLinearLayout;
     /**
      * 前一个被选中的position的位置
@@ -215,33 +218,20 @@ public class ViewPagerCycle extends LinearLayout {
             container.removeView((View) object);
         }
 
-        /**
-         * 把自身从父View中移除
-         */
-        public void removeSelfFromParent(View view) {
-            if (view != null) {
-                ViewParent parent = view.getParent();
-                if (parent != null && parent instanceof ViewGroup) {
-                    ViewGroup group = (ViewGroup) parent;
-                    group.removeView(view);
-                }
-            }
-        }
-
         @Override
         public Object instantiateItem(ViewGroup container, final int position) {
-            ImageView iv = (ImageView) mList.get(position % mList.size());
             ImageView imageView = new ImageView(getContext());
-            iv.setTag("设置TAG");
-            iv.setOnClickListener(new OnClickListener() {
+//            imageView.setTag("设置TAG");
+            GlideUtil.display(imageView,mList.get(position%mList.size()).getBanner());
+            imageView.setOnClickListener(new OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     mViewpagerCycleListener.onClick(position, v);
                 }
             });
 
-            container.addView(iv);
-            return iv;
+            container.addView(imageView);
+            return imageView;
         }
     }
 

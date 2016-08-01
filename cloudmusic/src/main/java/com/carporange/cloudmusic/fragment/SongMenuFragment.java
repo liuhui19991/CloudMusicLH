@@ -100,6 +100,6 @@ public class SongMenuFragment extends BaseFragment {
         JCFullScreenActivity.startActivity(getActivity(),
                 "http://resource.gbxx123.com/minivideo/mp4/gq/2016/7/22/1469176714153/1469176714153.mp4",
                 JCVideoPlayerStandard.class, "来个慢动作");
-//       startActivity(new Intent(getActivity(), VideoPlayer.class));
+//       startActivity(new Intent(getActivity(), VideoPlayerActivity.class));
     }
 }

@@ -26,16 +26,17 @@ public class GlideUtil {
      * @param url
      */
     public static void display(ImageView view, String url) {
-        displayUrl(view, url, R.mipmap.default_pic);
+        displayUrl(view, url, R.mipmap.ic_launcher);
     }
 
     /**
      * 在Fragment中展示
+     *
      * @param fragment
      * @param url
      */
     public static void displayInFragment(Fragment fragment, ImageView view, String url) {
-        displayUrlFragment(fragment, view, url, R.mipmap.default_pic);
+        displayUrlFragment(fragment, view, url, R.mipmap.ic_launcher);
     }
 
     private static void displayUrlFragment(Fragment fragment, ImageView view, String url, int default_pic) {
@@ -45,7 +46,7 @@ public class GlideUtil {
         }
         Glide.with(fragment)
                 .load(url)
-                .placeholder(R.mipmap.default_pic)
+                .placeholder(R.mipmap.ic_launcher)
                 .into(view);
     }
 

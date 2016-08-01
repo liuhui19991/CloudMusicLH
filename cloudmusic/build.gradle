@@ -45,4 +45,5 @@ dependencies {
     compile 'com.yolanda.nohttp:nohttp:1.0.4'
 //    compile 'fm.jiecao:jiecaovideoplayer:4.1_alpha'//视频播放
     compile project(path: ':jcvideoplayer-lib')
+    compile 'com.google.code.gson:gson:2.5'
 }

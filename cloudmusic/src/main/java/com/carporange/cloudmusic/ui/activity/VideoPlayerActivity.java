@@ -13,7 +13,7 @@ import fm.jiecao.jcvideoplayer_lib.JCVideoPlayerStandard;
 /**
  * Created by liuhui on 2016/7/27.
  */
-public class VideoPlayer extends AppCompatActivity {
+public class VideoPlayerActivity extends AppCompatActivity {
     @BindView(R.id.videoplayer)
     JCVideoPlayerStandard mVideoPlayer;
     private String url = "http://resource.gbxx123.com/minivideo/mp4/gq/2016/7/22/1469176714153/1469176714153.mp4";
