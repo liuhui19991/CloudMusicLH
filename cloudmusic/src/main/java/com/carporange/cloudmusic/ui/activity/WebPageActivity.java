@@ -5,6 +5,8 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.http.SslError;
 import android.support.v7.widget.Toolbar;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.webkit.SslErrorHandler;
 import android.webkit.WebChromeClient;
@@ -15,6 +17,7 @@ import android.widget.ProgressBar;
 
 import com.carporange.cloudmusic.R;
 import com.carporange.cloudmusic.ui.base.BaseActivity;
+import com.carporange.cloudmusic.util.T;
 
 
 /**
@@ -137,6 +140,27 @@ public class WebPageActivity extends BaseActivity {
     public void onBackPressed() {
         webView.loadUrl("about:blank");
         finish();
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_main, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == R.id.action_settings) {
+            T.showShort(this, "点");
+            return true;
+        } else if (item.getItemId() == R.id.action_two) {
+            T.showShort(this, "点2");
+            return true;
+        } else if (item.getItemId() == R.id.action_three) {
+            T.showShort(this, "点3");
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 }
 
