@@ -33,9 +33,9 @@ public class AnchorRadioFragment extends BaseFragment {
 
     @Override
     protected void initViews() {//如果使用buttknife当从第一个页面直接点过来的时候获取不到对象
-        String s = "{\"banners\":[{\"url\":\"http://www.sj88.com/attachments/bd-aldimg/1204/123/5.jpg\",\"banner\":\"http://pic10.nipic.com/20101103/5063545_000227976000_2.jpg\"}," +
+        String s = "{\"banners\":[{\"url\":\"http://ww1.sinaimg.cn/mw1024/532722c9gw1f66czxn4xwj21400qo7oi.jpg\",\"banner\":\"http://pic10.nipic.com/20101103/5063545_000227976000_2.jpg\"}," +
                 "{\"url\":\"http://www.hao123.com\",\"banner\":\"http://imgstore.cdn.sogou.com/app/a/100540002/714860.jpg\"}," +
-                "{\"url\":\"http://www.sj88.com/attachments/bd-aldimg/1204/123/11.jpg\",\"banner\":\"http://www.deskcar.com/desktop/fengjing/201081215337/19.jpg\"}," +
+                "{\"url\":\"http://static8.photo.sina.com.cn/orignal/4b3f4b54c456c0af533f7\",\"banner\":\"http://www.deskcar.com/desktop/fengjing/201081215337/19.jpg\"}," +
                 "{\"url\":\"http://img5.duitang.com/uploads/item/201411/18/20141118221443_iCX3X.jpeg\",\"banner\":\"http://pic3.nipic.com/20090715/2919184_104743067_2.jpg\"}]}\n";
         mViewBanner = GsonUtil.json2Bean(s, ViewBanner.class);
         mList = mViewBanner.getBanners();
