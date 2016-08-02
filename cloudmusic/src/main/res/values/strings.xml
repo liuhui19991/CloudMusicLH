@@ -7,6 +7,11 @@
     <string name="title">一笑过千山</string>
     <string name="pwd">请输入密码</string>
     <string name="youwant">你想要的</string>
+    <string name="smaller">超小号字体</string>
+    <string name="small">小号字体</string>
+    <string name="normal">正常字体</string>
+    <string name="big">大号字体</string>
+    <string name="bigger">超大号字体</string>
     <string name="tomap">视频</string>
     <string name="action_settings">设置</string>
     <string name="scale_up_show_behavior">com.carporange.cloudmusic.widget.ScaleUpShowBehavior</string>

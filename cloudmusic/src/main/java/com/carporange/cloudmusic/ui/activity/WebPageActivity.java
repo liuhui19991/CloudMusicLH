@@ -3,12 +3,10 @@ package com.carporange.cloudmusic.ui.activity;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.net.http.SslError;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.webkit.SslErrorHandler;
 import android.webkit.WebChromeClient;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
@@ -61,56 +59,48 @@ public class WebPageActivity extends BaseActivity {
      * 设置webview属性
      */
     private void initWebSetting() {
+        WebSettings settings = webView.getSettings();
+//        settings.setBuiltInZoomControls(true);// 显示缩放按钮(wap网页不支持)
+        settings.setUseWideViewPort(true);// 支持双击缩放(wap网页不支持)
+        settings.setJavaScriptEnabled(true);//设置支持js功能
+        settings.setUseWideViewPort(true);// 这个很关键  自适应大小
+        settings.setLoadWithOverviewMode(true);
 
-        WebSettings ws = webView.getSettings();
-
-        ws.setJavaScriptEnabled(true); // 设置支持javascript脚本
-        ws.setAllowFileAccess(true); // 允许访问文件
-        ws.setDefaultTextEncodingName("utf-8"); // 设置文本编码
-        ws.setAppCacheEnabled(true);
-        ws.setCacheMode(WebSettings.LOAD_DEFAULT);// 设置缓存模式
-        ws.setTextSize(WebSettings.TextSize.NORMAL);
-
-        ws.setUseWideViewPort(true);// 这个很关键  自适应大小
-        ws.setLoadWithOverviewMode(true);
-
-        ws.setSupportZoom(true);
-        ws.setBuiltInZoomControls(true);
-
-        webView.setWebViewClient(new WebViewClientCustom());
+        settings.setSupportZoom(true);
+        settings.setBuiltInZoomControls(true);
+        webView.setWebViewClient(new MyWebViewClient());
         webView.setWebChromeClient(new MyWebChromeClient());
 
     }
 
-    private class WebViewClientCustom extends WebViewClient {
-        @Override
-        public boolean shouldOverrideUrlLoading(WebView view, String url) {
-            view.loadUrl(url);// 当打开新链接时，使用当前的 WebView，不会使用系统其他浏览器
-            return true;
-        }
-
+    private class MyWebViewClient extends WebViewClient {
+        //开始加载网页
         @Override
         public void onPageStarted(WebView view, String url, Bitmap favicon) {
             super.onPageStarted(view, url, favicon);
 
         }
 
+        //所有链接跳转会走此方法
+        @Override
+        public boolean shouldOverrideUrlLoading(WebView view, String url) {
+            view.loadUrl(url);//这句话的意思是在跳转view时强制在当前view中加载
+            return true;
+        }
+
+        //网页加载结束
         @Override
         public void onPageFinished(WebView view, String url) {
             super.onPageFinished(view, url);
             bar.setVisibility(View.GONE);
-        }
-
-        @Override
-        public void onReceivedSslError(WebView view, SslErrorHandler handler,
-                                       SslError error) {
-            super.onReceivedSslError(view, handler, error);
         }
     }
 
     private class MyWebChromeClient extends WebChromeClient {
         @Override
         public void onProgressChanged(WebView view, int newProgress) {
+            super.onProgressChanged(view, newProgress);
+            //进度发生变化 newprogress
             if (newProgress == 100) {
                 bar.setVisibility(View.INVISIBLE);
             } else {
@@ -119,7 +109,13 @@ public class WebPageActivity extends BaseActivity {
                 }
                 bar.setProgress(newProgress);
             }
-            super.onProgressChanged(view, newProgress);
+        }
+
+        @Override
+        public void onReceivedTitle(WebView view, String title) {
+            super.onReceivedTitle(view, title);
+            // 网页标题
+            System.out.println("网页标题:" + title);
         }
     }
 
@@ -151,13 +147,19 @@ public class WebPageActivity extends BaseActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == R.id.action_settings) {
-            T.showShort(this, "点");
+            webView.getSettings().setTextZoom(50);
             return true;
         } else if (item.getItemId() == R.id.action_two) {
-            T.showShort(this, "点2");
+            webView.getSettings().setTextZoom(80);
             return true;
         } else if (item.getItemId() == R.id.action_three) {
-            T.showShort(this, "点3");
+            webView.getSettings().setTextZoom(100);
+            return true;
+        } else if (item.getItemId() == R.id.action_four) {
+            webView.getSettings().setTextZoom(120);
+            return true;
+        } else if (item.getItemId() == R.id.action_five) {
+            webView.getSettings().setTextZoom(140);
             return true;
         }
         return super.onOptionsItemSelected(item);
