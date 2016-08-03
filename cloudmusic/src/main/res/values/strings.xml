@@ -13,6 +13,7 @@
     <string name="big">大号字体</string>
     <string name="bigger">超大号字体</string>
     <string name="tomap">视频</string>
+    <string name="blureed">高斯模糊</string>
     <string name="action_settings">设置</string>
     <string name="scale_up_show_behavior">com.carporange.cloudmusic.widget.ScaleUpShowBehavior</string>
 </resources>

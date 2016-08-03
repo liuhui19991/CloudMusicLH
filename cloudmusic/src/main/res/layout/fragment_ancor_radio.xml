@@ -28,4 +28,22 @@
         android:padding="1dp"
         android:scaleType="centerInside"
         android:src="@mipmap/headimg"/>   <!--加上 android:padding=”1dp”，效果更好！-->
+
+    <TextView
+        android:id="@+id/blureed"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_35"
+        android:layout_marginTop="26dp"
+        android:background="@drawable/image_selector"
+        android:gravity="center"
+        android:text="@string/blureed"/>
+
+    <TextView
+        android:id="@+id/blureed1"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_35"
+        android:layout_marginTop="26dp"
+        android:background="@drawable/image_selector"
+        android:gravity="center"
+        android:text="@string/blureed"/>
 </LinearLayout>

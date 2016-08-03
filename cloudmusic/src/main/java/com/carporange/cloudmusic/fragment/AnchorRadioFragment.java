@@ -7,6 +7,8 @@ import android.widget.EditText;
 
 import com.carporange.cloudmusic.R;
 import com.carporange.cloudmusic.domain.ViewBanner;
+import com.carporange.cloudmusic.ui.activity.BlurredViewBasicActivity;
+import com.carporange.cloudmusic.ui.activity.WeatherActivity;
 import com.carporange.cloudmusic.ui.activity.WebPageActivity;
 import com.carporange.cloudmusic.ui.base.BaseFragment;
 import com.carporange.cloudmusic.util.GsonUtil;
@@ -15,6 +17,7 @@ import com.carporange.cloudmusic.widget.ViewPagerCycle;
 import java.util.List;
 
 import butterknife.BindView;
+import butterknife.OnClick;
 
 /**
  * Created by liuhui on 2016/6/27.
@@ -68,6 +71,16 @@ public class AnchorRadioFragment extends BaseFragment {
         if (mViewPagerCycle != null) {
             mViewPagerCycle.stopImageCycle();//暂停轮播
         }
+    }
+
+    @OnClick(R.id.blureed)
+    public void goBlurredActivity() {
+        startActivity(new Intent(getActivity(), BlurredViewBasicActivity.class));
+    }
+
+    @OnClick(R.id.blureed1)
+    public void goBlurredActivity2() {
+        startActivity(new Intent(getActivity(), WeatherActivity.class));
     }
 
     @Override

@@ -33,7 +33,7 @@ public class PersonalRecommendationFragment extends BaseFragment {
 
     @Override
     protected void onVisible() {
-        initWaitDialog();
+//        initWaitDialog();
     }
 
     private void initWaitDialog() {//展示我自定义的等待对话框
