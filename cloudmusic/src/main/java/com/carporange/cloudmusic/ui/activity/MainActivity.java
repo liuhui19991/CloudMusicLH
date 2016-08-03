@@ -1,5 +1,7 @@
 package com.carporange.cloudmusic.ui.activity;
 
+import android.content.Intent;
+import android.os.Bundle;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -18,6 +20,8 @@ import com.carporange.cloudmusic.ui.base.BaseActivity;
 import com.carporange.cloudmusic.util.DensityUtil;
 import com.carporange.cloudmusic.util.S;
 import com.carporange.cloudmusic.util.T;
+import com.uuzuche.lib_zxing.activity.CaptureActivity;
+import com.uuzuche.lib_zxing.activity.CodeUtils;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -38,7 +42,7 @@ public class MainActivity extends BaseActivity implements MenuLeftFragment.OnLef
     @BindView(R.id.tv_title)
     TextView mTitle;
     private Fragment mMainFragment;
-
+    private int REQUEST_CODE = 88;
     @Override
     protected int getLayoutId() {
         return R.layout.activity_main;
@@ -90,6 +94,35 @@ public class MainActivity extends BaseActivity implements MenuLeftFragment.OnLef
     @OnClick(R.id.actionbar_home)
     public void openDrawerLayout() {
         mDrawerLayout.openDrawer(Gravity.LEFT);
+    }
+
+    /**
+     * 扫描二维码
+     */
+    @OnClick(R.id.actionbar_search)
+    public void scanMessage() {
+        Intent intent = new Intent(MainActivity.this, CaptureActivity.class);
+        startActivityForResult(intent, REQUEST_CODE);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == REQUEST_CODE) {
+            //处理扫描结果（在界面上显示）
+            if (null != data) {
+                Bundle bundle = data.getExtras();
+                if (bundle == null) {
+                    return;
+                }
+                if (bundle.getInt(CodeUtils.RESULT_TYPE) == CodeUtils.RESULT_SUCCESS) {
+                    String result = bundle.getString(CodeUtils.RESULT_STRING);
+                    T.showShort(this, "解析结果:" + result);
+                } else if (bundle.getInt(CodeUtils.RESULT_TYPE) == CodeUtils.RESULT_FAILED) {
+                    T.showShort(MainActivity.this, "解析二维码失败");
+                }
+            }
+        }
     }
 
     @Override
