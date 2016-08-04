@@ -12,7 +12,6 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.carporange.cloudmusic.R;
-import com.carporange.cloudmusic.event.ExitEvent;
 import com.carporange.cloudmusic.event.TitleEvent;
 import com.carporange.cloudmusic.fragment.MainFragment;
 import com.carporange.cloudmusic.fragment.MenuLeftFragment;
@@ -43,6 +42,7 @@ public class MainActivity extends BaseActivity implements MenuLeftFragment.OnLef
     TextView mTitle;
     private Fragment mMainFragment;
     private int REQUEST_CODE = 88;
+
     @Override
     protected int getLayoutId() {
         return R.layout.activity_main;
@@ -136,10 +136,22 @@ public class MainActivity extends BaseActivity implements MenuLeftFragment.OnLef
     }
 
     @Override
-    public void onLeftClick() {//此处是将侧边栏按钮事件,在activity里面处理,  也可学习点击设置按钮时候的处理方式
+    public void onLeftClick(int what) {//此处是将侧边栏按钮事件,在activity里面处理,  也可学习点击设置按钮时候的处理方式
         mDrawerLayout.closeDrawer(Gravity.LEFT);
-        S.show(this, "退出程序点击了");
-        T.showShort(this, "退出程序点击了");
+        switch (what) {
+            case 0:
+                S.show(this, "退出程序点击了");
+                T.showShort(this, "退出程序点击了");
+                break;
+            case 1:
+                S.show(this, "设置");
+                T.showShort(this, "设置");
+                break;
+            default:
+
+                break;
+        }
+
     }
 
 /*     long time = 0;

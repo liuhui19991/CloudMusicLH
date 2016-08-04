@@ -86,7 +86,6 @@ public class MenuLeftFragment extends BaseFragment {//这个类在布局文件�
                 getActivity().recreate();
             }
         });
-
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         mRecyclerView.setAdapter(adapter);
     }
@@ -97,15 +96,19 @@ public class MenuLeftFragment extends BaseFragment {//这个类在布局文件�
         DrawerLayout drawerLayout = mainActivity.getDrawerLayout();
         drawerLayout.closeDrawer(Gravity.LEFT);
         Toast.makeText(mainActivity, "设置", Toast.LENGTH_SHORT).show();
+        mOnLeftClickListener.onLeftClick(1);
     }
 
     @OnClick(R.id.exit)
-    public void myExit(View v) {//退出按钮的点击事件执行的方法,这里的参数可以不写
-        mOnLeftClickListener.onLeftClick();
+    public void myExit() {//退出按钮的点击事件执行的方法,这里的参数可以不写
+        mOnLeftClickListener.onLeftClick(0);
 //        EventBus.getDefault().post(new ExitEvent());//使用EventBus进行点击退出应用的事件传递
     }
 
     public interface OnLeftClickListener {
-        void onLeftClick();
+        /**
+         * @param what 用于区分不同的按钮
+         */
+        void onLeftClick(int what);
     }
 }

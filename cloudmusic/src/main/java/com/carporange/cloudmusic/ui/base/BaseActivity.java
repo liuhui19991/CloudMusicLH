@@ -69,4 +69,5 @@ public abstract class BaseActivity extends AppCompatActivity {
     protected <V extends View> V findView(int id) {
         return (V) this.findViewById(id);
     }
+
 }
