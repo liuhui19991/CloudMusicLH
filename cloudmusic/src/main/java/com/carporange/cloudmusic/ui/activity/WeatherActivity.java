@@ -9,7 +9,7 @@ import android.view.WindowManager;
 
 import com.carporange.cloudmusic.R;
 import com.carporange.cloudmusic.adapter.BlurredAdapter;
-import com.qiushui.blurredview.BlurredView;
+import com.carporange.cloudmusic.blurred.BlurredView;
 
 
 /**

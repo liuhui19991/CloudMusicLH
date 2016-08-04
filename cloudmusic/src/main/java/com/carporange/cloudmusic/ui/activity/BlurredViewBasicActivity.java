@@ -7,7 +7,7 @@ import android.widget.SeekBar;
 import android.widget.TextView;
 
 import com.carporange.cloudmusic.R;
-import com.qiushui.blurredview.BlurredView;
+import com.carporange.cloudmusic.blurred.BlurredView;
 
 
 /**

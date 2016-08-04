@@ -6,11 +6,11 @@ android {
 
     defaultConfig {
         applicationId "com.carporange.cloudmusic"
-        minSdkVersion 15
+        minSdkVersion 14
         targetSdkVersion 23
         versionCode 1
         versionName "1.0"
-        //高斯模糊加入
+        //高斯模糊加入下面两行
         renderscriptTargetApi 19
         renderscriptSupportModeEnabled true
 
@@ -51,5 +51,5 @@ dependencies {
     compile project(path: ':jcvideoplayer-lib')
     compile 'com.google.code.gson:gson:2.5'
     compile 'cn.yipianfengye.android:zxing-library:1.2'//二维码
-    compile 'com.qiushui:blurredview:0.8.1'//图片模糊
+//    compile 'com.qiushui:blurredview:0.8.1'//图片模糊
 }
