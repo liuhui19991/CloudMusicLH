@@ -14,6 +14,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewParent;
 import android.view.ViewTreeObserver;
+import android.webkit.WebSettings;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
@@ -60,6 +61,7 @@ public class ViewPagerCycle extends LinearLayout {
     public void setImageResource(List list, ViewpagerCycleListener listener) {
         mList = list;
         mViewpagerCycleListener = listener;
+        mViewPager.setPageTransformer(true,new DepthPageTransformer());//设置ViewPager的切换动画
         initView();
     }
 
