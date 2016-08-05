@@ -117,9 +117,9 @@ public class MainActivity extends BaseActivity implements MenuLeftFragment.OnLef
                 }
                 if (bundle.getInt(CodeUtils.RESULT_TYPE) == CodeUtils.RESULT_SUCCESS) {
                     String result = bundle.getString(CodeUtils.RESULT_STRING);
-                    T.showShort(this, "解析结果:" + result);
+                    T.showShort(mContext, "解析结果:" + result);
                 } else if (bundle.getInt(CodeUtils.RESULT_TYPE) == CodeUtils.RESULT_FAILED) {
-                    T.showShort(MainActivity.this, "解析二维码失败");
+                    T.showShort(mContext, "解析二维码失败");
                 }
             }
         }
@@ -140,12 +140,12 @@ public class MainActivity extends BaseActivity implements MenuLeftFragment.OnLef
         mDrawerLayout.closeDrawer(Gravity.LEFT);
         switch (what) {
             case 0:
-                S.show(this, "退出程序点击了");
-                T.showShort(this, "退出程序点击了");
+                S.show(mContext, "退出程序点击了");
+                T.showShort(mContext, "退出程序点击了");
                 break;
             case 1:
-                S.show(this, "设置");
-                T.showShort(this, "设置");
+                S.show(mContext, "设置");
+                T.showShort(mContext, "设置");
                 break;
             default:
 

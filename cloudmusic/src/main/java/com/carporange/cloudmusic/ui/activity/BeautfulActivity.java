@@ -20,6 +20,7 @@ import com.carporange.cloudmusic.util.T;
 import com.jcodecraeer.xrecyclerview.ProgressStyle;
 import com.jcodecraeer.xrecyclerview.XRecyclerView;
 
+import java.math.MathContext;
 import java.util.ArrayList;
 
 import butterknife.BindView;
@@ -137,7 +138,7 @@ public class BeautfulActivity extends BaseActivity {
         FAB.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                T.showShort(BeautfulActivity.this, "回到顶部");
+                T.showShort(mContext, "回到顶部");
                 linearLayoutManager.scrollToPosition(0);
                 hideFAB();
             }

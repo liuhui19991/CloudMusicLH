@@ -1,6 +1,8 @@
 package com.carporange.cloudmusic.ui.base;
 
 import android.annotation.TargetApi;
+import android.app.Activity;
+import android.content.Context;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -17,6 +19,7 @@ import butterknife.ButterKnife;
  * Created by liuhui on 2016/6/27.
  */
 public abstract class BaseActivity extends AppCompatActivity {
+    public Activity mContext;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,6 +28,7 @@ public abstract class BaseActivity extends AppCompatActivity {
         setTheme(isNightMode ? R.style.NightTheme : R.style.DayTheme);
         setContentView(getLayoutId());
         ButterKnife.bind(this);//绑定黄油刀
+        mContext = this;
         initActionBar();
         initViews();
         initWindow();
