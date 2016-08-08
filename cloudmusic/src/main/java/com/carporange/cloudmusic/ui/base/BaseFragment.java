@@ -14,10 +14,6 @@ import butterknife.ButterKnife;
  */
 public abstract class BaseFragment extends Fragment {
     protected View mContentView;
-    /**
-     * Fragment当前状态是否可见
-     */
-    protected boolean isVisible;
 
     @Nullable
     @Override
@@ -36,13 +32,11 @@ public abstract class BaseFragment extends Fragment {
     }
 
     @Override
-    public void setUserVisibleHint(boolean isVisibleToUser) {
+    public void setUserVisibleHint(boolean isVisibleToUser) {//setUserVisibleHint()方法先于onCreateView执行
         super.setUserVisibleHint(isVisibleToUser);
-        if (getUserVisibleHint()) {
-            isVisible = true;
+        if (isVisibleToUser) {
             onVisible();
         } else {
-            isVisible = false;
             onInvisible();
         }
     }

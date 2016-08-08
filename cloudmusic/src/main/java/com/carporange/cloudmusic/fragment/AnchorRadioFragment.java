@@ -53,9 +53,6 @@ public class AnchorRadioFragment extends BaseFragment {
                 startActivity(intent);
             }
         });
-        if (mViewPagerCycle != null) {
-            mViewPagerCycle.startImageCycle();
-        }
     }
 
 
