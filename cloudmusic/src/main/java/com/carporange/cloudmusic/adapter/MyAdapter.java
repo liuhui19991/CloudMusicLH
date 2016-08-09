@@ -28,6 +28,9 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
      * 记录checkbox是否选中的list
      */
     List<Integer> list = new ArrayList<>();
+    /**
+     * 记录小红点的集合
+     */
     List<Integer> redList = new ArrayList<>();
 
     public interface ItemClickListener {
@@ -71,6 +74,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
             holder.checkBox.setChecked(false);
         }
         if (redList != null) {
+            //此处必须使用三元用算符,要不然还会出现复用的问题,只有当集合包含的时候才设置小红点消失
             holder.imageView.setVisibility(redList.contains(position) ? View.GONE : View.VISIBLE);
         } else {
             holder.imageView.setVisibility(View.VISIBLE);
