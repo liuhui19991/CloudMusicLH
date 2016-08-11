@@ -4,8 +4,9 @@
               android:layout_height="match_parent"
               android:orientation="vertical">
 
-    <fm.jiecao.videoplayer.JCVideoPlayerStandard
+    <Button
         android:id="@+id/videoplayer"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="wrap_content"
+        android:text="全频播放"/>
 </LinearLayout>
