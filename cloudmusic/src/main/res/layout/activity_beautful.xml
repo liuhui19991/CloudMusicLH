@@ -12,7 +12,7 @@
         android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
         >
 
-        <android.support.design.widget.CollapsingToolbarLayout
+     <!--   <android.support.design.widget.CollapsingToolbarLayout
             android:id="@+id/collapsing_toolbar"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -20,9 +20,9 @@
             app:expandedTitleMarginEnd="64dp"
             app:expandedTitleMarginStart="48dp"
             app:layout_scrollFlags="scroll|exitUntilCollapsed">
-            <!--app:layout_scrollFlags="scroll|enterAlways" 上拉隐藏下拉显示-->
-            <!-- app:layout_scrollFlags="scroll|enterAlwaysCollapsed" 上拉一旦隐藏再不出现-->
-            <!--app:layout_scrollFlags="scroll|exitUntilCollapsed"  上拉隐藏到固定高度,下拉时候再出现-->
+            &lt;!&ndash;app:layout_scrollFlags="scroll|enterAlways" 上拉隐藏下拉显示&ndash;&gt;
+            &lt;!&ndash; app:layout_scrollFlags="scroll|enterAlwaysCollapsed" 上拉一旦隐藏再不出现&ndash;&gt;
+            &lt;!&ndash;app:layout_scrollFlags="scroll|exitUntilCollapsed"  上拉隐藏到固定高度,下拉时候再出现&ndash;&gt;
 
             <ImageView
                 android:id="@+id/backdrop"
@@ -30,7 +30,7 @@
                 android:layout_height="match_parent"
                 android:scaleType="centerCrop"
                 android:src="@mipmap/headimg"
-                app:layout_collapseMode="parallax"/>
+                app:layout_collapseMode="parallax"/>-->
 
             <android.support.v7.widget.Toolbar
                 android:id="@+id/toolbar"
@@ -39,7 +39,7 @@
                 app:layout_collapseMode="pin"
                 app:popupTheme="@style/ThemeOverlay.AppCompat.Light"/>
 
-        </android.support.design.widget.CollapsingToolbarLayout>
+  <!--      </android.support.design.widget.CollapsingToolbarLayout>-->
 
     </android.support.design.widget.AppBarLayout>
 
