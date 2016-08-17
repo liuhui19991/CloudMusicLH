@@ -1,5 +1,6 @@
 package com.world.myapplication;
 
+import android.content.DialogInterface;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -65,7 +66,17 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void run() {
-                new AlertDialog.Builder(MainActivity.this).setMessage(text).show();
+                new AlertDialog.Builder(MainActivity.this).setMessage(text).setNegativeButton("确定", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        Toast.makeText(MainActivity.this, "确定", Toast.LENGTH_SHORT).show();
+                    }
+                }).setPositiveButton("取消", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        Toast.makeText(MainActivity.this, "取消", Toast.LENGTH_SHORT).show();
+                    }
+                }).show();
 
             }
         });
