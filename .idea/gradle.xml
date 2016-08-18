@@ -10,7 +10,6 @@
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/cloudmusic" />
             <option value="$PROJECT_DIR$/jcvideoplayer-lib" />
-            <option value="$PROJECT_DIR$/myapplication" />
           </set>
         </option>
         <option name="myModules">
@@ -18,7 +17,6 @@
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/cloudmusic" />
             <option value="$PROJECT_DIR$/jcvideoplayer-lib" />
-            <option value="$PROJECT_DIR$/myapplication" />
           </set>
         </option>
       </GradleProjectSettings>

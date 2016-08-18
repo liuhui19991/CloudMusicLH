@@ -1,1 +1,1 @@
-include ':cloudmusic', ':jcvideoplayer-lib', ':myapplication'
+include ':cloudmusic', ':jcvideoplayer-lib'

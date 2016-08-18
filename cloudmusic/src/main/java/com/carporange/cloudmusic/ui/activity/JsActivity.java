@@ -1,21 +1,33 @@
-package com.world.myapplication;
+package com.carporange.cloudmusic.ui.activity;
 
 import android.content.DialogInterface;
 import android.support.v7.app.AlertDialog;
-import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.view.View;
 import android.webkit.JavascriptInterface;
 import android.webkit.WebView;
 import android.widget.Toast;
 
-public class MainActivity extends AppCompatActivity {
+import com.carporange.cloudmusic.R;
+import com.carporange.cloudmusic.ui.base.BaseActivity;
+
+/**
+ * Created by liuhui on 2016/8/17.
+ */
+public class JsActivity extends BaseActivity {
     private WebView contentWebView;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+    protected int getLayoutId() {
+        return R.layout.activity_js;
+    }
+
+    @Override
+    public void initActionBar() {
+
+    }
+
+    @Override
+    public void initViews() {
         contentWebView = (WebView) findViewById(R.id.webview);
         // 启用javascript
         contentWebView.getSettings().setJavaScriptEnabled(true);
@@ -42,8 +54,6 @@ public class MainActivity extends AppCompatActivity {
                 contentWebView.loadUrl("javascript:javacalljswith(" + "'http://blog.csdn.net/Leejizhou'" + ")");
             }
         });
-
-
     }
 
     //由于安全原因 targetSdkVersion>=17需要加 @JavascriptInterface
@@ -54,7 +64,7 @@ public class MainActivity extends AppCompatActivity {
         runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                Toast.makeText(MainActivity.this, "show", Toast.LENGTH_SHORT).show();
+                Toast.makeText(mContext, "show", Toast.LENGTH_SHORT).show();
 
             }
         });
@@ -66,21 +76,19 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void run() {
-                new AlertDialog.Builder(MainActivity.this).setMessage(text).setNegativeButton("确定", new DialogInterface.OnClickListener() {
+                new AlertDialog.Builder(mContext).setMessage(text).setNegativeButton("确定", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        Toast.makeText(MainActivity.this, "确定", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(mContext, "确定", Toast.LENGTH_SHORT).show();
                     }
                 }).setPositiveButton("取消", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        Toast.makeText(MainActivity.this, "取消", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(mContext, "取消", Toast.LENGTH_SHORT).show();
                     }
                 }).show();
 
             }
         });
-
-
     }
 }
