@@ -32,12 +32,6 @@ public class VideoPlayerActivity extends AppCompatActivity {
     }
 
     @Override
-    protected void onResume() {
-        super.onResume();
-        JCMediaManager.instance().mediaPlayer.seekTo(5000);
-    }
-
-    @Override
     public void onBackPressed() {
         if (JCVideoPlayer.backPress()) {
             return;
