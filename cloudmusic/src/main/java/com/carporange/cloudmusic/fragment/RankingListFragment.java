@@ -81,7 +81,7 @@ public class RankingListFragment extends BaseFragment {
 
         // 下面是两种方法得到宽度和高度 getWindow().getDecorView().getWidth()
 
-        PopupWindow window = new PopupWindow(view,
+        final PopupWindow window = new PopupWindow(view,
                 WindowManager.LayoutParams.MATCH_PARENT,
                 WindowManager.LayoutParams.WRAP_CONTENT);
 
@@ -106,7 +106,9 @@ public class RankingListFragment extends BaseFragment {
 
             @Override
             public void onClick(View v) {
-
+                if (window != null) {
+                    window.dismiss();//隐藏popupwindow
+                }
                 System.out.println("第一个按钮被点击了");
             }
         });

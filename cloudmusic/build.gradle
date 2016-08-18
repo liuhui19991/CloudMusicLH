@@ -53,9 +53,18 @@ dependencies {
     //二维码
     compile 'cn.yipianfengye.android:zxing-library:1.2'
     //    compile 'com.qiushui:blurredview:0.8.1'//图片模糊
-
     //添加下面三行代码就可以在华为手机上面播放视频
     compile 'tv.danmaku.ijk.media:ijkplayer-arm64:0.6.0'
     compile 'tv.danmaku.ijk.media:ijkplayer-x86:0.6.0'
     compile 'tv.danmaku.ijk.media:ijkplayer-x86_64:0.6.0'
+
+    /*   //If you can not start app, you cancel the annotation
+       //如果app无法启动,请取消下面的注释
+       //Other ABIs: optional
+   //    compile 'tv.danmaku.ijk.media:ijkplayer-armv5:0.6.0'
+       compile 'tv.danmaku.ijk.media:ijkplayer-arm64:0.6.0'
+       compile 'tv.danmaku.ijk.media:ijkplayer-x86:0.6.0'
+       compile 'tv.danmaku.ijk.media:ijkplayer-x86_64:0.6.0'
+       //ExoPlayer as IMediaPlayer: optional, experimental
+       //compile 'tv.danmaku.ijk.media:ijkplayer-exo:0.6.0'*/
 }

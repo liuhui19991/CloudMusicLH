@@ -65,6 +65,7 @@ public class SongMenuFragment extends BaseFragment {
         });
     }
 
+
     @Override
     protected void onVisible() {
         S.show(getActivity(), CarpApplication.getInstance().getResources().getString(R.string.title));
