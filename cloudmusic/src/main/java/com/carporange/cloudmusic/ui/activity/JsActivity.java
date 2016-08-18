@@ -27,6 +27,10 @@ public class JsActivity extends BaseActivity {
     }
 
     @Override
+    protected void initWindow() {
+    }
+
+    @Override
     public void initViews() {
         contentWebView = (WebView) findViewById(R.id.webview);
         // 启用javascript
