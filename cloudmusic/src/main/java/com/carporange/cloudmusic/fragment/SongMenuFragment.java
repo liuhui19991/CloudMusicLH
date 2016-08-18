@@ -16,6 +16,7 @@ import com.carporange.cloudmusic.widget.CircleTextProgressbar;
 
 import butterknife.BindView;
 import butterknife.OnClick;
+import fm.jiecao.jcvideoplayer_lib.JCVideoPlayer;
 import fm.jiecao.jcvideoplayer_lib.JCVideoPlayerStandard;
 
 /**
@@ -117,4 +118,11 @@ public class SongMenuFragment extends BaseFragment {
 //                JCVideoPlayerStandard.class, "来个慢动作");
        startActivity(new Intent(getActivity(), VideoPlayerActivity.class));
     }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        JCVideoPlayer.releaseAllVideos();
+    }
+
 }

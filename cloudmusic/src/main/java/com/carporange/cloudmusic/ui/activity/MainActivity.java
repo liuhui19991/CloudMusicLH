@@ -28,6 +28,7 @@ import org.greenrobot.eventbus.ThreadMode;
 
 import butterknife.BindView;
 import butterknife.OnClick;
+import fm.jiecao.jcvideoplayer_lib.JCVideoPlayer;
 
 /**
  * Created by liuhui on 2016/6/27.
@@ -169,6 +170,9 @@ public class MainActivity extends BaseActivity implements MenuLeftFragment.OnLef
 
     @Override
     public void onBackPressed() {//此处要把super.onBackPressed()去掉,要不然还是执行父类的退出
+        if (JCVideoPlayer.backPress()) {
+            return;
+        }
         T.showShort(this, "小样你还想退出吗?");
         if (System.currentTimeMillis() - time > 2000) {
             T.showShort(MainActivity.this, "再按一次返回确认退出");

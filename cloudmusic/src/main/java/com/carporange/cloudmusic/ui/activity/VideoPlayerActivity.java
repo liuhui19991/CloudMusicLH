@@ -8,6 +8,8 @@ import com.carporange.cloudmusic.R;
 
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import fm.jiecao.jcvideoplayer_lib.JCMediaManager;
+import fm.jiecao.jcvideoplayer_lib.JCVideoPlayer;
 import fm.jiecao.jcvideoplayer_lib.JCVideoPlayerStandard;
 
 /**
@@ -27,5 +29,25 @@ public class VideoPlayerActivity extends AppCompatActivity {
     public void initView() {
         JCVideoPlayerStandard.startFullscreen(this, JCVideoPlayerStandard.class,
                 "http://2449.vod.myqcloud.com/2449_22ca37a6ea9011e5acaaf51d105342e3.f20.mp4", "慢动作");
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        JCMediaManager.instance().mediaPlayer.seekTo(5000);
+    }
+
+    @Override
+    public void onBackPressed() {
+        if (JCVideoPlayer.backPress()) {
+            return;
+        }
+        super.onBackPressed();
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        JCVideoPlayer.releaseAllVideos();
     }
 }
