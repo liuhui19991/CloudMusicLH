@@ -8,7 +8,6 @@ import com.carporange.cloudmusic.R;
 
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-import fm.jiecao.jcvideoplayer_lib.JCMediaManager;
 import fm.jiecao.jcvideoplayer_lib.JCVideoPlayer;
 import fm.jiecao.jcvideoplayer_lib.JCVideoPlayerStandard;
 
