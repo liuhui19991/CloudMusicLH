@@ -138,6 +138,11 @@ public class WebPageActivity extends BaseActivity {
         finish();
     }
 
+    /**
+     * 重写这个方法就能在toolbar上面出现菜单按钮
+     * @param menu
+     * @return
+     */
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_main, menu);
