@@ -16,14 +16,13 @@ import fm.jiecao.jcvideoplayer_lib.JCVideoPlayerStandard;
  */
 public class VideoPlayerActivity extends AppCompatActivity {
 
-    private String url = "http://resource.gbxx123.com/minivideo/mp4/gq/2016/7/22/1469176714153/1469176714153.mp4";
-
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_videoplayer);
         ButterKnife.bind(this);
     }
+
     @OnClick(R.id.videoplayer)
     public void initView() {
         JCVideoPlayerStandard.startFullscreen(this, JCVideoPlayerStandard.class,
