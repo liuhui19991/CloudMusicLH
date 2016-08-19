@@ -51,6 +51,7 @@ public class MainFragment extends BaseFragment {
         list.add(new DiscoverFragment());
         list.add(new MusicFragment());
         list.add(new FriendsFragment());
+        //Fragment中嵌套使用Fragment一定要使用getChildFragmentManager(),否则会有问题
         FragmentPagerAdapter fpa = new CarpFragmentPagerAdapter(list, getChildFragmentManager());
         mViewPager.setOffscreenPageLimit(3);
         mViewPager.setAdapter(fpa);
