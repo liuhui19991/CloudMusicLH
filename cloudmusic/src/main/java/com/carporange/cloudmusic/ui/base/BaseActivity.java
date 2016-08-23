@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.WindowManager;
 
 import com.carporange.cloudmusic.R;
+import com.carporange.cloudmusic.ui.activity.SwipeBackActivity;
 import com.carporange.cloudmusic.util.SpUtil;
 
 import butterknife.ButterKnife;
@@ -18,7 +19,7 @@ import butterknife.ButterKnife;
 /**
  * Created by liuhui on 2016/6/27.
  */
-public abstract class BaseActivity extends AppCompatActivity {
+public abstract class BaseActivity extends SwipeBackActivity {
     public Activity mContext;
 
     @Override

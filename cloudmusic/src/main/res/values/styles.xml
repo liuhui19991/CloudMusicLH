@@ -6,6 +6,9 @@
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:windowAnimationStyle">@style/HoloThemeActivityAnimation</item>
+        <!-- 设置背景透明背景，右滑时才能看到上一个界面，否则会看到黑屏效果-->，
+        <item name="android:windowIsTranslucent">true</item>
         <!--colorPrimary 对应ActionBar的颜色。
         colorPrimaryDark对应状态栏的颜色
         colorAccent 对应EditText编辑时、RadioButton选中、CheckBox等选中时的颜色。-->
@@ -46,12 +49,20 @@
 
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light"/>
 
-    <!--  这个是加入的代码 -->
+    <!--  这个是popupwindow加入的代码 -->
     <style name="mypopwindow_anim_style">
         <item name="android:windowEnterAnimation">@anim/popshow_anim</item>
         <!-- 指定显示的动画xml -->
 
         <item name="android:windowExitAnimation">@anim/pophidden_anim</item>
         <!-- 指定消失的动画xml -->
+    </style>
+
+    <!--Activity退出动画-->
+    <style name="HoloThemeActivityAnimation" parent="@android:style/Animation.Activity">
+        <item name="android:activityOpenEnterAnimation">@anim/activity_open_enter</item>
+        <item name="android:activityOpenExitAnimation">@anim/activity_open_exit</item>
+        <item name="android:activityCloseEnterAnimation">@anim/activity_close_enter</item>
+        <item name="android:activityCloseExitAnimation">@anim/activity_close_exit</item>
     </style>
 </resources>
