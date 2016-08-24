@@ -62,7 +62,7 @@ public class BeautfulActivity extends BaseActivity {
         mXRecyclerView.setLayoutManager(linearLayoutManager);
         mXRecyclerView.setRefreshProgressStyle(ProgressStyle.BallSpinFadeLoader);
         mXRecyclerView.setLoadingMoreProgressStyle(ProgressStyle.BallBeat);
-        mXRecyclerView.setPullRefreshEnabled(false);//不允许下拉刷新,这句话会使请求数据为空时候不显示空的View
+//        mXRecyclerView.setPullRefreshEnabled(false);//不允许下拉刷新,这句话会使请求数据为空时候不显示空的View
 //        mXRecyclerView.setArrowImageView(R.mipmap.iconfont_downgrey);//更换刷新箭头
         mEmptyView = findViewById(R.id.text_empty);
         mXRecyclerView.setEmptyView(mEmptyView);//当没有数据时候显示eMptyView;
