@@ -69,6 +69,10 @@ public class RefreshLoadMoreActivity extends BaseActivity {
     }
 
     @Override
+    protected void initWindow() {
+    }
+
+    @Override
     public void initViews() {
         mSwipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.swipe_layout);
         mSwipeRefreshLayout.setColorSchemeResources(android.R.color.holo_blue_light, android.R.color.holo_red_light, android.R.color.holo_orange_light, android.R.color.holo_green_light);
@@ -136,7 +140,7 @@ public class RefreshLoadMoreActivity extends BaseActivity {
         public void onCreateMenu(SwipeMenu swipeLeftMenu, SwipeMenu swipeRightMenu, int viewType) {
             int size = getResources().getDimensionPixelSize(R.dimen.item_height);
 
-            // 添加左侧的，如果不添加，则左侧不会出现菜单。
+          /*  // 添加左侧的，如果不添加，则左侧不会出现菜单。
             {
                 SwipeMenuItem addItem = new SwipeMenuItem(mContext)
                         .setBackgroundDrawable(R.drawable.selector_green)// 点击的背景。
@@ -152,7 +156,7 @@ public class RefreshLoadMoreActivity extends BaseActivity {
                         .setHeight(size);
 
                 swipeLeftMenu.addMenuItem(closeItem); // 添加一个按钮到左侧菜单。
-            }
+            }*/
             // 添加右侧的，如果不添加，则右侧不会出现菜单。
             {
                 SwipeMenuItem deleteItem = new SwipeMenuItem(mContext)

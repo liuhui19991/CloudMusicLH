@@ -16,7 +16,7 @@
         android:layout_marginRight="10dp"
         android:layout_marginTop="5dp"
         android:background="@android:color/holo_red_light"
-        android:text="第一个按钮"/>
+        android:text="swipeRecyclerView"/>
 
     <Button
         android:id="@+id/second"
