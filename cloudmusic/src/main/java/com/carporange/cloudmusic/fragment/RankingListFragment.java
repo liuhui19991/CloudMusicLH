@@ -16,6 +16,7 @@ import android.widget.TextView;
 import com.carporange.cloudmusic.R;
 import com.carporange.cloudmusic.event.TitleEvent;
 import com.carporange.cloudmusic.ui.activity.JsActivity;
+import com.carporange.cloudmusic.ui.activity.RefreshLoadMoreActivity;
 import com.carporange.cloudmusic.ui.base.BaseFragment;
 
 import org.greenrobot.eventbus.EventBus;
@@ -110,6 +111,7 @@ public class RankingListFragment extends BaseFragment {
                     window.dismiss();//隐藏popupwindow
                 }
                 System.out.println("第一个按钮被点击了");
+                startActivity(new Intent(getActivity(), RefreshLoadMoreActivity.class));
             }
         });
         Button second = (Button) view.findViewById(R.id.second);

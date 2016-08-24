@@ -30,6 +30,7 @@
         <activity android:name=".ui.activity.BlurredViewBasicActivity"/>
         <activity android:name=".ui.activity.WeatherActivity"/>
         <activity android:name=".ui.activity.JsActivity"/>
+        <activity android:name=".ui.activity.RefreshLoadMoreActivity"/>
     </application>
 
 </manifest>

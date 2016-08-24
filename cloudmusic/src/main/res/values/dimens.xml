@@ -5,6 +5,8 @@
     <dimen name="toolbar_height">56dp</dimen>
     <dimen name="toolbar_padding_top">0dp</dimen>
     <dimen name="toolbar_real_height">64dp</dimen>
+    <dimen name="item_height">60dp</dimen>
+    <dimen name="item_margin">10dp</dimen>
 
     <dimen name="sp_12">12sp</dimen>
     <dimen name="sp_13">13sp</dimen>

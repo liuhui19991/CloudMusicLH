@@ -6,6 +6,7 @@ import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.view.ViewPropertyAnimatorListener;
+import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
@@ -62,6 +63,7 @@ public class BeautfulActivity extends BaseActivity {
         mXRecyclerView.setLayoutManager(linearLayoutManager);
         mXRecyclerView.setRefreshProgressStyle(ProgressStyle.BallSpinFadeLoader);
         mXRecyclerView.setLoadingMoreProgressStyle(ProgressStyle.BallBeat);
+//        mXRecyclerView.setItemAnimator(new );//TODO item动画
 //        mXRecyclerView.setPullRefreshEnabled(false);//不允许下拉刷新,这句话会使请求数据为空时候不显示空的View
 //        mXRecyclerView.setArrowImageView(R.mipmap.iconfont_downgrey);//更换刷新箭头
         mEmptyView = findViewById(R.id.text_empty);
