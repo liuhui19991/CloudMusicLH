@@ -56,17 +56,6 @@ public class RefreshLoadMoreActivity extends BaseActivity {
 
     private SwipeMenuRecyclerView mSwipeMenuRecyclerView;
 
-    /*@Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView();
-
-
-        mContext = this;
-
-
-    }*/
-
     @Override
     protected int getLayoutId() {
         return R.layout.activity_refresh_load_more;
