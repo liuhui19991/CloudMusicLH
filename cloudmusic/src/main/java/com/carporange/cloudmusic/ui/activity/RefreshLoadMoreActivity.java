@@ -15,12 +15,9 @@
  */
 package com.carporange.cloudmusic.ui.activity;
 
-import android.app.Activity;
 import android.graphics.Color;
-import android.os.Bundle;
 import android.support.design.widget.Snackbar;
 import android.support.v4.widget.SwipeRefreshLayout;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -39,6 +36,7 @@ import com.yanzhenjie.recyclerview.swipe.SwipeMenu;
 import com.yanzhenjie.recyclerview.swipe.SwipeMenuCreator;
 import com.yanzhenjie.recyclerview.swipe.SwipeMenuItem;
 import com.yanzhenjie.recyclerview.swipe.SwipeMenuRecyclerView;
+import com.yolanda.nohttp.Logger;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -51,6 +49,8 @@ public class RefreshLoadMoreActivity extends BaseActivity {
     private SwipeRefreshLayout mSwipeRefreshLayout;
 
     private MenuAdapter mMenuAdapter;
+
+    private int refreshTime, times;
 
     private List<String> mStrings;
 
@@ -110,10 +110,16 @@ public class RefreshLoadMoreActivity extends BaseActivity {
     private SwipeRefreshLayout.OnRefreshListener mOnRefreshListener = new SwipeRefreshLayout.OnRefreshListener() {
         @Override
         public void onRefresh() {
+            refreshTime++;
             mSwipeMenuRecyclerView.postDelayed(new Runnable() {
                 @Override
                 public void run() {
                     mSwipeRefreshLayout.setRefreshing(false);
+                    mStrings.clear();
+                    for (int i = 0; i < 15; i++) {
+                        mStrings.add("item" + i + "after " + refreshTime + " times of refresh");
+                    }
+                    mMenuAdapter.notifyDataSetChanged();
                 }
             }, 2000);
         }
@@ -125,8 +131,35 @@ public class RefreshLoadMoreActivity extends BaseActivity {
     private RecyclerView.OnScrollListener mOnScrollListener = new RecyclerView.OnScrollListener() {
         @Override
         public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+            if (mStrings.size() < 20) {
+                Logger.e(String.valueOf(mStrings.size()));
+                return;
+            }
             if (!recyclerView.canScrollVertically(1)) {// 手指不能向上滑动了
-                Snackbar.make(mSwipeMenuRecyclerView, "加载更多", Snackbar.LENGTH_LONG).show();
+                final int size = mStrings.size();
+                if (times < 2) {
+                    for (int i = 0; i < 15; i++) {
+                        mStrings.add("item" + (i + size));
+                    }
+                    mMenuAdapter.notifyDataSetChanged();
+                } else if (times == 2) {
+                    for (int i = 0; i < 8; i++) {
+                        mStrings.add("lastData" + (i + size));
+                    }
+                    mMenuAdapter.notifyDataSetChanged();
+                } else {
+                Snackbar.make(mSwipeMenuRecyclerView, "没有更多数据了", Snackbar.LENGTH_SHORT).show();
+                }
+                times++;
+               /* new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        for (int i = 0; i < 15; i++) {
+                            mStrings.add("item" + (i + size));
+                        }
+                        mMenuAdapter.notifyDataSetChanged();
+                    }
+                }, 800);*/
             }
         }
 

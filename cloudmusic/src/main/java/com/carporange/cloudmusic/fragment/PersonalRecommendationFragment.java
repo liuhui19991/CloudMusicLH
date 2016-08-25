@@ -33,7 +33,7 @@ public class PersonalRecommendationFragment extends BaseFragment {
 
     @Override
     protected void onVisible() {
-//        initWaitDialog();  现在这个方法执行的时候会出现创建Dialog时候空指针
+//        initWaitDialog();  //现在这个方法执行的时候会出现创建Dialog时候空指针
     }
 
     private void initWaitDialog() {//展示我自定义的等待对话框
@@ -51,7 +51,7 @@ public class PersonalRecommendationFragment extends BaseFragment {
     @Override
     protected void initViews() {
         createBottomSheetDialog();
-
+        initWaitDialog();
     }
 
     private void createBottomSheetDialog() {
