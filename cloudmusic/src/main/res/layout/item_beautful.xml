@@ -4,6 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="?selectableItemBackground"
+    android:foreground="?android:attr/selectableItemBackground"
     >
     <!--android:foreground="?android:attr/selectableItemBackground" 点击水波纹效果-->
     <!--android:background="@drawable/image_selector" 背景点击选择效果-->
@@ -18,8 +19,8 @@
             android:layout_width="60dip"
             android:layout_height="60dip"
             android:layout_gravity="center"
-            android:padding="1dp"
             android:background="@drawable/shaptext_background"
+            android:padding="1dp"
             android:src="#999999"
             />
 

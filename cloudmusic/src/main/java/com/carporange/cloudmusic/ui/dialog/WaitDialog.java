@@ -1,4 +1,4 @@
-package com.carporange.cloudmusic.ui;
+package com.carporange.cloudmusic.ui.dialog;
 
 import android.app.ProgressDialog;
 import android.content.Context;
