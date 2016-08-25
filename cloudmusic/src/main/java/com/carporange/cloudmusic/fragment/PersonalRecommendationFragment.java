@@ -51,7 +51,7 @@ public class PersonalRecommendationFragment extends BaseFragment {
     @Override
     protected void initViews() {
         createBottomSheetDialog();
-        initWaitDialog();
+//        initWaitDialog();
     }
 
     private void createBottomSheetDialog() {

@@ -1,6 +1,7 @@
 package com.carporange.cloudmusic.ui.activity;
 
 
+import android.app.Dialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.support.v7.widget.Toolbar;
@@ -27,7 +28,7 @@ public class WebPageActivity extends BaseActivity {
     private String name = "";
     private ProgressBar bar;
     private WebView webView;
-
+    private Dialog mWaitDialog;
     @Override
     protected int getLayoutId() {
         return R.layout.activity_fun_webview;
@@ -49,7 +50,11 @@ public class WebPageActivity extends BaseActivity {
     public void initViews() {
         bar = (ProgressBar) findViewById(R.id.myProgressBar);
         webView = (WebView) findViewById(R.id.myWebView);
-
+        if (mWaitDialog == null) {
+            mWaitDialog = new Dialog(mContext, R.style.TRANSDIALOG);
+        }
+        mWaitDialog.setContentView(R.layout.trans_dialog);
+        mWaitDialog.getWindow().setBackgroundDrawableResource(R.color.transparent);
         initWebSetting();
         webView.loadUrl(url);
     }
@@ -78,7 +83,7 @@ public class WebPageActivity extends BaseActivity {
         @Override
         public void onPageStarted(WebView view, String url, Bitmap favicon) {
             super.onPageStarted(view, url, favicon);
-
+            mWaitDialog.show();
         }
 
         //所有链接跳转会走此方法
@@ -93,6 +98,7 @@ public class WebPageActivity extends BaseActivity {
         public void onPageFinished(WebView view, String url) {
             super.onPageFinished(view, url);
             bar.setVisibility(View.GONE);
+            mWaitDialog.dismiss();
         }
     }
 
