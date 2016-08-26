@@ -19,6 +19,8 @@
     <string name="username">liuhui</string>
     <string name="password">liuhui</string>
     <string name="blureed">高斯模糊</string>
+    <string name="progress">进度条</string>
+    <string name="progresswait">等待</string>
     <string name="action_settings">设置</string>
     <string name="scale_up_show_behavior">com.carporange.cloudmusic.widget.ScaleUpShowBehavior</string>
 </resources>

@@ -22,6 +22,7 @@ import android.widget.LinearLayout;
 import android.widget.ScrollView;
 
 import com.carporange.cloudmusic.R;
+import com.carporange.cloudmusic.util.L;
 import com.carporange.cloudmusic.util.SpUtil;
 import com.carporange.cloudmusic.widget.ResizeRelativeLayout;
 
@@ -71,11 +72,6 @@ public class LoginActivity extends AppCompatActivity implements OnClickListener 
         forgetpassword = (Button) findViewById(R.id.login_find_pwd);
         login = (Button) findViewById(R.id.login_submit_btn);
         checkBox = (CheckBox) findViewById(R.id.remember_checkbox);
-        boolean isRember = SpUtil.getBoolean("isRemberPassword", false);
-        if (isRember) {
-            username.setText(SpUtil.getString(us,""));
-            password.setText(SpUtil.getString(ps,""));
-        }
         //一下两种方式都可以获取资源文件中的值
         names = getResources().getString(R.string.username);
         passs = this.getString(R.string.password);
@@ -90,8 +86,15 @@ public class LoginActivity extends AppCompatActivity implements OnClickListener 
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 isRemberPassword = isChecked;
+                L.e(isChecked+"======");
             }
         });
+        boolean isRember = SpUtil.getBoolean("isRemberPassword", false);
+        if (isRember) {//上次是记住密码
+            checkBox.setChecked(true);
+            username.setText(SpUtil.getString(us,""));
+            password.setText(SpUtil.getString(ps,""));
+        }
         mHandler = new Handler() {
             public void handleMessage(Message msg) {
                 switch (msg.what) {
@@ -110,8 +113,6 @@ public class LoginActivity extends AppCompatActivity implements OnClickListener 
                         break;
                 }
             }
-
-            ;
         };
         mResizeRelativeLayout.setOnResizeListener(new ResizeRelativeLayout.OnResizeListener() {
             @Override

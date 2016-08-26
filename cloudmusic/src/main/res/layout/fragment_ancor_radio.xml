@@ -1,49 +1,74 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              xmlns:tools="http://schemas.android.com/tools"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent"
-              android:orientation="vertical"
-              tools:context="com.carporange.cloudmusic.fragment.AnchorRadioFragment">
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    >
 
-    <com.carporange.cloudmusic.widget.ViewPagerCycle
-        android:id="@+id/view_pager"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="200dp"/>
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        tools:context="com.carporange.cloudmusic.fragment.AnchorRadioFragment">
 
-    <EditText
-        android:id="@+id/et"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="6dp"
-        android:background="@drawable/shaptext_background"
-        android:hint="@string/pwd"/>
+        <com.carporange.cloudmusic.widget.ViewPagerCycle
+            android:id="@+id/view_pager"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"/>
 
-    <ImageView
-        android:layout_width="88dp"
-        android:layout_height="88dp"
-        android:layout_marginLeft="@dimen/dp_8"
-        android:layout_marginRight="@dimen/dp_8"
-        android:layout_marginTop="6dp"
-        android:background="@drawable/shaptext_background"
-        android:padding="1dp"
-        android:scaleType="centerInside"
-        android:src="@mipmap/headimg"/>   <!--加上 android:padding=”1dp”，效果更好！-->
+        <EditText
+            android:id="@+id/et"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="6dp"
+            android:background="@drawable/shaptext_background"
+            android:hint="@string/pwd"/>
 
-    <TextView
-        android:id="@+id/blureed"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/dp_35"
-        android:layout_marginTop="26dp"
-        android:background="@drawable/image_selector"
-        android:gravity="center"
-        android:text="@string/blureed"/>
+        <ImageView
+            android:layout_width="88dp"
+            android:layout_height="88dp"
+            android:layout_marginLeft="@dimen/dp_8"
+            android:layout_marginRight="@dimen/dp_8"
+            android:layout_marginTop="6dp"
+            android:background="@drawable/shaptext_background"
+            android:padding="1dp"
+            android:scaleType="centerInside"
+            android:src="@mipmap/headimg"/>   <!--加上 android:padding=”1dp”，效果更好！-->
 
-    <TextView
-        android:id="@+id/blureed1"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/dp_35"
-        android:layout_marginTop="26dp"
-        android:background="@drawable/image_selector"
-        android:gravity="center"
-        android:text="@string/blureed"/>
-</LinearLayout>
+        <TextView
+            android:id="@+id/blureed"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_35"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/image_selector"
+            android:gravity="center"
+            android:text="@string/blureed"/>
+
+        <TextView
+            android:id="@+id/blureed1"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_35"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/image_selector"
+            android:gravity="center"
+            android:text="@string/blureed"/>
+
+        <TextView
+            android:id="@+id/progressbar"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_35"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/image_selector"
+            android:gravity="center"
+            android:text="@string/progress"/>
+
+        <TextView
+            android:id="@+id/progresswait"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_35"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/image_selector"
+            android:gravity="center"
+            android:text="@string/progresswait"/>
+    </LinearLayout>
+</ScrollView>
