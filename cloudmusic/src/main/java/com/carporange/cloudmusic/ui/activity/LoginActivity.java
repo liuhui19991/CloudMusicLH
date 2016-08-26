@@ -151,12 +151,12 @@ public class LoginActivity extends AppCompatActivity implements OnClickListener 
                     Snackbar.make(username, "密码不正确", Snackbar.LENGTH_SHORT).show();
                 }
                 break;
-            case R.id.pass_visiable:
+            case R.id.pass_visiable://显示密码
                 passVisiable.setImageResource(R.mipmap.icon_login_visible);
                 password.setInputType(InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD);
                 mHandler.sendEmptyMessageDelayed(PASSWORD_INVISIABLE, 3000);
                 break;
-            case R.id.login_find_pwd:
+            case R.id.login_find_pwd://找回密码
                 AlertDialog.Builder builder = new AlertDialog.Builder(this);
                 builder.setTitle("您的密码!");
                 builder.setMessage("帐号:" + names + "\n" + "密码:" + passs);

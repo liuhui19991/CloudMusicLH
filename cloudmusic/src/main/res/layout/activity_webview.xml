@@ -55,14 +55,13 @@
                         android:layout_marginLeft="5dp"
                         android:layout_marginRight="5dp"/>
 
-                <!--    <com.zggbxx.learncamp.widget.MyListView
+                    <com.carporange.cloudmusic.widget.NoScrollListView
                         android:id="@+id/lvComment"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_marginLeft="5dp"
                         android:layout_marginRight="5dp"
                         android:visibility="gone" />
--->
                     <TextView
                         android:id="@+id/noData"
                         android:layout_width="match_parent"

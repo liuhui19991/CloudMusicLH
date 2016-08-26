@@ -1,6 +1,7 @@
 package com.carporange.cloudmusic.widget;
 
 import android.content.Context;
+import android.util.AttributeSet;
 import android.widget.ListView;
 
 
@@ -11,8 +12,8 @@ import android.widget.ListView;
 
 public class NoScrollListView extends ListView {
 
-    public NoScrollListView(Context context) {
-        super(context);
+    public NoScrollListView(Context context, AttributeSet attrs) {
+        super(context, attrs);
     }
 
     @Override
