@@ -69,6 +69,7 @@ public class LoginActivity extends AppCompatActivity implements OnClickListener 
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         username = (EditText) findViewById(R.id.login_account);
+        //动态设置帐号名可见
         username.setInputType(InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD);
         password = (EditText) findViewById(R.id.login_pwd);
         passVisiable = (ImageView) findViewById(R.id.pass_visiable);
