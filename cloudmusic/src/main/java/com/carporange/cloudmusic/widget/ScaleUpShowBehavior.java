@@ -28,7 +28,7 @@ import com.carporange.cloudmusic.util.AnimatorUtil;
 
 /**
  * <p>上拉时显示FAB。</p>
- * Created on 2016/7/14.
+ * Created by liuhui on 2016/6/15.
  *
  * @author liuhui.
  */

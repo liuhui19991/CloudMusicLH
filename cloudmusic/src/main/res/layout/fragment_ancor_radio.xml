@@ -70,5 +70,14 @@
             android:background="@drawable/image_selector"
             android:gravity="center"
             android:text="@string/progresswait"/>
+
+        <TextView
+            android:id="@+id/dicuss"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_35"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/image_selector"
+            android:gravity="center"
+            android:text="@string/dicuss"/>
     </LinearLayout>
 </ScrollView>

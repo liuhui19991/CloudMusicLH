@@ -7,6 +7,7 @@ import android.view.Window;
 import com.carporange.cloudmusic.R;
 
 /**
+ * 左侧进度圈,右侧内容
  * Created by liuhui on 2016/6/30.
  */
 public class WaitDialog extends ProgressDialog {

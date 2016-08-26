@@ -6,8 +6,7 @@ import android.widget.EditText;
 
 /**
  * 打开或关闭软键盘
- * <p/>
- * Created by liuhui
+ * Created by liuhui on 2016/6/15.
  */
 public class KeyBoardUtils {
     /**

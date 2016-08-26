@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/footer"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingTop="5dp"
+    android:paddingLeft="5dp"
+    android:paddingRight="5dp" >
+
+    <RelativeLayout
+        android:id="@+id/footer1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="gone" >
+
+        <ImageView
+            android:id="@+id/first"
+            android:layout_width="20dp"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:visibility="gone" />
+
+        <EditText
+            android:id="@+id/etComment"
+            android:layout_width="200dp"
+            android:layout_height="30dp"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@id/first"
+            android:gravity="center_vertical"
+            android:hint="发评论得积分"
+            android:singleLine="true"
+            android:textSize="10sp"
+            android:padding="5dp" />
+
+        <ImageView
+            android:id="@+id/upImage"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@id/etComment"
+            android:layout_marginLeft="20dp" />
+                
+        <TextView
+            android:id="@+id/up"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@id/upImage"
+            android:layout_centerVertical="true"
+            android:text="点赞"
+            android:visibility="gone" />
+
+        <ImageView
+            android:id="@+id/collectionImage"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@id/up"
+            android:layout_marginLeft="10dp" />
+
+        <TextView
+            android:id="@+id/collection"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+             android:layout_toRightOf="@id/collectionImage"
+            android:text="收藏"
+            android:visibility="gone" />
+
+
+        <ImageView
+            android:id="@+id/more"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_centerVertical="true"
+             android:layout_toRightOf="@id/collection"
+            android:layout_marginLeft="15dp" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/footer2"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="bottom"
+        android:visibility="visible" >
+
+        <EditText
+            android:id="@+id/etComment2"
+            android:layout_width="285dp"
+            android:layout_height="match_parent"
+            android:hint="发评论得积分"
+            android:singleLine="true"
+            android:textSize="15sp" />
+
+        <TextView
+            android:id="@+id/commitComment"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:text="发送"
+            android:layout_marginRight="15dp" />
+    </RelativeLayout>
+
+</FrameLayout>

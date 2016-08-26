@@ -86,7 +86,6 @@ public class LoginActivity extends AppCompatActivity implements OnClickListener 
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 isRemberPassword = isChecked;
-                L.e(isChecked+"======");
             }
         });
         boolean isRember = SpUtil.getBoolean("isRemberPassword", false);

@@ -35,6 +35,8 @@
             android:name=".ui.activity.LoginActivity"
             android:windowSoftInputMode="stateHidden"/>
         <!-- android:configChanges="keyboardHidden|orientation|screenSize"-->
+        <activity android:name=".ui.activity.WebviewActivity"
+                  android:windowSoftInputMode="stateHidden|adjustPan"/>
     </application>
 
 </manifest>

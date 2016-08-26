@@ -5,7 +5,7 @@ import android.util.AttributeSet;
 import android.widget.RelativeLayout;
 
 /**
- * 重写RelativeLayout布局，实现压缩模式下软键盘弹�?隐藏的监�? <br>
+ * 重写RelativeLayout布局，实现压缩模式下软键盘弹?隐藏的监?
  *登录页
  *Created by liuhui on 2016/6/15.
  */

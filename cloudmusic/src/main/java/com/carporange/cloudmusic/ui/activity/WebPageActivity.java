@@ -16,10 +16,10 @@ import android.widget.ProgressBar;
 
 import com.carporange.cloudmusic.R;
 import com.carporange.cloudmusic.ui.base.BaseActivity;
-import com.carporange.cloudmusic.util.T;
 
 
 /**
+ * 轮播图详情页
  * Created by liuhui on 2016/7/27.
  */
 public class WebPageActivity extends BaseActivity {
@@ -31,7 +31,7 @@ public class WebPageActivity extends BaseActivity {
     private Dialog mWaitDialog;
     @Override
     protected int getLayoutId() {
-        return R.layout.activity_fun_webview;
+        return R.layout.activity_webpage;
     }
 
     @Override
