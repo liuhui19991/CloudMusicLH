@@ -96,8 +96,9 @@ public class RefreshLoadMoreActivity extends BaseActivity {
         // 设置菜单Item点击监听。
         mSwipeMenuRecyclerView.setSwipeMenuItemClickListener(menuItemClickListener);
 
-        mSwipeMenuRecyclerView.openLeftMenu(0);
-        mSwipeMenuRecyclerView.openRightMenu(0);
+        //这两句话注掉也可以
+        mSwipeMenuRecyclerView.smoothOpenLeftMenu(0);
+        mSwipeMenuRecyclerView.smoothOpenRightMenu(0);
 
         mMenuAdapter = new MenuAdapter(mStrings);
         mMenuAdapter.setOnItemClickListener(onItemClickListener);
@@ -267,7 +268,7 @@ public class RefreshLoadMoreActivity extends BaseActivity {
         if (item.getItemId() == android.R.id.home) {
             finish();
         } else if (item.getItemId() == R.id.menu_open_rv_menu) {
-            mSwipeMenuRecyclerView.openRightMenu(0);
+           mSwipeMenuRecyclerView.smoothOpenRightMenu(0);
         }
         return true;
     }

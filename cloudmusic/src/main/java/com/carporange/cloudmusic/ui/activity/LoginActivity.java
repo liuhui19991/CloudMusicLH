@@ -6,16 +6,21 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.os.SystemClock;
 import android.support.annotation.Nullable;
 import android.support.design.widget.Snackbar;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.text.InputType;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.WindowManager;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
 
@@ -36,9 +41,14 @@ public class LoginActivity extends AppCompatActivity implements OnClickListener 
 
     private final int KEYBOARD_SHOW = 1001;
     private final int KEYBOARD_HIDDEN = 1002;
+    private final int PASSWORD_INVISIABLE = 1003;
     private EditText username;
     private EditText password;
     private Button login;
+    private ImageView passVisiable;
+    private Button forgetpassword;
+    private String names;
+    private String passs;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -57,12 +67,19 @@ public class LoginActivity extends AppCompatActivity implements OnClickListener 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         username = (EditText) findViewById(R.id.login_account);
         password = (EditText) findViewById(R.id.login_pwd);
+        passVisiable = (ImageView) findViewById(R.id.pass_visiable);
+        forgetpassword = (Button) findViewById(R.id.login_find_pwd);
         login = (Button) findViewById(R.id.login_submit_btn);
-        login.setOnClickListener(this);
+        //一下两种方式都可以获取资源文件中的值
+        names = getResources().getString(R.string.username);
+        passs = this.getString(R.string.password);
         initListeners();
     }
 
     private void initListeners() {
+        passVisiable.setOnClickListener(this);
+        forgetpassword.setOnClickListener(this);
+        login.setOnClickListener(this);
         mHandler = new Handler() {
             public void handleMessage(Message msg) {
                 switch (msg.what) {
@@ -73,7 +90,10 @@ public class LoginActivity extends AppCompatActivity implements OnClickListener 
                     case KEYBOARD_HIDDEN:
                         mForgetLayout.setVisibility(View.VISIBLE);
                         break;
-
+                    case PASSWORD_INVISIABLE:
+                        passVisiable.setImageResource(R.mipmap.icon_login_gone);
+                        password.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
+                        break;
                     default:
                         break;
                 }
@@ -86,10 +106,8 @@ public class LoginActivity extends AppCompatActivity implements OnClickListener 
             public void OnResize(int w, int h, int oldw, int oldh) {
                 Message msg = new Message();
                 if (h < oldh) {//软键盘弹出
-                    L.e("软键盘弹出");
                     msg.what = KEYBOARD_SHOW;
-                } else {
-                    L.e("软键盘关闭");
+                } else {//软件盘关闭
                     msg.what = KEYBOARD_HIDDEN;
                 }
                 mHandler.sendMessage(msg);
@@ -103,11 +121,6 @@ public class LoginActivity extends AppCompatActivity implements OnClickListener 
             case R.id.login_submit_btn://登录
                 String name = username.getText().toString().trim();
                 String pass = password.getText().toString().trim();
-                //一下两种方式都可以获取资源文件中的值
-                String names = getResources().getString(R.string.username);
-                String passs = this.getString(R.string.password);
-                L.e(names+".."+name);
-                L.e(passs+"----"+pass);
                 if (name.equals("") && pass.equals("")) {
                     Snackbar.make(username, "请输入用户名或密码", Snackbar.LENGTH_SHORT).show();
                     return;
@@ -119,6 +132,27 @@ public class LoginActivity extends AppCompatActivity implements OnClickListener 
                     Snackbar.make(username, "密码不正确", Snackbar.LENGTH_SHORT).show();
                 }
                 break;
+            case R.id.pass_visiable:
+                passVisiable.setImageResource(R.mipmap.icon_login_visible);
+                password.setInputType(InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD);
+                mHandler.sendEmptyMessageDelayed(PASSWORD_INVISIABLE, 3000);
+                break;
+            case R.id.login_find_pwd:
+                AlertDialog.Builder builder = new AlertDialog.Builder(this);
+                builder.setTitle("您的密码!");
+                builder.setMessage("帐号:"+names+"\n"+"密码:"+passs);
+                builder.setNegativeButton("取消", null);
+                builder.setPositiveButton("确定", null);
+                builder.show();
+                break;
         }
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == android.R.id.home) {
+            finish();
+        }
+        return true;
     }
 }

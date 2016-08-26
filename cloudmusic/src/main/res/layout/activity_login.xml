@@ -190,11 +190,17 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:background="@null"
-                    android:inputType="textPassword"
                     android:gravity="left|center"
                     android:hint="输入密码"
+                    android:inputType="textPassword"
                     android:paddingRight="14dp"
                     android:singleLine="true"/>
+
+                <ImageView
+                    android:id="@+id/pass_visiable"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@mipmap/icon_login_gone"/>
             </LinearLayout>
         </LinearLayout>
 
@@ -204,12 +210,15 @@
             android:id="@+id/remember_linear"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginRight="10dp"
-            android:gravity="right"
+            android:layout_below="@id/input_linear"
+            android:layout_marginLeft="39dp"
+            android:layout_marginTop="8dp"
+            android:gravity="start"
             android:orientation="horizontal"
-            android:visibility="gone">
+            >
 
             <CheckBox
+                android:id="@+id/remember_checkbox"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="记住密码"/>
@@ -221,7 +230,7 @@
             android:id="@+id/login_submit_btn"
             android:layout_width="match_parent"
             android:layout_height="48dp"
-            android:layout_below="@+id/input_linear"
+            android:layout_below="@+id/remember_linear"
             android:layout_marginLeft="30dp"
             android:layout_marginRight="30dp"
             android:layout_marginTop="15dp"
