@@ -69,6 +69,7 @@ public class LoginActivity extends AppCompatActivity implements OnClickListener 
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         username = (EditText) findViewById(R.id.login_account);
+        username.setInputType(InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD);
         password = (EditText) findViewById(R.id.login_pwd);
         passVisiable = (ImageView) findViewById(R.id.pass_visiable);
         forgetpassword = (Button) findViewById(R.id.login_find_pwd);
@@ -100,7 +101,6 @@ public class LoginActivity extends AppCompatActivity implements OnClickListener 
             public void handleMessage(Message msg) {
                 switch (msg.what) {
                     case KEYBOARD_SHOW:
-                        username.setInputType(InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD);
                         mScrollView.fullScroll(ScrollView.FOCUS_DOWN);
                         mForgetLayout.setVisibility(View.GONE);
                         break;
