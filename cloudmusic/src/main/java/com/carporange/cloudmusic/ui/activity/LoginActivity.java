@@ -6,7 +6,6 @@ import android.os.Handler;
 import android.os.Message;
 import android.support.annotation.Nullable;
 import android.support.design.widget.Snackbar;
-import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -23,9 +22,7 @@ import android.widget.LinearLayout;
 import android.widget.ScrollView;
 
 import com.carporange.cloudmusic.R;
-import com.carporange.cloudmusic.util.L;
 import com.carporange.cloudmusic.util.SpUtil;
-import com.carporange.cloudmusic.util.T;
 import com.carporange.cloudmusic.widget.ResizeRelativeLayout;
 
 /**
