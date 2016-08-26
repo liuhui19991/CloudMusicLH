@@ -15,6 +15,9 @@
     <string name="tomap">视频</string>
     <string name="popup">PopupWindow</string>
     <string name="jsactivity">JSActivity</string>
+    <string name="login">登 录</string>
+    <string name="username">liuhui</string>
+    <string name="password">liuhui</string>
     <string name="blureed">高斯模糊</string>
     <string name="action_settings">设置</string>
     <string name="scale_up_show_behavior">com.carporange.cloudmusic.widget.ScaleUpShowBehavior</string>

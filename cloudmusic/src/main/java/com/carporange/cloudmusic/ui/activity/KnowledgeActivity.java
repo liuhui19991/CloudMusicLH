@@ -2,13 +2,9 @@ package com.carporange.cloudmusic.ui.activity;
 
 import android.content.res.Resources;
 import android.graphics.BitmapFactory;
-import android.os.Bundle;
 import android.os.Handler;
-import android.support.annotation.Nullable;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.DisplayMetrics;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.LinearLayout;
 
@@ -43,7 +39,7 @@ public class KnowledgeActivity extends BaseActivity {
     @Override
     public void initViews() {
         ll = (LinearLayout) findViewById(R.id.ll);
-        resourceUrl = getIntent().getStringExtra("map");
+        resourceUrl = mContext.getIntent().getStringExtra("map");
         // 知识地图相关
         final MapView commonMapView = (MapView) findViewById(R.id.map);
 
@@ -53,7 +49,7 @@ public class KnowledgeActivity extends BaseActivity {
         NodeService.open = BitmapFactory.decodeResource(res,
                 R.mipmap.common_node_open);
 
-        DisplayMetrics dm = UIUtils.getDisplayMetrics(this);
+        DisplayMetrics dm = UIUtils.getDisplayMetrics(mContext);
         final MapService service = new MapService(commonMapView, null, dm);
         service.startEngineFromUrl(resourceUrl);
         mHandler.postDelayed(new Runnable() {

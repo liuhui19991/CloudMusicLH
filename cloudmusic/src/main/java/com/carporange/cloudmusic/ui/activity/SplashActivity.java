@@ -46,7 +46,7 @@ public class SplashActivity extends BaseActivity {
             @Override
             public void run() {
                 SystemClock.sleep(2000);
-                startActivity(new Intent(SplashActivity.this, MainActivity.class));
+                startActivity(new Intent(SplashActivity.this, LoginActivity.class));
                 finish();
             }
         }).start();
