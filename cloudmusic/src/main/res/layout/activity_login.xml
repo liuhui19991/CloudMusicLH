@@ -137,11 +137,12 @@
                         android:src="@mipmap/ic_launcher"/>
                 </LinearLayout>
 
-                <EditText
+                <AutoCompleteTextView
                     android:id="@+id/login_account"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
+                    android:inputType="textPassword"
                     android:background="@null"
                     android:dropDownHeight="145dp"
                     android:gravity="left|center"
@@ -183,16 +184,18 @@
                         android:background="@mipmap/ic_launcher"
                         android:contentDescription="图标"/>
                 </LinearLayout>
-
+                <!--此处输入类型会影响键盘弹出时候屏幕上下闪动
+                只有当两个edittext输入类型一致时候才不会发生屏幕闪动问题
+                -->
                 <EditText
                     android:id="@+id/login_pwd"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
+                    android:inputType="textPassword"
                     android:background="@null"
                     android:gravity="left|center"
                     android:hint="输入密码"
-                    android:inputType="textPassword"
                     android:paddingRight="14dp"
                     android:singleLine="true"/>
 

@@ -6,6 +6,7 @@ import android.os.Handler;
 import android.os.Message;
 import android.support.annotation.Nullable;
 import android.support.design.widget.Snackbar;
+import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -24,6 +25,7 @@ import android.widget.ScrollView;
 import com.carporange.cloudmusic.R;
 import com.carporange.cloudmusic.util.L;
 import com.carporange.cloudmusic.util.SpUtil;
+import com.carporange.cloudmusic.util.T;
 import com.carporange.cloudmusic.widget.ResizeRelativeLayout;
 
 /**
@@ -91,13 +93,14 @@ public class LoginActivity extends AppCompatActivity implements OnClickListener 
         boolean isRember = SpUtil.getBoolean("isRemberPassword", false);
         if (isRember) {//上次是记住密码
             checkBox.setChecked(true);
-            username.setText(SpUtil.getString(us,""));
-            password.setText(SpUtil.getString(ps,""));
+            username.setText(SpUtil.getString(us, ""));
+            password.setText(SpUtil.getString(ps, ""));
         }
         mHandler = new Handler() {
             public void handleMessage(Message msg) {
                 switch (msg.what) {
                     case KEYBOARD_SHOW:
+                        username.setInputType(InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD);
                         mScrollView.fullScroll(ScrollView.FOCUS_DOWN);
                         mForgetLayout.setVisibility(View.GONE);
                         break;
@@ -113,6 +116,7 @@ public class LoginActivity extends AppCompatActivity implements OnClickListener 
                 }
             }
         };
+
         mResizeRelativeLayout.setOnResizeListener(new ResizeRelativeLayout.OnResizeListener() {
             @Override
             public void OnResize(int w, int h, int oldw, int oldh) {
