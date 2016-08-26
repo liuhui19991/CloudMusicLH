@@ -1,12 +1,9 @@
 package com.carporange.cloudmusic.ui.activity;
 
-import android.annotation.TargetApi;
 import android.content.Intent;
-import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.os.SystemClock;
 import android.support.annotation.Nullable;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AlertDialog;
@@ -16,17 +13,16 @@ import android.text.InputType;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.view.WindowManager;
-import android.widget.AutoCompleteTextView;
 import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
 
 import com.carporange.cloudmusic.R;
-import com.carporange.cloudmusic.util.L;
-import com.carporange.cloudmusic.util.S;
+import com.carporange.cloudmusic.util.SpUtil;
 import com.carporange.cloudmusic.widget.ResizeRelativeLayout;
 
 /**
@@ -49,6 +45,10 @@ public class LoginActivity extends AppCompatActivity implements OnClickListener 
     private Button forgetpassword;
     private String names;
     private String passs;
+    private CheckBox checkBox;
+    private boolean isRemberPassword;
+    private String us = "username";
+    private String ps = "password";
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -70,6 +70,12 @@ public class LoginActivity extends AppCompatActivity implements OnClickListener 
         passVisiable = (ImageView) findViewById(R.id.pass_visiable);
         forgetpassword = (Button) findViewById(R.id.login_find_pwd);
         login = (Button) findViewById(R.id.login_submit_btn);
+        checkBox = (CheckBox) findViewById(R.id.remember_checkbox);
+        boolean isRember = SpUtil.getBoolean("isRemberPassword", false);
+        if (isRember) {
+            username.setText(SpUtil.getString(us,""));
+            password.setText(SpUtil.getString(ps,""));
+        }
         //一下两种方式都可以获取资源文件中的值
         names = getResources().getString(R.string.username);
         passs = this.getString(R.string.password);
@@ -80,6 +86,12 @@ public class LoginActivity extends AppCompatActivity implements OnClickListener 
         passVisiable.setOnClickListener(this);
         forgetpassword.setOnClickListener(this);
         login.setOnClickListener(this);
+        checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                isRemberPassword = isChecked;
+            }
+        });
         mHandler = new Handler() {
             public void handleMessage(Message msg) {
                 switch (msg.what) {
@@ -126,6 +138,13 @@ public class LoginActivity extends AppCompatActivity implements OnClickListener 
                     return;
                 }
                 if (name.equals(names) && pass.equals(passs)) {
+                    if (isRemberPassword) {
+                        SpUtil.put(us, name);
+                        SpUtil.put(ps, pass);
+                        SpUtil.put("isRemberPassword", true);
+                    } else {
+                        SpUtil.put("isRemberPassword", false);
+                    }
                     startActivity(new Intent(this, MainActivity.class));
                     finish();
                 } else {
@@ -140,7 +159,7 @@ public class LoginActivity extends AppCompatActivity implements OnClickListener 
             case R.id.login_find_pwd:
                 AlertDialog.Builder builder = new AlertDialog.Builder(this);
                 builder.setTitle("您的密码!");
-                builder.setMessage("帐号:"+names+"\n"+"密码:"+passs);
+                builder.setMessage("帐号:" + names + "\n" + "密码:" + passs);
                 builder.setNegativeButton("取消", null);
                 builder.setPositiveButton("确定", null);
                 builder.show();

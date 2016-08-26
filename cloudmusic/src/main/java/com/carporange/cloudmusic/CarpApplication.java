@@ -1,6 +1,7 @@
 package com.carporange.cloudmusic;
 
 import android.app.Application;
+import android.content.SharedPreferences;
 
 import com.yolanda.nohttp.Logger;
 import com.yolanda.nohttp.NoHttp;
@@ -12,7 +13,6 @@ import com.yolanda.nohttp.NoHttp;
  */
 public class CarpApplication extends Application {
     private static CarpApplication application;
-
     public static CarpApplication getInstance() {
         return application;
     }
