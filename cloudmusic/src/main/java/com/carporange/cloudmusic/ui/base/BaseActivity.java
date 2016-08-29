@@ -1,11 +1,8 @@
 package com.carporange.cloudmusic.ui.base;
 
-import android.annotation.TargetApi;
 import android.app.Activity;
-import android.content.Context;
 import android.os.Build;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
@@ -47,12 +44,15 @@ public abstract class BaseActivity extends SwipeBackActivity {
     /**
      * 这个方法是让状态栏变成透明色,让窗体可以填充,下面的19意思是19版本以上此方法有用,对应的dimens(v19)
      */
-    @TargetApi(19)
     protected void initWindow() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
             WindowManager.LayoutParams localLayoutParams = getWindow().getAttributes();
             localLayoutParams.flags = (WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS | localLayoutParams.flags);
         }
+       /* if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP) {
+            //5.0以上可以直接设置 statusbar颜色
+            getWindow().setStatusBarColor(getResources().getColor(R.color.colorPrimary));
+        } */
     }
 
     /**
@@ -65,14 +65,13 @@ public abstract class BaseActivity extends SwipeBackActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == android.R.id.home) {
             finish();
-//            onBackPressed();
             return true;
         }
         return super.onOptionsItemSelected(item);
     }
 
     protected <V extends View> V findView(int id) {
-        return (V) this.findViewById(id);
+        return (V) findViewById(id);
     }
 
 }

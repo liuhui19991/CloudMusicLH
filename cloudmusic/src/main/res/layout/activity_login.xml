@@ -1,277 +1,285 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-            xmlns:app="http://schemas.android.com/apk/res-auto"
-            android:id="@+id/login_scrollview"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:fillViewport="true"
-            android:focusable="true"
-            android:focusableInTouchMode="true">
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/root_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    >
 
-    <com.carporange.cloudmusic.widget.ResizeRelativeLayout
-        android:id="@+id/login_page"
+    <android.support.design.widget.AppBarLayout
+        android:id="@+id/appbar"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
 
-        <android.support.design.widget.AppBarLayout
-            android:id="@+id/appbar"
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
-
-            <android.support.v7.widget.Toolbar
-                android:id="@+id/toolbar"
-                android:layout_width="match_parent"
-                android:layout_height="56dp"
-                app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
-                >  <!--android:layout_height="?attr/actionBarSize"-->
-
-                <TextView
-                    android:id="@+id/tv_title"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:layout_gravity="center"
-                    android:gravity="center"
-                    android:text="@string/title"
-                    android:textColor="@color/white"
-                    android:textSize="@dimen/dp_25"
-                    />
-            </android.support.v7.widget.Toolbar>
-        </android.support.design.widget.AppBarLayout>
-        <!-- LOGO图片和文字部分 -->
-
-        <LinearLayout
-            android:id="@+id/logo_linear"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="15dp"
-            android:layout_marginTop="@dimen/toolbar_height"
-            android:gravity="center"
-            android:orientation="vertical">
-
-            <!-- LOGO图片 -->
-
-            <ImageView
-                android:id="@+id/login_logo_image"
-                android:layout_width="120dp"
-                android:layout_height="120dp"
-                android:src="@mipmap/ic_launcher"/>
-
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-                <!-- LOGO文本 -->
-
-                <TextView
-                    android:id="@+id/login_logo_text"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerHorizontal="true"
-                    android:layout_marginTop="10dp"
-                    android:text="滚动登录布局"
-                    android:textStyle="bold"/>
-
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="3dp"
-                    android:layout_marginTop="3dp"
-                    android:layout_toRightOf="@id/login_logo_text"
-                    android:gravity="center"
-                    android:orientation="horizontal">
-
-                    <!-- 版本号符号 -->
-
-                    <TextView
-                        android:id="@+id/login_version_v"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:visibility="gone"/>
-
-                    <!-- 版本号值 -->
-
-                    <TextView
-                        android:id="@+id/login_version"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:visibility="gone"/>
-                </LinearLayout>
-            </RelativeLayout>
-        </LinearLayout>
-
-        <!-- 登录输入区部分 -->
-
-        <LinearLayout
-            android:id="@+id/input_linear"
-            android:layout_width="match_parent"
-            android:layout_height="91dp"
-            android:layout_below="@+id/logo_linear"
-            android:layout_marginLeft="30dp"
-            android:layout_marginRight="30dp"
-            android:layout_marginTop="20dp"
-            android:orientation="vertical">
-
-            <!-- 账户输入框 -->
-
-            <LinearLayout
-                android:id="@+id/tt_login_account_linear"
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:orientation="horizontal"
-                android:paddingTop="1dp">
-
-                <LinearLayout
-                    android:layout_width="48dp"
-                    android:layout_height="match_parent"
-                    android:layout_marginLeft="1dp"
-                    android:gravity="center"
-                    android:orientation="vertical">
-
-                    <ImageView
-                        android:layout_width="25dp"
-                        android:layout_height="25dp"
-                        android:contentDescription="图标"
-                        android:src="@mipmap/ic_launcher"/>
-                </LinearLayout>
-
-                <AutoCompleteTextView
-                    android:id="@+id/login_account"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:inputType="textPassword"
-                    android:background="@null"
-                    android:dropDownHeight="145dp"
-                    android:gravity="left|center"
-                    android:hint="输入用户名"
-                    android:paddingTop="1dp"
-                    android:singleLine="true"/>
-
-                <ImageView
-                    android:id="@+id/login_clear_account"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:paddingRight="14dp"
-                    android:scaleType="centerInside"
-                    android:src="@mipmap/ic_launcher"
-                    android:visibility="gone"/>
-            </LinearLayout>
-
-            <!-- 密码输入框 -->
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_marginTop="10dp"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:orientation="horizontal"
-                android:paddingBottom="1dp">
-
-                <LinearLayout
-                    android:layout_width="48dp"
-                    android:layout_height="match_parent"
-                    android:layout_marginLeft="1dp"
-                    android:gravity="center"
-                    android:orientation="vertical">
-
-                    <ImageView
-                        android:layout_width="25dp"
-                        android:layout_height="25dp"
-                        android:background="@mipmap/ic_launcher"
-                        android:contentDescription="图标"/>
-                </LinearLayout>
-                <!--此处输入类型会影响键盘弹出时候屏幕上下闪动
-                只有当两个edittext输入类型一致时候才不会发生屏幕闪动问题
-                -->
-                <EditText
-                    android:id="@+id/login_pwd"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:inputType="textPassword"
-                    android:background="@null"
-                    android:gravity="left|center"
-                    android:hint="输入密码"
-                    android:paddingRight="14dp"
-                    android:singleLine="true"/>
-
-                <ImageView
-                    android:id="@+id/pass_visiable"
-                    android:layout_width="wrap_content"
-                    android:layout_height="25dp"
-                    android:background="@drawable/image_selector"
-                    android:src="@mipmap/icon_login_gone"/>
-            </LinearLayout>
-        </LinearLayout>
-
-        <!-- 登录勾选区域（记住账户和记住密码） -->
-
-        <LinearLayout
-            android:id="@+id/remember_linear"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/input_linear"
-            android:layout_marginLeft="39dp"
-            android:layout_marginTop="8dp"
-            android:gravity="start"
-            android:orientation="horizontal"
-            >
-
-            <CheckBox
-                android:id="@+id/remember_checkbox"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="记住密码"/>
-        </LinearLayout>
-
-        <!-- 登录按钮 -->
-
-        <Button
-            android:id="@+id/login_submit_btn"
-            android:layout_width="match_parent"
-            android:layout_height="48dp"
-            android:layout_below="@+id/remember_linear"
-            android:layout_marginLeft="30dp"
-            android:layout_marginRight="30dp"
-            android:layout_marginTop="15dp"
-            android:text="登  录"/>
-
-        <!-- 其他功能区（忘记密码等） -->
-
-        <LinearLayout
-            android:id="@+id/forget_linear"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_alignParentBottom="true"
-            android:layout_below="@+id/login_submit_btn"
-            android:layout_marginTop="5dp"
-            android:orientation="vertical">
-
-            <Button
-                android:id="@+id/login_find_pwd"
-                android:layout_width="wrap_content"
-                android:layout_height="30dp"
-                android:layout_gravity="right"
-                android:layout_marginRight="30dp"
-                android:layout_marginTop="5dp"
-                android:background="@null"
-                android:drawablePadding="5dp"
-                android:gravity="center"
-                android:text="忘记密码"/>
+            android:layout_height="56dp"
+            app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+            >  <!--android:layout_height="?attr/actionBarSize"-->
 
             <TextView
-                android:id="@+id/authority_text"
+                android:id="@+id/tv_title"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:text="@string/title"
+                android:textColor="@color/white"
+                android:textSize="@dimen/dp_25"
+                />
+        </android.support.v7.widget.Toolbar>
+    </android.support.design.widget.AppBarLayout>
+    <!-- LOGO图片和文字部分 -->
+    <ScrollView
+        android:id="@+id/login_scrollview"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true"
+        android:focusable="true"
+        android:focusableInTouchMode="true">
+
+        <RelativeLayout
+            android:id="@+id/login_page"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:id="@+id/logo_linear"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="15dp"
+                android:layout_marginTop="@dimen/toolbar_height"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <!-- LOGO图片 -->
+
+                <ImageView
+                    android:id="@+id/login_logo_image"
+                    android:layout_width="120dp"
+                    android:layout_height="120dp"
+                    android:src="@mipmap/ic_launcher"/>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <!-- LOGO文本 -->
+
+                    <TextView
+                        android:id="@+id/login_logo_text"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerHorizontal="true"
+                        android:layout_marginTop="10dp"
+                        android:text="滚动登录布局"
+                        android:textStyle="bold"/>
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="3dp"
+                        android:layout_marginTop="3dp"
+                        android:layout_toRightOf="@id/login_logo_text"
+                        android:gravity="center"
+                        android:orientation="horizontal">
+
+                        <!-- 版本号符号 -->
+
+                        <TextView
+                            android:id="@+id/login_version_v"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:visibility="gone"/>
+
+                        <!-- 版本号值 -->
+
+                        <TextView
+                            android:id="@+id/login_version"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:visibility="gone"/>
+                    </LinearLayout>
+                </RelativeLayout>
+            </LinearLayout>
+
+            <!-- 登录输入区部分 -->
+
+            <LinearLayout
+                android:id="@+id/input_linear"
+                android:layout_width="match_parent"
+                android:layout_height="91dp"
+                android:layout_below="@+id/logo_linear"
+                android:layout_marginLeft="30dp"
+                android:layout_marginRight="30dp"
+                android:layout_marginTop="20dp"
+                android:orientation="vertical">
+
+                <!-- 账户输入框 -->
+
+                <LinearLayout
+                    android:id="@+id/tt_login_account_linear"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:orientation="horizontal"
+                    android:paddingTop="1dp">
+
+                    <LinearLayout
+                        android:layout_width="48dp"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="1dp"
+                        android:gravity="center"
+                        android:orientation="vertical">
+
+                        <ImageView
+                            android:layout_width="25dp"
+                            android:layout_height="25dp"
+                            android:contentDescription="图标"
+                            android:src="@mipmap/ic_launcher"/>
+                    </LinearLayout>
+
+                    <AutoCompleteTextView
+                        android:id="@+id/login_account"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:background="@null"
+                        android:dropDownHeight="145dp"
+                        android:gravity="left|center"
+                        android:hint="输入用户名"
+                        android:inputType="textPassword"
+                        android:paddingTop="1dp"
+                        android:singleLine="true"/>
+
+                    <ImageView
+                        android:id="@+id/login_clear_account"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:paddingRight="14dp"
+                        android:scaleType="centerInside"
+                        android:src="@mipmap/ic_launcher"
+                        android:visibility="gone"/>
+                </LinearLayout>
+
+                <!-- 密码输入框 -->
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:orientation="horizontal"
+                    android:paddingBottom="1dp">
+
+                    <LinearLayout
+                        android:layout_width="48dp"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="1dp"
+                        android:gravity="center"
+                        android:orientation="vertical">
+
+                        <ImageView
+                            android:layout_width="25dp"
+                            android:layout_height="25dp"
+                            android:background="@mipmap/ic_launcher"
+                            android:contentDescription="图标"/>
+                    </LinearLayout>
+                    <!--此处输入类型会影响键盘弹出时候屏幕上下闪动
+                    只有当两个edittext输入类型一致时候才不会发生屏幕闪动问题
+                    -->
+                    <EditText
+                        android:id="@+id/login_pwd"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:background="@null"
+                        android:gravity="left|center"
+                        android:hint="输入密码"
+                        android:inputType="textPassword"
+                        android:paddingRight="14dp"
+                        android:singleLine="true"/>
+
+                    <ImageView
+                        android:id="@+id/pass_visiable"
+                        android:layout_width="wrap_content"
+                        android:layout_height="25dp"
+                        android:background="@drawable/image_selector"
+                        android:src="@mipmap/icon_login_gone"/>
+                </LinearLayout>
+            </LinearLayout>
+
+            <!-- 登录勾选区域（记住账户和记住密码） -->
+
+            <LinearLayout
+                android:id="@+id/remember_linear"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/input_linear"
+                android:layout_marginLeft="39dp"
+                android:layout_marginTop="8dp"
+                android:gravity="start"
+                android:orientation="horizontal"
+                >
+
+                <CheckBox
+                    android:id="@+id/remember_checkbox"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="记住密码"/>
+            </LinearLayout>
+
+            <!-- 登录按钮 -->
+
+            <Button
+                android:id="@+id/login_submit_btn"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:layout_below="@+id/remember_linear"
+                android:layout_marginLeft="30dp"
+                android:layout_marginRight="30dp"
+                android:layout_marginTop="15dp"
+                android:text="登  录"/>
+
+            <!-- 其他功能区（忘记密码等） -->
+
+            <LinearLayout
+                android:id="@+id/forget_linear"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginBottom="12dp"
-                android:gravity="bottom|center_horizontal"
-                android:text="版权所有"/>
-        </LinearLayout>
-    </com.carporange.cloudmusic.widget.ResizeRelativeLayout>
+                android:layout_alignParentBottom="true"
+                android:layout_below="@+id/login_submit_btn"
+                android:layout_marginTop="5dp"
+                android:orientation="vertical">
 
-</ScrollView>
+                <Button
+                    android:id="@+id/login_find_pwd"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:layout_gravity="right"
+                    android:layout_marginRight="30dp"
+                    android:layout_marginTop="5dp"
+                    android:background="@null"
+                    android:drawablePadding="5dp"
+                    android:gravity="center"
+                    android:text="忘记密码"/>
 
+                <TextView
+                    android:id="@+id/authority_text"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginBottom="12dp"
+                    android:gravity="bottom|center_horizontal"
+                    android:text="版权所有"/>
+            </LinearLayout>
+        </RelativeLayout>
+
+    </ScrollView>
+
+</LinearLayout>

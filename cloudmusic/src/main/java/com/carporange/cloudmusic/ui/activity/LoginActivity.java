@@ -1,16 +1,13 @@
 package com.carporange.cloudmusic.ui.activity;
 
 import android.content.Intent;
-import android.os.Bundle;
+import android.os.Build;
 import android.os.Handler;
 import android.os.Message;
-import android.support.annotation.Nullable;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AlertDialog;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.InputType;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -22,19 +19,17 @@ import android.widget.LinearLayout;
 import android.widget.ScrollView;
 
 import com.carporange.cloudmusic.R;
+import com.carporange.cloudmusic.ui.base.BaseActivity;
 import com.carporange.cloudmusic.util.SpUtil;
-import com.carporange.cloudmusic.widget.ResizeRelativeLayout;
 
 /**
  * Created by liuhui on 2016/6/15.
  */
-public class LoginActivity extends AppCompatActivity implements OnClickListener {
+public class LoginActivity extends BaseActivity implements OnClickListener, View.OnLayoutChangeListener {
 
-    private ResizeRelativeLayout mResizeRelativeLayout;
     private ScrollView mScrollView;
     private LinearLayout mForgetLayout;
     private Handler mHandler;
-
     private final int KEYBOARD_SHOW = 1001;
     private final int KEYBOARD_HIDDEN = 1002;
     private final int PASSWORD_INVISIABLE = 1003;
@@ -49,22 +44,42 @@ public class LoginActivity extends AppCompatActivity implements OnClickListener 
     private boolean isRemberPassword;
     private String us = "username";
     private String ps = "password";
+    //软件盘弹起后所占高度阀值
+    private int keyHeight = 0;
+    //屏幕高度
+    private int screenHeight = 0;
+    private LinearLayout linearLayout;
 
     @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login);
-        initViews();
+    protected int getLayoutId() {
+        return R.layout.activity_login;
     }
 
-    public void initViews() {
-        mResizeRelativeLayout = (ResizeRelativeLayout) findViewById(R.id.login_page);
-        mScrollView = (ScrollView) findViewById(R.id.login_scrollview);
-        mForgetLayout = (LinearLayout) findViewById(R.id.forget_linear);
+    @Override
+    public void initActionBar() {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         toolbar.setTitle("登录");
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+    }
+
+    @Override
+    protected void initWindow() {
+        if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP) {
+            //5.0以上可以直接设置 statusbar颜色
+            getWindow().setStatusBarColor(getResources().getColor(R.color.colorPrimary));
+        }
+    }
+
+    @Override
+    public void initViews() {
+        //获取屏幕高度
+        screenHeight = this.getWindowManager().getDefaultDisplay().getHeight();
+        //阀值设置为屏幕高度的1/3
+        keyHeight = screenHeight / 4;
+        mScrollView = (ScrollView) findViewById(R.id.login_scrollview);
+        mForgetLayout = (LinearLayout) findViewById(R.id.forget_linear);
+        linearLayout = findView(R.id.root_layout);
         username = (EditText) findViewById(R.id.login_account);
         //动态设置帐号名可见
         username.setInputType(InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD);
@@ -101,6 +116,9 @@ public class LoginActivity extends AppCompatActivity implements OnClickListener 
                     case KEYBOARD_SHOW:
                         mScrollView.fullScroll(ScrollView.FOCUS_DOWN);
                         mForgetLayout.setVisibility(View.GONE);
+                        username.setFocusable(true);
+                        username.requestFocus();
+                        username.setFocusableInTouchMode(true);
                         break;
                     case KEYBOARD_HIDDEN:
                         mForgetLayout.setVisibility(View.VISIBLE);
@@ -114,19 +132,6 @@ public class LoginActivity extends AppCompatActivity implements OnClickListener 
                 }
             }
         };
-
-        mResizeRelativeLayout.setOnResizeListener(new ResizeRelativeLayout.OnResizeListener() {
-            @Override
-            public void OnResize(int w, int h, int oldw, int oldh) {
-                Message msg = new Message();
-                if (h < oldh) {//软键盘弹出
-                    msg.what = KEYBOARD_SHOW;
-                } else {//软件盘关闭
-                    msg.what = KEYBOARD_HIDDEN;
-                }
-                mHandler.sendMessage(msg);
-            }
-        });
     }
 
     @Override
@@ -170,10 +175,19 @@ public class LoginActivity extends AppCompatActivity implements OnClickListener 
     }
 
     @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        if (item.getItemId() == android.R.id.home) {
-            finish();
+    protected void onResume() {
+        super.onResume();
+        linearLayout.addOnLayoutChangeListener(this);
+    }
+
+    @Override
+    public void onLayoutChange(View v, int left, int top, int right, int bottom, int oldLeft, int oldTop, int oldRight, int oldBottom) {
+        Message msg = Message.obtain();
+        if (oldBottom != 0 && bottom != 0 && (oldBottom - bottom > keyHeight)) {
+            msg.what = KEYBOARD_SHOW;
+        } else if (oldBottom != 0 && bottom != 0 && (bottom - oldBottom > keyHeight)) {
+            msg.what = KEYBOARD_HIDDEN;
         }
-        return true;
+        mHandler.sendMessage(msg);
     }
 }
