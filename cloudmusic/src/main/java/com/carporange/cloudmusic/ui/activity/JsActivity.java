@@ -2,6 +2,7 @@ package com.carporange.cloudmusic.ui.activity;
 
 import android.content.DialogInterface;
 import android.support.v7.app.AlertDialog;
+import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.webkit.JavascriptInterface;
 import android.webkit.WebView;
@@ -23,11 +24,10 @@ public class JsActivity extends BaseActivity {
 
     @Override
     public void initActionBar() {
-
-    }
-
-    @Override
-    protected void initWindow() {
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        toolbar.setTitle("");
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 
     @Override
