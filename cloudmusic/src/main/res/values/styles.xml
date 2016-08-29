@@ -1,25 +1,25 @@
 <resources>
-  <!--  <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
-        <item name="colorPrimary">@color/colorPrimary</item>
-        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
-        <item name="colorAccent">@color/colorAccent</item>
-    </style>
+    <!--  <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+          <item name="colorPrimary">@color/colorPrimary</item>
+          <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+          <item name="colorAccent">@color/colorAccent</item>
+      </style>
 
-    <style name="AppTheme.NoActionBar">
-        <item name="windowActionBar">false</item>
-        <item name="windowNoTitle">true</item>
-    </style>
+      <style name="AppTheme.NoActionBar">
+          <item name="windowActionBar">false</item>
+          <item name="windowNoTitle">true</item>
+      </style>
 
-    <style name="AppTheme.NoActionBar.Launch">
-        <item name="android:windowIsTranslucent">true</item>
-    </style>-->
+      <style name="AppTheme.NoActionBar.Launch">
+          <item name="android:windowIsTranslucent">true</item>
+      </style>-->
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
-        <!-- 设置背景透明背景，右滑时才能看到上一个界面，否则会看到黑屏效果-->，
+        <!-- 设置背景透明背景，右滑时才能看到上一个界面，否则会看到黑屏效果,会影响转场动画-->，
         <!--<item name="android:windowIsTranslucent">true</item>-->
         <!--colorPrimary 对应ActionBar的颜色。
         colorPrimaryDark对应状态栏的颜色
@@ -27,20 +27,13 @@
         <!-- 好像这里设置的转场动画没有用-->
         <!--<item name="android:windowAnimationStyle">@style/activityAnimation</item>-->
     </style>
-    <!-- Activity切换动画 -->
-   <!-- <style name="aa">
-        <item name="android:windowNoTitle">true</item>
-        <item name="android:windowBackground">@android:color/transparent</item>
-        <item name="android:colorBackgroundCacheHint">@null</item>
-        <item name="android:windowIsTranslucent">true</item>
-        <item name="android:windowAnimationStyle">@style/activityAnimation</item>
-    </style>
+
     <style name="activityAnimation" parent="@android:style/Animation">
         <item name="android:activityOpenEnterAnimation">@anim/slide_in_right</item>
         <item name="android:activityOpenExitAnimation">@anim/slide_out_left</item>
         <item name="android:activityCloseEnterAnimation">@anim/slide_in_left</item>
         <item name="android:activityCloseExitAnimation">@anim/slide_out_right</item>
-    </style>-->
+    </style>
 
     <style name="DayTheme" parent="AppTheme">
         <item name="text_color">@color/text_color_day</item>
