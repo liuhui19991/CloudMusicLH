@@ -16,6 +16,7 @@
 package com.carporange.cloudmusic.ui.activity;
 
 import android.graphics.Color;
+import android.os.Build;
 import android.support.design.widget.Snackbar;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.DefaultItemAnimator;
@@ -63,13 +64,17 @@ public class RefreshLoadMoreActivity extends BaseActivity {
 
     @Override
     public void initActionBar() {
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        Toolbar toolbar = findView(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 
     @Override
     protected void initWindow() {
+        if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP) {
+            //5.0以上可以直接设置 statusbar颜色
+            getWindow().setStatusBarColor(getResources().getColor(R.color.colorPrimary));
+        }
     }
 
     @Override
@@ -149,7 +154,7 @@ public class RefreshLoadMoreActivity extends BaseActivity {
                     }
                     mMenuAdapter.notifyDataSetChanged();
                 } else {
-                Snackbar.make(mSwipeMenuRecyclerView, "没有更多数据了", Snackbar.LENGTH_SHORT).show();
+                    Snackbar.make(mSwipeMenuRecyclerView, "没有更多数据了", Snackbar.LENGTH_SHORT).show();
                 }
                 times++;
                /* new Handler().postDelayed(new Runnable() {
@@ -268,7 +273,7 @@ public class RefreshLoadMoreActivity extends BaseActivity {
         if (item.getItemId() == android.R.id.home) {
             finish();
         } else if (item.getItemId() == R.id.menu_open_rv_menu) {
-           mSwipeMenuRecyclerView.smoothOpenRightMenu(0);
+            mSwipeMenuRecyclerView.smoothOpenRightMenu(0);
         }
         return true;
     }

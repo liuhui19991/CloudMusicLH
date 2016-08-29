@@ -1,6 +1,7 @@
 package com.carporange.cloudmusic.ui.activity;
 
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.Nullable;
@@ -128,7 +129,7 @@ public class BeautfulActivity extends BaseActivity {
         mAdapter.setOnItemClickListener(new MyAdapter.ItemClickListener() {
             @Override
             public void onItemCclick(View v, int position) {
-                Intent intent = new Intent(BeautfulActivity.this, KnowledgeActivity.class);
+                Intent intent = new Intent(mContext, KnowledgeActivity.class);
                 if (position % 2 == 0) {
                     intent.putExtra("map", resourceUrl);
                 } else {
@@ -145,11 +146,6 @@ public class BeautfulActivity extends BaseActivity {
                 hideFAB();
             }
         });
-    }
-
-    @Override
-    protected void initWindow() {//重写此方法,就不走基类的方法
-
     }
 
     private void hideFAB() {

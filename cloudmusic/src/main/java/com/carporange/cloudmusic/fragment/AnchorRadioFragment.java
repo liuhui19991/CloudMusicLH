@@ -11,6 +11,7 @@ import com.carporange.cloudmusic.ui.activity.BlurredViewBasicActivity;
 import com.carporange.cloudmusic.ui.activity.WeatherActivity;
 import com.carporange.cloudmusic.ui.activity.WebPageActivity;
 import com.carporange.cloudmusic.ui.activity.WebviewActivity;
+import com.carporange.cloudmusic.ui.base.BaseActivity;
 import com.carporange.cloudmusic.ui.base.BaseFragment;
 import com.carporange.cloudmusic.ui.dialog.ProgressDialog;
 import com.carporange.cloudmusic.ui.dialog.WaitDialog;

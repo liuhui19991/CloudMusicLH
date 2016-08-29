@@ -2,6 +2,7 @@ package com.carporange.cloudmusic.ui.activity;
 
 import android.content.res.Resources;
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
 import android.os.Handler;
 import android.support.v7.widget.Toolbar;
 import android.util.DisplayMetrics;
@@ -31,11 +32,12 @@ public class KnowledgeActivity extends BaseActivity {
 
     @Override
     public void initActionBar() {
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        Toolbar toolbar = findView(R.id.toolbar);
         toolbar.setTitle("");
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
+
     @Override
     public void initViews() {
         ll = (LinearLayout) findViewById(R.id.ll);

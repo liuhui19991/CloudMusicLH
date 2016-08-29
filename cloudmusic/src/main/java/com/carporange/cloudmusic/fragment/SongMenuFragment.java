@@ -27,8 +27,7 @@ public class SongMenuFragment extends BaseFragment {
     CircleTextProgressbar mCircleProgress;
     @BindView(R.id.circle_progress_opposite)
     CircleTextProgressbar mCircleProgressOpposite;
-    @BindView(R.id.tomap)
-    TextView tv_play;
+
     public SongMenuFragment() {
     }
 
@@ -54,14 +53,6 @@ public class SongMenuFragment extends BaseFragment {
             @Override
             public void onClick(View v) {
 //                mCircleProgress.setInCircleColor(Color.parseColor("#897654"));//点击时候改变进度圆内圆的颜色
-            }
-        });
-
-        tv_play.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                JCVideoPlayerStandard.startFullscreen(getActivity(), JCVideoPlayerStandard.class,
-                        "http://2449.vod.myqcloud.com/2449_22ca37a6ea9011e5acaaf51d105342e3.f20.mp4", "嫂子辛苦了");
             }
         });
     }
@@ -99,14 +90,11 @@ public class SongMenuFragment extends BaseFragment {
         startActivity(new Intent(getContext(), BeautfulActivity.class));
     }
 
-   /* @OnClick(R.id.tomap)
+    @OnClick(R.id.tomap)
     void toMap() {
         JCVideoPlayerStandard.startFullscreen(getActivity(), JCVideoPlayerStandard.class,
-                "http://2449.vod.myqcloud.com/2449_22ca37a6ea9011e5acaaf51d105342e3.f20.mp4", "嫂子辛苦了");
-       *//* JCFullScreenActivity.startActivity(getActivity(),
-                "http://2449.vod.myqcloud.com/2449_22ca37a6ea9011e5acaaf51d105342e3.f20.mp4",
-                JCVideoPlayerStandard.class, "来个慢动作");*//*
-    }*/
+                "http://2449.vod.myqcloud.com/2449_22ca37a6ea9011e5acaaf51d105342e3.f20.mp4", "摇滚");
+    }
 
     @OnClick(R.id.tomap1)
     void toVideo() {
@@ -116,7 +104,7 @@ public class SongMenuFragment extends BaseFragment {
 //        JCFullScreenActivity.startActivity(getActivity(),
 //                "http://resource.gbxx123.com/minivideo/mp4/gq/2016/7/22/1469176714153/1469176714153.mp4",
 //                JCVideoPlayerStandard.class, "来个慢动作");
-       startActivity(new Intent(getActivity(), VideoPlayerActivity.class));
+        startActivity(new Intent(getActivity(), VideoPlayerActivity.class));
     }
 
     @Override

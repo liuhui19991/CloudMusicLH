@@ -1,6 +1,7 @@
 package com.carporange.cloudmusic.ui.base;
 
 import android.app.Activity;
+import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.MenuItem;
@@ -45,21 +46,35 @@ public abstract class BaseActivity extends SwipeBackActivity {
      * 这个方法是让状态栏变成透明色,让窗体可以填充,下面的19意思是19版本以上此方法有用,对应的dimens(v19)
      */
     protected void initWindow() {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {//5.0及以上
+            View decorView = getWindow().getDecorView();
+            int option = View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+                    | View.SYSTEM_UI_FLAG_LAYOUT_STABLE;
+            decorView.setSystemUiVisibility(option);
+            //5.0以上可以直接设置 statusbar颜色
+            getWindow().setStatusBarColor(Color.TRANSPARENT);
+        } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {//4.4到5.0
             WindowManager.LayoutParams localLayoutParams = getWindow().getAttributes();
             localLayoutParams.flags = (WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS | localLayoutParams.flags);
         }
-       /* if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP) {
-            //5.0以上可以直接设置 statusbar颜色
-            getWindow().setStatusBarColor(getResources().getColor(R.color.colorPrimary));
-        } */
     }
 
     /**
+     * 页面开启的切换动画
+     *//*
+    protected void start() {
+        overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+    }
+
+    *//**
+     * 页面关闭的切换动画
+     *//*
+    protected void finishActivity() {
+        overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
+    }*/
+
+    /**
      * ToolBar中的返回按钮对应事件
-     *
-     * @param item
-     * @return
      */
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
