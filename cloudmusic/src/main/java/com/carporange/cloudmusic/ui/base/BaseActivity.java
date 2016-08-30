@@ -35,7 +35,7 @@ public abstract class BaseActivity extends SwipeBackActivity {
                 .setSwipeBackTransformer(new SlideSwipeBackTransformer())
                 .setContentView(getLayoutId())
                 .setSwipeBackView(R.layout.swipeback_default)
-                .setSwipeBackContainerBackgroundColor(R.color.status_text);
+                .setSwipeBackContainerBackgroundColor(R.color.status_text);//这句话改变了侧拉的背景
         ButterKnife.bind(this);//绑定黄油刀
         mContext = this;
         initActionBar();
