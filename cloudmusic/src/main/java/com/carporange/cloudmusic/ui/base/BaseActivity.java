@@ -34,7 +34,8 @@ public abstract class BaseActivity extends SwipeBackActivity {
                 .setDividerEnabled(true)
                 .setSwipeBackTransformer(new SlideSwipeBackTransformer())
                 .setContentView(getLayoutId())
-                .setSwipeBackView(R.layout.swipeback_default);
+                .setSwipeBackView(R.layout.swipeback_default)
+                .setSwipeBackContainerBackgroundColor(R.color.status_text);
         ButterKnife.bind(this);//绑定黄油刀
         mContext = this;
         initActionBar();

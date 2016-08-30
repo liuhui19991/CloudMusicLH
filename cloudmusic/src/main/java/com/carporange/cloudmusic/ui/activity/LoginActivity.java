@@ -66,14 +66,6 @@ public class LoginActivity extends BaseActivity implements OnClickListener, View
     }
 
     @Override
-    protected void initWindow() {
-        if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP) {
-            //5.0以上可以直接设置 statusbar颜色
-            getWindow().setStatusBarColor(getResources().getColor(R.color.colorPrimary));
-        }
-    }
-
-    @Override
     public void initViews() {
         //获取屏幕高度
         screenHeight = this.getWindowManager().getDefaultDisplay().getHeight();
