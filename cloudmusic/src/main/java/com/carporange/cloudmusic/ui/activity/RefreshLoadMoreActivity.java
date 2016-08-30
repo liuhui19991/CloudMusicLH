@@ -16,13 +16,11 @@
 package com.carporange.cloudmusic.ui.activity;
 
 import android.graphics.Color;
-import android.os.Build;
 import android.support.design.widget.Snackbar;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
@@ -65,7 +63,7 @@ public class RefreshLoadMoreActivity extends BaseActivity {
     @Override
     public void initActionBar() {
         super.initActionBar();
-       toolbar.setTitle("一笑过千山");
+        toolbar.setTitle("一笑过千山");
     }
 
     @Override
