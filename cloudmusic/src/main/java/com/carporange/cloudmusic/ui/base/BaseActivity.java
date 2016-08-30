@@ -4,19 +4,15 @@ import android.app.Activity;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
 
 import com.carporange.cloudmusic.R;
-import com.carporange.cloudmusic.ui.activity.SwipeBackActivity;
 import com.carporange.cloudmusic.util.SpUtil;
-import com.hannesdorfmann.swipeback.Position;
-import com.hannesdorfmann.swipeback.SwipeBack;
-import com.hannesdorfmann.swipeback.transformer.SlideSwipeBackTransformer;
 
 import butterknife.ButterKnife;
+import me.majiajie.swipeback.SwipeBackActivity;
 
 /**
  * Created by liuhui on 2016/6/27.
@@ -29,13 +25,7 @@ public abstract class BaseActivity extends SwipeBackActivity {
         super.onCreate(savedInstanceState);
         boolean isNightMode = SpUtil.getBoolean("nightMode", false);
         setTheme(isNightMode ? R.style.NightTheme : R.style.DayTheme);
-        // Init the swipe back mechanism
-        SwipeBack.attach(this, Position.LEFT).setDrawOverlay(true)
-                .setDividerEnabled(true)
-                .setSwipeBackTransformer(new SlideSwipeBackTransformer())
-                .setContentView(getLayoutId())
-                .setSwipeBackView(R.layout.swipeback_default)
-                .setSwipeBackContainerBackgroundColor(R.color.status_text);//这句话改变了侧拉的背景
+        setContentView(getLayoutId());
         ButterKnife.bind(this);//绑定黄油刀
         mContext = this;
         initActionBar();
@@ -88,4 +78,16 @@ public abstract class BaseActivity extends SwipeBackActivity {
         return (V) findViewById(id);
     }
 
+    /**
+     * ToolBar中的返回按钮对应事件
+     */
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == android.R.id.home) {
+            onBackPressed();
+            return true;
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
 }

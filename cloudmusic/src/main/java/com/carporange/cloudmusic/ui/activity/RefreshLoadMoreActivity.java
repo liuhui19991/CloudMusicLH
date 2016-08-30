@@ -70,14 +70,6 @@ public class RefreshLoadMoreActivity extends BaseActivity {
     }
 
     @Override
-    protected void initWindow() {
-        if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP) {
-            //5.0以上可以直接设置 statusbar颜色
-            getWindow().setStatusBarColor(getResources().getColor(R.color.colorPrimary));
-        }
-    }
-
-    @Override
     public void initViews() {
         mSwipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.swipe_layout);
         mSwipeRefreshLayout.setColorSchemeResources(android.R.color.holo_blue_light, android.R.color.holo_red_light, android.R.color.holo_orange_light, android.R.color.holo_green_light);

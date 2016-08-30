@@ -6,6 +6,8 @@ import android.content.SharedPreferences;
 import com.yolanda.nohttp.Logger;
 import com.yolanda.nohttp.NoHttp;
 
+import me.majiajie.swipeback.utils.ActivityStack;
+
 /**
  * Created by Liyuchen on 2016/6/14.
  * email:987424501@qq.com
@@ -20,6 +22,7 @@ public class CarpApplication extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
+        this.registerActivityLifecycleCallbacks(ActivityStack.getInstance());//初始化滑动关闭页面
         application = this;
         NoHttp.initialize(application);
         Logger.setTag("LH");

@@ -6,7 +6,7 @@ android {
 
     defaultConfig {
         applicationId "com.carporange.cloudmusic"
-        minSdkVersion 14
+        minSdkVersion 15
         targetSdkVersion 23
         versionCode 1
         versionName "1.0"
@@ -58,7 +58,8 @@ dependencies {
     compile 'tv.danmaku.ijk.media:ijkplayer-x86:0.6.0'
     compile 'tv.danmaku.ijk.media:ijkplayer-x86_64:0.6.0'
 //    compile 'me.imid.swipebacklayout.lib:library:1.0.0'//滑动关闭页面需要设置透明主题,会有问题
-    compile 'com.hannesdorfmann:swipeback:1.0.4'//滑动关闭
+//    compile 'com.hannesdorfmann:swipeback:1.0.4'//滑动关闭侧面有黑条
+    compile 'me.majiajie:swipe-back:1.0.0-alpha2'
     compile 'com.yanzhenjie:recyclerview-swipe:1.0.2'
     /*   //If you can not start app, you cancel the annotation
        //如果app无法启动,请取消下面的注释
