@@ -83,13 +83,11 @@ public class AnchorRadioFragment extends BaseFragment {
     @OnClick(R.id.blureed)
     void goBlurredActivity() {
         startActivity(new Intent(getActivity(), BlurredViewBasicActivity.class));
-        SwitchUtil.start(getActivity());
     }
 
     @OnClick(R.id.blureed1)
     void goBlurredActivity2() {
         startActivity(new Intent(getActivity(), WeatherActivity.class));
-        SwitchUtil.start(getActivity());
     }
 
     @OnClick(R.id.progressbar)
@@ -107,6 +105,5 @@ public class AnchorRadioFragment extends BaseFragment {
     @OnClick(R.id.dicuss)
     void goWebviewActivity() {
         startActivity(new Intent(getContext(), WebviewActivity.class));
-        SwitchUtil.start(getActivity());
     }
 }

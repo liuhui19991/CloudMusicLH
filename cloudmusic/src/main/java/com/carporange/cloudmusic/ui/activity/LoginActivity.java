@@ -155,7 +155,6 @@ public class LoginActivity extends BaseActivity implements OnClickListener, View
                         SpUtil.put("isRemberPassword", false);
                     }
                     startActivity(new Intent(mContext, MainActivity.class));
-                    SwitchUtil.start(mContext);
                     finish();
                 } else {
                     Snackbar.make(username, "密码不正确", Snackbar.LENGTH_SHORT).show();

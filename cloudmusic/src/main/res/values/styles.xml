@@ -8,7 +8,7 @@
         <!-- 设置背景透明背景，右滑时才能看到上一个界面，否则会看到黑屏效果,添加转场动画变为缩放动画,去掉为平移动画
         为了解决这个问题采用代码设置转场动画
         -->
-         <item name="android:windowIsTranslucent">true</item>
+        <item name="android:windowIsTranslucent">true</item>
          <!--<item name="android:windowAnimationStyle">@style/Animation.Activity</item>-->
         <!--这句代码会让自己没设置背景的地方变透明-->
         <!--<item name="android:windowBackground">@android:color/transparent</item>-->

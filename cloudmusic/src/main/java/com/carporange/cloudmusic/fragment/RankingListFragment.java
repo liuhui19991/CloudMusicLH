@@ -70,7 +70,6 @@ public class RankingListFragment extends BaseFragment {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(getActivity(), JsActivity.class));
-                SwitchUtil.start(getActivity());
             }
         });
     }
@@ -114,7 +113,6 @@ public class RankingListFragment extends BaseFragment {
                 }
                 System.out.println("第一个按钮被点击了");
                 startActivity(new Intent(getActivity(), RefreshLoadMoreActivity.class));
-                SwitchUtil.start(getActivity());
             }
         });
         Button second = (Button) view.findViewById(R.id.second);

@@ -81,7 +81,6 @@ public abstract class BaseActivity extends SwipeBackActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == android.R.id.home) {
             finish();
-            SwitchUtil.finish(mContext);
             return true;
         }
         return super.onOptionsItemSelected(item);
@@ -90,7 +89,6 @@ public abstract class BaseActivity extends SwipeBackActivity {
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        SwitchUtil.finish(mContext);
     }
 
     protected <V extends View> V findView(int id) {

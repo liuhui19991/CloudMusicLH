@@ -89,7 +89,6 @@ public class SongMenuFragment extends BaseFragment {
     @OnClick(R.id.go)
     public void click() {
         startActivity(new Intent(getContext(), BeautfulActivity.class));
-        SwitchUtil.start(getActivity());
     }
 
     @OnClick(R.id.tomap)

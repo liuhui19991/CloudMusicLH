@@ -137,7 +137,6 @@ public class BeautfulActivity extends BaseActivity {
                     intent.putExtra("map", url);
                 }
                 startActivity(intent);
-                SwitchUtil.start(mContext);
             }
         });
         FAB.setOnClickListener(new View.OnClickListener() {
