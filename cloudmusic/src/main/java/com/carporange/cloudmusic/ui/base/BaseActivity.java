@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
@@ -11,7 +12,9 @@ import android.view.WindowManager;
 import com.carporange.cloudmusic.R;
 import com.carporange.cloudmusic.ui.activity.SwipeBackActivity;
 import com.carporange.cloudmusic.util.SpUtil;
-import com.carporange.cloudmusic.util.SwitchUtil;
+import com.hannesdorfmann.swipeback.Position;
+import com.hannesdorfmann.swipeback.SwipeBack;
+import com.hannesdorfmann.swipeback.transformer.SlideSwipeBackTransformer;
 
 import butterknife.ButterKnife;
 
@@ -22,11 +25,16 @@ public abstract class BaseActivity extends SwipeBackActivity {
     public Activity mContext;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         boolean isNightMode = SpUtil.getBoolean("nightMode", false);
         setTheme(isNightMode ? R.style.NightTheme : R.style.DayTheme);
-        setContentView(getLayoutId());
+        // Init the swipe back mechanism
+        SwipeBack.attach(this, Position.LEFT).setDrawOverlay(true)
+                .setDividerEnabled(true)
+                .setSwipeBackTransformer(new SlideSwipeBackTransformer())
+                .setContentView(getLayoutId())
+                .setSwipeBackView(R.layout.swipeback_default);
         ButterKnife.bind(this);//绑定黄油刀
         mContext = this;
         initActionBar();
@@ -67,30 +75,14 @@ public abstract class BaseActivity extends SwipeBackActivity {
         overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
     }
 
-    *//**
+    */
+
+    /**
      * 页面关闭的切换动画
      *//*
     protected void finishActivity() {
         overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
     }*/
-
-    /**
-     * ToolBar中的返回按钮对应事件
-     */
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        if (item.getItemId() == android.R.id.home) {
-            finish();
-            return true;
-        }
-        return super.onOptionsItemSelected(item);
-    }
-
-    @Override
-    public void onBackPressed() {
-        super.onBackPressed();
-    }
-
     protected <V extends View> V findView(int id) {
         return (V) findViewById(id);
     }

@@ -1,60 +1,53 @@
-
 package com.carporange.cloudmusic.ui.activity;
 
 import android.os.Bundle;
+import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.AppCompatActivity;
-import android.view.View;
+import android.util.Log;
+import android.view.MenuItem;
 
-import me.imid.swipebacklayout.lib.SwipeBackLayout;
-import me.imid.swipebacklayout.lib.Utils;
-import me.imid.swipebacklayout.lib.app.SwipeBackActivityBase;
-import me.imid.swipebacklayout.lib.app.SwipeBackActivityHelper;
+import com.hannesdorfmann.swipeback.R;
 
 /**
- * Created by JiaQing on 2016/7/17.
- * 官方给SwipeBackActivity继承的是Activity。这里需要是AppCompatActivity
+ * Created by liuhui on 2016/6/27.
  */
-public class SwipeBackActivity extends AppCompatActivity implements SwipeBackActivityBase {
-    private SwipeBackActivityHelper mHelper;
+public class SwipeBackActivity extends AppCompatActivity {
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        mHelper = new SwipeBackActivityHelper(this);
-        mHelper.onActivityCreate();
-    }
+	@Override
+	protected void onCreate(Bundle saved){
+		super.onCreate(saved);
 
-    @Override
-    protected void onPostCreate(Bundle savedInstanceState) {
-        super.onPostCreate(savedInstanceState);
-        mHelper.onPostCreate();
-    }
+		Log.d("SwipeBack", "onCreate");
 
-    @Override
-    public View findViewById(int id) {
-        View v = super.findViewById(id);
-        if (v == null && mHelper != null)
-            return mHelper.findViewById(id);
-        return v;
-    }
+	}
 
-    @Override
-    public SwipeBackLayout getSwipeBackLayout() {
-        return mHelper.getSwipeBackLayout();
-    }
+	@Override
+	protected void onDestroy() {
+		super.onDestroy();
 
-    @Override
-    public void setSwipeBackEnable(boolean enable) {
-        getSwipeBackLayout().setEnableGesture(enable);
-    }
+		Log.d("SwipeBack", "onDestroy");
 
-    @Override
-    public void scrollToFinishActivity() {    
-        Utils.convertActivityToTranslucent(this);
-        getSwipeBackLayout().scrollToFinishActivity();
-    }
+	}
+
+
+	/*@Override
+	public void onBackPressed(){
+		super.onBackPressed();
+		overridePendingTransition(R.anim.swipeback_slide_left_in,
+				R.anim.swipeback_slide_right_out);
+	}*/
+
+	/**
+	 * ToolBar中的返回按钮对应事件
+	 */
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item){
+		if (item.getItemId() == android.R.id.home){
+			onBackPressed();
+			return true;
+		}
+
+		return super.onOptionsItemSelected(item);
+	}
 
 }
-
-
-
