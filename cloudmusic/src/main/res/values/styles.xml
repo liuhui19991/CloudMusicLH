@@ -6,8 +6,8 @@
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
         <!-- 设置背景透明背景，右滑时才能看到上一个界面，否则会看到黑屏效果,添加转场动画变为缩放动画,去掉为平移动画-->，
-       <!-- <item name="android:windowIsTranslucent">true</item>
-        <item name="android:windowAnimationStyle">@style/Animation.Activity</item>-->
+         <item name="android:windowIsTranslucent">true</item>
+         <item name="android:windowAnimationStyle">@style/Animation.Activity</item>
         <!--这句代码会让自己没设置背景的地方变透明-->
         <!--<item name="android:windowBackground">@android:color/transparent</item>-->
         <!--colorPrimary 对应ActionBar的颜色。
@@ -16,6 +16,7 @@
         <!-- 好像这里设置的转场动画没有用-->
         <!--<item name="android:windowAnimationStyle">@style/activityAnimation</item>-->
     </style>
+
     <!--在application中配置,或者在Activity中配置
     android:windowAnimationStyle="@style/Animation.Activity.Translucent.Style"-->
     <style name="Animation.Activity" parent="@android:style/Animation.Translucent">
@@ -48,7 +49,6 @@
         <item name="bottom_bg">@color/bottom_bg_night</item>
         <item name="src_icon_message">@drawable/icon_message_night</item>
         <item name="toolbar_color">@color/bottom_bg_night</item>
-        <item name="android:windowBackground">@android:color/transparent</item>
     </style>
     <!--自定义的waitdialog和本项目中WaitDialog这个类没有关系-->
     <style name="TRANSDIALOG" parent="@android:style/Theme.Dialog">
