@@ -12,6 +12,7 @@ import com.carporange.cloudmusic.ui.activity.BeautfulActivity;
 import com.carporange.cloudmusic.ui.activity.VideoPlayerActivity;
 import com.carporange.cloudmusic.ui.base.BaseFragment;
 import com.carporange.cloudmusic.util.S;
+import com.carporange.cloudmusic.util.SwitchUtil;
 import com.carporange.cloudmusic.widget.CircleTextProgressbar;
 
 import butterknife.BindView;
@@ -88,6 +89,7 @@ public class SongMenuFragment extends BaseFragment {
     @OnClick(R.id.go)
     public void click() {
         startActivity(new Intent(getContext(), BeautfulActivity.class));
+        SwitchUtil.start(getActivity());
     }
 
     @OnClick(R.id.tomap)

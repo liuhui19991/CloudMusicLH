@@ -18,6 +18,7 @@ import com.carporange.cloudmusic.adapter.DividerItemDecoration;
 import com.carporange.cloudmusic.adapter.MyAdapter;
 import com.carporange.cloudmusic.ui.base.BaseActivity;
 import com.carporange.cloudmusic.util.AnimatorUtil;
+import com.carporange.cloudmusic.util.SwitchUtil;
 import com.carporange.cloudmusic.util.T;
 import com.jcodecraeer.xrecyclerview.ProgressStyle;
 import com.jcodecraeer.xrecyclerview.XRecyclerView;
@@ -136,6 +137,7 @@ public class BeautfulActivity extends BaseActivity {
                     intent.putExtra("map", url);
                 }
                 startActivity(intent);
+                SwitchUtil.start(mContext);
             }
         });
         FAB.setOnClickListener(new View.OnClickListener() {

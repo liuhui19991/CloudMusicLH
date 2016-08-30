@@ -16,6 +16,7 @@ import com.carporange.cloudmusic.ui.base.BaseFragment;
 import com.carporange.cloudmusic.ui.dialog.ProgressDialog;
 import com.carporange.cloudmusic.ui.dialog.WaitDialog;
 import com.carporange.cloudmusic.util.GsonUtil;
+import com.carporange.cloudmusic.util.SwitchUtil;
 import com.carporange.cloudmusic.widget.ViewPagerCycle;
 
 import java.util.List;
@@ -82,11 +83,13 @@ public class AnchorRadioFragment extends BaseFragment {
     @OnClick(R.id.blureed)
     void goBlurredActivity() {
         startActivity(new Intent(getActivity(), BlurredViewBasicActivity.class));
+        SwitchUtil.start(getActivity());
     }
 
     @OnClick(R.id.blureed1)
     void goBlurredActivity2() {
         startActivity(new Intent(getActivity(), WeatherActivity.class));
+        SwitchUtil.start(getActivity());
     }
 
     @OnClick(R.id.progressbar)
@@ -104,5 +107,6 @@ public class AnchorRadioFragment extends BaseFragment {
     @OnClick(R.id.dicuss)
     void goWebviewActivity() {
         startActivity(new Intent(getContext(), WebviewActivity.class));
+        SwitchUtil.start(getActivity());
     }
 }

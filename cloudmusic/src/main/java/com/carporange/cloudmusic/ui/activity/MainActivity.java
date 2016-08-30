@@ -177,13 +177,14 @@ public class MainActivity extends BaseActivity implements MenuLeftFragment.OnLef
         if (System.currentTimeMillis() - time > 2000) {
             T.showShort(MainActivity.this, "再按一次返回确认退出");
             time = System.currentTimeMillis();
-        } else {
             Snackbar.make(mTitle, "小样你还想退出吗?", Snackbar.LENGTH_LONG).setAction("click", new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     System.exit(0);
                 }
             }).show();
+        } else {
+            finish();
         }
     }
 }

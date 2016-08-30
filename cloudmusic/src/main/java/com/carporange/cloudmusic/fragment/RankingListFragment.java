@@ -18,6 +18,7 @@ import com.carporange.cloudmusic.event.TitleEvent;
 import com.carporange.cloudmusic.ui.activity.JsActivity;
 import com.carporange.cloudmusic.ui.activity.RefreshLoadMoreActivity;
 import com.carporange.cloudmusic.ui.base.BaseFragment;
+import com.carporange.cloudmusic.util.SwitchUtil;
 
 import org.greenrobot.eventbus.EventBus;
 
@@ -69,6 +70,7 @@ public class RankingListFragment extends BaseFragment {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(getActivity(), JsActivity.class));
+                SwitchUtil.start(getActivity());
             }
         });
     }
@@ -112,6 +114,7 @@ public class RankingListFragment extends BaseFragment {
                 }
                 System.out.println("第一个按钮被点击了");
                 startActivity(new Intent(getActivity(), RefreshLoadMoreActivity.class));
+                SwitchUtil.start(getActivity());
             }
         });
         Button second = (Button) view.findViewById(R.id.second);

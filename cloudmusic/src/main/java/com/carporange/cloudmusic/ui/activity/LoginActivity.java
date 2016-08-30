@@ -22,6 +22,7 @@ import android.widget.ScrollView;
 import com.carporange.cloudmusic.R;
 import com.carporange.cloudmusic.ui.base.BaseActivity;
 import com.carporange.cloudmusic.util.SpUtil;
+import com.carporange.cloudmusic.util.SwitchUtil;
 
 /**
  * Created by liuhui on 2016/6/15.
@@ -153,7 +154,8 @@ public class LoginActivity extends BaseActivity implements OnClickListener, View
                     } else {
                         SpUtil.put("isRemberPassword", false);
                     }
-                    startActivity(new Intent(this, MainActivity.class));
+                    startActivity(new Intent(mContext, MainActivity.class));
+                    SwitchUtil.start(mContext);
                     finish();
                 } else {
                     Snackbar.make(username, "密码不正确", Snackbar.LENGTH_SHORT).show();
