@@ -40,10 +40,7 @@ public class WebPageActivity extends BaseActivity {
         Intent intent = getIntent();
         url = intent.getStringExtra("url");
         name = intent.getStringExtra("title");
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         toolbar.setTitle(name);
-        setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 
     @Override

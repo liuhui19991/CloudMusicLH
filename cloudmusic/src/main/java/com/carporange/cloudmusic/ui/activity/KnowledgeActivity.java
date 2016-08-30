@@ -2,7 +2,6 @@ package com.carporange.cloudmusic.ui.activity;
 
 import android.content.res.Resources;
 import android.graphics.BitmapFactory;
-import android.graphics.Color;
 import android.os.Handler;
 import android.support.v7.widget.Toolbar;
 import android.util.DisplayMetrics;
@@ -15,7 +14,6 @@ import com.carporange.cloudmusic.knowledgemap.MapView;
 import com.carporange.cloudmusic.knowledgemap.NodeService;
 import com.carporange.cloudmusic.knowledgemap.UIUtils;
 import com.carporange.cloudmusic.ui.base.BaseActivity;
-import com.carporange.cloudmusic.util.SwitchUtil;
 
 /**
  * 知识地图阅读页
@@ -29,14 +27,6 @@ public class KnowledgeActivity extends BaseActivity {
     @Override
     protected int getLayoutId() {
         return R.layout.activity_knowledge;
-    }
-
-    @Override
-    public void initActionBar() {
-        Toolbar toolbar = findView(R.id.toolbar);
-        toolbar.setTitle("");
-        setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 
     @Override

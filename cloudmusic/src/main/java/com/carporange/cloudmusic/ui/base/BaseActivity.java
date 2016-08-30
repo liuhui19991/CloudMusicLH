@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
@@ -19,6 +20,7 @@ import me.majiajie.swipeback.SwipeBackActivity;
  */
 public abstract class BaseActivity extends SwipeBackActivity {
     public Activity mContext;
+    public Toolbar toolbar;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -29,8 +31,8 @@ public abstract class BaseActivity extends SwipeBackActivity {
         ButterKnife.bind(this);//绑定黄油刀
         mContext = this;
         initActionBar();
-        initViews();
         initWindow();
+        initViews();
     }
 
     /**
@@ -38,7 +40,12 @@ public abstract class BaseActivity extends SwipeBackActivity {
      */
     protected abstract int getLayoutId();
 
-    public abstract void initActionBar();
+    public void initActionBar() {
+        toolbar = findView(R.id.toolbar);
+        toolbar.setTitle("");
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+    }
 
     public abstract void initViews();
 

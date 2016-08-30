@@ -4,7 +4,6 @@ package com.carporange.cloudmusic.fragment;
 import android.content.Intent;
 import android.graphics.Color;
 import android.view.View;
-import android.widget.TextView;
 
 import com.carporange.cloudmusic.CarpApplication;
 import com.carporange.cloudmusic.R;
@@ -12,7 +11,6 @@ import com.carporange.cloudmusic.ui.activity.BeautfulActivity;
 import com.carporange.cloudmusic.ui.activity.VideoPlayerActivity;
 import com.carporange.cloudmusic.ui.base.BaseFragment;
 import com.carporange.cloudmusic.util.S;
-import com.carporange.cloudmusic.util.SwitchUtil;
 import com.carporange.cloudmusic.widget.CircleTextProgressbar;
 
 import butterknife.BindView;

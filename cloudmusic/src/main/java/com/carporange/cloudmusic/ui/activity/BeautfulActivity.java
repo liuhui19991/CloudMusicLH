@@ -1,16 +1,11 @@
 package com.carporange.cloudmusic.ui.activity;
 
 import android.content.Intent;
-import android.os.Build;
-import android.os.Bundle;
 import android.os.Handler;
-import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.view.ViewPropertyAnimatorListener;
-import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.Toolbar;
-import android.view.MenuItem;
 import android.view.View;
 
 import com.carporange.cloudmusic.R;
@@ -18,16 +13,13 @@ import com.carporange.cloudmusic.adapter.DividerItemDecoration;
 import com.carporange.cloudmusic.adapter.MyAdapter;
 import com.carporange.cloudmusic.ui.base.BaseActivity;
 import com.carporange.cloudmusic.util.AnimatorUtil;
-import com.carporange.cloudmusic.util.SwitchUtil;
 import com.carporange.cloudmusic.util.T;
 import com.jcodecraeer.xrecyclerview.ProgressStyle;
 import com.jcodecraeer.xrecyclerview.XRecyclerView;
 
-import java.math.MathContext;
 import java.util.ArrayList;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 
 /**
  * Created by liuhui on 2016/7/20.
@@ -52,10 +44,8 @@ public class BeautfulActivity extends BaseActivity {
 
     @Override
     public void initActionBar() {
-        final Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        super.initActionBar();
         toolbar.setTitle("RecyclerView");
-        setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 
     @Override

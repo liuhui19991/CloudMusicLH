@@ -18,7 +18,6 @@ import com.carporange.cloudmusic.event.TitleEvent;
 import com.carporange.cloudmusic.ui.activity.JsActivity;
 import com.carporange.cloudmusic.ui.activity.RefreshLoadMoreActivity;
 import com.carporange.cloudmusic.ui.base.BaseFragment;
-import com.carporange.cloudmusic.util.SwitchUtil;
 
 import org.greenrobot.eventbus.EventBus;
 

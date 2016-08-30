@@ -64,9 +64,8 @@ public class RefreshLoadMoreActivity extends BaseActivity {
 
     @Override
     public void initActionBar() {
-        Toolbar toolbar = findView(R.id.toolbar);
-        setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        super.initActionBar();
+       toolbar.setTitle("一笑过千山");
     }
 
     @Override

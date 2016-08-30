@@ -1,6 +1,7 @@
 package com.carporange.cloudmusic.ui.activity;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Build;
 import android.os.Handler;
 import android.os.Message;
@@ -8,7 +9,6 @@ import android.support.design.widget.Snackbar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.Toolbar;
 import android.text.InputType;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -22,7 +22,6 @@ import android.widget.ScrollView;
 import com.carporange.cloudmusic.R;
 import com.carporange.cloudmusic.ui.base.BaseActivity;
 import com.carporange.cloudmusic.util.SpUtil;
-import com.carporange.cloudmusic.util.SwitchUtil;
 
 /**
  * Created by liuhui on 2016/6/15.
@@ -59,10 +58,16 @@ public class LoginActivity extends BaseActivity implements OnClickListener, View
 
     @Override
     public void initActionBar() {
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        super.initActionBar();
         toolbar.setTitle("登录");
-        setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+    }
+
+    @Override
+    protected void initWindow() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {//5.0及以上
+            //5.0以上可以直接设置 statusbar颜色
+            getWindow().setStatusBarColor(getResources().getColor(R.color.colorPrimary));
+        }
     }
 
     @Override
@@ -71,17 +76,17 @@ public class LoginActivity extends BaseActivity implements OnClickListener, View
         screenHeight = this.getWindowManager().getDefaultDisplay().getHeight();
         //阀值设置为屏幕高度的1/3
         keyHeight = screenHeight / 4;
-        mScrollView = (ScrollView) findViewById(R.id.login_scrollview);
-        mForgetLayout = (LinearLayout) findViewById(R.id.forget_linear);
+        mScrollView = findView(R.id.login_scrollview);
+        mForgetLayout = findView(R.id.forget_linear);
         linearLayout = findView(R.id.root_layout);
-        username = (EditText) findViewById(R.id.login_account);
+        username = findView(R.id.login_account);
         //动态设置帐号名可见
         username.setInputType(InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD);
-        password = (EditText) findViewById(R.id.login_pwd);
-        passVisiable = (ImageView) findViewById(R.id.pass_visiable);
-        forgetpassword = (Button) findViewById(R.id.login_find_pwd);
-        login = (Button) findViewById(R.id.login_submit_btn);
-        checkBox = (CheckBox) findViewById(R.id.remember_checkbox);
+        password =  findView(R.id.login_pwd);
+        passVisiable = findView(R.id.pass_visiable);
+        forgetpassword = findView(R.id.login_find_pwd);
+        login = findView(R.id.login_submit_btn);
+        checkBox = findView(R.id.remember_checkbox);
         //一下两种方式都可以获取资源文件中的值
         names = getResources().getString(R.string.username);
         passs = this.getString(R.string.password);

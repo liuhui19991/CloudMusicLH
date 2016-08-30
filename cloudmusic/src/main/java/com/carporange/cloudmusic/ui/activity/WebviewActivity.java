@@ -13,11 +13,6 @@ public class WebviewActivity extends BaseActivity {
     }
 
     @Override
-    public void initActionBar() {
-
-    }
-
-    @Override
     public void initViews() {
 
     }

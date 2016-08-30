@@ -23,14 +23,6 @@ public class JsActivity extends BaseActivity {
     }
 
     @Override
-    public void initActionBar() {
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        toolbar.setTitle("");
-        setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-    }
-
-    @Override
     public void initViews() {
         contentWebView = (WebView) findViewById(R.id.webview);
         // 启用javascript
