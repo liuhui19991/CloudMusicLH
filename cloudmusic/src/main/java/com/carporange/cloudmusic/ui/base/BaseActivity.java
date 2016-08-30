@@ -11,6 +11,7 @@ import android.view.WindowManager;
 import com.carporange.cloudmusic.R;
 import com.carporange.cloudmusic.ui.activity.SwipeBackActivity;
 import com.carporange.cloudmusic.util.SpUtil;
+import com.carporange.cloudmusic.util.SwitchUtil;
 
 import butterknife.ButterKnife;
 
@@ -80,9 +81,16 @@ public abstract class BaseActivity extends SwipeBackActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == android.R.id.home) {
             finish();
+            SwitchUtil.finish(mContext);
             return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        SwitchUtil.finish(mContext);
     }
 
     protected <V extends View> V findView(int id) {

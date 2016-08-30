@@ -15,6 +15,7 @@ import com.carporange.cloudmusic.knowledgemap.MapView;
 import com.carporange.cloudmusic.knowledgemap.NodeService;
 import com.carporange.cloudmusic.knowledgemap.UIUtils;
 import com.carporange.cloudmusic.ui.base.BaseActivity;
+import com.carporange.cloudmusic.util.SwitchUtil;
 
 /**
  * 知识地图阅读页
@@ -74,5 +75,4 @@ public class KnowledgeActivity extends BaseActivity {
         }
         super.onDestroy();
     }
-
 }

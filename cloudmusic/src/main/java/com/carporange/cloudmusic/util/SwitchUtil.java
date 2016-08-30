@@ -9,10 +9,10 @@ import com.carporange.cloudmusic.R;
  */
 public class SwitchUtil {
     public static void start(Activity activity) {
-        activity.overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+        activity.overridePendingTransition(R.anim.slide_in_right, 0);
     }
 
     public static void finish(Activity activity) {
-        activity.overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
+        activity.overridePendingTransition(0, R.anim.slide_out_right);
     }
 }
