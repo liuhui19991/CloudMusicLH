@@ -21,22 +21,32 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".ui.activity.MainActivity"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".ui.activity.BeautfulActivity"/>
-        <activity android:name=".ui.activity.KnowledgeActivity"/>
-        <activity android:name=".ui.activity.VideoPlayerActivity"/>
-        <activity android:name=".ui.activity.WebPageActivity"/>
-        <activity android:name=".ui.activity.BlurredViewBasicActivity"/>
-        <activity android:name=".ui.activity.WeatherActivity"/>
-        <activity android:name=".ui.activity.JsActivity"/>
-        <activity android:name=".ui.activity.RefreshLoadMoreActivity"/>
-        <activity
             android:name=".ui.activity.LoginActivity"
+            android:windowAnimationStyle="@null"
             android:windowSoftInputMode="stateHidden"/>
         <!-- android:configChanges="keyboardHidden|orientation|screenSize"-->
-        <activity android:name=".ui.activity.WebviewActivity"
-                  android:windowSoftInputMode="stateHidden|adjustPan"/>
+        <activity
+            android:name=".ui.activity.MainActivity"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".ui.activity.BeautfulActivity"/>
+        <activity
+            android:name=".ui.activity.KnowledgeActivity"/>
+        <activity
+            android:name=".ui.activity.VideoPlayerActivity"/>
+        <activity
+            android:name=".ui.activity.WebPageActivity"/>
+        <activity
+            android:name=".ui.activity.BlurredViewBasicActivity"/>
+        <activity
+            android:name=".ui.activity.WeatherActivity"/>
+        <activity
+            android:name=".ui.activity.JsActivity"/>
+        <activity
+            android:name=".ui.activity.RefreshLoadMoreActivity"/>
+        <activity
+            android:name=".ui.activity.WebviewActivity"
+            android:windowSoftInputMode="stateHidden|adjustPan"/>
     </application>
 
 </manifest>
