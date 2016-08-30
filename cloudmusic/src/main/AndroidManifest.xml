@@ -22,7 +22,6 @@
         </activity>
         <activity
             android:name=".ui.activity.LoginActivity"
-            android:windowAnimationStyle="@null"
             android:windowSoftInputMode="stateHidden"/>
         <!-- android:configChanges="keyboardHidden|orientation|screenSize"-->
         <activity
