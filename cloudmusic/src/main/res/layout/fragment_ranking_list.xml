@@ -5,25 +5,6 @@
                 android:layout_height="match_parent"
                 tools:context="com.carporange.cloudmusic.fragment.RankingListFragment">
 
-    <TextView
-        android:id="@+id/popup"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/dp_35"
-        android:layout_marginTop="26dp"
-        android:background="@drawable/image_selector"
-        android:gravity="center"
-        android:text="@string/popup"/>
-
-    <TextView
-        android:id="@+id/jsactivity"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/dp_35"
-        android:layout_below="@id/popup"
-        android:layout_marginTop="26dp"
-        android:background="@drawable/image_selector"
-        android:gravity="center"
-        android:text="@string/jsactivity"/>
-
     <LinearLayout
         android:id="@+id/progress"
         android:layout_width="match_parent"

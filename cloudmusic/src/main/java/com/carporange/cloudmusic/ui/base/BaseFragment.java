@@ -1,5 +1,6 @@
 package com.carporange.cloudmusic.ui.base;
 
+import android.app.Activity;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -14,7 +15,10 @@ import butterknife.ButterKnife;
  */
 public abstract class BaseFragment extends Fragment {
     protected View mContentView;
-
+    /**
+     * Fragment中的上下文
+     */
+    protected Activity mContext;
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -25,6 +29,7 @@ public abstract class BaseFragment extends Fragment {
             ViewGroup parent = (ViewGroup) mContentView.getParent();
             parent.removeView(mContentView);
         }
+        mContext = getActivity();
         ButterKnife.bind(this, mContentView);
         initViews();
         setListeners();

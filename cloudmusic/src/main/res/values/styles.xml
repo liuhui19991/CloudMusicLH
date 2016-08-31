@@ -9,7 +9,7 @@
         为了解决这个问题采用代码设置转场动画
         -->
         <!--<item name="android:windowIsTranslucent">true</item>-->
-         <!--<item name="android:windowAnimationStyle">@style/Animation.Activity</item>-->
+        <!--<item name="android:windowAnimationStyle">@style/Animation.Activity</item>-->
         <!--这句代码会让窗口的背景变透明-->
         <!--<item name="android:windowBackground">@android:color/transparent</item>-->
         <!--colorPrimary 对应ActionBar的颜色。
@@ -74,5 +74,13 @@
 
         <item name="android:windowExitAnimation">@anim/pophidden_anim</item>
         <!-- 指定消失的动画xml -->
+    </style>
+    <!--统一的textview风格-->
+    <style name="textview">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">@dimen/dp_35</item>
+        <item name="android:layout_marginTop">@dimen/dp_8</item>
+        <item name="android:background">@drawable/image_selector</item>
+        <item name="android:gravity">center</item>
     </style>
 </resources>

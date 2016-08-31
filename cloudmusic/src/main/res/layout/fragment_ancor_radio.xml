@@ -37,47 +37,38 @@
 
         <TextView
             android:id="@+id/blureed"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/dp_35"
-            android:layout_marginTop="8dp"
-            android:background="@drawable/image_selector"
-            android:gravity="center"
+            style="@style/textview"
             android:text="@string/blureed"/>
 
         <TextView
             android:id="@+id/blureed1"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/dp_35"
-            android:layout_marginTop="8dp"
-            android:background="@drawable/image_selector"
-            android:gravity="center"
-            android:text="@string/blureed"/>
+            style="@style/textview"
+            android:text="@string/blureed1"/>
 
         <TextView
             android:id="@+id/progressbar"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/dp_35"
-            android:layout_marginTop="8dp"
-            android:background="@drawable/image_selector"
-            android:gravity="center"
+            style="@style/textview"
             android:text="@string/progress"/>
 
         <TextView
             android:id="@+id/progresswait"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/dp_35"
-            android:layout_marginTop="8dp"
-            android:background="@drawable/image_selector"
-            android:gravity="center"
+            style="@style/textview"
             android:text="@string/progresswait"/>
 
         <TextView
             android:id="@+id/dicuss"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/dp_35"
-            android:layout_marginTop="8dp"
-            android:background="@drawable/image_selector"
-            android:gravity="center"
+            style="@style/textview"
             android:text="@string/dicuss"/>
+
+
+        <TextView
+            android:id="@+id/popup"
+            style="@style/textview"
+            android:text="@string/popup"/>
+
+        <TextView
+            android:id="@+id/jsactivity"
+            style="@style/textview"
+            android:text="@string/jsactivity"/>
     </LinearLayout>
 </ScrollView>

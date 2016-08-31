@@ -39,30 +39,28 @@
 
             <TextView
                 android:id="@+id/go"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/dp_35"
-                android:layout_marginTop="26dp"
-                android:background="@drawable/image_selector"
-                android:gravity="center"
+                style="@style/textview"
                 android:text="@string/youwant"/>
 
             <TextView
                 android:id="@+id/tomap"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/dp_35"
-                android:layout_marginTop="26dp"
-                android:background="@drawable/image_selector"
-                android:gravity="center"
+                style="@style/textview"
                 android:text="@string/tomap"/>
 
             <TextView
                 android:id="@+id/tomap1"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/dp_35"
-                android:layout_marginTop="26dp"
-                android:background="@drawable/image_selector"
-                android:gravity="center"
-                android:text="@string/tomap"/>
+                style="@style/textview"
+                android:text="@string/tomap1"/>
+
+            <TextView
+                android:id="@+id/swiperecycler"
+                style="@style/textview"
+                android:text="@string/swiperecycler"/>
+
+            <TextView
+                android:id="@+id/recyclerload"
+                style="@style/textview"
+                android:text="@string/recyclerload"/>
         </LinearLayout>
     </FrameLayout>
 </ScrollView>

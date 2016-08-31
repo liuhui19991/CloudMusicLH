@@ -8,6 +8,8 @@ import android.view.View;
 import com.carporange.cloudmusic.CarpApplication;
 import com.carporange.cloudmusic.R;
 import com.carporange.cloudmusic.ui.activity.BeautfulActivity;
+import com.carporange.cloudmusic.ui.activity.MyRecyclerViewLoadActivity;
+import com.carporange.cloudmusic.ui.activity.RefreshLoadMoreActivity;
 import com.carporange.cloudmusic.ui.activity.VideoPlayerActivity;
 import com.carporange.cloudmusic.ui.base.BaseFragment;
 import com.carporange.cloudmusic.util.S;
@@ -28,6 +30,11 @@ public class SongMenuFragment extends BaseFragment {
     CircleTextProgressbar mCircleProgressOpposite;
 
     public SongMenuFragment() {
+    }
+
+    @Override
+    protected int getLayoutId() {
+        return R.layout.fragment_song_menu;
     }
 
     @Override
@@ -79,11 +86,6 @@ public class SongMenuFragment extends BaseFragment {
         }
     };
 
-    @Override
-    protected int getLayoutId() {
-        return R.layout.fragment_song_menu;
-    }
-
     @OnClick(R.id.go)
     public void click() {
         startActivity(new Intent(getContext(), BeautfulActivity.class));
@@ -104,6 +106,16 @@ public class SongMenuFragment extends BaseFragment {
 //                "http://resource.gbxx123.com/minivideo/mp4/gq/2016/7/22/1469176714153/1469176714153.mp4",
 //                JCVideoPlayerStandard.class, "来个慢动作");
         startActivity(new Intent(getActivity(), VideoPlayerActivity.class));
+    }
+
+    @OnClick(R.id.swiperecycler)
+    void goSwipeRecyclerView() {
+        startActivity(new Intent(getActivity(), RefreshLoadMoreActivity.class));
+    }
+
+    @OnClick(R.id.recyclerload)
+    void goMyRecyclerViewLoad() {
+        startActivity(new Intent(mContext,MyRecyclerViewLoadActivity.class));
     }
 
     @Override

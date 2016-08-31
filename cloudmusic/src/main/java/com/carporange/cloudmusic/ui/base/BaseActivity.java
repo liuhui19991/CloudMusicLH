@@ -19,6 +19,9 @@ import me.majiajie.swipeback.SwipeBackActivity;
  * Created by liuhui on 2016/6/27.
  */
 public abstract class BaseActivity extends SwipeBackActivity {
+    /**
+     * BaseActivity中的上下文
+     */
     public Activity mContext;
     public Toolbar toolbar;
 
@@ -81,8 +84,8 @@ public abstract class BaseActivity extends SwipeBackActivity {
     protected void finishActivity() {
         overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
     }*/
-    protected <V extends View> V findView(int id) {
-        return (V) findViewById(id);
+    protected <T> T findView(int id) {
+        return (T) findViewById(id);
     }
 
     /**
