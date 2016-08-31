@@ -23,7 +23,7 @@ import butterknife.ButterKnife;
  */
 public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
     private ArrayList<String> datas;
-    ItemClickListener mListener;
+    private ItemClickListener mListener;
     /**
      * 记录checkbox是否选中的list
      */

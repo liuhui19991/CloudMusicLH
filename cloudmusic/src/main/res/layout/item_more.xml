@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="@dimen/dp_35"
+              android:background="?selectableItemBackground"
+              android:foreground="?android:attr/selectableItemBackground"
+              android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/text"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:text="@string/title"
+        android:textSize="@dimen/sp_18"/>
+</LinearLayout>
