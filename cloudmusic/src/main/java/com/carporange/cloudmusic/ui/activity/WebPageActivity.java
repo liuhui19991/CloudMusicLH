@@ -36,6 +36,7 @@ public class WebPageActivity extends BaseActivity {
 
     @Override
     public void initActionBar() {
+        super.initActionBar();
         //传递的数据
         Intent intent = getIntent();
         url = intent.getStringExtra("url");
