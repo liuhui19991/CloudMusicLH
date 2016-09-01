@@ -35,6 +35,7 @@ public class MyRecyclerViewLoadActivity extends BaseActivity {
     private List<String> mStrings;
     private MyLoadMoreAdapter mLoadAdapter;
     private LinearLayoutManager mLinearLayoutManager;
+    private boolean isLoadMore;
 
     @Override
     protected int getLayoutId() {
@@ -109,12 +110,15 @@ public class MyRecyclerViewLoadActivity extends BaseActivity {
                     return;
                 }
                 //加载更多
-                mRecyclerView.postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        loadMore();
-                    }
-                }, 500);
+                if (!isLoadMore) {
+                    isLoadMore = true;
+                    mRecyclerView.postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            loadMore();
+                        }
+                    }, 500);
+                }
             }
         }
 
@@ -136,6 +140,7 @@ public class MyRecyclerViewLoadActivity extends BaseActivity {
                 Snackbar.make(mRecyclerView, "没有更多数据了", Snackbar.LENGTH_SHORT).show();
             }
             times++;
+            isLoadMore = false;
         }
     };
 
