@@ -39,6 +39,7 @@
             android:name=".ui.activity.WebviewActivity"
             android:windowSoftInputMode="stateHidden|adjustPan"/>
         <activity android:name=".ui.activity.MyRecyclerViewLoadActivity"/>
+        <activity android:name=".ui.activity.RecyclerSwipe"/>
     </application>
 
 </manifest>

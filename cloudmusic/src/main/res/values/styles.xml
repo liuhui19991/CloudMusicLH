@@ -5,6 +5,7 @@
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:actionMenuTextColor">@android:color/white</item>
         <!-- 设置背景透明背景，右滑时才能看到上一个界面，否则会看到黑屏效果,添加转场动画变为缩放动画,去掉为平移动画
         为了解决这个问题采用代码设置转场动画
         -->

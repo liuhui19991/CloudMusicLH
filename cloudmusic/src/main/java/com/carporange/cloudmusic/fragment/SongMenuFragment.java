@@ -9,6 +9,7 @@ import com.carporange.cloudmusic.CarpApplication;
 import com.carporange.cloudmusic.R;
 import com.carporange.cloudmusic.ui.activity.BeautfulActivity;
 import com.carporange.cloudmusic.ui.activity.MyRecyclerViewLoadActivity;
+import com.carporange.cloudmusic.ui.activity.RecyclerSwipe;
 import com.carporange.cloudmusic.ui.activity.RefreshLoadMoreActivity;
 import com.carporange.cloudmusic.ui.activity.VideoPlayerActivity;
 import com.carporange.cloudmusic.ui.base.BaseFragment;
@@ -118,6 +119,10 @@ public class SongMenuFragment extends BaseFragment {
         startActivity(new Intent(mContext,MyRecyclerViewLoadActivity.class));
     }
 
+    @OnClick(R.id.recycleswipe)
+    void goRecyclerSwipe() {
+        startActivity(new Intent(mContext, RecyclerSwipe.class));
+    }
     @Override
     public void onPause() {
         super.onPause();
