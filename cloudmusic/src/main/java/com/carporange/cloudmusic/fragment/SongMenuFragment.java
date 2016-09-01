@@ -66,7 +66,7 @@ public class SongMenuFragment extends BaseFragment {
 
     @Override
     protected void onVisible() {
-        S.show(getActivity(), CarpApplication.getInstance().getResources().getString(R.string.title));
+//        S.show(getActivity(), CarpApplication.getInstance().getResources().getString(R.string.title));//此处的snackbar会出现在华为手机的导航栏上因为获取的view的缘故
         // 如果需要自动倒计时，就会自动走进度。
 //        mCircleProgress.start();//只能开启一次
         mCircleProgress.reStart();

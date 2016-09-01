@@ -1,23 +1,27 @@
 package com.carporange.cloudmusic.ui.activity;
 
 import android.content.Intent;
+import android.graphics.Color;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.AppCompatActivity;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.TextView;
 
 import com.carporange.cloudmusic.R;
 import com.carporange.cloudmusic.event.TitleEvent;
 import com.carporange.cloudmusic.fragment.MainFragment;
 import com.carporange.cloudmusic.fragment.MenuLeftFragment;
-import com.carporange.cloudmusic.ui.base.BaseActivity;
 import com.carporange.cloudmusic.util.DensityUtil;
 import com.carporange.cloudmusic.util.S;
+import com.carporange.cloudmusic.util.SpUtil;
 import com.carporange.cloudmusic.util.T;
 import com.uuzuche.lib_zxing.activity.CaptureActivity;
 import com.uuzuche.lib_zxing.activity.CodeUtils;
@@ -27,13 +31,14 @@ import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
 import butterknife.BindView;
+import butterknife.ButterKnife;
 import butterknife.OnClick;
 import fm.jiecao.jcvideoplayer_lib.JCVideoPlayer;
 
 /**
  * Created by liuhui on 2016/6/27.
  */
-public class MainActivity extends BaseActivity implements MenuLeftFragment.OnLeftClickListener {
+public class MainActivity extends AppCompatActivity implements MenuLeftFragment.OnLeftClickListener {
 
     @BindView(R.id.drawer_layout)
     DrawerLayout mDrawerLayout;
@@ -43,13 +48,37 @@ public class MainActivity extends BaseActivity implements MenuLeftFragment.OnLef
     TextView mTitle;
     private Fragment mMainFragment;
     private int REQUEST_CODE = 88;
+    private AppCompatActivity mContext;
 
     @Override
-    protected int getLayoutId() {
-        return R.layout.activity_main;
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        boolean isNightMode = SpUtil.getBoolean("nightMode", false);
+        setTheme(isNightMode ? R.style.NightTheme : R.style.DayTheme);
+        setContentView(R.layout.activity_main);
+        ButterKnife.bind(this);//绑定黄油刀
+        mContext = this;
+        initWindow();
+        initViews();
     }
 
-    @Override
+    /**
+     * 这个方法是让状态栏变成透明色,让窗体可以填充,下面的19意思是19版本以上此方法有用,对应的dimens(v19)
+     */
+    protected void initWindow() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {//5.0及以上
+            View decorView = getWindow().getDecorView();
+            int option = View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+                    | View.SYSTEM_UI_FLAG_LAYOUT_STABLE;
+            decorView.setSystemUiVisibility(option);
+            //5.0以上可以直接设置 statusbar颜色
+            getWindow().setStatusBarColor(Color.TRANSPARENT);
+        } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {//4.4到5.0
+            WindowManager.LayoutParams localLayoutParams = getWindow().getAttributes();
+            localLayoutParams.flags = (WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS | localLayoutParams.flags);
+        }
+    }
+
     public void initViews() {
         EventBus.getDefault().register(this);//注册eventbus
         ViewGroup.LayoutParams layoutParams = mFragmentLeft.getLayoutParams();
@@ -127,16 +156,6 @@ public class MainActivity extends BaseActivity implements MenuLeftFragment.OnLef
     }
 
     @Override
-    public void initActionBar() {
-//        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-//        setSupportActionBar(toolbar);
-//        ActionBar ab = getSupportActionBar();
-//        ab.setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
-//        ab.setHomeAsUpIndicator(R.drawable.actionbar_menu);
-//        ab.setDisplayHomeAsUpEnabled(true);
-    }
-
-    @Override
     public void onLeftClick(int what) {//此处是将侧边栏按钮事件,在activity里面处理,  也可学习点击设置按钮时候的处理方式
         mDrawerLayout.closeDrawer(Gravity.LEFT);
         switch (what) {
@@ -173,7 +192,7 @@ public class MainActivity extends BaseActivity implements MenuLeftFragment.OnLef
         if (JCVideoPlayer.backPress()) {
             return;
         }
-        T.showShort(this, "小样你还想退出吗?"+"\n"+"再按一次返回确认退出");
+        T.showShort(this, "小样你还想退出吗?" + "\n" + "再按一次返回确认退出");
         if (System.currentTimeMillis() - time > 2000) {
             time = System.currentTimeMillis();
             Snackbar.make(mTitle, "小样你还想退出吗?", Snackbar.LENGTH_LONG).setAction("click", new View.OnClickListener() {
