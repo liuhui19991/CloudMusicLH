@@ -102,7 +102,6 @@ public class MyRecyclerViewLoadActivity extends BaseActivity {
         @Override
         public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
             super.onScrollStateChanged(recyclerView, newState);
-            L.e("执行没有");
             if (newState == RecyclerView.SCROLL_STATE_IDLE
                     && lastVisibleItem + 1 == mLoadAdapter.getItemCount()
                     && mLoadAdapter.isShowFooter()) {//如果没有数据时候再次滑动到底部时候要提示没有数据了,就把此行删掉
