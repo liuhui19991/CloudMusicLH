@@ -239,11 +239,14 @@
 
             <Button
                 android:id="@+id/login_submit_btn"
+                style="?attr/buttonBarButtonStyle"
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
                 android:layout_below="@+id/remember_linear"
                 android:layout_marginLeft="30dp"
                 android:layout_marginRight="30dp"
+                android:textSize="@dimen/sp_22"
+                android:textColor="@android:color/black"
                 android:layout_marginTop="15dp"
                 android:text="登  录"/>
 
