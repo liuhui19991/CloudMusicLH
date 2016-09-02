@@ -2,6 +2,8 @@ package com.carporange.cloudmusic.ui.activity;
 
 import android.content.Context;
 import android.content.DialogInterface;
+import android.support.design.widget.FloatingActionButton;
+import android.support.v4.view.ViewPropertyAnimatorListener;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -16,12 +18,15 @@ import android.widget.TextView;
 import com.carporange.cloudmusic.R;
 import com.carporange.cloudmusic.domain.RowModel;
 import com.carporange.cloudmusic.ui.base.BaseActivity;
+import com.carporange.cloudmusic.util.AnimatorUtil;
 import com.carporange.cloudmusic.util.T;
 import com.nikhilpanju.recyclerviewenhanced.OnActivityTouchListener;
 import com.nikhilpanju.recyclerviewenhanced.RecyclerTouchListener;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import butterknife.BindView;
 
 /**
  * Created by liuhui on 2016/9/1.
@@ -35,6 +40,9 @@ public class RecyclerSwipe extends BaseActivity implements RecyclerTouchListener
     private int openOptionsPosition;
     private OnActivityTouchListener touchListener;
     private List<RowModel> list;
+    @BindView(R.id.fab)
+    FloatingActionButton FAB;
+    private LinearLayoutManager mLinearLayoutManager;
 
     @Override
     protected int getLayoutId() {
@@ -53,7 +61,8 @@ public class RecyclerSwipe extends BaseActivity implements RecyclerTouchListener
         mRecyclerView = findView(R.id.recyclermore);
         mAdapter = new MainAdapter(this, getData());
         mRecyclerView.setAdapter(mAdapter);
-        mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+        mLinearLayoutManager = new LinearLayoutManager(this);
+        mRecyclerView.setLayoutManager(mLinearLayoutManager);
 
         onTouchListener = new RecyclerTouchListener(this, mRecyclerView);
         onTouchListener
@@ -92,6 +101,14 @@ public class RecyclerSwipe extends BaseActivity implements RecyclerTouchListener
                         T.showShort(mContext, message);
                     }
                 });
+        FAB.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                T.showShort(mContext, "回到顶部");
+                mLinearLayoutManager.scrollToPosition(0);
+                hideFAB();
+            }
+        });
     }
 
     @Override
@@ -251,5 +268,27 @@ public class RecyclerSwipe extends BaseActivity implements RecyclerTouchListener
                 subText.setText(rowModel.getSubText());
             }
         }
+    }
+
+    private void hideFAB() {
+        FAB.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                AnimatorUtil.scaleHide(FAB, new ViewPropertyAnimatorListener() {
+                    @Override
+                    public void onAnimationStart(View view) {
+                    }
+
+                    @Override
+                    public void onAnimationEnd(View view) {
+                        FAB.setVisibility(View.GONE);
+                    }
+
+                    @Override
+                    public void onAnimationCancel(View view) {
+                    }
+                });
+            }
+        }, 500);
     }
 }
