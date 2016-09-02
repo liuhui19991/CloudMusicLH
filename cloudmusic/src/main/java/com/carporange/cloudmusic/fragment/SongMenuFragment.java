@@ -5,15 +5,13 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.view.View;
 
-import com.carporange.cloudmusic.CarpApplication;
 import com.carporange.cloudmusic.R;
 import com.carporange.cloudmusic.ui.activity.BeautfulActivity;
 import com.carporange.cloudmusic.ui.activity.MyRecyclerViewLoadActivity;
-import com.carporange.cloudmusic.ui.activity.RecyclerSwipe;
+import com.carporange.cloudmusic.ui.activity.RecyclerSwipeActivity;
 import com.carporange.cloudmusic.ui.activity.RefreshLoadMoreActivity;
 import com.carporange.cloudmusic.ui.activity.VideoPlayerActivity;
 import com.carporange.cloudmusic.ui.base.BaseFragment;
-import com.carporange.cloudmusic.util.S;
 import com.carporange.cloudmusic.widget.CircleTextProgressbar;
 
 import butterknife.BindView;
@@ -121,7 +119,7 @@ public class SongMenuFragment extends BaseFragment {
 
     @OnClick(R.id.recycleswipe)
     void goRecyclerSwipe() {
-        startActivity(new Intent(mContext, RecyclerSwipe.class));
+        startActivity(new Intent(mContext, RecyclerSwipeActivity.class));
     }
     @Override
     public void onPause() {

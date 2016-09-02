@@ -31,7 +31,7 @@ import butterknife.BindView;
 /**
  * Created by liuhui on 2016/9/1.
  */
-public class RecyclerSwipe extends BaseActivity implements RecyclerTouchListener.RecyclerTouchListenerHelper {
+public class RecyclerSwipeActivity extends BaseActivity implements RecyclerTouchListener.RecyclerTouchListenerHelper {
     RecyclerView mRecyclerView;
     MainAdapter mAdapter;
     String[] dialogItems;
