@@ -79,7 +79,7 @@ public class RecyclerSwipeActivity extends BaseActivity implements RecyclerTouch
                         T.showShort(mContext, "Button in row " + (position + 1) + " clicked!");
                     }
                 })
-                .setLongClickable(true, new RecyclerTouchListener.OnRowLongClickListener() {
+                .setLongClickable(true, new RecyclerTouchListener.OnRowLongClickListener() {//这里的true表示加震动
                     @Override
                     public void onRowLongClicked(int position) {
                         T.showShort(mContext, "Row " + (position + 1) + " long clicked!");
