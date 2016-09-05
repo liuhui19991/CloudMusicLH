@@ -15,6 +15,7 @@
     <string name="tomap">视频</string>
     <string name="tomap1">视频页面</string>
     <string name="swiperecycler">侧滑删除</string>
+    <string name="baidumap">百度地图</string>
     <string name="recyclerload">自己完成的recycler上拉加载下拉刷新</string>
     <string name="popup">PopupWindow</string>
     <string name="jsactivity">JSActivity</string>

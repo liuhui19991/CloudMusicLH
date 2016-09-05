@@ -32,6 +32,12 @@ android {
         baidu {}
         wandoujia {}
     }
+    //百度地图so
+    sourceSets {
+        main {
+            jniLibs.srcDirs = ['libs']
+        }
+    }
 }
 
 dependencies {

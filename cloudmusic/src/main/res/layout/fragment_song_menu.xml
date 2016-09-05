@@ -66,6 +66,11 @@
                 android:id="@+id/recycleswipe"
                 style="@style/textview"
                 android:text="@string/swiperecycler"/>
+
+            <TextView
+                android:id="@+id/baidumap"
+                style="@style/textview"
+                android:text="@string/swiperecycler"/>
         </LinearLayout>
     </FrameLayout>
 </ScrollView>

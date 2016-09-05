@@ -6,6 +6,7 @@ import android.graphics.Color;
 import android.view.View;
 
 import com.carporange.cloudmusic.R;
+import com.carporange.cloudmusic.ui.activity.BaiduMapActivity;
 import com.carporange.cloudmusic.ui.activity.BeautfulActivity;
 import com.carporange.cloudmusic.ui.activity.MyRecyclerViewLoadActivity;
 import com.carporange.cloudmusic.ui.activity.RecyclerSwipeActivity;
@@ -114,13 +115,19 @@ public class SongMenuFragment extends BaseFragment {
 
     @OnClick(R.id.recyclerload)
     void goMyRecyclerViewLoad() {
-        startActivity(new Intent(mContext,MyRecyclerViewLoadActivity.class));
+        startActivity(new Intent(mContext, MyRecyclerViewLoadActivity.class));
     }
 
     @OnClick(R.id.recycleswipe)
     void goRecyclerSwipe() {
         startActivity(new Intent(mContext, RecyclerSwipeActivity.class));
     }
+
+    @OnClick(R.id.baidumap)
+    void goBaiduMap() {
+        startActivity(new Intent(mContext,BaiduMapActivity.class));
+    }
+
     @Override
     public void onPause() {
         super.onPause();
