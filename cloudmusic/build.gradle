@@ -4,6 +4,12 @@ android {
     compileSdkVersion 23
     buildToolsVersion "23.0.3"
 
+//百度地图SO的使用 必须要配置
+    sourceSets {
+        main {
+            jniLibs.srcDirs = ['libs']
+        }
+    }
     defaultConfig {
         applicationId "com.carporange.cloudmusic"
         minSdkVersion 15
@@ -31,12 +37,6 @@ android {
         _360 {}
         baidu {}
         wandoujia {}
-    }
-    //百度地图so
-    sourceSets {
-        main {
-            jniLibs.srcDirs = ['libs']
-        }
     }
 }
 
