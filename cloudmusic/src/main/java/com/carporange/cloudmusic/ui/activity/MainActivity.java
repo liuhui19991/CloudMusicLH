@@ -1,12 +1,16 @@
 package com.carporange.cloudmusic.ui.activity;
 
+import android.Manifest;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Gravity;
@@ -40,6 +44,7 @@ import fm.jiecao.jcvideoplayer_lib.JCVideoPlayer;
  */
 public class MainActivity extends AppCompatActivity implements MenuLeftFragment.OnLeftClickListener {
 
+    private static final int MY_PERMISSIONS_REQUEST_READ_CONTACTS = 99;
     @BindView(R.id.drawer_layout)
     DrawerLayout mDrawerLayout;
     @BindView(R.id.fragment_left)
@@ -131,8 +136,44 @@ public class MainActivity extends AppCompatActivity implements MenuLeftFragment.
      */
     @OnClick(R.id.actionbar_search)
     public void scanMessage() {
+        if (Build.VERSION.SDK_INT >= 23) {
+            if (ContextCompat.checkSelfPermission(this,
+                    Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {//没有权限
+                ActivityCompat.requestPermissions(this,
+                        new String[]{Manifest.permission.CAMERA},
+                        MY_PERMISSIONS_REQUEST_READ_CONTACTS);
+            } else {
+                scannerTwo();
+            }
+        } else {
+            scannerTwo();
+        }
+    }
+
+    private void scannerTwo() {
         Intent intent = new Intent(MainActivity.this, CaptureActivity.class);
         startActivityForResult(intent, REQUEST_CODE);
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode,
+                                           String permissions[], int[] grantResults) {
+        switch (requestCode) {
+            case MY_PERMISSIONS_REQUEST_READ_CONTACTS: {
+                // If request is cancelled, the result arrays are empty.
+                if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    scannerTwo();
+                    // permission was granted, yay! Do the
+                    // contacts-related task you need to do.
+
+                } else {
+
+                    // permission denied, boo! Disable the
+                    // functionality that depends on this permission.
+                }
+                return;
+            }
+        }
     }
 
     @Override

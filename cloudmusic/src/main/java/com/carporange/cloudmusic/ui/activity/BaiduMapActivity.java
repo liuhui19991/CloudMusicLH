@@ -60,21 +60,14 @@ public class BaiduMapActivity extends BaseActivity {
 
     @Override
     public void initViews() {
-//        if (Build.VERSION.SDK_INT >= 23) {
-//            showPressmion();
-//        } else {
-//        }
-            init();
+        if (Build.VERSION.SDK_INT >= 23) {
+            showPressmion();
+        }
+        init();
     }
 
     private void showPressmion() {
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION)
-                != PackageManager.PERMISSION_GRANTED
-                || ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
-                != PackageManager.PERMISSION_GRANTED
-                || ActivityCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE)
-                != PackageManager.PERMISSION_GRANTED
-                || ActivityCompat.checkSelfPermission(this, Manifest.permission.READ_PHONE_STATE)
                 != PackageManager.PERMISSION_GRANTED) {
             // Contacts permissions have not been granted.
             requestContactsPermissions();
@@ -87,16 +80,9 @@ public class BaiduMapActivity extends BaseActivity {
     private void requestContactsPermissions() {
         // BEGIN_INCLUDE(contacts_permission_request)
         if (ActivityCompat.shouldShowRequestPermissionRationale(this,
-                Manifest.permission.ACCESS_COARSE_LOCATION)
-                || ActivityCompat.shouldShowRequestPermissionRationale(this,
-                Manifest.permission.ACCESS_FINE_LOCATION)
-                || ActivityCompat.shouldShowRequestPermissionRationale(this,
-                Manifest.permission.WRITE_EXTERNAL_STORAGE)
-                || ActivityCompat.shouldShowRequestPermissionRationale(this,
-                Manifest.permission.READ_PHONE_STATE)
-                ) {
+                Manifest.permission.ACCESS_COARSE_LOCATION)) {
 
-            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.READ_PHONE_STATE}, BAIDU_READ_PHONE_STATE);
+            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_COARSE_LOCATION}, BAIDU_READ_PHONE_STATE);
         }
         // END_INCLUDE(contacts_permission_request)
     }
