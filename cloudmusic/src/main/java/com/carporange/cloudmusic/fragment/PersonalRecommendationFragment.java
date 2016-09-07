@@ -12,8 +12,9 @@ import android.view.View;
 
 import com.carporange.cloudmusic.R;
 import com.carporange.cloudmusic.adapter.ListRecyclerAdapter;
+import com.carporange.cloudmusic.adapter.MyAdapter;
 import com.carporange.cloudmusic.ui.base.BaseFragment;
-import com.carporange.cloudmusic.util.S;
+import com.carporange.cloudmusic.util.T;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,6 +30,11 @@ public class PersonalRecommendationFragment extends BaseFragment {
     private boolean canCancel = true;
 
     public PersonalRecommendationFragment() {
+    }
+
+    @Override
+    public int getLayoutId() {
+        return R.layout.fragment_personal_recommendation;
     }
 
     @Override
@@ -71,6 +77,12 @@ public class PersonalRecommendationFragment extends BaseFragment {
         ListRecyclerAdapter adapter = new ListRecyclerAdapter(list);
         recyclerView.setAdapter(adapter);
 
+        adapter.setOnItemClickListener(new MyAdapter.ItemClickListener() {
+            @Override
+            public void onItemCclick(View v, int position) {
+                T.showShort(mContext,position+"点击");
+            }
+        });
         setBehaviorCallback();
     }
 
@@ -103,11 +115,5 @@ public class PersonalRecommendationFragment extends BaseFragment {
             mBottomSheetDialog.show();
         }
     }
-
-    @Override
-    public int getLayoutId() {
-        return R.layout.fragment_personal_recommendation;
-    }
-
 
 }

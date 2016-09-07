@@ -36,9 +36,14 @@ import java.util.List;
 public class ListRecyclerAdapter extends Adapter<ListRecyclerAdapter.DefineViewHolder> {
 
     private List<String> list;
+    private MyAdapter.ItemClickListener mListener;
 
     public ListRecyclerAdapter(List<String> list) {
         this.list = list;
+    }
+
+    public void setOnItemClickListener(MyAdapter.ItemClickListener listener) {
+        mListener = listener;
     }
 
     @Override
@@ -47,8 +52,14 @@ public class ListRecyclerAdapter extends Adapter<ListRecyclerAdapter.DefineViewH
     }
 
     @Override
-    public void onBindViewHolder(DefineViewHolder viewHolder, int position) {
+    public void onBindViewHolder(final DefineViewHolder viewHolder, int position) {
         viewHolder.setData(list.get(position));
+        viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mListener.onItemCclick(viewHolder.itemView, viewHolder.getLayoutPosition());
+            }
+        });
     }
 
     @Override
