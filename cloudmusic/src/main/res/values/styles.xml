@@ -81,7 +81,8 @@
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">@dimen/dp_35</item>
         <item name="android:layout_marginTop">@dimen/dp_8</item>
-        <item name="android:background">@drawable/image_selector</item>
+        <!--<item name="android:background">@drawable/image_selector</item>-->
+        <item name="android:background">?selectableItemBackground</item>
         <item name="android:gravity">center</item>
     </style>
 </resources>
