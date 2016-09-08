@@ -1,11 +1,17 @@
 package com.carporange.cloudmusic.ui.activity;
 
+import android.Manifest;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Color;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Handler;
 import android.os.Message;
 import android.support.design.widget.Snackbar;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.Toolbar;
 import android.text.InputType;
@@ -50,6 +56,7 @@ public class LoginActivity extends BaseActivity implements OnClickListener, View
     //屏幕高度
     private int screenHeight = 0;
     private LinearLayout linearLayout;
+    private final int CALL_PHONE = 88;
 
     @Override
     protected int getLayoutId() {
@@ -82,7 +89,7 @@ public class LoginActivity extends BaseActivity implements OnClickListener, View
         username = findView(R.id.login_account);
         //动态设置帐号名可见
         username.setInputType(InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD);
-        password =  findView(R.id.login_pwd);
+        password = findView(R.id.login_pwd);
         passVisiable = findView(R.id.pass_visiable);
         forgetpassword = findView(R.id.login_find_pwd);
         login = findView(R.id.login_submit_btn);
@@ -166,10 +173,51 @@ public class LoginActivity extends BaseActivity implements OnClickListener, View
                 AlertDialog.Builder builder = new AlertDialog.Builder(this);
                 builder.setTitle("您的密码!");
                 builder.setMessage("帐号:" + names + "\n" + "密码:" + passs);
-                builder.setNegativeButton("取消", null);
+                builder.setNegativeButton("电话联系", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        if (Build.VERSION.SDK_INT >= 23) {
+                            if (ContextCompat.checkSelfPermission(mContext,
+                                    Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {//没有权限
+                                ActivityCompat.requestPermissions(mContext,
+                                        new String[]{Manifest.permission.CALL_PHONE},
+                                        CALL_PHONE);
+                            } else {
+                                callPhone();
+                            }
+                        } else {
+                            callPhone();
+                        }
+                    }
+                });
                 builder.setPositiveButton("确定", null);
                 builder.show();
                 break;
+        }
+    }
+
+    private void callPhone() {
+        String number = "1871081";
+        //用intent启动拨打电话
+        Intent intent = new Intent(Intent.ACTION_CALL, Uri.parse("tel:" + number));
+        mContext.startActivity(intent);
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode,
+                                           String permissions[], int[] grantResults) {
+        switch (requestCode) {
+            case CALL_PHONE: {
+                // If request is cancelled, the result arrays are empty.
+                if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    callPhone();
+                } else {
+
+                    // permission denied, boo! Disable the
+                    // functionality that depends on this permission.
+                }
+                return;
+            }
         }
     }
 
@@ -180,7 +228,8 @@ public class LoginActivity extends BaseActivity implements OnClickListener, View
     }
 
     @Override
-    public void onLayoutChange(View v, int left, int top, int right, int bottom, int oldLeft, int oldTop, int oldRight, int oldBottom) {
+    public void onLayoutChange(View v, int left, int top, int right, int bottom, int oldLeft, int oldTop,
+                               int oldRight, int oldBottom) {
         Message msg = Message.obtain();
         if (oldBottom != 0 && bottom != 0 && (oldBottom - bottom > keyHeight)) {
             msg.what = KEYBOARD_SHOW;

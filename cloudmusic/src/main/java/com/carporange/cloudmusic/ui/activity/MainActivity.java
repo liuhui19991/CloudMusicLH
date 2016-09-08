@@ -253,12 +253,13 @@ public class MainActivity extends AppCompatActivity implements MenuLeftFragment.
         if (JCVideoPlayer.backPress()) {
             return;
         }
-        T.showShort(this, "小样你还想退出吗?" + "\n" + "再按一次返回确认退出");
         if (System.currentTimeMillis() - time > 2000) {
             if (mDrawerLayout.isDrawerOpen(GravityCompat.START)) {
                 mDrawerLayout.closeDrawer(GravityCompat.START);
+                return;
             }
             time = System.currentTimeMillis();
+            T.showShort(this, "小样你还想退出吗?" + "\n" + "再按一次返回确认退出");
             Snackbar.make(mTitle, "小样你还想退出吗?", Snackbar.LENGTH_LONG).setAction("click", new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
