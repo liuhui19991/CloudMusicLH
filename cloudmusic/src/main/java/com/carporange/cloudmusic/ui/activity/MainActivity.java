@@ -45,6 +45,7 @@ import fm.jiecao.jcvideoplayer_lib.JCVideoPlayer;
 public class MainActivity extends AppCompatActivity implements MenuLeftFragment.OnLeftClickListener {
 
     private static final int MY_PERMISSIONS_REQUEST_READ_CONTACTS = 99;
+    private static final int BAIDU_READ_PHONE_STATE = 100;
     @BindView(R.id.drawer_layout)
     DrawerLayout mDrawerLayout;
     @BindView(R.id.fragment_left)
@@ -173,6 +174,21 @@ public class MainActivity extends AppCompatActivity implements MenuLeftFragment.
                 }
                 return;
             }
+            case BAIDU_READ_PHONE_STATE: {
+                // If request is cancelled, the result arrays are empty.
+                if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    // 获取到权限，作相应处理（调用定位SDK应当确保相关权限均被授权，否则可能引起定位失败）
+                    startActivity(new Intent(mContext, BaiduMapActivity.class));
+                    // permission was granted, yay! Do the
+                    // contacts-related task you need to do.
+
+                } else {
+
+                    // permission denied, boo! Disable the
+                    // functionality that depends on this permission.
+                }
+                return;
+            }
         }
     }
 
@@ -188,6 +204,9 @@ public class MainActivity extends AppCompatActivity implements MenuLeftFragment.
                 }
                 if (bundle.getInt(CodeUtils.RESULT_TYPE) == CodeUtils.RESULT_SUCCESS) {
                     String result = bundle.getString(CodeUtils.RESULT_STRING);
+                    Intent intent = new Intent(mContext, WebPageActivity.class);
+                    intent.putExtra("url", result);
+                    startActivity(intent);
                     T.showShort(mContext, "解析结果:" + result);
                 } else if (bundle.getInt(CodeUtils.RESULT_TYPE) == CodeUtils.RESULT_FAILED) {
                     T.showShort(mContext, "解析二维码失败");

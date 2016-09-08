@@ -1,8 +1,13 @@
 package com.carporange.cloudmusic.fragment;
 
 
+import android.Manifest;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Color;
+import android.os.Build;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.view.View;
 
 import com.carporange.cloudmusic.R;
@@ -28,6 +33,7 @@ public class SongMenuFragment extends BaseFragment {
     CircleTextProgressbar mCircleProgress;
     @BindView(R.id.circle_progress_opposite)
     CircleTextProgressbar mCircleProgressOpposite;
+    private static final int BAIDU_READ_PHONE_STATE = 100;
 
     public SongMenuFragment() {
     }
@@ -125,7 +131,16 @@ public class SongMenuFragment extends BaseFragment {
 
     @OnClick(R.id.baidumap)
     void goBaiduMap() {
-        startActivity(new Intent(mContext,BaiduMapActivity.class));
+        if (Build.VERSION.SDK_INT >= 23) {
+            if (ContextCompat.checkSelfPermission(mContext,
+                    Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {//没有权限
+                ActivityCompat.requestPermissions(mContext,
+                        new String[]{Manifest.permission.ACCESS_COARSE_LOCATION},
+                        BAIDU_READ_PHONE_STATE);
+            }
+        } else {
+            startActivity(new Intent(mContext, BaiduMapActivity.class));
+        }
     }
 
     @Override

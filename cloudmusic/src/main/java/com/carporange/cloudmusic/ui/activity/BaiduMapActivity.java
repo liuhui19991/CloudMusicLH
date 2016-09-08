@@ -1,11 +1,6 @@
 package com.carporange.cloudmusic.ui.activity;
 
-import android.Manifest;
-import android.content.pm.PackageManager;
-import android.os.Build;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.v4.app.ActivityCompat;
 
 import com.baidu.location.BDLocation;
 import com.baidu.location.BDLocationListener;
@@ -43,7 +38,6 @@ public class BaiduMapActivity extends BaseActivity {
     private LocationClient mLocClient;
     private boolean isFirstLoc = true; // 是否首次定位
     private MyLocationListenner myListener = new MyLocationListenner();
-    private static final int BAIDU_READ_PHONE_STATE = 100;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -60,44 +54,7 @@ public class BaiduMapActivity extends BaseActivity {
 
     @Override
     public void initViews() {
-        if (Build.VERSION.SDK_INT >= 23) {
-            showPressmion();
-        }
         init();
-    }
-
-    private void showPressmion() {
-        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION)
-                != PackageManager.PERMISSION_GRANTED) {
-            // Contacts permissions have not been granted.
-            requestContactsPermissions();
-
-        } else {
-            init();
-        }
-    }
-
-    private void requestContactsPermissions() {
-        // BEGIN_INCLUDE(contacts_permission_request)
-        if (ActivityCompat.shouldShowRequestPermissionRationale(this,
-                Manifest.permission.ACCESS_COARSE_LOCATION)) {
-
-            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_COARSE_LOCATION}, BAIDU_READ_PHONE_STATE);
-        }
-        // END_INCLUDE(contacts_permission_request)
-    }
-
-    @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        switch (requestCode) {
-            // requestCode即所声明的权限获取码，在checkSelfPermission时传入
-            case BAIDU_READ_PHONE_STATE:
-                if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                    // 获取到权限，作相应处理（调用定位SDK应当确保相关权限均被授权，否则可能引起定位失败）
-                    init();
-                }
-        }
     }
 
     private void init() {
