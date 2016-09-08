@@ -11,6 +11,7 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.content.ContextCompat;
+import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Gravity;
@@ -254,6 +255,9 @@ public class MainActivity extends AppCompatActivity implements MenuLeftFragment.
         }
         T.showShort(this, "小样你还想退出吗?" + "\n" + "再按一次返回确认退出");
         if (System.currentTimeMillis() - time > 2000) {
+            if (mDrawerLayout.isDrawerOpen(GravityCompat.START)) {
+                mDrawerLayout.closeDrawer(GravityCompat.START);
+            }
             time = System.currentTimeMillis();
             Snackbar.make(mTitle, "小样你还想退出吗?", Snackbar.LENGTH_LONG).setAction("click", new View.OnClickListener() {
                 @Override
