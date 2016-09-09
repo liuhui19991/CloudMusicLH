@@ -23,6 +23,7 @@ import com.carporange.cloudmusic.ui.base.BaseFragment;
 import com.carporange.cloudmusic.ui.dialog.ProgressDialog;
 import com.carporange.cloudmusic.ui.dialog.WaitDialog;
 import com.carporange.cloudmusic.util.GsonUtil;
+import com.carporange.cloudmusic.util.T;
 import com.carporange.cloudmusic.widget.ViewPagerCycle;
 
 import java.util.List;
@@ -160,7 +161,6 @@ public class AnchorRadioFragment extends BaseFragment {
                 if (window != null) {
                     window.dismiss();//隐藏popupwindow
                 }
-                System.out.println("第一个按钮被点击了");
                 startActivity(new Intent(getActivity(), RefreshLoadMoreActivity.class));
             }
         });
@@ -169,8 +169,7 @@ public class AnchorRadioFragment extends BaseFragment {
 
             @Override
             public void onClick(View v) {
-
-                System.out.println("第二个按钮被点击了");
+                T.showShort(mContext,"点");
             }
         });
         //popWindow消失监听方法

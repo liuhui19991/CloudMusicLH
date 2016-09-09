@@ -141,6 +141,8 @@ public class PersonalRecommendationFragment extends BaseFragment {
      */
     private void showPopupWindow(View v) {
         View view = LayoutInflater.from(getContext()).inflate(R.layout.popwin_view, null);
+        view.findViewById(R.id.text_size_big).setOnClickListener(onclick);
+        view.findViewById(R.id.text_size_small).setOnClickListener(onclick);
         PopupWindow popupWindow = new PopupWindow(view, WindowManager.LayoutParams.WRAP_CONTENT, WindowManager.LayoutParams.WRAP_CONTENT);
         popupWindow.setBackgroundDrawable(new BitmapDrawable());
         view.measure(View.MeasureSpec.UNSPECIFIED, View.MeasureSpec.UNSPECIFIED);//要想下面测量出高度必须添加这句话
@@ -159,4 +161,21 @@ public class PersonalRecommendationFragment extends BaseFragment {
         // 刷新状态
         popupWindow.update();
     }
+
+    View.OnClickListener onclick = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            switch (v.getId()) {
+                case R.id.text_size_big:
+                    T.showShort(mContext,"大字体");
+                    break;
+                case R.id.text_size_small:
+                    T.showShort(mContext,"小字体");
+                    break;
+                default:
+
+                    break;
+            }
+        }
+    };
 }
