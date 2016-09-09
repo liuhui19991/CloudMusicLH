@@ -19,18 +19,44 @@
 
         <Button
             android:id="@+id/btn_bottom_dialog_control"
+            style="?attr/buttonBarButtonStyle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/dp_8"
             android:text="Dialog 显示/隐藏"/>
 
     </LinearLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <Button
+            android:id="@+id/bottom"
+            style="?attr/buttonBarButtonStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"
+            android:text="win"/>
+
+        <Button
+            android:id="@+id/top"
+            style="?attr/buttonBarButtonStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:text="win"/>
+
+    </RelativeLayout>
+
     <com.carporange.cloudmusic.widget.LoadingView
         android:id="@+id/lodingView"
         android:layout_width="60dp"
         android:layout_height="60dp"
-        android:background="@drawable/loading"
-        android:layout_marginTop="76dp"
         android:layout_gravity="center"
+        android:layout_marginTop="76dp"
+        android:background="@drawable/loading"
         />
+
 </FrameLayout>

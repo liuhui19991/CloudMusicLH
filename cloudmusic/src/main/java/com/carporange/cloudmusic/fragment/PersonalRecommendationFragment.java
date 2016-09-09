@@ -2,18 +2,24 @@ package com.carporange.cloudmusic.fragment;
 
 
 import android.app.Dialog;
+import android.graphics.drawable.BitmapDrawable;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomSheetBehavior;
 import android.support.design.widget.BottomSheetDialog;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.WindowManager;
+import android.widget.Button;
+import android.widget.PopupWindow;
 
 import com.carporange.cloudmusic.R;
 import com.carporange.cloudmusic.adapter.ListRecyclerAdapter;
 import com.carporange.cloudmusic.adapter.MyAdapter;
 import com.carporange.cloudmusic.ui.base.BaseFragment;
+import com.carporange.cloudmusic.util.L;
 import com.carporange.cloudmusic.util.T;
 
 import java.util.ArrayList;
@@ -28,6 +34,7 @@ public class PersonalRecommendationFragment extends BaseFragment {
     private BottomSheetDialog mBottomSheetDialog;
     private Dialog mWaitDialog;
     private boolean canCancel = true;
+    private Button top, bottom;
 
     public PersonalRecommendationFragment() {
     }
@@ -57,6 +64,8 @@ public class PersonalRecommendationFragment extends BaseFragment {
     @Override
     protected void initViews() {
         createBottomSheetDialog();
+        top = findView(R.id.top);
+        bottom = findView(R.id.bottom);
 //        initWaitDialog();
     }
 
@@ -80,7 +89,7 @@ public class PersonalRecommendationFragment extends BaseFragment {
         adapter.setOnItemClickListener(new MyAdapter.ItemClickListener() {
             @Override
             public void onItemCclick(View v, int position) {
-                T.showShort(mContext,position+"点击");
+                T.showShort(mContext, position + "点击");
             }
         });
         setBehaviorCallback();
@@ -108,7 +117,7 @@ public class PersonalRecommendationFragment extends BaseFragment {
      * 显示dialog的按钮点击事件
      */
     @OnClick(R.id.btn_bottom_dialog_control)
-    public void dialog() {
+    void dialog() {
         if (mBottomSheetDialog.isShowing()) {
             mBottomSheetDialog.dismiss();
         } else {
@@ -116,4 +125,38 @@ public class PersonalRecommendationFragment extends BaseFragment {
         }
     }
 
+    @OnClick(R.id.top)
+    void top() {
+        showPopupWindow(top);
+    }
+
+    @OnClick(R.id.bottom)
+    void bottom() {
+        showPopupWindow(bottom);
+    }
+
+    /**
+     *让PopupWindow显示在控件上方
+     * @param v  要显示的控件
+     */
+    private void showPopupWindow(View v) {
+        View view = LayoutInflater.from(getContext()).inflate(R.layout.popwin_view, null);
+        PopupWindow popupWindow = new PopupWindow(view, WindowManager.LayoutParams.WRAP_CONTENT, WindowManager.LayoutParams.WRAP_CONTENT);
+        popupWindow.setBackgroundDrawable(new BitmapDrawable());
+        view.measure(View.MeasureSpec.UNSPECIFIED, View.MeasureSpec.UNSPECIFIED);//要想下面测量出高度必须添加这句话
+        int high = view.getMeasuredHeight() + v.getHeight();
+        // 设置popWindow的显示和消失动画
+//        popupWindow.setAnimationStyle(R.style.mypopwindow_anim_style);//默认动画为缩放动画
+        popupWindow.showAsDropDown(v,
+                0,
+                // 保证尺寸是根据屏幕像素密度来的
+                -high);
+
+        // 使其聚集
+        popupWindow.setFocusable(true);
+        // 设置允许在外点击消失
+        popupWindow.setOutsideTouchable(true);
+        // 刷新状态
+        popupWindow.update();
+    }
 }
