@@ -41,7 +41,6 @@ public class GlideUtil {
 
     private static void displayUrlFragment(Fragment fragment, ImageView view, String url, int default_pic) {
         if (fragment == null) {
-            L.e(TAG, "GlideUtil -> displayInFragment -> fragment is null");
             return;
         }
         Glide.with(fragment)
@@ -58,7 +57,6 @@ public class GlideUtil {
     private static void displayUrl(final ImageView view, String url, @DrawableRes int defaultImage) {
         // 不能崩
         if (view == null) {
-            L.e(TAG, "GlideUtil -> display -> imageView is null");
             return;
         }
         Context context = view.getContext();

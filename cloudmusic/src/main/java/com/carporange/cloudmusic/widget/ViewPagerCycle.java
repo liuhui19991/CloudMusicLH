@@ -12,9 +12,7 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.ViewParent;
 import android.view.ViewTreeObserver;
-import android.webkit.WebSettings;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
@@ -22,7 +20,6 @@ import android.widget.RelativeLayout;
 import com.carporange.cloudmusic.R;
 import com.carporange.cloudmusic.domain.ViewBanner;
 import com.carporange.cloudmusic.util.GlideUtil;
-import com.carporange.cloudmusic.util.L;
 
 import java.util.List;
 

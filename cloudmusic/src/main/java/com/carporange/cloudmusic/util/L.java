@@ -1,61 +1,123 @@
 package com.carporange.cloudmusic.util;
 
+import android.text.TextUtils;
 import android.util.Log;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 /**
- * Log统一管理类
- *
- * @author way
+ * Created by liuhui on 2016/6/19.
  */
 public class L {
+    private static boolean sDebug = true;
+    private static String sTag = "lh";
+    private static final int JSON_INDENT = 2;
 
-    private L() {
-        /* cannot be instantiated */
-        throw new UnsupportedOperationException("cannot be instantiated");
+
+    public static void init(boolean debug, String tag) {
+        L.sDebug = debug;
+        L.sTag = tag;
     }
 
-    public static boolean isDebug = true;// 是否需要打印bug，可以在application的onCreate函数里面初始化
-    private static final String TAG = "LHL";
-
-    // 下面四个是默认tag的函数
-    public static void i(String msg) {
-        if (isDebug)
-            Log.i(TAG, msg);
+    public static void e(String msg, Object... params) {
+        e(null, msg, params);
     }
 
-    public static void d(String msg) {
-        if (isDebug)
-            Log.d(TAG, msg);
+    public static void e(String tag, String msg, Object[] params) {
+        if (!sDebug) return;
+        LogText.e(getFinalTag(tag), String.format(msg, params));
     }
 
-    public static void e(String msg) {
-        if (isDebug)
-            Log.e(TAG, msg);
+    public static void json(String json) {
+        json(null, json);
     }
 
-    public static void v(String msg) {
-        if (isDebug)
-            Log.v(TAG, msg);
+    public static void json(String tag, String json) {
+        if (!sDebug) return;
+        LogText.e(getFinalTag(tag), getPrettyJson(json));
     }
 
-    // 下面是传入自定义tag的函数
-    public static void i(String tag, String msg) {
-        if (isDebug)
-            Log.i(tag, msg);
+    private static String getPrettyJson(String jsonStr) {
+        try {
+            jsonStr = jsonStr.trim();
+            if (jsonStr.startsWith("{")) {
+                JSONObject jsonObject = new JSONObject(jsonStr);
+                return jsonObject.toString(JSON_INDENT);
+            }
+            if (jsonStr.startsWith("[")) {
+                JSONArray jsonArray = new JSONArray(jsonStr);
+                return jsonArray.toString(JSON_INDENT);
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return "Invalid Json, Please Check: " + jsonStr;
     }
 
-    public static void d(String tag, String msg) {
-        if (isDebug)
-            Log.i(tag, msg);
+
+    private static String getFinalTag(String tag) {
+        if (!TextUtils.isEmpty(tag)) {
+            return tag;
+        }
+        return sTag;
     }
 
-    public static void e(String tag, String msg) {
-        if (isDebug)
-            Log.i(tag, msg);
+    private static class LogText {
+        private static final String DOUBLE_DIVIDER = "════════════════════════════════════════════\n";
+        private static final String SINGLE_DIVIDER = "────────────────────────────────────────────\n";
+
+        private String mTag;
+
+        public LogText(String tag) {
+            mTag = tag;
+        }
+
+
+        public static void e(String tag, String content) {
+            LogText logText = new LogText(tag);
+            logText.setup(content);
+        }
+
+        public void setup(String content) {
+            setUpHeader();
+            setUpContent(content);
+            setUpFooter();
+
+        }
+
+        private void setUpHeader() {
+            Log.e(mTag, SINGLE_DIVIDER);
+        }
+
+        private void setUpFooter() {
+            Log.e(mTag, DOUBLE_DIVIDER);
+        }
+
+        public void setUpContent(String content) {
+            StackTraceElement targetStackTraceElement = getTargetStackTraceElement();
+            Log.e(mTag, "(" + targetStackTraceElement.getFileName() + ":"
+                    + targetStackTraceElement.getLineNumber() + ")");
+            Log.e(mTag, content);
+        }
+
+        private StackTraceElement getTargetStackTraceElement() {
+            // find the target invoked method
+            StackTraceElement targetStackTrace = null;
+            boolean shouldTrace = false;
+            StackTraceElement[] stackTrace = Thread.currentThread().getStackTrace();
+            for (StackTraceElement stackTraceElement : stackTrace) {
+                boolean isLogMethod = stackTraceElement.getClassName().equals(L.class.getName());
+                if (shouldTrace && !isLogMethod) {
+                    targetStackTrace = stackTraceElement;
+                    break;
+                }
+                shouldTrace = isLogMethod;
+            }
+            return targetStackTrace;
+        }
     }
 
-    public static void v(String tag, String msg) {
-        if (isDebug)
-            Log.i(tag, msg);
-    }
+
 }

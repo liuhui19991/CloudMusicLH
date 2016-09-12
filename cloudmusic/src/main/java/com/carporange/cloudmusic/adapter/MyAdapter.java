@@ -10,13 +10,9 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.carporange.cloudmusic.R;
-import com.carporange.cloudmusic.util.L;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import butterknife.BindView;
-import butterknife.ButterKnife;
 
 /**
  * Created by liuhui on 2016/7/21.
