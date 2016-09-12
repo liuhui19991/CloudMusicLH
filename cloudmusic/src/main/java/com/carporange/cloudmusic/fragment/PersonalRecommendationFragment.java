@@ -139,7 +139,7 @@ public class PersonalRecommendationFragment extends BaseFragment {
      * @param v  要显示的控件
      */
     private void showPopupWindow(View v) {
-        L.e("hello, %s","world");//这样才能换行
+        L.e("hello, %s","world");//, %s这样才能换行
         View view = LayoutInflater.from(getContext()).inflate(R.layout.popwin_view, null);
         view.findViewById(R.id.text_size_big).setOnClickListener(onclick);
         view.findViewById(R.id.text_size_small).setOnClickListener(onclick);

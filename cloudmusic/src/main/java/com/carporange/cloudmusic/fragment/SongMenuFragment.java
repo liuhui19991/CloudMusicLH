@@ -3,11 +3,8 @@ package com.carporange.cloudmusic.fragment;
 
 import android.Manifest;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.graphics.Color;
-import android.os.Build;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.content.ContextCompat;
+import android.support.annotation.NonNull;
 import android.view.View;
 
 import com.carporange.cloudmusic.R;
@@ -18,7 +15,12 @@ import com.carporange.cloudmusic.ui.activity.RecyclerSwipeActivity;
 import com.carporange.cloudmusic.ui.activity.RefreshLoadMoreActivity;
 import com.carporange.cloudmusic.ui.activity.VideoPlayerActivity;
 import com.carporange.cloudmusic.ui.base.BaseFragment;
+import com.carporange.cloudmusic.util.L;
+import com.carporange.cloudmusic.util.T;
 import com.carporange.cloudmusic.widget.CircleTextProgressbar;
+import com.yanzhenjie.permission.AndPermission;
+import com.yanzhenjie.permission.PermissionNo;
+import com.yanzhenjie.permission.PermissionYes;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -131,7 +133,7 @@ public class SongMenuFragment extends BaseFragment {
 
     @OnClick(R.id.baidumap)
     void goBaiduMap() {
-        if (Build.VERSION.SDK_INT >= 23) {
+        /*if (Build.VERSION.SDK_INT >= 23) {
             if (ContextCompat.checkSelfPermission(mContext,
                     Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {//没有权限
                 ActivityCompat.requestPermissions(mContext,
@@ -140,7 +142,29 @@ public class SongMenuFragment extends BaseFragment {
             }
         } else {
             startActivity(new Intent(mContext, BaiduMapActivity.class));
-        }
+        }*/
+        AndPermission.with(this)
+                .requestCode(99)
+                .permission(Manifest.permission.ACCESS_COARSE_LOCATION)
+                .send();
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        // 这个Fragment所在的Activity的onRequestPermissionsResult()如果重写了，不能删除super.onRes...
+        super.onRequestPermissionsResult(requestCode,permissions,grantResults);
+        AndPermission.onRequestPermissionsResult(this, requestCode, permissions, grantResults);
+    }
+
+    @PermissionYes(99)
+    private void getLocationYes() {
+        L.e("获取定位权限");
+        startActivity(new Intent(mContext, BaiduMapActivity.class));
+    }
+
+    @PermissionNo(99)
+    private void getLocationNo() {
+        L.e("没有获取到定位权限");
     }
 
     @Override

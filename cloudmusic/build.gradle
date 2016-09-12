@@ -67,6 +67,7 @@ dependencies {
 //    compile 'com.hannesdorfmann:swipeback:1.0.4'//滑动关闭侧面有黑条
     compile 'me.majiajie:swipe-back:1.0.0-alpha2'
     compile 'com.yanzhenjie:recyclerview-swipe:1.0.2'//侧滑删除
+    compile 'com.yanzhenjie:permission:1.0.0'
     compile 'com.nikhilpanju.recyclerviewenhanced:recyclerviewenhanced:1.1.0'//侧滑删除
     /*   //If you can not start app, you cancel the annotation
        //如果app无法启动,请取消下面的注释

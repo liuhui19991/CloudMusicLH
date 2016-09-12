@@ -1,18 +1,17 @@
 package com.carporange.cloudmusic.ui.activity;
 
 import android.Manifest;
+import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
-import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
-import android.support.v4.content.ContextCompat;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Gravity;
 import android.view.View;
@@ -25,11 +24,17 @@ import com.carporange.cloudmusic.event.TitleEvent;
 import com.carporange.cloudmusic.fragment.MainFragment;
 import com.carporange.cloudmusic.fragment.MenuLeftFragment;
 import com.carporange.cloudmusic.util.DensityUtil;
+import com.carporange.cloudmusic.util.L;
 import com.carporange.cloudmusic.util.S;
 import com.carporange.cloudmusic.util.SpUtil;
 import com.carporange.cloudmusic.util.T;
 import com.uuzuche.lib_zxing.activity.CaptureActivity;
 import com.uuzuche.lib_zxing.activity.CodeUtils;
+import com.yanzhenjie.permission.AndPermission;
+import com.yanzhenjie.permission.PermissionNo;
+import com.yanzhenjie.permission.PermissionYes;
+import com.yanzhenjie.permission.Rationale;
+import com.yanzhenjie.permission.RationaleListener;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -138,7 +143,8 @@ public class MainActivity extends AppCompatActivity implements MenuLeftFragment.
      */
     @OnClick(R.id.actionbar_search)
     public void scanMessage() {
-        if (Build.VERSION.SDK_INT >= 23) {
+        requestLocationPermission();
+        /*if (Build.VERSION.SDK_INT >= 23) {
             if (ContextCompat.checkSelfPermission(this,
                     Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {//没有权限
                 ActivityCompat.requestPermissions(this,
@@ -149,18 +155,63 @@ public class MainActivity extends AppCompatActivity implements MenuLeftFragment.
             }
         } else {
             scannerTwo();
-        }
+        }*/
     }
+
+    private void requestLocationPermission() {
+        AndPermission.with(this)
+                .requestCode(100)
+                .permission(Manifest.permission.CAMERA)
+                .rationale(rationaleListener)
+                .send();
+    }
+
+    private RationaleListener rationaleListener = new RationaleListener() {
+        @Override
+        public void showRequestPermissionRationale(int requestCode, final Rationale rationale) {
+            new AlertDialog.Builder(mContext)
+                    .setTitle("友好提醒")
+                    .setMessage("您已拒绝过相机权限，没有相机权限无法为您拍照，请把拍照权限赐给我吧！")
+                    .setPositiveButton("好，给你", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.cancel();
+                            rationale.resume();
+                        }
+                    })
+                    .setNegativeButton("我拒绝", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.cancel();
+                            rationale.cancel();
+                        }
+                    }).show();
+        }
+    };
 
     private void scannerTwo() {
         Intent intent = new Intent(MainActivity.this, CaptureActivity.class);
         startActivityForResult(intent, REQUEST_CODE);
     }
 
+    @PermissionYes(100)
+    private void getCameraYes() {
+        scannerTwo();
+        L.e("获取到相机权限");
+    }
+
+    @PermissionNo(100)
+    private void getCameraNo() {
+        L.e("没有获取到相机权限");
+    }
+
     @Override
     public void onRequestPermissionsResult(int requestCode,
                                            String permissions[], int[] grantResults) {
-        switch (requestCode) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);//如果这个Activity中没有Fragment，这句话可以注释。
+        AndPermission.onRequestPermissionsResult(this, requestCode, permissions, grantResults);
+
+       /* switch (requestCode) {
             case MY_PERMISSIONS_REQUEST_READ_CONTACTS: {
                 // If request is cancelled, the result arrays are empty.
                 if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
@@ -190,7 +241,7 @@ public class MainActivity extends AppCompatActivity implements MenuLeftFragment.
                 }
                 return;
             }
-        }
+        }*/
     }
 
     @Override
