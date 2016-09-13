@@ -61,6 +61,7 @@
         <activity android:name=".ui.activity.MyRecyclerViewLoadActivity"/>
         <activity android:name=".ui.activity.RecyclerSwipeActivity"/>
         <activity android:name=".ui.activity.BaiduMapActivity"/>
+        <activity android:name=".ui.activity.UniversalActivity"/>
 
         <service android:name="com.baidu.location.f" android:enabled="true" android:process=":remote"/>
     </application>

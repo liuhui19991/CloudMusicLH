@@ -19,6 +19,7 @@
     <string name="recyclerload">自己完成的recycler上拉加载下拉刷新</string>
     <string name="popup">PopupWindow</string>
     <string name="jsactivity">JSActivity</string>
+    <string name="universaladapter">万能Adapter</string>
     <string name="login">登 录</string>
     <string name="username">liuhui</string>
     <string name="password">liuhui</string>

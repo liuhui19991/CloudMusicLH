@@ -2,6 +2,7 @@ package com.carporange.cloudmusic.fragment;
 
 
 import android.app.Dialog;
+import android.content.Intent;
 import android.graphics.drawable.BitmapDrawable;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomSheetBehavior;
@@ -17,6 +18,7 @@ import android.widget.PopupWindow;
 import com.carporange.cloudmusic.R;
 import com.carporange.cloudmusic.adapter.ListRecyclerAdapter;
 import com.carporange.cloudmusic.adapter.MyAdapter;
+import com.carporange.cloudmusic.ui.activity.UniversalActivity;
 import com.carporange.cloudmusic.ui.base.BaseFragment;
 import com.carporange.cloudmusic.util.L;
 import com.carporange.cloudmusic.util.T;
@@ -134,12 +136,18 @@ public class PersonalRecommendationFragment extends BaseFragment {
         showPopupWindow(bottom);
     }
 
+    @OnClick(R.id.universaladapter)
+    void universalAdapter() {
+        startActivity(new Intent(mContext, UniversalActivity.class));
+    }
+
     /**
-     *让PopupWindow显示在控件上方
-     * @param v  要显示的控件
+     * 让PopupWindow显示在控件上方
+     *
+     * @param v 要显示的控件
      */
     private void showPopupWindow(View v) {
-        L.e("hello, %s","world");//, %s这样才能换行
+        L.e("hello, %s", "world");//, %s这样才能换行
         View view = LayoutInflater.from(getContext()).inflate(R.layout.popwin_view, null);
         view.findViewById(R.id.text_size_big).setOnClickListener(onclick);
         view.findViewById(R.id.text_size_small).setOnClickListener(onclick);
@@ -167,10 +175,10 @@ public class PersonalRecommendationFragment extends BaseFragment {
         public void onClick(View v) {
             switch (v.getId()) {
                 case R.id.text_size_big:
-                    T.showShort(mContext,"大字体");
+                    T.showShort(mContext, "大字体");
                     break;
                 case R.id.text_size_small:
-                    T.showShort(mContext,"小字体");
+                    T.showShort(mContext, "小字体");
                     break;
                 default:
 
