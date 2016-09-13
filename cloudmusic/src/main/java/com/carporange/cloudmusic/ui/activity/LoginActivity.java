@@ -28,6 +28,9 @@ import android.widget.ScrollView;
 import com.carporange.cloudmusic.R;
 import com.carporange.cloudmusic.ui.base.BaseActivity;
 import com.carporange.cloudmusic.util.SpUtil;
+import com.yanzhenjie.permission.AndPermission;
+import com.yanzhenjie.permission.PermissionNo;
+import com.yanzhenjie.permission.PermissionYes;
 
 /**
  * Created by liuhui on 2016/6/15.
@@ -82,7 +85,7 @@ public class LoginActivity extends BaseActivity implements OnClickListener, View
         //获取屏幕高度
         screenHeight = this.getWindowManager().getDefaultDisplay().getHeight();
         //阀值设置为屏幕高度的1/3
-        keyHeight = screenHeight / 4;
+        keyHeight = screenHeight / 3;
         mScrollView = findView(R.id.login_scrollview);
         mForgetLayout = findView(R.id.forget_linear);
         linearLayout = findView(R.id.root_layout);
@@ -176,18 +179,10 @@ public class LoginActivity extends BaseActivity implements OnClickListener, View
                 builder.setNegativeButton("电话联系", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        if (Build.VERSION.SDK_INT >= 23) {
-                            if (ContextCompat.checkSelfPermission(mContext,
-                                    Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {//没有权限
-                                ActivityCompat.requestPermissions(mContext,
-                                        new String[]{Manifest.permission.CALL_PHONE},
-                                        CALL_PHONE);
-                            } else {
-                                callPhone();
-                            }
-                        } else {
-                            callPhone();
-                        }
+                        AndPermission.with(mContext)
+                                .requestCode(98)
+                                .permission(Manifest.permission.CAMERA)
+                                .send();
                     }
                 });
                 builder.setPositiveButton("确定", null);
@@ -200,25 +195,22 @@ public class LoginActivity extends BaseActivity implements OnClickListener, View
         String number = "1871081";
         //用intent启动拨打电话
         Intent intent = new Intent(Intent.ACTION_CALL, Uri.parse("tel:" + number));
-        mContext.startActivity(intent);
+        startActivity(intent);
     }
 
+    @PermissionYes(98)
+    private void getCallPhoneYes() {
+        callPhone();
+    }
+
+    @PermissionNo(98)
+    private void getCallPhoneNo() {
+
+    }
     @Override
     public void onRequestPermissionsResult(int requestCode,
                                            String permissions[], int[] grantResults) {
-        switch (requestCode) {
-            case CALL_PHONE: {
-                // If request is cancelled, the result arrays are empty.
-                if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                    callPhone();
-                } else {
-
-                    // permission denied, boo! Disable the
-                    // functionality that depends on this permission.
-                }
-                return;
-            }
-        }
+        AndPermission.onRequestPermissionsResult(this, requestCode, permissions, grantResults);
     }
 
     @Override
