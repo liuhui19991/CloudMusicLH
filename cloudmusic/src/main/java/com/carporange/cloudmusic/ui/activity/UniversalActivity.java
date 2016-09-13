@@ -14,6 +14,7 @@ import com.carporange.cloudmusic.R;
 import com.carporange.cloudmusic.adapter.DividerItemDecoration;
 import com.carporange.cloudmusic.ui.base.BaseActivity;
 import com.carporange.cloudmusic.util.AnimatorUtil;
+import com.carporange.cloudmusic.util.T;
 import com.zhy.adapter.recyclerview.CommonAdapter;
 import com.zhy.adapter.recyclerview.base.ViewHolder;
 import com.zhy.adapter.recyclerview.wrapper.HeaderAndFooterWrapper;
@@ -60,7 +61,7 @@ public class UniversalActivity extends BaseActivity {
         mLinearLayoutManager = new LinearLayoutManager(mContext);
         mRecyclerView.setLayoutManager(mLinearLayoutManager);
         mRecyclerView.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.VERTICAL_LIST));//设置分割线
-        for (int i = 'A'; i <= 'z'; i++) {
+        for (int i = 'A'; i <= 'ｚ'; i++) {
             mDatas.add((char) i + "");
         }
         mAdapter = new CommonAdapter<String>(this, R.layout.item, mDatas) {
@@ -73,6 +74,11 @@ public class UniversalActivity extends BaseActivity {
 
         mLoadMoreWrapper = new LoadMoreWrapper(mHeaderAndFooterWrapper);
         mLoadMoreWrapper.setLoadMoreView(R.layout.loadmore_footer);
+        mRecyclerView.setAdapter(mLoadMoreWrapper);
+        initListener();
+    }
+
+    private void initListener() {
         mLoadMoreWrapper.setOnLoadMoreListener(new LoadMoreWrapper.OnLoadMoreListener() {
             @Override
             public void onLoadMoreRequested() {
@@ -80,7 +86,7 @@ public class UniversalActivity extends BaseActivity {
                     @Override
                     public void run() {
                         for (int i = 0; i < 10; i++) {
-                            mDatas.add("Add:" + i);
+                            mDatas.add("Add:" + mDatas.size() + i);
                         }
                         mLoadMoreWrapper.notifyDataSetChanged();
 
@@ -89,7 +95,6 @@ public class UniversalActivity extends BaseActivity {
             }
         });
 
-        mRecyclerView.setAdapter(mLoadMoreWrapper);
         mAdapter.setOnItemClickListener(new CommonAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(View view, RecyclerView.ViewHolder holder, int position) {
@@ -100,6 +105,15 @@ public class UniversalActivity extends BaseActivity {
             public boolean onItemLongClick(View view, RecyclerView.ViewHolder holder, int position) {
                 Toast.makeText(mContext, "=" + position, Toast.LENGTH_SHORT).show();
                 return false;
+            }
+        });
+
+        FAB.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                T.showShort(mContext, "回到顶部");
+                mLinearLayoutManager.scrollToPosition(0);
+                hideFAB();
             }
         });
     }
