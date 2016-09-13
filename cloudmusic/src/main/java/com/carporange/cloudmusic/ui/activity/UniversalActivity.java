@@ -40,7 +40,7 @@ public class UniversalActivity extends BaseActivity {
     private List<String> mDatas = new ArrayList<>();
     private HeaderAndFooterWrapper mHeaderAndFooterWrapper;
     private LoadMoreWrapper mLoadMoreWrapper;
-    private int refreshTime;
+    private int refreshTime, times;
 
     @Override
     protected int getLayoutId() {
@@ -60,14 +60,14 @@ public class UniversalActivity extends BaseActivity {
 
         mLinearLayoutManager = new LinearLayoutManager(mContext);
         mRecyclerView.setLayoutManager(mLinearLayoutManager);
-        mRecyclerView.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.VERTICAL_LIST));//设置分割线
-        for (int i = 'A'; i <= 'ｚ'; i++) {
+//        mRecyclerView.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.VERTICAL_LIST));//设置分割线
+        for (int i = 'A'; i <= 'z'; i++) {
             mDatas.add((char) i + "");
         }
-        mAdapter = new CommonAdapter<String>(this, R.layout.item, mDatas) {
+        mAdapter = new CommonAdapter<String>(this, R.layout.item_more, mDatas) {
             @Override
             protected void convert(ViewHolder holder, String s, int position) {
-                holder.setText(R.id.tv_title, s + " : " + holder.getAdapterPosition() + " , " + holder.getLayoutPosition());
+                holder.setText(R.id.text, s + " : " + holder.getAdapterPosition() + " , " + holder.getLayoutPosition());
             }
         };
         initHeaderAndFooter();
@@ -82,16 +82,19 @@ public class UniversalActivity extends BaseActivity {
         mLoadMoreWrapper.setOnLoadMoreListener(new LoadMoreWrapper.OnLoadMoreListener() {
             @Override
             public void onLoadMoreRequested() {
-                new Handler().postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        for (int i = 0; i < 10; i++) {
-                            mDatas.add("Add:" + mDatas.size() + i);
+                if (times++ < 2) {
+                    new Handler().postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            for (int i = 0; i < 10; i++) {
+                                mDatas.add("Add:" + mDatas.size() + "times" + times);
+                            }
+                            mLoadMoreWrapper.notifyDataSetChanged();
                         }
-                        mLoadMoreWrapper.notifyDataSetChanged();
-
-                    }
-                }, 3000);
+                    }, 2000);
+                } else {
+                    T.showShort(mContext, "隐藏脚布局");
+                }
             }
         });
 
