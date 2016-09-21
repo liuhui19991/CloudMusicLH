@@ -1,14 +1,10 @@
 package com.carporange.cloudmusic.fragment;
 
-import android.os.Bundle;
 import android.os.Handler;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 
 import com.carporange.cloudmusic.R;
 import com.carporange.cloudmusic.ui.base.BaseFragment;
-import com.carporange.cloudmusic.util.L;
 import com.carporange.cloudmusic.widget.WinLoading;
 
 import butterknife.BindView;
@@ -21,6 +17,7 @@ public class MusicFragment extends BaseFragment {
     WinLoading mWinLoading;
 
     public MusicFragment() {
+
     }
 
 

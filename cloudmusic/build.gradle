@@ -54,7 +54,7 @@ dependencies {
     compile 'com.github.bumptech.glide:glide:3.7.0'
     compile 'com.jcodecraeer:xrecyclerview:1.2.7'
     compile 'com.yolanda.nohttp:nohttp:1.0.5'
-    compile 'fm.jiecao:jiecaovideoplayer:4.6'//视频播放
+    compile 'fm.jiecao:jiecaovideoplayer:4.6'
     compile 'com.google.code.gson:gson:2.5'
     //二维码
     compile 'cn.yipianfengye.android:zxing-library:1.2'
@@ -69,7 +69,7 @@ dependencies {
     compile 'com.yanzhenjie:recyclerview-swipe:1.0.2'//侧滑删除
     compile 'com.yanzhenjie:permission:1.0.0'
     compile 'com.nikhilpanju.recyclerviewenhanced:recyclerviewenhanced:1.1.0'//侧滑删除
-    compile 'com.zhy:base-rvadapter:3.0.3'//万能adapter
+    compile 'com.zhy:base-rvadapter:3.0.3'
     /*   //If you can not start app, you cancel the annotation
        //如果app无法启动,请取消下面的注释
        //Other ABIs: optional
