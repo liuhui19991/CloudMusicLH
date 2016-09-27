@@ -8,6 +8,7 @@ import android.support.annotation.NonNull;
 import android.view.View;
 
 import com.carporange.cloudmusic.R;
+import com.carporange.cloudmusic.event.ProgressVideoPlayer;
 import com.carporange.cloudmusic.ui.activity.BaiduMapActivity;
 import com.carporange.cloudmusic.ui.activity.BeautfulActivity;
 import com.carporange.cloudmusic.ui.activity.MyRecyclerViewLoadActivity;
@@ -35,7 +36,6 @@ public class SongMenuFragment extends BaseFragment {
     CircleTextProgressbar mCircleProgress;
     @BindView(R.id.circle_progress_opposite)
     CircleTextProgressbar mCircleProgressOpposite;
-    private static final int BAIDU_READ_PHONE_STATE = 100;
 
     public SongMenuFragment() {
     }
@@ -101,7 +101,7 @@ public class SongMenuFragment extends BaseFragment {
 
     @OnClick(R.id.tomap)
     void toMap() {
-        JCVideoPlayerStandard.startFullscreen(getActivity(), JCVideoPlayerStandard.class,
+        JCVideoPlayerStandard.startFullscreen(getActivity(), ProgressVideoPlayer.class,
                 "http://2449.vod.myqcloud.com/2449_22ca37a6ea9011e5acaaf51d105342e3.f20.mp4", "摇滚");
     }
 
