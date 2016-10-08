@@ -43,12 +43,12 @@ public class ProgressVideoPlayer extends JCVideoPlayerStandard {
     public void onPrepared() {
         super.onPrepared();
         String oldPosition = SpUtil.getString(mPosition, 0 + "");
+        L.e("页面可见" + oldPosition);
         onEvent(JCBuriedPoint.ON_TOUCH_SCREEN_SEEK_POSITION);
         JCMediaManager.instance().mediaPlayer.seekTo(Integer.parseInt(oldPosition));
         int duration = getDuration();
         int progress = Integer.parseInt(oldPosition) * 100 / (duration == 0 ? 1 : duration);
         progressBar.setProgress(progress);
-        L.e("页面可见" + oldPosition);
     }
 
     @Override
