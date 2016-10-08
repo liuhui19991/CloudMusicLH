@@ -2,7 +2,6 @@ package com.carporange.cloudmusic.event;
 
 import android.content.Context;
 import android.graphics.SurfaceTexture;
-import android.os.Handler;
 import android.util.AttributeSet;
 
 import com.carporange.cloudmusic.util.L;
@@ -37,6 +36,7 @@ public class ProgressVideoPlayer extends JCVideoPlayerStandard {
     @Override
     public void onSurfaceTextureAvailable(SurfaceTexture surface, int width, int height) {
         fullscreenButton.setVisibility(GONE);//隐藏全屏切换按钮
+        super.onSurfaceTextureAvailable(surface, width, height);
     }
 
     @Override
