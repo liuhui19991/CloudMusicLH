@@ -1,35 +1,19 @@
+/*
 package com.carporange.cloudmusic.ui.activity;
 
 import android.os.Bundle;
 
-import com.baidu.location.BDLocation;
-import com.baidu.location.BDLocationListener;
-import com.baidu.location.LocationClient;
-import com.baidu.location.LocationClientOption;
-import com.baidu.mapapi.SDKInitializer;
-import com.baidu.mapapi.map.BaiduMap;
-import com.baidu.mapapi.map.BitmapDescriptor;
-import com.baidu.mapapi.map.BitmapDescriptorFactory;
-import com.baidu.mapapi.map.MapStatus;
-import com.baidu.mapapi.map.MapStatusUpdateFactory;
-import com.baidu.mapapi.map.MapView;
-import com.baidu.mapapi.map.Marker;
-import com.baidu.mapapi.map.MarkerOptions;
-import com.baidu.mapapi.map.MyLocationConfiguration;
-import com.baidu.mapapi.map.MyLocationData;
-import com.baidu.mapapi.map.OverlayOptions;
-import com.baidu.mapapi.map.PolygonOptions;
-import com.baidu.mapapi.map.Stroke;
-import com.baidu.mapapi.model.LatLng;
 import com.carporange.cloudmusic.R;
 import com.carporange.cloudmusic.ui.base.BaseActivity;
 
 import java.util.ArrayList;
 import java.util.List;
 
+*/
 /**
  * Created by liuhui on 2016/9/5.
- */
+ *//*
+
 public class BaiduMapActivity extends BaseActivity {
     //获取地图控件引用
     private MapView mMapView;
@@ -82,9 +66,11 @@ public class BaiduMapActivity extends BaseActivity {
         loadpicture();
     }
 
-    /**
+    */
+/**
      * 路线图
-     */
+     *//*
+
     private void loadpicture() {
         //定义多边形的五个顶点
         LatLng pt1 = new LatLng(39.93923, 116.357428);
@@ -107,9 +93,11 @@ public class BaiduMapActivity extends BaseActivity {
         mBaiduMap.addOverlay(polygonOption);
     }
 
-    /**
+    */
+/**
      * 定位
-     */
+     *//*
+
     private void location() {
         // 开启定位图层
         mBaiduMap.setMyLocationEnabled(true);
@@ -148,9 +136,11 @@ public class BaiduMapActivity extends BaseActivity {
         super.onPause();
     }
 
-    /**
+    */
+/**
      * 定位SDK监听函数
-     */
+     *//*
+
     public class MyLocationListenner implements BDLocationListener {
 
         @Override
@@ -180,3 +170,4 @@ public class BaiduMapActivity extends BaseActivity {
     }
 }
 
+*/

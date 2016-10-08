@@ -9,7 +9,6 @@ import android.view.View;
 
 import com.carporange.cloudmusic.R;
 import com.carporange.cloudmusic.event.ProgressVideoPlayer;
-import com.carporange.cloudmusic.ui.activity.BaiduMapActivity;
 import com.carporange.cloudmusic.ui.activity.BeautfulActivity;
 import com.carporange.cloudmusic.ui.activity.MyRecyclerViewLoadActivity;
 import com.carporange.cloudmusic.ui.activity.RecyclerSwipeActivity;
@@ -17,7 +16,6 @@ import com.carporange.cloudmusic.ui.activity.RefreshLoadMoreActivity;
 import com.carporange.cloudmusic.ui.activity.VideoPlayerActivity;
 import com.carporange.cloudmusic.ui.base.BaseFragment;
 import com.carporange.cloudmusic.util.L;
-import com.carporange.cloudmusic.util.T;
 import com.carporange.cloudmusic.widget.CircleTextProgressbar;
 import com.yanzhenjie.permission.AndPermission;
 import com.yanzhenjie.permission.PermissionNo;
@@ -159,7 +157,7 @@ public class SongMenuFragment extends BaseFragment {
     @PermissionYes(99)
     private void getLocationYes() {
         L.e("获取定位权限");
-        startActivity(new Intent(mContext, BaiduMapActivity.class));
+//        startActivity(new Intent(mContext, BaiduMapActivity.class));
     }
 
     @PermissionNo(99)

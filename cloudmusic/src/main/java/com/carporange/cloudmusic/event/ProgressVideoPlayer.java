@@ -2,6 +2,7 @@ package com.carporange.cloudmusic.event;
 
 import android.content.Context;
 import android.graphics.SurfaceTexture;
+import android.os.Handler;
 import android.util.AttributeSet;
 
 import com.carporange.cloudmusic.util.L;
@@ -24,7 +25,6 @@ public class ProgressVideoPlayer extends JCVideoPlayerStandard {
 
     public ProgressVideoPlayer(Context context, AttributeSet attrs) {
         super(context, attrs);
-        setTextAndProgress(5000);
     }
 
     @Override
@@ -36,30 +36,19 @@ public class ProgressVideoPlayer extends JCVideoPlayerStandard {
 
     @Override
     public void onSurfaceTextureAvailable(SurfaceTexture surface, int width, int height) {
-        String oldPosition = SpUtil.getString(mPosition, 0 + "");
-//        setTextAndProgress(Integer.parseInt(oldPosition));
-//        JCMediaManager.instance().mediaPlayer.seekTo(Integer.parseInt(oldPosition));
-//        bottomProgressBar.setProgress(Integer.parseInt(oldPosition));
+        fullscreenButton.setVisibility(GONE);//隐藏全屏切换按钮
+    }
 
-        L.e("页面可见" + oldPosition);
+    @Override
+    public void onPrepared() {
+        super.onPrepared();
+        String oldPosition = SpUtil.getString(mPosition, 0 + "");
         onEvent(JCBuriedPoint.ON_TOUCH_SCREEN_SEEK_POSITION);
         JCMediaManager.instance().mediaPlayer.seekTo(Integer.parseInt(oldPosition));
         int duration = getDuration();
         int progress = Integer.parseInt(oldPosition) * 100 / (duration == 0 ? 1 : duration);
         progressBar.setProgress(progress);
-        super.onSurfaceTextureAvailable(surface, width, height);
-        JCMediaManager.instance().mediaPlayer.seekTo(Integer.parseInt(oldPosition));
-    }
-
-    @Override
-    protected void showProgressDialog(float deltaX, String seekTime, int seekTimePosition, String totalTime, int totalTimeDuration) {
-        super.showProgressDialog(deltaX, seekTime, seekTimePosition, totalTime, totalTimeDuration);
-    }
-
-    @Override
-    public void onSurfaceTextureSizeChanged(SurfaceTexture surface, int width, int height) {
-        L.e("页面改变" + getCurrentPositionWhenPlaying());
-        super.onSurfaceTextureSizeChanged(surface, width, height);
+        L.e("页面可见" + oldPosition);
     }
 
     @Override
