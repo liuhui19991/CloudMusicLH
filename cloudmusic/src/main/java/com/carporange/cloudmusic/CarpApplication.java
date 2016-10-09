@@ -1,7 +1,6 @@
 package com.carporange.cloudmusic;
 
 import android.app.Application;
-import android.content.SharedPreferences;
 
 import com.yolanda.nohttp.Logger;
 import com.yolanda.nohttp.NoHttp;
@@ -15,9 +14,12 @@ import me.majiajie.swipeback.utils.ActivityStack;
  */
 public class CarpApplication extends Application {
     private static CarpApplication application;
+
     public static CarpApplication getInstance() {
         return application;
     }
+
+    public int mCount = 1;//此处是为了验证全局变量
 
     @Override
     public void onCreate() {
