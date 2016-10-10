@@ -28,6 +28,7 @@ import com.carporange.cloudmusic.util.L;
 import com.carporange.cloudmusic.util.S;
 import com.carporange.cloudmusic.util.SpUtil;
 import com.carporange.cloudmusic.util.T;
+import com.nineoldandroids.view.ViewHelper;
 import com.uuzuche.lib_zxing.activity.CaptureActivity;
 import com.uuzuche.lib_zxing.activity.CodeUtils;
 import com.yanzhenjie.permission.AndPermission;
@@ -48,7 +49,7 @@ import fm.jiecao.jcvideoplayer_lib.JCVideoPlayer;
 /**
  * Created by liuhui on 2016/6/27.
  */
-public class MainActivity extends AppCompatActivity implements MenuLeftFragment.OnLeftClickListener {
+public class MainActivity extends AppCompatActivity implements MenuLeftFragment.OnLeftClickListener ,DrawerLayout.DrawerListener{
 
     private static final int MY_PERMISSIONS_REQUEST_READ_CONTACTS = 99;
     private static final int BAIDU_READ_PHONE_STATE = 100;
@@ -72,6 +73,7 @@ public class MainActivity extends AppCompatActivity implements MenuLeftFragment.
         mContext = this;
         initWindow();
         initViews();
+        mDrawerLayout.addDrawerListener(this);
     }
 
     /**
@@ -320,5 +322,27 @@ public class MainActivity extends AppCompatActivity implements MenuLeftFragment.
         } else {
             finish();
         }
+    }
+
+    @Override
+    public void onDrawerSlide(View drawerView, float slideOffset) {
+        View mContent = mDrawerLayout.getChildAt(0);
+        View mMenu = drawerView;
+        ViewHelper.setTranslationX(mContent,mMenu.getMeasuredWidth()*slideOffset);//此处引用nineoldandroids库来完成动画
+    }
+
+    @Override
+    public void onDrawerOpened(View drawerView) {
+
+    }
+
+    @Override
+    public void onDrawerClosed(View drawerView) {
+
+    }
+
+    @Override
+    public void onDrawerStateChanged(int newState) {
+
     }
 }
