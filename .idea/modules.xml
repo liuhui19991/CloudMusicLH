@@ -5,6 +5,7 @@
       <module fileurl="file://$PROJECT_DIR$/CloudMusic-master.iml" filepath="$PROJECT_DIR$/CloudMusic-master.iml" />
       <module fileurl="file://$PROJECT_DIR$/CloudMusicLH.iml" filepath="$PROJECT_DIR$/CloudMusicLH.iml" />
       <module fileurl="file://$PROJECT_DIR$/cloudmusic/cloudmusic.iml" filepath="$PROJECT_DIR$/cloudmusic/cloudmusic.iml" />
+      <module fileurl="file://$PROJECT_DIR$/liuhui/liuhui.iml" filepath="$PROJECT_DIR$/liuhui/liuhui.iml" />
     </modules>
   </component>
 </project>
