@@ -3,7 +3,8 @@ package cn.world.liuhui;
 import android.content.Context;
 
 /**
- * Created by liuhui on 2016/6/27.
+ * SharedPreferences的工具类
+ * Created by liuhui on 2015/6/27.
  */
 public class SpUtil {
     public static void put(String key, String value) {
