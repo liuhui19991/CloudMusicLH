@@ -7,9 +7,9 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import static android.icu.lang.UCharacter.GraphemeClusterBreak.L;
 
 /**
+ * L.e("hello, %s", "world");//, %s这样才能换行
  * Created by liuhui on 2016/6/19.
  */
 public class LogUtil {

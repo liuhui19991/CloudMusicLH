@@ -2,6 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
               android:layout_width="match_parent"
               android:layout_height="match_parent"
+              android:background="#897656"
               android:orientation="vertical">
 
     <Button
@@ -9,4 +10,21 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="全频播放"/>
+
+    <ImageView
+        android:id="@+id/iv_1"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"/>
+
+    <ImageView
+        android:layout_gravity="center"
+        android:id="@+id/iv_2"
+        android:layout_width="80dp"
+        android:layout_height="80dp"/>
+
+    <ImageView
+        android:id="@+id/iv_3"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="center"/>
 </LinearLayout>
