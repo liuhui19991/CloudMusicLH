@@ -3,9 +3,12 @@ package com.carporange.cloudmusic.ui.activity;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.DecodeFormat;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.carporange.cloudmusic.CarpApplication;
 import com.carporange.cloudmusic.R;
 import com.carporange.cloudmusic.util.L;
@@ -15,6 +18,8 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import cn.world.liuhui.GlideCircleTransfromUtil;
 import cn.world.liuhui.GlideRoundTransformUtil;
+import cn.world.liuhui.OnDoubleClickListener;
+import cn.world.liuhui.ToastUtil;
 import fm.jiecao.jcvideoplayer_lib.JCVideoPlayer;
 import fm.jiecao.jcvideoplayer_lib.JCVideoPlayerStandard;
 
@@ -36,7 +41,17 @@ public class VideoPlayerActivity extends AppCompatActivity {
         ButterKnife.bind(this);
         Glide.with(this).load("https://www.baidu.com/img/bdlogo.png").transform(new GlideRoundTransformUtil(this)).into(iv1);
         Glide.with(this).load("https://www.baidu.com/img/bdlogo.png").transform(new GlideCircleTransfromUtil(this)).into(iv2);
-        Glide.with(this).load(R.mipmap.circlepicture).into(iv3);
+//        Glide.with(this).load(R.mipmap.circlepicture).into(iv3);
+        Glide.with(this).load(R.mipmap.circlepicture).asBitmap()
+                .format(DecodeFormat.PREFER_ARGB_8888)
+                .diskCacheStrategy(DiskCacheStrategy.ALL)
+                .into(iv3);
+        iv2.setOnClickListener(new OnDoubleClickListener() {
+            @Override
+            protected void onDoubleClick(View v) {
+                ToastUtil.show(VideoPlayerActivity.this, "2", 8);
+            }
+        });
     }
 
     @OnClick(R.id.videoplayer)

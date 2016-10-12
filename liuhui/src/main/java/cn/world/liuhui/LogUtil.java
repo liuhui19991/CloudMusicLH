@@ -13,13 +13,13 @@ import org.json.JSONObject;
  * Created by liuhui on 2016/6/19.
  */
 public class LogUtil {
-    private static boolean sDebug = true;
+    private static boolean isDebug = true;
     private static String sTag = "lh";
     private static final int JSON_INDENT = 2;
 
 
     public static void init(boolean debug, String tag) {
-        LogUtil.sDebug = debug;
+        LogUtil.isDebug = debug;
         LogUtil.sTag = tag;
     }
 
@@ -28,7 +28,7 @@ public class LogUtil {
     }
 
     public static void e(String tag, String msg, Object[] params) {
-        if (!sDebug) return;
+        if (!isDebug) return;
         LogText.e(getFinalTag(tag), String.format(msg, params));
     }
 
@@ -37,7 +37,7 @@ public class LogUtil {
     }
 
     public static void json(String tag, String json) {
-        if (!sDebug) return;
+        if (!isDebug) return;
         LogText.e(getFinalTag(tag), getPrettyJson(json));
     }
 
