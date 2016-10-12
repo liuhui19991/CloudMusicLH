@@ -6,9 +6,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.ImageView;
 
-import com.bumptech.glide.Glide;
-import com.bumptech.glide.load.DecodeFormat;
-import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.carporange.cloudmusic.CarpApplication;
 import com.carporange.cloudmusic.R;
 import com.carporange.cloudmusic.util.L;
@@ -16,8 +13,7 @@ import com.carporange.cloudmusic.util.L;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-import cn.world.liuhui.GlideCircleTransfromUtil;
-import cn.world.liuhui.GlideRoundTransformUtil;
+import cn.world.liuhui.GlideUtil;
 import cn.world.liuhui.OnDoubleClickListener;
 import cn.world.liuhui.ToastUtil;
 import fm.jiecao.jcvideoplayer_lib.JCVideoPlayer;
@@ -39,13 +35,9 @@ public class VideoPlayerActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_videoplayer);
         ButterKnife.bind(this);
-        Glide.with(this).load("https://www.baidu.com/img/bdlogo.png").transform(new GlideRoundTransformUtil(this)).into(iv1);
-        Glide.with(this).load("https://www.baidu.com/img/bdlogo.png").transform(new GlideCircleTransfromUtil(this)).into(iv2);
-//        Glide.with(this).load(R.mipmap.circlepicture).into(iv3);
-        Glide.with(this).load(R.mipmap.circlepicture).asBitmap()
-                .format(DecodeFormat.PREFER_ARGB_8888)
-                .diskCacheStrategy(DiskCacheStrategy.ALL)
-                .into(iv3);
+        GlideUtil.displayRound(this,iv1,"https://www.baidu.com/img/bdlogo.png");
+        GlideUtil.displayCircle(this, iv2,"https://www.baidu.com/img/bdlogo.png");
+        GlideUtil.display(iv3,R.mipmap.circlepicture);
         iv2.setOnClickListener(new OnDoubleClickListener() {
             @Override
             protected void onDoubleClick(View v) {
