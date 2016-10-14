@@ -3,17 +3,11 @@ package com.carporange.cloudmusic.ui.activity;
 import android.Manifest;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.pm.PackageManager;
-import android.graphics.Color;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Handler;
 import android.os.Message;
 import android.support.design.widget.Snackbar;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.content.ContextCompat;
-import android.support.v7.app.AlertDialog;
-import android.support.v7.widget.Toolbar;
 import android.text.InputType;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -31,6 +25,8 @@ import com.carporange.cloudmusic.util.SpUtil;
 import com.yanzhenjie.permission.AndPermission;
 import com.yanzhenjie.permission.PermissionNo;
 import com.yanzhenjie.permission.PermissionYes;
+
+import cn.world.liuhui.DialogUtil;
 
 /**
  * Created by liuhui on 2016/6/15.
@@ -173,7 +169,8 @@ public class LoginActivity extends BaseActivity implements OnClickListener, View
                 mHandler.sendEmptyMessageDelayed(PASSWORD_INVISIABLE, 3000);
                 break;
             case R.id.login_find_pwd://找回密码
-                AlertDialog.Builder builder = new AlertDialog.Builder(this);
+                //下面显示字体为绿色
+                /*AlertDialog.Builder builder = new AlertDialog.Builder(this);
                 builder.setTitle("您的密码!");
                 builder.setMessage("帐号:" + names + "\n" + "密码:" + passs);
                 builder.setNegativeButton("电话联系", new DialogInterface.OnClickListener() {
@@ -186,10 +183,22 @@ public class LoginActivity extends BaseActivity implements OnClickListener, View
                     }
                 });
                 builder.setPositiveButton("确定", null);
-                builder.show();
+                builder.show();*/
+                DialogUtil.showAlert(this, "您的密码", "帐号:" + names + "\n" + "密码:" + passs, "ok",
+                        null, "中间", null, "Call", callListener, null, false, null, null);
                 break;
         }
     }
+
+    DialogInterface.OnClickListener callListener = new DialogInterface.OnClickListener() {
+        @Override
+        public void onClick(DialogInterface dialog, int which) {
+            AndPermission.with(mContext)
+                    .requestCode(98)
+                    .permission(Manifest.permission.CAMERA)
+                    .send();
+        }
+    };
 
     private void callPhone() {
         String number = "1871081";
@@ -207,6 +216,7 @@ public class LoginActivity extends BaseActivity implements OnClickListener, View
     private void getCallPhoneNo() {
 
     }
+
     @Override
     public void onRequestPermissionsResult(int requestCode,
                                            String permissions[], int[] grantResults) {

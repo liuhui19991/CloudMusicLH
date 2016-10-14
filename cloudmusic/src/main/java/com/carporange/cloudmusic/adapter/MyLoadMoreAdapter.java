@@ -1,9 +1,12 @@
 package com.carporange.cloudmusic.adapter;
 
+import android.support.annotation.AnimRes;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.TextView;
 
 import com.carporange.cloudmusic.R;
@@ -18,6 +21,7 @@ public class MyLoadMoreAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
     private static final int TYPE_FOOTER = 1;
     private ArrayList<String> datas;
     private ItemClickListener mListener;
+    protected int mLastPosition = -1;
     private boolean mShowFooter = true;
 
     public MyLoadMoreAdapter(ArrayList mlist) {
@@ -80,9 +84,16 @@ public class MyLoadMoreAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
                 }
             }
         });
-
+        setItemAppearAnimation(holder, position, R.anim.anim_item_in);
     }
 
+    protected void setItemAppearAnimation(RecyclerView.ViewHolder holder, int position, @AnimRes int type) {
+        if (position > mLastPosition/* && !isFooterPosition(position)*/) {
+            Animation animation = AnimationUtils.loadAnimation(holder.itemView.getContext(), type);
+            holder.itemView.startAnimation(animation);
+            mLastPosition = position;
+        }
+    }
 
     @Override
     public int getItemCount() {

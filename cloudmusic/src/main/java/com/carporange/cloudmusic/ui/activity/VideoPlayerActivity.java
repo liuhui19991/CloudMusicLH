@@ -1,7 +1,9 @@
 package com.carporange.cloudmusic.ui.activity;
 
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.ImageView;
@@ -15,7 +17,6 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import cn.world.liuhui.ImageLoaderUtil;
 import cn.world.liuhui.OnDoubleClickListener;
-import cn.world.liuhui.ToastUtil;
 import fm.jiecao.jcvideoplayer_lib.JCVideoPlayer;
 import fm.jiecao.jcvideoplayer_lib.JCVideoPlayerStandard;
 
@@ -35,13 +36,23 @@ public class VideoPlayerActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_videoplayer);
         ButterKnife.bind(this);
-        ImageLoaderUtil.displayRound(iv1,"https://www.baidu.com/img/bdlogo.png");
-        ImageLoaderUtil.displayCircle(iv2,"https://www.baidu.com/img/bdlogo.png");
-        ImageLoaderUtil.display(iv3,R.mipmap.circlepicture);
+        ImageLoaderUtil.displayRound(iv1, "https://www.baidu.com/img/bdlogo.png");
+        ImageLoaderUtil.displayCircle(iv2, "https://www.baidu.com/img/bdlogo.png");
+        ImageLoaderUtil.display(iv3, R.mipmap.circlepicture);
         iv2.setOnClickListener(new OnDoubleClickListener() {
             @Override
             protected void onDoubleClick(View v) {
-                ToastUtil.show(VideoPlayerActivity.this, "2", 8);
+                //下面显示的对话框字体为绿色
+                AlertDialog.Builder builder = new AlertDialog.Builder(VideoPlayerActivity.this);
+                builder.setTitle("您的密码!");
+                builder.setMessage("帐号:" + "\n" + "密码:");
+                builder.setNegativeButton("电话联系", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                    }
+                });
+                builder.setPositiveButton("确定", null);
+                builder.show();
             }
         });
     }
