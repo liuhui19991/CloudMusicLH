@@ -16,14 +16,14 @@ import com.bumptech.glide.load.resource.bitmap.BitmapTransformation;
  * Created by liuhui on 2015/8/8.
  * 使用方法 Glide.with(this).load(url).transform(new GlideRoundTransformUtil(context)).into(imageView);
  */
-public class GlideRoundTransformUtil extends BitmapTransformation {
+public class GlideRoundTransform extends BitmapTransformation {
     private static float radius = 0f;
 
-    public GlideRoundTransformUtil(Context context) {
+    public GlideRoundTransform(Context context) {
         this(context, 4);
     }
 
-    public GlideRoundTransformUtil(Context context, int dp) {
+    public GlideRoundTransform(Context context, int dp) {
         super(context);
         this.radius = Resources.getSystem().getDisplayMetrics().density * dp;
     }

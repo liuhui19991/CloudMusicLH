@@ -13,7 +13,7 @@ import com.carporange.cloudmusic.util.L;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-import cn.world.liuhui.GlideUtil;
+import cn.world.liuhui.ImageLoaderUtil;
 import cn.world.liuhui.OnDoubleClickListener;
 import cn.world.liuhui.ToastUtil;
 import fm.jiecao.jcvideoplayer_lib.JCVideoPlayer;
@@ -35,9 +35,9 @@ public class VideoPlayerActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_videoplayer);
         ButterKnife.bind(this);
-        GlideUtil.displayRound(this,iv1,"https://www.baidu.com/img/bdlogo.png");
-        GlideUtil.displayCircle(this, iv2,"https://www.baidu.com/img/bdlogo.png");
-        GlideUtil.display(iv3,R.mipmap.circlepicture);
+        ImageLoaderUtil.displayRound(iv1,"https://www.baidu.com/img/bdlogo.png");
+        ImageLoaderUtil.displayCircle(iv2,"https://www.baidu.com/img/bdlogo.png");
+        ImageLoaderUtil.display(iv3,R.mipmap.circlepicture);
         iv2.setOnClickListener(new OnDoubleClickListener() {
             @Override
             protected void onDoubleClick(View v) {

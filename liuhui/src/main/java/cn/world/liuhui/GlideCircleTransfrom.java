@@ -14,8 +14,8 @@ import com.bumptech.glide.load.resource.bitmap.BitmapTransformation;
  * Created by liuhui on 2015/8/8.
  * 使用方法 Glide.with(this).load(url).transform(new GlideCircleTransfromUtil(context)).into(imageView);
  */
-public class GlideCircleTransfromUtil extends BitmapTransformation {
-    public GlideCircleTransfromUtil(Context context) {
+public class GlideCircleTransfrom extends BitmapTransformation {
+    public GlideCircleTransfrom(Context context) {
         super(context);
     }
 
