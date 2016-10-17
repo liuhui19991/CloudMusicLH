@@ -1,4 +1,4 @@
-package cn.world.liuhui;
+package cn.world.liuhui.widget;
 
 import android.annotation.TargetApi;
 import android.content.Context;
@@ -18,6 +18,9 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 
 import java.util.List;
+
+import cn.world.liuhui.R;
+import cn.world.liuhui.utils.ImageLoaderUtil;
 
 /**
  * Created by liuhui on 2016/6/15.

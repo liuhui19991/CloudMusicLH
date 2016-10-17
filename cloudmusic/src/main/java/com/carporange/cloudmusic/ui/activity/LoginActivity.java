@@ -26,7 +26,7 @@ import com.yanzhenjie.permission.AndPermission;
 import com.yanzhenjie.permission.PermissionNo;
 import com.yanzhenjie.permission.PermissionYes;
 
-import cn.world.liuhui.DialogUtil;
+import cn.world.liuhui.utils.DialogUtil;
 
 /**
  * Created by liuhui on 2016/6/15.

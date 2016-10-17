@@ -1,4 +1,4 @@
-package cn.world.liuhui;
+package cn.world.liuhui.utils;
 
 import android.text.TextUtils;
 
@@ -8,7 +8,7 @@ import java.security.MessageDigest;
 /**
  * Created by liuhui on 2016/7/27.
  */
-public class MD5 {
+public class MD5Util {
     private static final char HEX_DIGITS[] = {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9',
             'A', 'B', 'C', 'D', 'E', 'F' };
 
@@ -32,7 +32,7 @@ public class MD5 {
         MessageDigest md5;
         try {
             fis = new FileInputStream(filename);
-            md5 = MessageDigest.getInstance("MD5");
+            md5 = MessageDigest.getInstance("MD5Util");
             while ((numRead = fis.read(buffer)) > 0) {
                 md5.update(buffer, 0, numRead);
             }

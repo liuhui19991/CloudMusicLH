@@ -15,7 +15,7 @@ import com.carporange.cloudmusic.util.L;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-import cn.world.liuhui.ImageLoaderUtil;
+import cn.world.liuhui.utils.ImageLoaderUtil;
 import cn.world.liuhui.OnDoubleClickListener;
 import fm.jiecao.jcvideoplayer_lib.JCVideoPlayer;
 import fm.jiecao.jcvideoplayer_lib.JCVideoPlayerStandard;

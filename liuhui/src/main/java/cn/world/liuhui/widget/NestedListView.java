@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package cn.world.liuhui;
+package cn.world.liuhui.widget;
 
 import android.content.Context;
 import android.util.AttributeSet;

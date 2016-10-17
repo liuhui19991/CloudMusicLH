@@ -1,4 +1,4 @@
-package cn.world.liuhui;
+package cn.world.liuhui.utils;
 
 import android.content.Context;
 import android.view.inputmethod.InputMethodManager;
@@ -8,7 +8,7 @@ import android.widget.EditText;
  * 打开或关闭软键盘
  * Created by liuhui on 2016/6/15.
  */
-public class KeyBoardUtils {
+public class KeyBoardUtil {
     /**
      * 打卡软键盘
      *

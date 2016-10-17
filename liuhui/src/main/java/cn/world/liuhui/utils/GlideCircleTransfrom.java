@@ -1,4 +1,4 @@
-package cn.world.liuhui;
+package cn.world.liuhui.utils;
 
 import android.content.Context;
 import android.graphics.Bitmap;

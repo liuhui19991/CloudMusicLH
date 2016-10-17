@@ -1,6 +1,8 @@
-package cn.world.liuhui;
+package cn.world.liuhui.utils;
 
 import android.content.Context;
+
+import cn.world.liuhui.BaseApplication;
 
 /**
  * SharedPreferences的工具类

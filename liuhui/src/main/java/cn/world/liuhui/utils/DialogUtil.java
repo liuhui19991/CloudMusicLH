@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package cn.world.liuhui;
+package cn.world.liuhui.utils;
 
 import android.app.Activity;
 import android.app.AlertDialog;
