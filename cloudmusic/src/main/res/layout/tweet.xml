@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/card_view"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"
+    android:layout_marginLeft="5dp"
+    android:layout_marginRight="5dp"
+    android:foreground="?android:attr/selectableItemBackground"
+    card_view:cardBackgroundColor="@color/white"
+    card_view:cardCornerRadius="4dp"
+    card_view:cardElevation="2dp"
+    card_view:cardUseCompatPadding="true">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:padding="10dp">
+
+        <ImageView
+            android:id="@+id/tweetAvatar"
+            android:layout_width="@dimen/avatarSize"
+            android:layout_height="@dimen/avatarSize"
+            android:layout_alignParentLeft="true"
+            android:layout_centerInParent="true"
+            android:layout_margin="@dimen/smallSpace"
+            android:src="@mipmap/def_head"
+            />
+
+        <ImageView
+            android:id="@+id/tweetRT"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/tweetDate"
+            android:layout_toLeftOf="@+id/tweetDate"
+            />
+
+        <TextView
+            android:id="@+id/tweetName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="1dp"
+            android:layout_toRightOf="@+id/tweetAvatar"
+            android:text="Chad"
+            android:textColor="#FFAAAAAA"
+            android:textSize="16sp"/>
+
+        <TextView
+            android:id="@+id/tweetText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tweetName"
+            android:layout_marginTop="5dp"
+            android:layout_toRightOf="@+id/tweetAvatar"
+            android:text="Hello world!"
+            android:textColor="@android:color/darker_gray"
+            android:textColorLink="#778085"
+            android:textSize="16sp"/>
+
+        <TextView
+            android:id="@+id/tweetDate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentTop="true"
+            android:text="04/06/13"
+            android:textColorLink="#778085"
+            android:textSize="16sp"/>
+
+    </RelativeLayout>
+</android.support.v7.widget.CardView>

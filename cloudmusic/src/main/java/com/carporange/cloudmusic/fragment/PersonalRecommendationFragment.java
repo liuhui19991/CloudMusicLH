@@ -52,7 +52,7 @@ public class PersonalRecommendationFragment extends BaseFragment {
 
     private void initWaitDialog() {//展示我自定义的等待对话框
         if (mWaitDialog == null) {
-            mWaitDialog = new Dialog(getActivity(), R.style.TRANSDIALOG);
+            mWaitDialog = new Dialog(mContext, R.style.TRANSDIALOG);
         }
         mWaitDialog.setContentView(R.layout.trans_dialog);
         mWaitDialog.getWindow().setBackgroundDrawableResource(R.color.transparent);

@@ -5,11 +5,11 @@ android {
     buildToolsVersion "23.0.3"
 
 //百度地图SO的使用 必须要配置
-   /* sourceSets {
-        main {
-            jniLibs.srcDirs = ['libs']
-        }
-    }*/
+    /* sourceSets {
+         main {
+             jniLibs.srcDirs = ['libs']
+         }
+     }*/
     defaultConfig {
         applicationId "com.carporange.cloudmusic"
         minSdkVersion 15
@@ -29,7 +29,7 @@ android {
     }
 
     //打包渠道Flavors
-    productFlavors {
+   /* productFlavors {
         SELF {}
         GooglePlay {}
         xiaomi {}
@@ -37,7 +37,7 @@ android {
         _360 {}
         baidu {}
         wandoujia {}
-    }
+    }*/
 }
 
 dependencies {
@@ -66,12 +66,14 @@ dependencies {
     //    compile 'me.imid.swipebacklayout.lib:library:1.0.0'//滑动关闭页面需要设置透明主题,会有问题
     //    compile 'com.hannesdorfmann:swipeback:1.0.4'//滑动关闭侧面有黑条
     compile 'me.majiajie:swipe-back:1.0.0-alpha2'
+    //侧滑删除
     compile 'com.yanzhenjie:recyclerview-swipe:1.0.2'
-    //侧滑删除
+
     compile 'com.yanzhenjie:permission:1.0.0'
-    compile 'com.nikhilpanju.recyclerviewenhanced:recyclerviewenhanced:1.1.0'
     //侧滑删除
-    compile 'com.zhy:base-rvadapter:3.0.3'
+    compile 'com.nikhilpanju.recyclerviewenhanced:recyclerviewenhanced:1.1.0'
+
+    compile 'com.github.CymChad:BaseRecyclerViewAdapterHelper:v2.2.2'
     /*   //If you can not start app, you cancel the annotation
            //如果app无法启动,请取消下面的注释
            //Other ABIs: optional

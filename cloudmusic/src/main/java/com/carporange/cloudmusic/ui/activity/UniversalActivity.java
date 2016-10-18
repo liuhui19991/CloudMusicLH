@@ -7,28 +7,26 @@ import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
-import android.widget.TextView;
+import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.carporange.cloudmusic.R;
-import com.carporange.cloudmusic.adapter.DividerItemDecoration;
+import com.carporange.cloudmusic.adapter.QuickAdapter;
+import com.carporange.cloudmusic.domain.CustomAnimation;
+import com.carporange.cloudmusic.domain.DataServer;
 import com.carporange.cloudmusic.ui.base.BaseActivity;
 import com.carporange.cloudmusic.util.AnimatorUtil;
+import com.carporange.cloudmusic.util.L;
 import com.carporange.cloudmusic.util.T;
-import com.zhy.adapter.recyclerview.CommonAdapter;
-import com.zhy.adapter.recyclerview.base.ViewHolder;
-import com.zhy.adapter.recyclerview.wrapper.HeaderAndFooterWrapper;
-import com.zhy.adapter.recyclerview.wrapper.LoadMoreWrapper;
-
-import java.util.ArrayList;
-import java.util.List;
+import com.chad.library.adapter.base.BaseQuickAdapter;
+import com.chad.library.adapter.base.listener.OnItemClickListener;
 
 import butterknife.BindView;
 
 /**
  * Created by liuhui on 2016/9/13.
  */
-public class UniversalActivity extends BaseActivity {
+public class UniversalActivity extends BaseActivity implements BaseQuickAdapter.RequestLoadMoreListener {
     @BindView(R.id.recyclermore)
     RecyclerView mRecyclerView;
     @BindView(R.id.swipe_layout)
@@ -36,11 +34,13 @@ public class UniversalActivity extends BaseActivity {
     @BindView(R.id.fab)
     FloatingActionButton FAB;
     private LinearLayoutManager mLinearLayoutManager;
-    private CommonAdapter<String> mAdapter;
-    private List<String> mDatas = new ArrayList<>();
-    private HeaderAndFooterWrapper mHeaderAndFooterWrapper;
-    private LoadMoreWrapper mLoadMoreWrapper;
-    private int refreshTime, times;
+    private View notLoadingView;
+    private QuickAdapter mQuickAdapter;
+    private static final int TOTAL_COUNTER = 18;
+    private static final int PAGE_SIZE = 6;
+    private int delayMillis = 1000;
+    private int mCurrentCounter = 0;
+    private boolean isErr;
 
     @Override
     protected int getLayoutId() {
@@ -61,56 +61,59 @@ public class UniversalActivity extends BaseActivity {
         mLinearLayoutManager = new LinearLayoutManager(mContext);
         mRecyclerView.setLayoutManager(mLinearLayoutManager);
 //        mRecyclerView.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.VERTICAL_LIST));//设置分割线
-        for (int i = 'A'; i <= 'z'; i++) {
-            mDatas.add((char) i + "");
-        }
-        mAdapter = new CommonAdapter<String>(this, R.layout.item_more, mDatas) {
-            @Override
-            protected void convert(ViewHolder holder, String s, int position) {
-                holder.setText(R.id.text, s + " : " + holder.getAdapterPosition() + " , " + holder.getLayoutPosition());
-            }
-        };
-        initHeaderAndFooter();
 
-        mLoadMoreWrapper = new LoadMoreWrapper(mHeaderAndFooterWrapper);
-        mLoadMoreWrapper.setLoadMoreView(R.layout.loadmore_footer);
-        mRecyclerView.setAdapter(mLoadMoreWrapper);
+        initAdapter();
         initListener();
     }
 
+    private void initAdapter() {
+        mQuickAdapter = new QuickAdapter(PAGE_SIZE);
+        mQuickAdapter.openLoadAnimation(new CustomAnimation());
+        mQuickAdapter.isFirstOnly(false);
+        mQuickAdapter.openLoadMore(PAGE_SIZE);
+        mRecyclerView.setAdapter(mQuickAdapter);
+        mCurrentCounter = mQuickAdapter.getData().size();
+        mQuickAdapter.setOnLoadMoreListener(this);
+    }
+
     private void initListener() {
-        mLoadMoreWrapper.setOnLoadMoreListener(new LoadMoreWrapper.OnLoadMoreListener() {
+        mRecyclerView.addOnItemTouchListener(new OnItemClickListener() {
+
             @Override
-            public void onLoadMoreRequested() {
-                if (times++ < 2) {
-                    new Handler().postDelayed(new Runnable() {
-                        @Override
-                        public void run() {
-                            for (int i = 0; i < 10; i++) {
-                                mDatas.add("Add:" + mDatas.size() + "times" + times);
-                            }
-                            mLoadMoreWrapper.notifyDataSetChanged();
-                        }
-                    }, 2000);
-                } else {
-                    T.showShort(mContext, "隐藏脚布局");
+            public void SimpleOnItemClick(BaseQuickAdapter adapter, View view, int position) {
+                Toast.makeText(mContext, "" + Integer.toString(position), Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onItemChildClick(BaseQuickAdapter adapter, View view, int position) {
+                super.onItemChildClick(adapter, view, position);
+                switch (view.getId()) {
+                    case R.id.tweetAvatar:
+                        Toast.makeText(mContext, "The " + Integer.toString(position)+" tweetAvatar  is clicked", Toast.LENGTH_SHORT).show();
+                        break;
+                    case R.id.tweetName:
+                        Toast.makeText(mContext, "The " + Integer.toString(position)+" tweetName  is clicked", Toast.LENGTH_SHORT).show();
+                        break;
+                    default:
+                        break;
                 }
             }
-        });
 
-        mAdapter.setOnItemClickListener(new CommonAdapter.OnItemClickListener() {
+
             @Override
-            public void onItemClick(View view, RecyclerView.ViewHolder holder, int position) {
-                Toast.makeText(mContext, "pos = " + position, Toast.LENGTH_SHORT).show();
+            public void onItemLongClick(BaseQuickAdapter adapter, View view, int position) {
+                super.onItemLongClick(adapter, view, position);
+                Toast.makeText(mContext,"The " + Integer.toString(position)+ " Item is LongClick ", Toast.LENGTH_SHORT).show();
+
             }
 
             @Override
-            public boolean onItemLongClick(View view, RecyclerView.ViewHolder holder, int position) {
-                Toast.makeText(mContext, "=" + position, Toast.LENGTH_SHORT).show();
-                return false;
+            public void onItemChildLongClick(BaseQuickAdapter adapter, View view, int position) {
+                super.onItemChildLongClick(adapter, view, position);
+                Toast.makeText(mContext, "The "+ Integer.toString(position)+"  view itemchild " + "is LongClick " + Integer.toString(position), Toast.LENGTH_SHORT).show();
+
             }
         });
-
         FAB.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -121,16 +124,6 @@ public class UniversalActivity extends BaseActivity {
         });
     }
 
-    private void initHeaderAndFooter() {
-        mHeaderAndFooterWrapper = new HeaderAndFooterWrapper(mAdapter);
-
-        TextView t1 = new TextView(this);
-        t1.setText("Header 1");
-        TextView t2 = new TextView(this);
-        t2.setText("Header 2");
-        mHeaderAndFooterWrapper.addHeaderView(t1);
-        mHeaderAndFooterWrapper.addHeaderView(t2);
-    }
 
     /**
      * 刷新监听。
@@ -138,21 +131,48 @@ public class UniversalActivity extends BaseActivity {
     private SwipeRefreshLayout.OnRefreshListener mOnRefreshListener = new SwipeRefreshLayout.OnRefreshListener() {
         @Override
         public void onRefresh() {
-            refreshTime++;
             mRecyclerView.postDelayed(new Runnable() {
                 @Override
                 public void run() {
                     mSwipeRefreshLayout.setRefreshing(false);
-                    mDatas.clear();
-                    for (int i = 0; i < 15; i++) {
-                        mDatas.add("item" + i + "after " + refreshTime + " times of refresh");
-                    }
 
-                    mLoadMoreWrapper.notifyDataSetChanged();//要用mLoadMoreWrapper通知更新
                 }
             }, 2000);
         }
     };
+
+    @Override
+    public void onLoadMoreRequested() {
+        L.e(Thread.currentThread() + "..1");
+        mRecyclerView.post(new Runnable() {
+            @Override
+            public void run() {
+                L.e(Thread.currentThread() + "..2");
+                if (mCurrentCounter >= TOTAL_COUNTER) {
+                    mQuickAdapter.loadComplete();
+                    if (notLoadingView == null) {
+                        notLoadingView = getLayoutInflater().inflate(R.layout.not_loading, (ViewGroup) mRecyclerView.getParent(), false);
+                    }
+                    mQuickAdapter.addFooterView(notLoadingView);
+                } else {
+                    if (isErr) {
+                        new Handler().postDelayed(new Runnable() {
+                            @Override
+                            public void run() {
+                                mQuickAdapter.addData(DataServer.getSampleData(PAGE_SIZE));
+                                mCurrentCounter = mQuickAdapter.getData().size();
+                            }
+                        }, delayMillis);
+                    } else {
+                        isErr = true;
+                        Toast.makeText(mContext, "网络出错", Toast.LENGTH_SHORT).show();
+                        mQuickAdapter.showLoadMoreFailedView();
+
+                    }
+                }
+            }
+        });
+    }
 
     private void hideFAB() {
         FAB.postDelayed(new Runnable() {
