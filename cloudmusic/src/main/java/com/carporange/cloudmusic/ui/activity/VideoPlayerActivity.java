@@ -1,11 +1,14 @@
 package com.carporange.cloudmusic.ui.activity;
 
 import android.content.DialogInterface;
+import android.graphics.Color;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.ImageView;
 
 import com.carporange.cloudmusic.CarpApplication;
@@ -36,6 +39,7 @@ public class VideoPlayerActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_videoplayer);
         ButterKnife.bind(this);
+//        initWindow();
         ImageLoaderUtil.displayRound(iv1, "https://www.baidu.com/img/bdlogo.png");
         ImageLoaderUtil.displayCircle(iv2, "https://www.baidu.com/img/bdlogo.png");
         ImageLoaderUtil.display(iv3, R.mipmap.circlepicture);
@@ -55,6 +59,20 @@ public class VideoPlayerActivity extends AppCompatActivity {
                 builder.show();
             }
         });
+    }
+
+    protected void initWindow() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {//5.0及以上
+            View decorView = getWindow().getDecorView();
+            int option = View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+                    | View.SYSTEM_UI_FLAG_LAYOUT_STABLE;
+            decorView.setSystemUiVisibility(option);
+            //5.0以上可以直接设置 statusbar颜色
+            getWindow().setStatusBarColor(Color.TRANSPARENT);
+        } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {//4.4到5.0
+            WindowManager.LayoutParams localLayoutParams = getWindow().getAttributes();
+            localLayoutParams.flags = (WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS | localLayoutParams.flags);
+        }
     }
 
     @OnClick(R.id.videoplayer)

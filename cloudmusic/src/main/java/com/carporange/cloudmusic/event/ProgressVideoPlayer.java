@@ -35,7 +35,7 @@ public class ProgressVideoPlayer extends JCVideoPlayerStandard {
     }
 
     @Override
-    protected int getCurrentPositionWhenPlaying() {
+    public int getCurrentPositionWhenPlaying() {
         position = super.getCurrentPositionWhenPlaying();
         L.e(String.valueOf(position));
         return position;
@@ -48,7 +48,7 @@ public class ProgressVideoPlayer extends JCVideoPlayerStandard {
             @Override
             public void onClick(View v) {
                 ToastUtil.show(getContext(), "切换清晰度");
-                showPopupWindow(fullscreenButton);
+               showPopupWindow(fullscreenButton);
             }
         });
         super.onSurfaceTextureAvailable(surface, width, height);
@@ -112,9 +112,9 @@ public class ProgressVideoPlayer extends JCVideoPlayerStandard {
         L.e("页面可见" + oldPosition);
         onEvent(JCBuriedPoint.ON_TOUCH_SCREEN_SEEK_POSITION);
         JCMediaManager.instance().mediaPlayer.seekTo(Integer.parseInt(oldPosition));
-        int duration = getDuration();
-        int progress = Integer.parseInt(oldPosition) * 100 / (duration == 0 ? 1 : duration);
-        progressBar.setProgress(progress);
+//        int duration = getDuration();
+//        int progress = Integer.parseInt(oldPosition) * 100 / (duration == 0 ? 1 : duration);
+//        progressBar.setProgress(progress);
     }
 
     @Override
