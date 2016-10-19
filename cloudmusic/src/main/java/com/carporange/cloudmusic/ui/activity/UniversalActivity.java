@@ -55,7 +55,8 @@ public class UniversalActivity extends BaseActivity implements BaseQuickAdapter.
 
     @Override
     public void initViews() {
-        mSwipeRefreshLayout.setColorSchemeResources(android.R.color.holo_blue_light, android.R.color.holo_red_light, android.R.color.holo_orange_light, android.R.color.holo_green_light);
+        mSwipeRefreshLayout.setColorSchemeResources(android.R.color.holo_blue_light, android.R.color.holo_red_light,
+                android.R.color.holo_orange_light, android.R.color.holo_green_light);
         mSwipeRefreshLayout.setOnRefreshListener(mOnRefreshListener);
 
         mLinearLayoutManager = new LinearLayoutManager(mContext);
@@ -71,6 +72,8 @@ public class UniversalActivity extends BaseActivity implements BaseQuickAdapter.
         mQuickAdapter.openLoadAnimation(new CustomAnimation());
         mQuickAdapter.isFirstOnly(false);
         mQuickAdapter.openLoadMore(PAGE_SIZE);
+        //这句话可以设置自定义的加载进度条
+        mQuickAdapter.setLoadingView(getLayoutInflater().inflate(R.layout.loadmore_footer, (ViewGroup) mRecyclerView.getParent(), false));
         mRecyclerView.setAdapter(mQuickAdapter);
         mCurrentCounter = mQuickAdapter.getData().size();
         mQuickAdapter.setOnLoadMoreListener(this);
@@ -89,10 +92,10 @@ public class UniversalActivity extends BaseActivity implements BaseQuickAdapter.
                 super.onItemChildClick(adapter, view, position);
                 switch (view.getId()) {
                     case R.id.tweetAvatar:
-                        Toast.makeText(mContext, "The " + Integer.toString(position)+" tweetAvatar  is clicked", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(mContext, "The " + Integer.toString(position) + " tweetAvatar  is clicked", Toast.LENGTH_SHORT).show();
                         break;
                     case R.id.tweetName:
-                        Toast.makeText(mContext, "The " + Integer.toString(position)+" tweetName  is clicked", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(mContext, "The " + Integer.toString(position) + " tweetName  is clicked", Toast.LENGTH_SHORT).show();
                         break;
                     default:
                         break;
@@ -103,14 +106,15 @@ public class UniversalActivity extends BaseActivity implements BaseQuickAdapter.
             @Override
             public void onItemLongClick(BaseQuickAdapter adapter, View view, int position) {
                 super.onItemLongClick(adapter, view, position);
-                Toast.makeText(mContext,"The " + Integer.toString(position)+ " Item is LongClick ", Toast.LENGTH_SHORT).show();
+                Toast.makeText(mContext, "The " + Integer.toString(position) + " Item is LongClick ", Toast.LENGTH_SHORT).show();
 
             }
 
             @Override
             public void onItemChildLongClick(BaseQuickAdapter adapter, View view, int position) {
                 super.onItemChildLongClick(adapter, view, position);
-                Toast.makeText(mContext, "The "+ Integer.toString(position)+"  view itemchild " + "is LongClick " + Integer.toString(position), Toast.LENGTH_SHORT).show();
+                Toast.makeText(mContext, "The " + Integer.toString(position) + "  view itemchild " + "is LongClick " +
+                        Integer.toString(position), Toast.LENGTH_SHORT).show();
 
             }
         });
@@ -165,9 +169,7 @@ public class UniversalActivity extends BaseActivity implements BaseQuickAdapter.
                         }, delayMillis);
                     } else {
                         isErr = true;
-                        Toast.makeText(mContext, "网络出错", Toast.LENGTH_SHORT).show();
                         mQuickAdapter.showLoadMoreFailedView();
-
                     }
                 }
             }
