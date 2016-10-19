@@ -32,7 +32,6 @@ public class ViewPagerBanner<T> extends LinearLayout {
     private ImageView mRedPoint;
     private ViewPager mViewPager;
     private List<T> mList;
-    private List mListUrl;
     private LinearLayout mLinearLayout;
     /**
      * 前一个被选中的position的位置
@@ -55,29 +54,26 @@ public class ViewPagerBanner<T> extends LinearLayout {
         mLinearLayout = (LinearLayout) findViewById(R.id.ll_point);
         mRedPoint = (ImageView) findViewById(R.id.iv_red_point);
     }
+
     /**
-     * @param list  轮播图信息
-     * @param listUrl  轮播图地址
+     * @param list     轮播图信息
      * @param listener 点击的监听
      */
-    public void setImageResource(List list, List listUrl, ViewPagerBannerListener listener) {
+    public void setImageResource(List list, ViewPagerBannerListener listener) {
         mList = list;
-        mListUrl = listUrl;
         mViewPagerBannerListener = listener;
 //        mViewPager.setPageTransformer(true, new DepthPageTransformer());//设置ViewPager的切换动画
         initView();
     }
 
     /**
-     * @param list  轮播图信息
-     * @param listUrl  轮播图地址
+     * @param list     轮播图信息
      * @param listener 点击的监听
      * @param selector 轮播图选中的指示器
-     * @param normal 轮播图未选中的指示器
+     * @param normal   轮播图未选中的指示器
      */
-    public void setImageResource(List list, List listUrl, ViewPagerBannerListener listener, int selector, int normal) {
+    public void setImageResource(List list,ViewPagerBannerListener listener, int selector, int normal) {
         mList = list;
-        mListUrl = listUrl;
         mViewPagerBannerListener = listener;
         if (selector != 0) {
             RED_POINT = selector;
@@ -247,7 +243,7 @@ public class ViewPagerBanner<T> extends LinearLayout {
         public Object instantiateItem(ViewGroup container, final int position) {
             ImageView imageView = new ImageView(getContext());
 //            imageView.setTag("设置TAG");
-            ImageLoaderUtil.display(imageView, mListUrl.get(position % mListUrl.size()));
+            ImageLoaderUtil.display(imageView, mList.get(position % mList.size()));
             imageView.setOnClickListener(new OnClickListener() {
                 @Override
                 public void onClick(View v) {

@@ -134,8 +134,8 @@ public class UniversalActivity extends BaseActivity implements BaseQuickAdapter.
             mRecyclerView.postDelayed(new Runnable() {
                 @Override
                 public void run() {
+                    mQuickAdapter.setNewData(DataServer.getSampleData(8));
                     mSwipeRefreshLayout.setRefreshing(false);
-
                 }
             }, 2000);
         }

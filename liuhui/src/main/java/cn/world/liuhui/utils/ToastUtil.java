@@ -21,9 +21,9 @@ public class ToastUtil {
             Toast.makeText(context, message, Toast.LENGTH_LONG).show();
     }
 
-    public static void show(Context context, CharSequence message, int duration) {
+    public static void show(Context context, CharSequence message) {
         if (isDebug)
-            Toast.makeText(context, message, duration).show();
+            Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
     }
 
 }
