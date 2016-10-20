@@ -15,7 +15,6 @@ import com.carporange.cloudmusic.util.L;
 import com.carporange.cloudmusic.util.SpUtil;
 
 import cn.world.liuhui.utils.ToastUtil;
-import fm.jiecao.jcvideoplayer_lib.JCBuriedPoint;
 import fm.jiecao.jcvideoplayer_lib.JCMediaManager;
 import fm.jiecao.jcvideoplayer_lib.JCVideoPlayerStandard;
 
@@ -25,6 +24,7 @@ import fm.jiecao.jcvideoplayer_lib.JCVideoPlayerStandard;
 public class ProgressVideoPlayer extends JCVideoPlayerStandard {
     private String mPosition = "position";
     private int position;
+    private PopupWindow mPopupWindow;
 
     public ProgressVideoPlayer(Context context) {
         super(context);
@@ -37,7 +37,6 @@ public class ProgressVideoPlayer extends JCVideoPlayerStandard {
     @Override
     public int getCurrentPositionWhenPlaying() {
         position = super.getCurrentPositionWhenPlaying();
-        L.e(String.valueOf(position));
         return position;
     }
 
@@ -48,7 +47,7 @@ public class ProgressVideoPlayer extends JCVideoPlayerStandard {
             @Override
             public void onClick(View v) {
                 ToastUtil.show(getContext(), "切换清晰度");
-               showPopupWindow(fullscreenButton);
+                showPopupWindow(fullscreenButton);
             }
         });
         super.onSurfaceTextureAvailable(surface, width, height);
@@ -57,18 +56,18 @@ public class ProgressVideoPlayer extends JCVideoPlayerStandard {
     OnClickListener onclick = new OnClickListener() {
         @Override
         public void onClick(View v) {
+            backPress();
             switch (v.getId()) {
                 case R.id.text_size_big:
-                    backPress();
                     JCVideoPlayerStandard.startFullscreen(getContext(), ProgressVideoPlayer.class,
                             "http://resource.gbxx123.com/minivideo/mp4/gq/2016/7/22/1469176714153/1469176714153.mp4", "高清视频");
                     break;
                 case R.id.text_size_small:
-                    backPress();
                     JCVideoPlayerStandard.startFullscreen(getContext(), ProgressVideoPlayer.class,
                             "http://resource.gbxx123.com/minivideo/mp4/gq/2016/7/22/1469176714153/1469176714153.mp4", "低清视频");
                     break;
             }
+            mPopupWindow.dismiss();
         }
     };
 
@@ -86,32 +85,34 @@ public class ProgressVideoPlayer extends JCVideoPlayerStandard {
         TextView tv_small = (TextView) view.findViewById(R.id.text_size_small);
         tv_small.setText("低清");
         tv_small.setOnClickListener(onclick);
-        PopupWindow popupWindow = new PopupWindow(view, WindowManager.LayoutParams.WRAP_CONTENT, WindowManager.LayoutParams.WRAP_CONTENT);
-        popupWindow.setBackgroundDrawable(new BitmapDrawable());
+        mPopupWindow = new PopupWindow(view, WindowManager.LayoutParams.WRAP_CONTENT, WindowManager.LayoutParams.WRAP_CONTENT);
+        mPopupWindow.setBackgroundDrawable(new BitmapDrawable());
+        mPopupWindow.setAnimationStyle(R.style.mypopwindow_anim_style);
         view.measure(View.MeasureSpec.UNSPECIFIED, View.MeasureSpec.UNSPECIFIED);//要想下面测量出高度必须添加这句话
         int high = view.getMeasuredHeight() + v.getHeight();
         // 设置popWindow的显示和消失动画
 //        popupWindow.setAnimationStyle(R.style.mypopwindow_anim_style);//默认动画为缩放动画
-        popupWindow.showAsDropDown(v,
+        mPopupWindow.showAsDropDown(v,
                 0,
                 // 保证尺寸是根据屏幕像素密度来的
                 -high);
 
         // 使其聚集
-        popupWindow.setFocusable(true);
+        mPopupWindow.setFocusable(true);
         // 设置允许在外点击消失
-        popupWindow.setOutsideTouchable(true);
+        mPopupWindow.setOutsideTouchable(true);
         // 刷新状态
-        popupWindow.update();
+        mPopupWindow.update();
     }
 
     @Override
     public void onPrepared() {
         super.onPrepared();
-        String oldPosition = SpUtil.getString(mPosition, 0 + "");
+        int oldPosition = Integer.parseInt(SpUtil.getString(mPosition, 0 + ""));
         L.e("页面可见" + oldPosition);
-        onEvent(JCBuriedPoint.ON_TOUCH_SCREEN_SEEK_POSITION);
-        JCMediaManager.instance().mediaPlayer.seekTo(Integer.parseInt(oldPosition));
+//        onEvent(JCBuriedPoint.ON_TOUCH_SCREEN_SEEK_POSITION);
+        if (Math.abs(oldPosition - getDuration()) < 5000) return;
+        JCMediaManager.instance().mediaPlayer.seekTo(oldPosition);
 //        int duration = getDuration();
 //        int progress = Integer.parseInt(oldPosition) * 100 / (duration == 0 ? 1 : duration);
 //        progressBar.setProgress(progress);
@@ -121,7 +122,8 @@ public class ProgressVideoPlayer extends JCVideoPlayerStandard {
     public boolean onSurfaceTextureDestroyed(SurfaceTexture surface) {
         SpUtil.put(mPosition, position + "");
         L.e("页面销毁" + position);
+        L.e("视频总时长" + getDuration());
+        L.e("进度" + Float.parseFloat(String.valueOf(position)) / getDuration() * 100);
         return super.onSurfaceTextureDestroyed(surface);
     }
-
 }
