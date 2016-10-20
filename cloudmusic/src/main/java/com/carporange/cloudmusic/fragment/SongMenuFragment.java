@@ -100,7 +100,7 @@ public class SongMenuFragment extends BaseFragment {
     @OnClick(R.id.tomap)
     void toMap() {
         JCVideoPlayerStandard.startFullscreen(getActivity(), ProgressVideoPlayer.class,
-                "http://resource.gbxx123.com/minivideo/mp4/gq/2016/7/22/1469176714153/1469176714153.mp4", "学习");
+                "http://resource.gbxx123.com/video/mp4/pq/1328171871228/1328171871228.mp4", "学习");
     }
 
     @OnClick(R.id.tomap1)

@@ -60,11 +60,11 @@ public class ProgressVideoPlayer extends JCVideoPlayerStandard {
             switch (v.getId()) {
                 case R.id.text_size_big:
                     JCVideoPlayerStandard.startFullscreen(getContext(), ProgressVideoPlayer.class,
-                            "http://resource.gbxx123.com/minivideo/mp4/gq/2016/7/22/1469176714153/1469176714153.mp4", "高清视频");
+                            "http://resource.gbxx123.com/video/mp4/gq/1328171871228/1328171871228.mp4", "高清视频");
                     break;
                 case R.id.text_size_small:
                     JCVideoPlayerStandard.startFullscreen(getContext(), ProgressVideoPlayer.class,
-                            "http://resource.gbxx123.com/minivideo/mp4/gq/2016/7/22/1469176714153/1469176714153.mp4", "低清视频");
+                            "http://resource.gbxx123.com/video/mp4/dq/1328171871228/1328171871228.mp4", "低清视频");
                     break;
             }
             mPopupWindow.dismiss();
