@@ -20,6 +20,12 @@
         <item name="android:windowAnimationStyle">@style/activityAnimation</item>
     </style>
 
+    <style name="AppTheme.Launch"> <!--用于启动页面解决白屏时间太长的问题-->
+        <item name="android:windowFullscreen">true</item>
+        <item name="android:windowDisablePreview">false</item>
+        <item name="android:windowBackground">@color/colorAccent</item>
+    </style>
+
     <!--在application中配置,或者在Activity中配置
     android:windowAnimationStyle="@style/Animation.Activity.Translucent.Style"-->
     <style name="Animation.Activity" parent="@android:style/Animation.Translucent">

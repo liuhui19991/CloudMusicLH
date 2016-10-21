@@ -26,6 +26,7 @@ import com.carporange.cloudmusic.event.ProgressVideoPlayer;
 import com.carporange.cloudmusic.event.WriteStorage;
 import com.carporange.cloudmusic.ui.activity.BlurredViewBasicActivity;
 import com.carporange.cloudmusic.ui.activity.JsActivity;
+import com.carporange.cloudmusic.ui.activity.KnowledgeActivity;
 import com.carporange.cloudmusic.ui.activity.RefreshLoadMoreActivity;
 import com.carporange.cloudmusic.ui.activity.WeatherActivity;
 import com.carporange.cloudmusic.ui.activity.WebPageActivity;
@@ -48,6 +49,7 @@ import com.yolanda.nohttp.download.DownloadRequest;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -106,6 +108,10 @@ public class AnchorRadioFragment extends BaseFragment implements MyAdapter.ItemC
             }
         });
         createBottomSheetDialog();
+        File file = new File(SAVE_URL);
+        if (!file.exists()) {//如果没有的话需要创建文件夹
+            file.mkdir();
+        }
     }
 
     @Override
@@ -145,8 +151,8 @@ public class AnchorRadioFragment extends BaseFragment implements MyAdapter.ItemC
 
     private void downLoad() {
         mMDownloadRequest = NoHttp.createDownloadRequest(VIDEO_DOWN_URL, SAVE_URL, "123.mp4", true, true);
-        DownloadQueue downloadQueue = NoHttp.newDownloadQueue();
-        downloadQueue.add(0, mMDownloadRequest, downloadListener);
+        DownloadQueue mDownloadQueue = NoHttp.newDownloadQueue();
+        mDownloadQueue.add(0, mMDownloadRequest, downloadListener);
     }
 
     private DownloadListener downloadListener = new DownloadListener() {
@@ -169,7 +175,6 @@ public class AnchorRadioFragment extends BaseFragment implements MyAdapter.ItemC
 
         @Override
         public void onFinish(int what, String filePath) {
-//            mDownTextView.setText("下载完成");
             L.e("回调下载地址" + filePath);
             JCVideoPlayerStandard.startFullscreen(mContext, JCVideoPlayerStandard.class, filePath, "download");
         }
@@ -272,6 +277,8 @@ public class AnchorRadioFragment extends BaseFragment implements MyAdapter.ItemC
         }*/
         list.add("下载视频");
         list.add("打开文件");
+        list.add("取消下载");
+        list.add("打开知识地图");
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
         linearLayoutManager.setSmoothScrollbarEnabled(true);
         recyclerView.setLayoutManager(linearLayoutManager);
@@ -300,7 +307,7 @@ public class AnchorRadioFragment extends BaseFragment implements MyAdapter.ItemC
         L.e("没有获取到写内存卡权限");
     }
 
-    @Subscribe(threadMode = ThreadMode.MAIN) //EventBus回调在ui线程执行
+    @Subscribe(threadMode = ThreadMode.MAIN) //EventBus回调在ui线程执行,这里没有用到
     public void onEvent(WriteStorage event) {
         downLoad();
         L.e("EventBus回调");
@@ -330,12 +337,21 @@ public class AnchorRadioFragment extends BaseFragment implements MyAdapter.ItemC
             case 0:
                 AndPermission.with(this)
                         .requestCode(66)
-                        .permission(Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE)
+                        .permission(Manifest.permission.WRITE_EXTERNAL_STORAGE)//当有写权限的时候读权限系统也会授予
                         .send();
                 break;
             case 1:
                 JCVideoPlayerStandard.startFullscreen(mContext, ProgressVideoPlayer.class,
                         SAVE_URL + "123.mp4", "download");
+                break;
+            case 2:
+                mMDownloadRequest.cancel();
+                break;
+            case 3:
+                Intent intent = new Intent(mContext, KnowledgeActivity.class);
+                intent.putExtra("map", SAVE_URL + "knowledge.json");
+                intent.putExtra("down","down");
+                startActivity(intent);
                 break;
             default:
 

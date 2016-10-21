@@ -5,6 +5,7 @@
     <string name="wait_dialog_title">玩命加载中...</string>
     <string name="newarby">附近</string>
     <string name="title">一笑过千山</string>
+    <string name="knowledgemap">知识地图</string>
     <string name="pwd">请输入密码</string>
     <string name="youwant">带小红点的RecyclerView</string>
     <string name="smaller">超小号字体</string>
