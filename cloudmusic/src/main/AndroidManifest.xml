@@ -15,6 +15,7 @@
     <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
     <!-- 写入扩展存储，向扩展卡写入数据，用于写入离线定位数据 -->
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
     <!-- 访问网络，网络定位需要上网 -->
     <uses-permission android:name="android.permission.INTERNET"/>
     <!--拨打电话-->
@@ -62,10 +63,10 @@
         <activity android:name=".ui.activity.RecyclerSwipeActivity"/>
         <activity android:name=".ui.activity.UniversalActivity"/>
 
-       <!-- <service
-            android:name="com.baidu.location.f"
-            android:enabled="true"
-            android:process=":remote"/>-->
+        <!-- <service
+             android:name="com.baidu.location.f"
+             android:enabled="true"
+             android:process=":remote"/>-->
     </application>
 
 </manifest>

@@ -1,9 +1,9 @@
 package com.carporange.cloudmusic.fragment;
 
 
+import android.Manifest;
 import android.content.Intent;
 import android.graphics.drawable.ColorDrawable;
-import android.os.Environment;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomSheetBehavior;
 import android.support.design.widget.BottomSheetDialog;
@@ -23,6 +23,7 @@ import com.carporange.cloudmusic.adapter.ListRecyclerAdapter;
 import com.carporange.cloudmusic.adapter.MyAdapter;
 import com.carporange.cloudmusic.domain.ViewBanner;
 import com.carporange.cloudmusic.event.ProgressVideoPlayer;
+import com.carporange.cloudmusic.event.WriteStorage;
 import com.carporange.cloudmusic.ui.activity.BlurredViewBasicActivity;
 import com.carporange.cloudmusic.ui.activity.JsActivity;
 import com.carporange.cloudmusic.ui.activity.RefreshLoadMoreActivity;
@@ -35,25 +36,31 @@ import com.carporange.cloudmusic.util.GsonUtil;
 import com.carporange.cloudmusic.util.L;
 import com.carporange.cloudmusic.util.T;
 import com.carporange.cloudmusic.widget.ViewPagerCycle;
+import com.yanzhenjie.permission.AndPermission;
+import com.yanzhenjie.permission.PermissionNo;
+import com.yanzhenjie.permission.PermissionYes;
 import com.yolanda.nohttp.Headers;
 import com.yolanda.nohttp.NoHttp;
 import com.yolanda.nohttp.download.DownloadListener;
 import com.yolanda.nohttp.download.DownloadQueue;
 import com.yolanda.nohttp.download.DownloadRequest;
 
-import java.io.File;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
+
 import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
 import butterknife.OnClick;
+import cn.world.liuhui.utils.FileUtil;
 import cn.world.liuhui.widget.NumberProgressBar;
 import fm.jiecao.jcvideoplayer_lib.JCVideoPlayerStandard;
 
 /**
  * Created by liuhui on 2016/6/27.
  */
-public class AnchorRadioFragment extends BaseFragment {
+public class AnchorRadioFragment extends BaseFragment implements MyAdapter.ItemClickListener {
     @BindView(R.id.et)
     EditText mEditText;
     @BindView(R.id.view_pager)
@@ -63,7 +70,7 @@ public class AnchorRadioFragment extends BaseFragment {
     @BindView(R.id.down_progress)
     NumberProgressBar mNumberProgressBar;
     private BottomSheetDialog mBottomSheetDialog;
-    private String SAVE_URL = Environment.getExternalStorageDirectory() + "/liuhui/";
+    private String SAVE_URL = FileUtil.getRootPath() + "/liuhui/";
     private String VIDEO_DOWN_URL = "http://resource.gbxx123.com/video/mp4/dq/2015/3/25/1427219238357/1427219238357.mp4";
     //            "http://resource.gbxx123.com/video/mp4/gq/1328171871228/1328171871228.mp4";
     private ViewBanner mViewBanner = new ViewBanner();
@@ -99,11 +106,6 @@ public class AnchorRadioFragment extends BaseFragment {
             }
         });
         createBottomSheetDialog();
-        File dirFile = new File(SAVE_URL);
-        if (!dirFile.exists()) {
-            L.e("创建一个文件夹");
-            dirFile.mkdir();
-        }
     }
 
     @Override
@@ -169,7 +171,7 @@ public class AnchorRadioFragment extends BaseFragment {
         public void onFinish(int what, String filePath) {
 //            mDownTextView.setText("下载完成");
             L.e("回调下载地址" + filePath);
-            JCVideoPlayerStandard.startFullscreen(mContext, JCVideoPlayerStandard.class, filePath);
+            JCVideoPlayerStandard.startFullscreen(mContext, JCVideoPlayerStandard.class, filePath, "download");
         }
 
         @Override
@@ -276,27 +278,32 @@ public class AnchorRadioFragment extends BaseFragment {
         ListRecyclerAdapter adapter = new ListRecyclerAdapter(list);
         recyclerView.setAdapter(adapter);
 
-        adapter.setOnItemClickListener(new MyAdapter.ItemClickListener() {
-            @Override
-            public void onItemCclick(View v, int position) {
-                switch (position) {
-                    case 0:
-                        downLoad();
-                        break;
-                    case 1:
-                        L.e("本地地址" + SAVE_URL + File.separator + "video.mp4");
-                        JCVideoPlayerStandard.startFullscreen(mContext, ProgressVideoPlayer.class,
-                                "/storage/emulated/0/Android/data/com.xcjy.activity/files/Download//53818/1427219238357.mp4");
-                        break;
-                    default:
-
-                        break;
-                }
-                if (mBottomSheetDialog != null)
-                    mBottomSheetDialog.dismiss();
-            }
-        });
+        adapter.setOnItemClickListener(this);
         setBehaviorCallback();
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        // 这个Fragment所在的Activity的onRequestPermissionsResult()如果重写了，不能删除super.onRes...
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        AndPermission.onRequestPermissionsResult(this, requestCode, permissions, grantResults);
+    }
+
+    @PermissionYes(66)
+    private void getExteralStorageYes() {
+        L.e("获取到写内存卡权限");
+        downLoad();
+    }
+
+    @PermissionNo(66)
+    private void getExteralStorageNo() {
+        L.e("没有获取到写内存卡权限");
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN) //EventBus回调在ui线程执行
+    public void onEvent(WriteStorage event) {
+        downLoad();
+        L.e("EventBus回调");
     }
 
     private void setBehaviorCallback() {
@@ -317,5 +324,25 @@ public class AnchorRadioFragment extends BaseFragment {
         });
     }
 
+    @Override
+    public void onItemCclick(View v, int position) {
+        switch (position) {
+            case 0:
+                AndPermission.with(this)
+                        .requestCode(66)
+                        .permission(Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE)
+                        .send();
+                break;
+            case 1:
+                JCVideoPlayerStandard.startFullscreen(mContext, ProgressVideoPlayer.class,
+                        SAVE_URL + "123.mp4", "download");
+                break;
+            default:
+
+                break;
+        }
+        if (mBottomSheetDialog != null)
+            mBottomSheetDialog.dismiss();
+    }
 }
 

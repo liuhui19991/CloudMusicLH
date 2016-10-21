@@ -266,7 +266,7 @@ public class MainActivity extends AppCompatActivity implements MenuLeftFragment.
                     T.showShort(mContext, "解析二维码失败");
                 }
             }
-        }
+       }
     }
 
     @Override
