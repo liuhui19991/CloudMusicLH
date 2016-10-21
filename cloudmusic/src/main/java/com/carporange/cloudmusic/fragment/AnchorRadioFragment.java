@@ -22,8 +22,8 @@ import com.carporange.cloudmusic.R;
 import com.carporange.cloudmusic.adapter.ListRecyclerAdapter;
 import com.carporange.cloudmusic.adapter.MyAdapter;
 import com.carporange.cloudmusic.domain.ViewBanner;
-import com.carporange.cloudmusic.event.ProgressVideoPlayer;
 import com.carporange.cloudmusic.event.WriteStorage;
+import com.carporange.cloudmusic.listener.MyDownloadListener;
 import com.carporange.cloudmusic.ui.activity.BlurredViewBasicActivity;
 import com.carporange.cloudmusic.ui.activity.JsActivity;
 import com.carporange.cloudmusic.ui.activity.KnowledgeActivity;
@@ -40,7 +40,6 @@ import com.carporange.cloudmusic.widget.ViewPagerCycle;
 import com.yanzhenjie.permission.AndPermission;
 import com.yanzhenjie.permission.PermissionNo;
 import com.yanzhenjie.permission.PermissionYes;
-import com.yolanda.nohttp.Headers;
 import com.yolanda.nohttp.NoHttp;
 import com.yolanda.nohttp.download.DownloadListener;
 import com.yolanda.nohttp.download.DownloadQueue;
@@ -49,7 +48,6 @@ import com.yolanda.nohttp.download.DownloadRequest;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
-import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -108,10 +106,7 @@ public class AnchorRadioFragment extends BaseFragment implements MyAdapter.ItemC
             }
         });
         createBottomSheetDialog();
-        File file = new File(SAVE_URL);
-        if (!file.exists()) {//如果没有的话需要创建文件夹
-            file.mkdir();
-        }
+        FileUtil.initDirectory(SAVE_URL);//如果没有的话需要创建文件夹
     }
 
     @Override
@@ -155,33 +150,10 @@ public class AnchorRadioFragment extends BaseFragment implements MyAdapter.ItemC
         mDownloadQueue.add(0, mMDownloadRequest, downloadListener);
     }
 
-    private DownloadListener downloadListener = new DownloadListener() {
-
-        @Override
-        public void onDownloadError(int what, Exception exception) {
-
-        }
-
-        @Override
-        public void onStart(int what, boolean isResume, long rangeSize, Headers responseHeaders, long allCount) {
-//            mDownTextView.setText("暂停");
-            L.e("开始下载");
-        }
-
+    private DownloadListener downloadListener = new MyDownloadListener() {
         @Override
         public void onProgress(int what, int progress, long fileCount) {
             mNumberProgressBar.setProgress(progress);
-        }
-
-        @Override
-        public void onFinish(int what, String filePath) {
-            L.e("回调下载地址" + filePath);
-            JCVideoPlayerStandard.startFullscreen(mContext, JCVideoPlayerStandard.class, filePath, "download");
-        }
-
-        @Override
-        public void onCancel(int what) {
-
         }
     };
 
@@ -213,7 +185,7 @@ public class AnchorRadioFragment extends BaseFragment implements MyAdapter.ItemC
         // 利用layoutInflater获得View
         View view = LayoutInflater.from(getContext()).inflate(R.layout.poplayout, null);
 
-        // 下面是两种方法得到宽度和高度 getWindow().getDecorView().getWidth()
+// 下面是两种方法得到宽度和高度 getWindow().getDecorView().getWidth()
 
         final PopupWindow window = new PopupWindow(view,
                 WindowManager.LayoutParams.MATCH_PARENT,
@@ -298,7 +270,7 @@ public class AnchorRadioFragment extends BaseFragment implements MyAdapter.ItemC
 
     @PermissionYes(66)
     private void getExteralStorageYes() {
-        L.e("获取到写内存卡权限");
+        L.e("拥有写内存卡权限");
         downLoad();
     }
 
@@ -309,7 +281,6 @@ public class AnchorRadioFragment extends BaseFragment implements MyAdapter.ItemC
 
     @Subscribe(threadMode = ThreadMode.MAIN) //EventBus回调在ui线程执行,这里没有用到
     public void onEvent(WriteStorage event) {
-        downLoad();
         L.e("EventBus回调");
     }
 
@@ -341,7 +312,7 @@ public class AnchorRadioFragment extends BaseFragment implements MyAdapter.ItemC
                         .send();
                 break;
             case 1:
-                JCVideoPlayerStandard.startFullscreen(mContext, ProgressVideoPlayer.class,
+                JCVideoPlayerStandard.startFullscreen(mContext, JCVideoPlayerStandard.class,
                         SAVE_URL + "123.mp4", "download");
                 break;
             case 2:
@@ -350,7 +321,7 @@ public class AnchorRadioFragment extends BaseFragment implements MyAdapter.ItemC
             case 3:
                 Intent intent = new Intent(mContext, KnowledgeActivity.class);
                 intent.putExtra("map", SAVE_URL + "knowledge.json");
-                intent.putExtra("down","down");
+                intent.putExtra("down", "down");
                 startActivity(intent);
                 break;
             default:

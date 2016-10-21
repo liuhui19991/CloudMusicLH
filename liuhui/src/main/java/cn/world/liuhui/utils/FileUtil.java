@@ -32,7 +32,6 @@ import java.io.OutputStreamWriter;
 import java.io.Writer;
 
 /**
- * 对话框工具箱
  * Created by liuhui on 2015/7/27.
  */
 public class FileUtil {

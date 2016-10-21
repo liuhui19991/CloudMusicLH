@@ -6,7 +6,6 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
-import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.view.GravityCompat;
@@ -44,15 +43,14 @@ import org.greenrobot.eventbus.ThreadMode;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import cn.world.liuhui.utils.SnackbarUtil;
 import fm.jiecao.jcvideoplayer_lib.JCVideoPlayer;
 
 /**
  * Created by liuhui on 2016/6/27.
  */
-public class MainActivity extends AppCompatActivity implements MenuLeftFragment.OnLeftClickListener ,DrawerLayout.DrawerListener{
+public class MainActivity extends AppCompatActivity implements MenuLeftFragment.OnLeftClickListener, DrawerLayout.DrawerListener {
 
-    private static final int MY_PERMISSIONS_REQUEST_READ_CONTACTS = 99;
-    private static final int BAIDU_READ_PHONE_STATE = 100;
     @BindView(R.id.drawer_layout)
     DrawerLayout mDrawerLayout;
     @BindView(R.id.fragment_left)
@@ -266,7 +264,7 @@ public class MainActivity extends AppCompatActivity implements MenuLeftFragment.
                     T.showShort(mContext, "解析二维码失败");
                 }
             }
-       }
+        }
     }
 
     @Override
@@ -302,7 +300,7 @@ public class MainActivity extends AppCompatActivity implements MenuLeftFragment.
     long time = 0;
 
     @Override
-    public void onBackPressed() {//此处要把super.onBackPressed()去掉,要不然还是执行父类的退出
+    public void onBackPressed() {
         if (JCVideoPlayer.backPress()) {
             return;
         }
@@ -313,22 +311,24 @@ public class MainActivity extends AppCompatActivity implements MenuLeftFragment.
             }
             time = System.currentTimeMillis();
             T.showShort(this, "小样你还想退出吗?" + "\n" + "再按一次返回确认退出");
-            Snackbar.make(mTitle, "小样你还想退出吗?", Snackbar.LENGTH_LONG).setAction("click", new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    System.exit(0);
-                }
-            }).show();
+            SnackbarUtil.showWithClick(mTitle, "小样你还想退出吗?", "点我也能退出", mOnClickListener);
         } else {
             finish();
         }
     }
 
+    private View.OnClickListener mOnClickListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+            System.exit(0);
+        }
+    };
+
     @Override
     public void onDrawerSlide(View drawerView, float slideOffset) {
         View mContent = mDrawerLayout.getChildAt(0);
         View mMenu = drawerView;
-        ViewHelper.setTranslationX(mContent,mMenu.getMeasuredWidth()*slideOffset);//此处引用nineoldandroids库来完成动画
+        ViewHelper.setTranslationX(mContent, mMenu.getMeasuredWidth() * slideOffset);//此处引用nineoldandroids库来完成动画
     }
 
     @Override

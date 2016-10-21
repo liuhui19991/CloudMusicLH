@@ -18,19 +18,27 @@ package cn.world.liuhui.utils;
 import android.app.Activity;
 import android.support.annotation.StringRes;
 import android.support.design.widget.Snackbar;
+import android.view.View;
 
 /**
  * 展示Snackbar的工具类
  * Created by liuhui on 2016/7/10.
  */
 public class SnackbarUtil {
-    //TODO view
-    public static void show(Activity context, CharSequence msg) {
-        Snackbar.make(context.getWindow().getDecorView(), msg, Snackbar.LENGTH_LONG).show();
+
+    public static void show(View view, CharSequence msg) {
+        Snackbar.make(view, msg, Snackbar.LENGTH_SHORT).show();
+    }
+
+    public static void showLong(View view, CharSequence msg) {
+        Snackbar.make(view, msg, Snackbar.LENGTH_LONG).show();
+    }
+
+    public static void showWithClick(View view, CharSequence msg, CharSequence clickMsg, View.OnClickListener listener) {
+        Snackbar.make(view, msg, Snackbar.LENGTH_LONG).setAction(clickMsg, listener).show();
     }
 
     public static void show(Activity context, @StringRes int stringId) {
-        Snackbar.make(context.getWindow().getDecorView(), stringId, Snackbar.LENGTH_LONG).show();
+        Snackbar.make(context.getWindow().getDecorView(), stringId, Snackbar.LENGTH_SHORT).show();
     }
-
 }
