@@ -6,6 +6,7 @@
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
         <item name="android:actionMenuTextColor">@android:color/white</item>
+        <item name="alertDialogTheme">@style/Theme.AppCompat.Light.Dialog.Alert.Self</item>
         <!-- 设置背景透明背景，右滑时才能看到上一个界面，否则会看到黑屏效果,添加转场动画变为缩放动画,去掉为平移动画
         为了解决这个问题采用代码设置转场动画
         -->
@@ -24,6 +25,12 @@
         <item name="android:windowFullscreen">true</item>
         <item name="android:windowDisablePreview">false</item>
         <item name="android:windowBackground">@color/colorAccent</item>
+    </style>
+
+    <!--设置dialogbutton颜色-->
+    <style name="Theme.AppCompat.Light.Dialog.Alert.Self" parent="@style/Theme.AppCompat.Light.Dialog.Alert">
+        <!--修改AlertDialog按钮的颜色-->
+        <item name="colorAccent">#987656</item>
     </style>
 
     <!--在application中配置,或者在Activity中配置
