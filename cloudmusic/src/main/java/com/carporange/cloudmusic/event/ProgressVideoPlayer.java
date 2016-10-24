@@ -1,8 +1,10 @@
 package com.carporange.cloudmusic.event;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.graphics.SurfaceTexture;
 import android.graphics.drawable.BitmapDrawable;
+import android.support.v7.app.AlertDialog;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -126,4 +128,30 @@ public class ProgressVideoPlayer extends JCVideoPlayerStandard {
         L.e("进度" + Float.parseFloat(String.valueOf(position)) / getDuration() * 100);
         return super.onSurfaceTextureDestroyed(surface);
     }
+
+    @Override
+    public void showWifiDialog() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+        builder.setMessage(getResources().getString(R.string.tips_not_wifi));
+        builder.setPositiveButton(getResources().getString(R.string.tips_not_wifi_confirm), new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+                startPlayLogic();
+                WIFI_TIP_DIALOG_SHOWED = true;
+            }
+        });
+        builder.setNegativeButton(getResources().getString(R.string.tips_not_wifi_cancel), new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+                backPress();
+                JCVideoPlayerStandard.startFullscreen(getContext(), ProgressVideoPlayer.class,
+                        "file//:"+"此处设置一个错误地址让返回键不响应所在Activity的onBack方法", "错误视频");
+                backPress();
+            }
+        });
+        builder.create().show();
+    }
+
 }

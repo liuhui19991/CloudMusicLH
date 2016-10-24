@@ -22,6 +22,7 @@ import com.carporange.cloudmusic.R;
 import com.carporange.cloudmusic.adapter.ListRecyclerAdapter;
 import com.carporange.cloudmusic.adapter.MyAdapter;
 import com.carporange.cloudmusic.domain.ViewBanner;
+import com.carporange.cloudmusic.event.ProgressVideoPlayer;
 import com.carporange.cloudmusic.event.WriteStorage;
 import com.carporange.cloudmusic.listener.MyDownloadListener;
 import com.carporange.cloudmusic.ui.activity.BlurredViewBasicActivity;
@@ -312,11 +313,13 @@ public class AnchorRadioFragment extends BaseFragment implements MyAdapter.ItemC
                         .send();
                 break;
             case 1:
-                JCVideoPlayerStandard.startFullscreen(mContext, JCVideoPlayerStandard.class,
-                        SAVE_URL + "123.mp4", "download");
+                JCVideoPlayerStandard.startFullscreen(mContext, ProgressVideoPlayer.class,
+                        "file://" + SAVE_URL + "123.mp4", "download");//解决弹出提示使用移动网络的问题
                 break;
             case 2:
-                mMDownloadRequest.cancel();
+                JCVideoPlayerStandard.startFullscreen(mContext, ProgressVideoPlayer.class,
+                        SAVE_URL + "123.mp4", "download");
+                if (mMDownloadRequest != null) mMDownloadRequest.cancel();
                 break;
             case 3:
                 Intent intent = new Intent(mContext, KnowledgeActivity.class);

@@ -17,7 +17,7 @@ android {
     defaultConfig {
         applicationId "com.carporange.cloudmusic"
         minSdkVersion 15
-        targetSdkVersion 23
+        targetSdkVersion 24
         versionCode 1
         versionName "1.0"
         //高斯模糊加入下面两行
@@ -77,7 +77,7 @@ dependencies {
     //侧滑删除
     compile 'com.nikhilpanju.recyclerviewenhanced:recyclerviewenhanced:1.1.0'
     compile 'com.lzy.widget:imagepicker:0.3.2'
-    compile 'com.github.CymChad:BaseRecyclerViewAdapterHelper:v2.2.2'
+    compile 'com.github.CymChad:BaseRecyclerViewAdapterHelper:v2.3.2'
     /*   //If you can not start app, you cancel the annotation
            //如果app无法启动,请取消下面的注释
            //Other ABIs: optional
