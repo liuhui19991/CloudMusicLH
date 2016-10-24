@@ -14,6 +14,9 @@ import com.carporange.cloudmusic.R;
 import java.util.ArrayList;
 import java.util.List;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
 /**
  * Created by liuhui on 2016/7/21.
  */
@@ -142,15 +145,16 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
      * 自定义的ViewHolder，持有每个Item的的所有界面元素
      */
     public class ViewHolder extends RecyclerView.ViewHolder {
+        @BindView(R.id.text)
         TextView textView;
+        @BindView(R.id.cb)
         CheckBox checkBox;
+        @BindView(R.id.image)
         ImageView imageView;
 
         public ViewHolder(View view) {
             super(view);
-            checkBox = (CheckBox) view.findViewById(R.id.cb);
-            textView = (TextView) view.findViewById(R.id.text);
-            imageView = (ImageView) view.findViewById(R.id.image);
+            ButterKnife.bind(this, view);
         }
     }
 }
