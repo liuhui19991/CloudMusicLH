@@ -4,6 +4,7 @@ package com.carporange.cloudmusic.fragment;
 import android.Manifest;
 import android.content.Intent;
 import android.graphics.drawable.ColorDrawable;
+import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomSheetBehavior;
 import android.support.design.widget.BottomSheetDialog;
@@ -49,6 +50,7 @@ import com.yolanda.nohttp.download.DownloadRequest;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -313,8 +315,12 @@ public class AnchorRadioFragment extends BaseFragment implements MyAdapter.ItemC
                         .send();
                 break;
             case 1:
+                Uri uri = Uri.fromFile(new File(SAVE_URL + "123.MP4"));
+                String url = uri.toString();
                 JCVideoPlayerStandard.startFullscreen(mContext, ProgressVideoPlayer.class,
-                        "file://" + SAVE_URL + "123.mp4", "download");//解决弹出提示使用移动网络的问题
+                        url, "download");//解决弹出提示使用移动网络的问题
+//                JCVideoPlayerStandard.startFullscreen(mContext, ProgressVideoPlayer.class,
+//                "file://" + SAVE_URL + "123.mp4", "download");//解决弹出提示使用移动网络的问题
                 break;
             case 2:
                 JCVideoPlayerStandard.startFullscreen(mContext, ProgressVideoPlayer.class,
