@@ -30,7 +30,8 @@ public class RankingListFragment extends BaseFragment {
     }
 
     @Override
-    protected void onVisible() {
+    public void initViews() {
+        ll = (LinearLayout) mContentView.findViewById(R.id.progress);
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {
@@ -38,10 +39,5 @@ public class RankingListFragment extends BaseFragment {
             }
         }, 2000);
         EventBus.getDefault().post(new TitleEvent("排行榜"));
-    }
-
-    @Override
-    public void initViews() {
-        ll = (LinearLayout) mContentView.findViewById(R.id.progress);
     }
 }

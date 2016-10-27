@@ -2,6 +2,7 @@ package com.carporange.cloudmusic.fragment;
 
 
 import android.Manifest;
+import android.app.Dialog;
 import android.content.Intent;
 import android.graphics.Color;
 import android.support.annotation.NonNull;
@@ -67,18 +68,22 @@ public class SongMenuFragment extends BaseFragment {
 //                mCircleProgress.setInCircleColor(Color.parseColor("#897654"));//点击时候改变进度圆内圆的颜色
             }
         });
-    }
 
-
-    @Override
-    protected void onVisible() {
 //        S.show(getActivity(), CarpApplication.getInstance().getResources().getString(R.string.title));//此处的snackbar会出现在华为手机的导航栏上因为获取的view的缘故
-        // 如果需要自动倒计时，就会自动走进度。
+//        如果需要自动倒计时，就会自动走进度。
 //        mCircleProgress.start();//只能开启一次
         mCircleProgress.reStart();
         mCircleProgressOpposite.reStart();
         mCircleProgress.setCountdownProgressListener(1, onCountdownProgressListener);
         mCircleProgressOpposite.setCountdownProgressListener(2, onCountdownProgressListener);
+
+        Dialog mWaitDialog = new Dialog(mContext, R.style.TRANSDIALOG);
+        mWaitDialog.setContentView(R.layout.trans_dialog);
+        mWaitDialog.getWindow().setBackgroundDrawableResource(R.color.transparent);
+        mWaitDialog.setCancelable(true);
+        if (mWaitDialog != null) {
+            mWaitDialog.show();
+        }
     }
 
     CircleTextProgressbar.OnCountdownProgressListener onCountdownProgressListener = new CircleTextProgressbar.OnCountdownProgressListener() {
@@ -150,7 +155,7 @@ public class SongMenuFragment extends BaseFragment {
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         // 这个Fragment所在的Activity的onRequestPermissionsResult()如果重写了，不能删除super.onRes...
-        super.onRequestPermissionsResult(requestCode,permissions,grantResults);
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         AndPermission.onRequestPermissionsResult(this, requestCode, permissions, grantResults);
     }
 

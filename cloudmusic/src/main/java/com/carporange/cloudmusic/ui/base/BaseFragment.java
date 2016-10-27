@@ -1,6 +1,6 @@
 package com.carporange.cloudmusic.ui.base;
 
-import android.app.Activity;
+import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -18,7 +18,14 @@ public abstract class BaseFragment extends Fragment {
     /**
      * Fragment中的上下文
      */
-    protected Activity mContext;
+    protected Context mContext; //也可以在attach方法中得到
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        mContext = context;
+    }
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -29,7 +36,6 @@ public abstract class BaseFragment extends Fragment {
             ViewGroup parent = (ViewGroup) mContentView.getParent();
             parent.removeView(mContentView);
         }
-        mContext = getActivity();
         ButterKnife.bind(this, mContentView);
         initViews();
         setListeners();
@@ -56,7 +62,8 @@ public abstract class BaseFragment extends Fragment {
     /**
      * 当前fragment可见时候加载
      */
-    protected abstract void onVisible();
+    protected void onVisible() {
+    }
 
     protected void setListeners() {
     }

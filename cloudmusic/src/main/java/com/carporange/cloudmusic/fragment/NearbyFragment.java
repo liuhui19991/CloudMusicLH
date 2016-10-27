@@ -9,11 +9,6 @@ import com.carporange.cloudmusic.ui.base.BaseFragment;
 public class NearbyFragment extends BaseFragment {
 
     @Override
-    protected void onVisible() {
-
-    }
-
-    @Override
     public int getLayoutId() {
         return R.layout.fragment_nearby;
     }

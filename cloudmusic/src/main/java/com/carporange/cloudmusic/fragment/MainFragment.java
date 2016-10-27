@@ -1,7 +1,6 @@
 package com.carporange.cloudmusic.fragment;
 
 
-import android.app.Activity;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
@@ -20,7 +19,6 @@ import butterknife.BindView;
  * Created by liuhui on 2016/6/27.
  */
 public class MainFragment extends BaseFragment {
-    private Activity mActivity;
     @BindView(R.id.viewPager_main)
     ViewPager mViewPager;
     @BindView(R.id.radioGroup)
@@ -30,19 +28,8 @@ public class MainFragment extends BaseFragment {
     }
 
     @Override
-    public void onAttach(Activity activity) {
-        super.onAttach(activity);
-        mActivity = activity;
-    }
-
-    @Override
     public int getLayoutId() {
         return R.layout.fragment_main;
-    }
-
-    @Override
-    public void onDetach() {
-        super.onDetach();
     }
 
     @Override
@@ -56,11 +43,6 @@ public class MainFragment extends BaseFragment {
         mViewPager.setOffscreenPageLimit(3);
         mViewPager.setAdapter(fpa);
         mRadioGroup.check(R.id.rb_discover);
-    }
-
-    @Override
-    protected void onVisible() {
-
     }
 
     @Override

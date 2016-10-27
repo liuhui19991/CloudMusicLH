@@ -114,6 +114,7 @@ public class AnchorRadioFragment extends BaseFragment implements MyAdapter.ItemC
 
     @Override
     protected void onVisible() {
+        super.onVisible();
         if (mViewPagerCycle != null) {
             mViewPagerCycle.startImageCycle();
         }
@@ -121,6 +122,7 @@ public class AnchorRadioFragment extends BaseFragment implements MyAdapter.ItemC
 
     @Override
     public void onInvisible() {
+        super.onInvisible();
         if (mViewPagerCycle != null) {
             mViewPagerCycle.stopImageCycle();//暂停轮播
         }

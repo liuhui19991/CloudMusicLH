@@ -33,11 +33,6 @@ public class DiscoverFragment extends BaseFragment {
     }
 
     @Override
-    protected void onVisible() {
-
-    }
-
-    @Override
     public void initViews() {
         CarpFragmentPagerAdapter fpa = new CarpFragmentPagerAdapter(getChildFragmentManager());
         fpa.addFragment(new PersonalRecommendationFragment(), "个性推荐");

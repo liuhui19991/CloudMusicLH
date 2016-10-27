@@ -34,11 +34,6 @@ public class PersonalRecommendationFragment extends BaseFragment {
         return R.layout.fragment_personal_recommendation;
     }
 
-    @Override
-    protected void onVisible() {
-//        initWaitDialog();  //现在这个方法执行的时候会出现创建Dialog时候空指针
-    }
-
     private void initWaitDialog() {//展示我自定义的等待对话框
         if (mWaitDialog == null) {
             mWaitDialog = new Dialog(mContext, R.style.TRANSDIALOG);
@@ -55,9 +50,8 @@ public class PersonalRecommendationFragment extends BaseFragment {
     protected void initViews() {
         top = findView(R.id.top);
         bottom = findView(R.id.bottom);
-//        initWaitDialog();
+//        initWaitDialog();  //现在这个方法执行的时候会出现创建Dialog时候空指针
     }
-
 
 
     /**

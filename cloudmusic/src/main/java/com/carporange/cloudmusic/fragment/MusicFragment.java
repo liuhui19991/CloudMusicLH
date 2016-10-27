@@ -28,7 +28,8 @@ public class MusicFragment extends BaseFragment {
     }*/
 
     @Override
-    protected void onVisible() {
+    protected void initViews() {
+        super.initViews();
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {

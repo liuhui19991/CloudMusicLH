@@ -1,6 +1,5 @@
 package com.carporange.cloudmusic.fragment;
 
-import android.app.Dialog;
 import android.widget.TextView;
 
 import com.carporange.cloudmusic.R;
@@ -21,9 +20,4 @@ public class FriendFragment extends BaseFragment {
         return R.layout.fragment_friend;
     }
 
-    @Override
-    protected void onVisible() {
-        mTextView.setText("动态添加");
-
-    }
 }

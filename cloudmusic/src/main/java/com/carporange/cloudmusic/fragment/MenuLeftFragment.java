@@ -3,12 +3,10 @@ package com.carporange.cloudmusic.fragment;
 import android.app.Activity;
 import android.content.ComponentName;
 import android.content.Intent;
-import android.provider.Settings;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.Gravity;
-import android.view.View;
 import android.widget.Toast;
 
 import com.carporange.cloudmusic.R;
@@ -54,11 +52,6 @@ public class MenuLeftFragment extends BaseFragment {//这个类在布局文件�
     @Override
     public int getLayoutId() {
         return R.layout.fragment_menu_left;
-    }
-
-    @Override
-    protected void onVisible() {
-
     }
 
     @Override

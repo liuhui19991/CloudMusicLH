@@ -24,11 +24,6 @@ public class FriendsFragment extends BaseFragment {
     ViewPager mViewPager;
 
     @Override
-    protected void onVisible() {
-
-    }
-
-    @Override
     public void initViews() {
         FriendsFragmentPagerAdapter fpa = new FriendsFragmentPagerAdapter(getChildFragmentManager());
         fpa.addFragment(new DynamicFragment(), "动态");
