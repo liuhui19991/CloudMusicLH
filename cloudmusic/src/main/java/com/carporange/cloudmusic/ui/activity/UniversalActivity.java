@@ -147,11 +147,9 @@ public class UniversalActivity extends BaseActivity implements BaseQuickAdapter.
 
     @Override
     public void onLoadMoreRequested() {
-        L.e(Thread.currentThread() + "..1");
         mRecyclerView.post(new Runnable() {
             @Override
             public void run() {
-                L.e(Thread.currentThread() + "..2");
                 if (mCurrentCounter >= TOTAL_COUNTER) {
                     mQuickAdapter.loadComplete();
                     if (notLoadingView == null) {

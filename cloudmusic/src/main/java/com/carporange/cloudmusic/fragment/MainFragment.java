@@ -9,6 +9,7 @@ import android.widget.RadioGroup;
 import com.carporange.cloudmusic.R;
 import com.carporange.cloudmusic.adapter.CarpFragmentPagerAdapter;
 import com.carporange.cloudmusic.ui.base.BaseFragment;
+import com.carporange.cloudmusic.util.L;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -34,6 +35,7 @@ public class MainFragment extends BaseFragment {
 
     @Override
     protected void initViews() {
+        L.e("kanwo主页fragment走了没有");
         List<Fragment> list = new ArrayList<>();
         list.add(new DiscoverFragment());
         list.add(new MusicFragment());

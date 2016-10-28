@@ -92,14 +92,17 @@ public class MainActivity extends AppCompatActivity implements MenuLeftFragment.
     }
 
     public void initViews() {
-        EventBus.getDefault().register(this);//注册eventbus
+        EventBus.getDefault().register(this);//注册eventbus 还需要取消注册
         ViewGroup.LayoutParams layoutParams = mFragmentLeft.getLayoutParams();
         layoutParams.width = DensityUtil.getDisplayWidth(this) * 4 / 5;
         FragmentManager fm = getSupportFragmentManager();
         if (mMainFragment == null) {
             mMainFragment = new MainFragment();
         }
-        fm.beginTransaction().replace(R.id.framelayout, mMainFragment).commit();
+        fm.beginTransaction().add(R.id.framelayout, mMainFragment).commit();
+        fm.beginTransaction().hide(mMainFragment).commit();
+        fm.beginTransaction().show(mMainFragment).commit();
+//        fm.beginTransaction().replace(R.id.framelayout, mMainFragment).commit();
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN) //在ui线程执行

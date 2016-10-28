@@ -4,6 +4,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -13,11 +14,21 @@ import java.util.List;
  */
 public class CarpFragmentPagerAdapter extends FragmentPagerAdapter {
 
-    private List<Fragment> mList;
+    private List<Fragment> mList = new ArrayList<>();
+    private List<String> mTitleList = new ArrayList<>();
+
+    public CarpFragmentPagerAdapter(FragmentManager fm) {
+        super(fm);
+    }
 
     public CarpFragmentPagerAdapter(List<Fragment> list, FragmentManager fm) {
         super(fm);
         mList = list;
+    }
+
+    public void addFragment(Fragment fragment, String title) {
+        mList.add(fragment);
+        mTitleList.add(title);
     }
 
     @Override
@@ -28,5 +39,10 @@ public class CarpFragmentPagerAdapter extends FragmentPagerAdapter {
     @Override
     public int getCount() {
         return mList.size();
+    }
+
+    @Override
+    public CharSequence getPageTitle(int position) {
+        return mTitleList.get(position);
     }
 }

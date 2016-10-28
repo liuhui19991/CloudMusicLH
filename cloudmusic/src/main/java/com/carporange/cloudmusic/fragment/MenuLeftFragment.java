@@ -3,40 +3,56 @@ package com.carporange.cloudmusic.fragment;
 import android.app.Activity;
 import android.content.ComponentName;
 import android.content.Intent;
+import android.os.Bundle;
+import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.Gravity;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.carporange.cloudmusic.R;
 import com.carporange.cloudmusic.adapter.MenuLeftRvAdapter;
 import com.carporange.cloudmusic.ui.activity.MainActivity;
-import com.carporange.cloudmusic.ui.base.BaseFragment;
 import com.carporange.cloudmusic.util.SpUtil;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 /**
  * Created by liuhui on 2016/6/27.
  */
-public class MenuLeftFragment extends BaseFragment {//这个类在布局文件中绑定了类名
+public class MenuLeftFragment extends Fragment {//这个类在布局文件中绑定了类名
 
     private RecyclerView mRecyclerView;
     public OnLeftClickListener mOnLeftClickListener;
+    private View mView;
 
     public MenuLeftFragment() {
 
     }
 
+    @Nullable
+    @Override
+    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        mView = inflater.inflate(getLayoutId(), container, false);
+        ButterKnife.bind(this, mView);
+        initViews();
+        return mView;
+    }
+
     /* @Override
-     public void onAttach(Context context) {
-         super.onAttach(context);
-     mOnHomeClickListener = (OnLeftClickListener) context;  //
-     }*/
+         public void onAttach(Context context) {
+             super.onAttach(context);
+         mOnHomeClickListener = (OnLeftClickListener) context;  //
+         }*/
     @Override
     public void onDetach() {
         super.onDetach();
@@ -49,14 +65,12 @@ public class MenuLeftFragment extends BaseFragment {//这个类在布局文件�
         mOnLeftClickListener = (OnLeftClickListener) activity;
     }
 
-    @Override
     public int getLayoutId() {
         return R.layout.fragment_menu_left;
     }
 
-    @Override
     public void initViews() {
-        mRecyclerView = (RecyclerView) mContentView.findViewById(R.id.recycler_view);
+        mRecyclerView = (RecyclerView) mView.findViewById(R.id.recycler_view);
         List<MenuLeftRvAdapter.BaseMenuItem> menuItemList = new ArrayList<>();
         MenuLeftRvAdapter.AvatarMenuItem avatarMenuItem = MenuLeftRvAdapter.MenuItemFactory.createAvatarMenu();
         avatarMenuItem.setName("李昱辰");

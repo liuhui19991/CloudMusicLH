@@ -91,6 +91,7 @@ public class AnchorRadioFragment extends BaseFragment implements MyAdapter.ItemC
 
     @Override
     protected void initViews() {//如果使用buttknife当从第一个页面直接点过来的时候获取不到对象
+        L.e("走走走走走啊走走了几回");
         String s = "{\"banners\":[{\"url\":\"http://ww1.sinaimg.cn/mw1024/532722c9gw1f66czxn4xwj21400qo7oi.jpg\",\"banner\":\"http://pic10.nipic.com/20101103/5063545_000227976000_2.jpg\"}," +
                 "{\"url\":\"http://www.hao123.com\",\"banner\":\"http://imgstore.cdn.sogou.com/app/a/100540002/714860.jpg\"}," +
                 "{\"url\":\"http://static8.photo.sina.com.cn/orignal/4b3f4b54c456c0af533f7\",\"banner\":\"http://www.deskcar.com/desktop/fengjing/201081215337/19.jpg\"}," +

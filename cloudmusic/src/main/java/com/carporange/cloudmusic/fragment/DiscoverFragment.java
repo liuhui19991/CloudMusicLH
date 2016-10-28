@@ -2,16 +2,11 @@ package com.carporange.cloudmusic.fragment;
 
 
 import android.support.design.widget.TabLayout;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 
 import com.carporange.cloudmusic.R;
+import com.carporange.cloudmusic.adapter.CarpFragmentPagerAdapter;
 import com.carporange.cloudmusic.ui.base.BaseFragment;
-
-import java.util.ArrayList;
-import java.util.List;
 
 import butterknife.BindView;
 
@@ -40,40 +35,10 @@ public class DiscoverFragment extends BaseFragment {
         fpa.addFragment(new AnchorRadioFragment(), "主播电台");
         fpa.addFragment(new RankingListFragment(), "排行榜");
         mViewPager.setAdapter(fpa);
+        mViewPager.setOffscreenPageLimit(3);
         mTabLayout.setSelectedTabIndicatorColor(0xff324567);//设置tablayout的指示颜色
         mTabLayout.setupWithViewPager(mViewPager);
         mTabLayout.setTabTextColors(0xff0ff0FF, 0xfff000FF);//字体标准颜色和选中颜色
     }
-
-    public class CarpFragmentPagerAdapter extends FragmentPagerAdapter {
-
-        private List<Fragment> mList = new ArrayList<>();
-        private List<String> mTitleList = new ArrayList<>();
-
-        public CarpFragmentPagerAdapter(FragmentManager fm) {
-            super(fm);
-        }
-
-        public void addFragment(Fragment fragment, String title) {
-            mList.add(fragment);
-            mTitleList.add(title);
-        }
-
-        @Override
-        public Fragment getItem(int position) {
-            return mList.get(position);
-        }
-
-        @Override
-        public int getCount() {
-            return mList.size();
-        }
-
-        @Override
-        public CharSequence getPageTitle(int position) {
-            return mTitleList.get(position);
-        }
-    }
-
 
 }
