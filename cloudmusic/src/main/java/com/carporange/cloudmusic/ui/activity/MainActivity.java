@@ -4,6 +4,7 @@ import android.Manifest;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
+import android.graphics.Point;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -12,6 +13,7 @@ import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.view.Display;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
@@ -27,7 +29,6 @@ import com.carporange.cloudmusic.util.L;
 import com.carporange.cloudmusic.util.S;
 import com.carporange.cloudmusic.util.SpUtil;
 import com.carporange.cloudmusic.util.T;
-import com.nineoldandroids.view.ViewHelper;
 import com.uuzuche.lib_zxing.activity.CaptureActivity;
 import com.uuzuche.lib_zxing.activity.CodeUtils;
 import com.yanzhenjie.permission.AndPermission;
@@ -329,9 +330,17 @@ public class MainActivity extends AppCompatActivity implements MenuLeftFragment.
 
     @Override
     public void onDrawerSlide(View drawerView, float slideOffset) {
-        View mContent = mDrawerLayout.getChildAt(0);
-        View mMenu = drawerView;
-        ViewHelper.setTranslationX(mContent, mMenu.getMeasuredWidth() * slideOffset);//此处引用nineoldandroids库来完成动画
+//        方法一:
+//        View mContent = mDrawerLayout.getChildAt(0);
+//        View mMenu = drawerView;
+//        ViewHelper.setTranslationX(mContent, mMenu.getMeasuredWidth() * slideOffset);//此处引用nineoldandroids库来完成动画
+//      方法二:
+        Display display = getWindowManager().getDefaultDisplay();
+        Point size = new Point();
+        display.getSize(size);
+        int width = size.x;
+        int height = size.y;
+        mDrawerLayout.getChildAt(0).layout(drawerView.getRight(), 0, drawerView.getRight() + width, height);
     }
 
     @Override

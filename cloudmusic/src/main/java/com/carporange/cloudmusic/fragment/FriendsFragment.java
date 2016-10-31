@@ -26,6 +26,7 @@ public class FriendsFragment extends BaseFragment {
         fpa.addFragment(new FriendFragment(), "朋友");
         mViewPager.setAdapter(fpa);
 //        mTabLayout.setSelectedTabIndicatorColor(Color.YELLOW);//设置tablayout的指示颜色
+        mViewPager.setOffscreenPageLimit(fpa.getCount());
         mTabLayout.setupWithViewPager(mViewPager);
         mTabLayout.setTabTextColors(0xff0ff0FF, 0xfff000FF);//字体标准颜色和选中颜色
     }
