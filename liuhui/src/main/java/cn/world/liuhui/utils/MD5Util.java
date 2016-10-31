@@ -1,47 +1,57 @@
 package cn.world.liuhui.utils;
 
-import android.text.TextUtils;
-
+import java.io.File;
 import java.io.FileInputStream;
-import java.io.InputStream;
+import java.security.DigestInputStream;
 import java.security.MessageDigest;
+
 /**
  * Created by liuhui on 2016/7/27.
  */
 public class MD5Util {
-    private static final char HEX_DIGITS[] = {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9',
-            'A', 'B', 'C', 'D', 'E', 'F' };
 
-    public static void main(String[] args) {
-        System.out.println(md5sum("/init.rc"));
-    }
-
-    public static String toHexString(byte[] b) {
-        StringBuilder sb = new StringBuilder(b.length * 2);
-        for (int i = 0; i < b.length; i++) {
-            sb.append(HEX_DIGITS[(b[i] & 0xf0) >>> 4]);
-            sb.append(HEX_DIGITS[b[i] & 0x0f]);
-        }
-        return sb.toString();
-    }
-
-    public static String md5sum(String filename) {
-        InputStream fis;
-        byte[] buffer = new byte[1024];
-        int numRead = 0;
-        MessageDigest md5;
+    /**
+     * 获取字符串的 MD5
+     */
+    public static String encode(String str) {
         try {
-            fis = new FileInputStream(filename);
-            md5 = MessageDigest.getInstance("MD5Util");
-            while ((numRead = fis.read(buffer)) > 0) {
-                md5.update(buffer, 0, numRead);
+            MessageDigest md5 = MessageDigest.getInstance("MD5");
+            md5.update(str.getBytes("UTF-8"));
+            byte messageDigest[] = md5.digest();
+            StringBuilder hexString = new StringBuilder();
+            for (byte b : messageDigest) {
+                hexString.append(String.format("%02X", b));
             }
-            fis.close();
-            String md5Str = toHexString(md5.digest());
-            return TextUtils.isEmpty(md5Str) ? "" : md5Str;
+            return hexString.toString().toLowerCase();
         } catch (Exception e) {
-            System.out.println("error");
-            return "";
+            e.printStackTrace();
         }
+        return "";
+    }
+
+    /**
+     * 获取文件的 MD5
+     */
+    public static String encode(File file) {
+        try {
+            MessageDigest messageDigest = MessageDigest.getInstance("MD5");
+            FileInputStream inputStream = new FileInputStream(file);
+            DigestInputStream digestInputStream = new DigestInputStream(inputStream, messageDigest);
+            //必须把文件读取完毕才能拿到md5
+            byte[] buffer = new byte[4096];
+            while (digestInputStream.read(buffer) > -1) {
+            }
+            MessageDigest digest = digestInputStream.getMessageDigest();
+            digestInputStream.close();
+            byte[] md5 = digest.digest();
+            StringBuilder sb = new StringBuilder();
+            for (byte b : md5) {
+                sb.append(String.format("%02X", b));
+            }
+            return sb.toString().toLowerCase();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 }

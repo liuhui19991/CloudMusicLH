@@ -14,12 +14,14 @@ import com.carporange.cloudmusic.knowledgemap.NodeService;
 import com.carporange.cloudmusic.knowledgemap.UIUtils;
 import com.carporange.cloudmusic.listener.MyDownloadListener;
 import com.carporange.cloudmusic.ui.base.BaseActivity;
+import com.carporange.cloudmusic.util.L;
 import com.yolanda.nohttp.NoHttp;
 import com.yolanda.nohttp.download.DownloadListener;
 import com.yolanda.nohttp.download.DownloadQueue;
 import com.yolanda.nohttp.download.DownloadRequest;
 
 import butterknife.OnClick;
+import cn.world.liuhui.utils.AppCacheUtil;
 import cn.world.liuhui.utils.FileUtil;
 
 /**
@@ -62,6 +64,7 @@ public class KnowledgeActivity extends BaseActivity {
                 commonMapView.setVisibility(View.VISIBLE);
             }
         }, 1500);
+        L.e("缓存"+AppCacheUtil.getInstance(mContext).getString("liuhui"));
     }
 
     @OnClick(R.id.tv_down)

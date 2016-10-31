@@ -26,6 +26,7 @@ import com.yanzhenjie.permission.AndPermission;
 import com.yanzhenjie.permission.PermissionNo;
 import com.yanzhenjie.permission.PermissionYes;
 
+import cn.world.liuhui.utils.AppCacheUtil;
 import cn.world.liuhui.utils.DialogUtil;
 
 /**
@@ -158,6 +159,7 @@ public class LoginActivity extends BaseActivity implements OnClickListener, View
                         SpUtil.put("isRemberPassword", false);
                     }
                     startActivity(new Intent(mContext, MainActivity.class));
+                    AppCacheUtil.getInstance(mContext).put("liuhui","LIUHU");
                     finish();
                 } else {
                     Snackbar.make(username, "密码不正确", Snackbar.LENGTH_SHORT).show();
