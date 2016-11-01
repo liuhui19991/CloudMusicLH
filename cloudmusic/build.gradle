@@ -77,7 +77,7 @@ dependencies {
     //侧滑删除
     compile 'com.nikhilpanju.recyclerviewenhanced:recyclerviewenhanced:1.1.0'
     compile 'com.lzy.widget:imagepicker:0.3.2'
-    compile 'com.github.CymChad:BaseRecyclerViewAdapterHelper:v2.3.2'
+    compile 'com.github.CymChad:BaseRecyclerViewAdapterHelper:v2.4.4'
     /*   //If you can not start app, you cancel the annotation
            //如果app无法启动,请取消下面的注释
            //Other ABIs: optional

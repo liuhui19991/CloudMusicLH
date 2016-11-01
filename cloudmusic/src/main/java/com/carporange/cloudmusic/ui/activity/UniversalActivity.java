@@ -16,7 +16,6 @@ import com.carporange.cloudmusic.domain.CustomAnimation;
 import com.carporange.cloudmusic.domain.DataServer;
 import com.carporange.cloudmusic.ui.base.BaseActivity;
 import com.carporange.cloudmusic.util.AnimatorUtil;
-import com.carporange.cloudmusic.util.L;
 import com.carporange.cloudmusic.util.T;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.listener.OnItemClickListener;
