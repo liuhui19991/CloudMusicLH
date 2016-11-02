@@ -44,7 +44,9 @@ import org.greenrobot.eventbus.ThreadMode;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import cn.world.liuhui.utils.NetWorkUtil;
 import cn.world.liuhui.utils.SnackbarUtil;
+import cn.world.liuhui.utils.ToastUtil;
 import fm.jiecao.jcvideoplayer_lib.JCVideoPlayer;
 
 /**
@@ -73,6 +75,7 @@ public class MainActivity extends AppCompatActivity implements MenuLeftFragment.
         initWindow();
         initViews();
         mDrawerLayout.addDrawerListener(this);
+        ToastUtil.show(mContext, NetWorkUtil.isConnectedByState(mContext) + "");
     }
 
     /**
