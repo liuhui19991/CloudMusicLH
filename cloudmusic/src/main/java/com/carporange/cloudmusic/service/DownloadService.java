@@ -36,7 +36,6 @@ public class DownloadService extends Service {
     private NotificationManager notificationManager;
 
     public IBinder onBind(Intent arg0) {
-        // TODO Auto-generated method stub
         return null;
     }
 
@@ -52,7 +51,6 @@ public class DownloadService extends Service {
             } else {
                 ToastUtil.show(this, "下载地址错误");
             }
-
         }
         return super.onStartCommand(intent, flags, startId);
     }
