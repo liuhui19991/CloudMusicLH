@@ -2,6 +2,7 @@ package com.carporange.cloudmusic.fragment;
 
 
 import android.app.Dialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.drawable.BitmapDrawable;
 import android.view.LayoutInflater;
@@ -11,12 +12,15 @@ import android.widget.Button;
 import android.widget.PopupWindow;
 
 import com.carporange.cloudmusic.R;
+import com.carporange.cloudmusic.service.DownloadService;
+import com.carporange.cloudmusic.ui.activity.PhonePersion;
 import com.carporange.cloudmusic.ui.activity.UniversalActivity;
 import com.carporange.cloudmusic.ui.base.BaseFragment;
 import com.carporange.cloudmusic.util.L;
 import com.carporange.cloudmusic.util.T;
 
 import butterknife.OnClick;
+import cn.world.liuhui.utils.DialogUtil;
 
 /**
  * Created by liuhui on 2016/6/27.
@@ -77,6 +81,22 @@ public class PersonalRecommendationFragment extends BaseFragment {
         startActivity(new Intent(mContext, UniversalActivity.class));
     }
 
+    @OnClick(R.id.phone_persion)
+    void phonePersion() {
+        startActivity(new Intent(mContext, PhonePersion.class));
+    }
+
+    @OnClick(R.id.update)
+    void updateApp() {
+        DialogUtil.showAlert(mContext, "更新软件", "这是一个新的版本", "立即更新", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                Intent intent = new Intent(mContext,DownloadService.class);
+                intent.putExtra("url", "http://surveyapp.fy.chaoxing.com/app/LauncherDemo5.apk");
+                mContext.startService(intent);
+            }
+        }, "下次再说", null);
+    }
     /**
      * 让PopupWindow显示在控件上方
      *

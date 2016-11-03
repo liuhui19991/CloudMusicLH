@@ -21,6 +21,8 @@
     <string name="popup">PopupWindow</string>
     <string name="jsactivity">JSActivity</string>
     <string name="universaladapter">万能Adapter</string>
+    <string name="phone_persion">通讯录</string>
+    <string name="update">更新软件</string>
     <string name="login">登 录</string>
     <string name="username">liuhui</string>
     <string name="password">liuhui</string>

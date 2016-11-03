@@ -30,6 +30,16 @@
             style="@style/textview"
             android:text="@string/universaladapter"/>
 
+        <TextView
+            android:id="@+id/phone_persion"
+            style="@style/textview"
+            android:text="@string/phone_persion"/>
+
+        <TextView
+            android:id="@+id/update"
+            style="@style/textview"
+            android:text="@string/update"/>
+
     </LinearLayout>
 
     <RelativeLayout
