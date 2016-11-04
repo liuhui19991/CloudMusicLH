@@ -29,6 +29,7 @@ public class PersonalRecommendationFragment extends BaseFragment {
     private Dialog mWaitDialog;
     private boolean canCancel = true;
     private Button top, bottom;
+    private PopupWindow mPopupWindow;
 
     public PersonalRecommendationFragment() {
     }
@@ -91,12 +92,13 @@ public class PersonalRecommendationFragment extends BaseFragment {
         DialogUtil.showAlert(mContext, "更新软件", "这是一个新的版本", "立即更新", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
-                Intent intent = new Intent(mContext,DownloadService.class);
+                Intent intent = new Intent(mContext, DownloadService.class);
                 intent.putExtra("url", "http://surveyapp.fy.chaoxing.com/app/LauncherDemo5.apk");
                 mContext.startService(intent);
             }
         }, "下次再说", null);
     }
+
     /**
      * 让PopupWindow显示在控件上方
      *
@@ -107,28 +109,29 @@ public class PersonalRecommendationFragment extends BaseFragment {
         View view = LayoutInflater.from(getContext()).inflate(R.layout.popwin_view, null);
         view.findViewById(R.id.text_size_big).setOnClickListener(onclick);
         view.findViewById(R.id.text_size_small).setOnClickListener(onclick);
-        PopupWindow popupWindow = new PopupWindow(view, WindowManager.LayoutParams.WRAP_CONTENT, WindowManager.LayoutParams.WRAP_CONTENT);
-        popupWindow.setBackgroundDrawable(new BitmapDrawable());
+        mPopupWindow = new PopupWindow(view, WindowManager.LayoutParams.WRAP_CONTENT, WindowManager.LayoutParams.WRAP_CONTENT);
+        mPopupWindow.setBackgroundDrawable(new BitmapDrawable());
         view.measure(View.MeasureSpec.UNSPECIFIED, View.MeasureSpec.UNSPECIFIED);//要想下面测量出高度必须添加这句话
         int high = view.getMeasuredHeight() + v.getHeight();
         // 设置popWindow的显示和消失动画
 //        popupWindow.setAnimationStyle(R.style.mypopwindow_anim_style);//默认动画为缩放动画
-        popupWindow.showAsDropDown(v,
+        mPopupWindow.showAsDropDown(v,
                 0,
                 // 保证尺寸是根据屏幕像素密度来的
                 -high);
 
         // 使其聚集
-        popupWindow.setFocusable(true);
+        mPopupWindow.setFocusable(true);
         // 设置允许在外点击消失
-        popupWindow.setOutsideTouchable(true);
+        mPopupWindow.setOutsideTouchable(true);
         // 刷新状态
-        popupWindow.update();
+        mPopupWindow.update();
     }
 
     View.OnClickListener onclick = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
+            mPopupWindow.dismiss();
             switch (v.getId()) {
                 case R.id.text_size_big:
                     T.showShort(mContext, "大字体");
