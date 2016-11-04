@@ -1,6 +1,9 @@
 package com.carporange.cloudmusic.ui.activity;
 
 import android.Manifest;
+import android.animation.AnimatorSet;
+import android.animation.ObjectAnimator;
+import android.animation.ValueAnimator;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
@@ -21,6 +24,7 @@ import android.view.WindowManager;
 import android.widget.TextView;
 
 import com.carporange.cloudmusic.R;
+import com.carporange.cloudmusic.event.ExitEvent;
 import com.carporange.cloudmusic.event.TitleEvent;
 import com.carporange.cloudmusic.fragment.MainFragment;
 import com.carporange.cloudmusic.fragment.MenuLeftFragment;
@@ -48,6 +52,8 @@ import cn.world.liuhui.utils.NetWorkUtil;
 import cn.world.liuhui.utils.SnackbarUtil;
 import cn.world.liuhui.utils.ToastUtil;
 import fm.jiecao.jcvideoplayer_lib.JCVideoPlayer;
+
+import static com.carporange.cloudmusic.R.id.tabLayout;
 
 /**
  * Created by liuhui on 2016/6/27.
@@ -114,13 +120,46 @@ public class MainActivity extends AppCompatActivity implements MenuLeftFragment.
         mTitle.setText(event.getmTitle());
     }
 
-    /*   @Subscribe(threadMode = ThreadMode.MAIN) //使用EventBus进行点击退出应用的事件传递
-       public void onEvent(ExitEvent event) {
-           mDrawerLayout.closeDrawer(Gravity.LEFT);
-           S.show(this, "退出程序点击了");
-           T.showShort(this, "退出程序点击了");
-       }
-   */
+    @Subscribe(threadMode = ThreadMode.MAIN) //使用EventBus进行点击退出应用的事件传递
+    public void onEvent(ExitEvent event) {
+        startAnimation(event.hide);
+        L.e("接收到滑动事件");
+//           mDrawerLayout.closeDrawer(Gravity.LEFT);
+//           S.show(this, "退出程序点击了");
+//           T.showShort(this, "退出程序点击了");
+    }
+
+
+    /**
+     * 菜单显示隐藏动画
+     * @param showOrHide
+     */
+    private void startAnimation(boolean showOrHide){
+        final ViewGroup.LayoutParams layoutParams = findViewById(R.id.toolbar_bottom).getLayoutParams();
+        ValueAnimator valueAnimator;
+        int tabLayoutHeight;
+        tabLayoutHeight = findViewById(R.id.toolbar_bottom).getMeasuredHeight();
+        ObjectAnimator alpha;
+        if(!showOrHide){
+            valueAnimator = ValueAnimator.ofInt(tabLayoutHeight, 0);
+            alpha = ObjectAnimator.ofFloat(tabLayout, "alpha", 1, 0);
+        }else{
+            valueAnimator = ValueAnimator.ofInt(0, tabLayoutHeight);
+            alpha = ObjectAnimator.ofFloat(tabLayout, "alpha", 0, 1);
+        }
+        valueAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+            @Override
+            public void onAnimationUpdate(ValueAnimator valueAnimator) {
+                layoutParams.height= (int) valueAnimator.getAnimatedValue();
+                findViewById(R.id.toolbar_bottom).setLayoutParams(layoutParams);
+            }
+        });
+        AnimatorSet animatorSet=new AnimatorSet();
+        animatorSet.setDuration(500);
+        animatorSet.playTogether(valueAnimator,alpha);
+        animatorSet.start();
+    }
+
     @Override
     protected void onDestroy() {
         super.onDestroy();

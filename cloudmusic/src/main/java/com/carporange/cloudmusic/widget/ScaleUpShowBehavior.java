@@ -19,11 +19,12 @@ import android.content.Context;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.view.ViewCompat;
-import android.support.v4.view.ViewPropertyAnimatorListener;
 import android.util.AttributeSet;
 import android.view.View;
 
-import com.carporange.cloudmusic.util.AnimatorUtil;
+import com.carporange.cloudmusic.event.ExitEvent;
+
+import org.greenrobot.eventbus.EventBus;
 
 
 /**
@@ -62,29 +63,19 @@ public class ScaleUpShowBehavior extends FloatingActionButton.Behavior {
 //            System.out.println("到边界了，还在下滑。。。");
 //        }
 
-        if (((dyConsumed > 0 && dyUnconsumed == 0) || (dyConsumed == 0 && dyUnconsumed > 0)) && child.getVisibility() != View.VISIBLE) {// 显示
-            AnimatorUtil.scaleShow(child, null);
-        } else if (((dyConsumed < 0 && dyUnconsumed == 0) || (dyConsumed == 0 && dyUnconsumed < 0)) && child.getVisibility() != View.GONE && !isAnimatingOut) {
-            AnimatorUtil.scaleHide(child, viewPropertyAnimatorListener);
+        if (((dyConsumed > 0 && dyUnconsumed == 0) || (dyConsumed == 0 && dyUnconsumed > 0)) && child.getVisibility() == View.VISIBLE) {// 隐藏
+            child.hide();
+            EventBus.getDefault().post(new ExitEvent(true));
+        } else if (((dyConsumed < 0 && dyUnconsumed == 0) || (dyConsumed == 0 && dyUnconsumed < 0)) && child.getVisibility() != View.VISIBLE) {
+            child.show();
+            EventBus.getDefault().post(new ExitEvent(false));
         }
+//        if (dyConsumed > 0 && child.getVisibility() == View.VISIBLE) {
+////            child.hide();
+//            RxBus.getInstance().post(AppConstant.MENU_SHOW_HIDE,false);
+//        } else if (dyConsumed < 0 && child.getVisibility() != View.VISIBLE) {
+//            RxBus.getInstance().post(AppConstant.MENU_SHOW_HIDE,true);
+////            child.show();
+//        }
     }
-
-    private ViewPropertyAnimatorListener viewPropertyAnimatorListener = new ViewPropertyAnimatorListener() {
-
-        @Override
-        public void onAnimationStart(View view) {
-            isAnimatingOut = true;
-        }
-
-        @Override
-        public void onAnimationEnd(View view) {
-            isAnimatingOut = false;
-            view.setVisibility(View.GONE);
-        }
-
-        @Override
-        public void onAnimationCancel(View arg0) {
-            isAnimatingOut = false;
-        }
-    };
 }

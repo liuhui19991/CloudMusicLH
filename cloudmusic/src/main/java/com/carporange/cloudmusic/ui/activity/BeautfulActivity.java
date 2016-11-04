@@ -133,7 +133,8 @@ public class BeautfulActivity extends BaseActivity {
             public void onClick(View v) {
                 T.showShort(mContext, "回到顶部");
                 linearLayoutManager.scrollToPosition(0);
-                hideFAB();
+                FAB.hide();
+//                hideFAB();
             }
         });
     }
