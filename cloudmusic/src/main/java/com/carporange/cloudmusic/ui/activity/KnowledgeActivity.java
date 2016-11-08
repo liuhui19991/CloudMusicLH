@@ -3,7 +3,6 @@ package com.carporange.cloudmusic.ui.activity;
 import android.content.res.Resources;
 import android.graphics.BitmapFactory;
 import android.util.DisplayMetrics;
-import android.widget.LinearLayout;
 
 import com.carporange.cloudmusic.R;
 import com.carporange.cloudmusic.knowledgemap.MapService;
@@ -18,7 +17,6 @@ import com.yolanda.nohttp.download.DownloadListener;
 import com.yolanda.nohttp.download.DownloadQueue;
 import com.yolanda.nohttp.download.DownloadRequest;
 
-import butterknife.BindView;
 import butterknife.OnClick;
 import cn.world.liuhui.utils.AppCacheUtil;
 import cn.world.liuhui.utils.FileUtil;
@@ -29,8 +27,6 @@ import cn.world.liuhui.utils.FileUtil;
  */
 public class KnowledgeActivity extends BaseActivity {
     private String resourceUrl;
-    @BindView(R.id.ll)
-     LinearLayout ｍLoading;
     private String SAVE_URL = FileUtil.getRootPath() + "/liuhui/";
 
     @Override
