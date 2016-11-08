@@ -34,6 +34,11 @@ public class DiscoverFragment extends BaseFragment {
         fpa.addFragment(new SongMenuFragment(), "歌单");
         fpa.addFragment(new AnchorRadioFragment(), "主播电台");
         fpa.addFragment(new RankingListFragment(), "排行榜");
+        fpa.addFragment(new RankingListFragment(), "排行榜");
+        fpa.addFragment(new RankingListFragment(), "排行榜");
+        fpa.addFragment(new RankingListFragment(), "排行榜");
+        fpa.addFragment(new RankingListFragment(), "排行榜");
+        fpa.addFragment(new RankingListFragment(), "排行榜");
         mViewPager.setAdapter(fpa);
         mViewPager.setOffscreenPageLimit(fpa.getCount());
         mTabLayout.setSelectedTabIndicatorColor(0xff324567);//设置tablayout的指示颜色

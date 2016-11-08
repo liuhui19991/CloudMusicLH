@@ -2,9 +2,7 @@ package com.carporange.cloudmusic.ui.activity;
 
 import android.content.res.Resources;
 import android.graphics.BitmapFactory;
-import android.os.Handler;
 import android.util.DisplayMetrics;
-import android.view.View;
 import android.widget.LinearLayout;
 
 import com.carporange.cloudmusic.R;
@@ -20,6 +18,7 @@ import com.yolanda.nohttp.download.DownloadListener;
 import com.yolanda.nohttp.download.DownloadQueue;
 import com.yolanda.nohttp.download.DownloadRequest;
 
+import butterknife.BindView;
 import butterknife.OnClick;
 import cn.world.liuhui.utils.AppCacheUtil;
 import cn.world.liuhui.utils.FileUtil;
@@ -30,8 +29,8 @@ import cn.world.liuhui.utils.FileUtil;
  */
 public class KnowledgeActivity extends BaseActivity {
     private String resourceUrl;
-    private Handler mHandler = new Handler();
-    private LinearLayout ll;
+    @BindView(R.id.ll)
+     LinearLayout ｍLoading;
     private String SAVE_URL = FileUtil.getRootPath() + "/liuhui/";
 
     @Override
@@ -41,9 +40,8 @@ public class KnowledgeActivity extends BaseActivity {
 
     @Override
     public void initViews() {
-        ll = (LinearLayout) findViewById(R.id.ll);
         // 知识地图相关
-        final MapView commonMapView = (MapView) findViewById(R.id.map);
+         MapView commonMapView = (MapView) findViewById(R.id.map);
 
         Resources res = getResources();
         NodeService.close = BitmapFactory.decodeResource(res,
@@ -52,19 +50,13 @@ public class KnowledgeActivity extends BaseActivity {
                 R.mipmap.common_node_open);
 
         DisplayMetrics dm = UIUtils.getDisplayMetrics(mContext);
-        final MapService service = new MapService(commonMapView, null, dm);
-        resourceUrl = mContext.getIntent().getStringExtra("map");
+        MapService service = new MapService(commonMapView, null, dm);
+
+        resourceUrl = getIntent().getStringExtra("map");
         if ("down".equals(getIntent().getStringExtra("down"))) {//下载文件打开
             service.startEngineFromString(FileUtil.getFileUTF8(resourceUrl));
         } else service.startEngineFromUrl(resourceUrl);
-        mHandler.postDelayed(new Runnable() {
-            @Override
-            public void run() {//此处为了让效果更好所以让知识地图延时显示
-                ll.setVisibility(View.GONE);
-                commonMapView.setVisibility(View.VISIBLE);
-            }
-        }, 1500);
-        L.e("缓存"+AppCacheUtil.getInstance(mContext).getString("liuhui"));
+        L.e("缓存"+AppCacheUtil.getInstance(mContext).getString("liuhui"));//这里的缓存是登录页设置的
     }
 
     @OnClick(R.id.tv_down)
