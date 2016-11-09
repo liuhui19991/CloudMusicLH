@@ -42,8 +42,8 @@ public class DiscoverFragment extends BaseFragment {
         mViewPager.setAdapter(fpa);
         mViewPager.setOffscreenPageLimit(fpa.getCount());
         mTabLayout.setSelectedTabIndicatorColor(0xff324567);//设置tablayout的指示颜色
+        mTabLayout.setTabTextColors(0xff0ff0FF, 0xfff000FF);//字体标准颜色和选中颜色   这两句代码都可以在布局文件中设置
         mTabLayout.setupWithViewPager(mViewPager);
-        mTabLayout.setTabTextColors(0xff0ff0FF, 0xfff000FF);//字体标准颜色和选中颜色
     }
 
 }

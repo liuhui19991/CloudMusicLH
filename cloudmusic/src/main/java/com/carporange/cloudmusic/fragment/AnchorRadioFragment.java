@@ -80,10 +80,6 @@ public class AnchorRadioFragment extends BaseFragment implements MyAdapter.ItemC
     private List<ViewBanner.BannersBean> mList;
     private DownloadRequest mMDownloadRequest;
 
-    public AnchorRadioFragment() {
-        // Required empty public constructor
-    }
-
     @Override
     public int getLayoutId() {
         return R.layout.fragment_ancor_radio;

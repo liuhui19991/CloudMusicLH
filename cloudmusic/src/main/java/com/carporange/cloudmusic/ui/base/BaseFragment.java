@@ -1,5 +1,6 @@
 package com.carporange.cloudmusic.ui.base;
 
+import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -26,7 +27,7 @@ public abstract class BaseFragment extends Fragment {
     /**
      * Fragment中的上下文
      */
-    protected Context mContext; //也可以在attach方法中得到
+    protected Activity mContext; //也可以在attach方法中得到
     private boolean isVisible;                  //是否可见状态
     private boolean isPrepared;                 //标志位，View已经初始化完成。
     private boolean isFirstLoad = true;         //是否第一次加载
@@ -34,7 +35,7 @@ public abstract class BaseFragment extends Fragment {
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        mContext = context;
+        mContext = (Activity) context;
     }
 
     @Nullable
