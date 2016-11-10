@@ -56,6 +56,9 @@
         </android.support.design.widget.CollapsingToolbarLayout>
     </android.support.design.widget.AppBarLayout>
 
-
+    <cn.world.liuhui.widget.WatchView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        />
     <!--app:backgroundTint="?attr/fabColor"-->
 </android.support.design.widget.CoordinatorLayout>

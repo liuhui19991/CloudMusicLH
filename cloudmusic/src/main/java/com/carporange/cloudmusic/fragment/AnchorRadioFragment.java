@@ -37,7 +37,6 @@ import com.carporange.cloudmusic.ui.base.BaseFragment;
 import com.carporange.cloudmusic.ui.dialog.WaitDialog;
 import com.carporange.cloudmusic.util.GsonUtil;
 import com.carporange.cloudmusic.util.L;
-import com.carporange.cloudmusic.util.T;
 import com.carporange.cloudmusic.widget.ViewPagerCycle;
 import com.yanzhenjie.permission.AndPermission;
 import com.yanzhenjie.permission.PermissionNo;
@@ -56,15 +55,19 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.OnClick;
+import cn.world.liuhui.calendar.DatePickerDialog;
+import cn.world.liuhui.utils.DateDialogUtil;
 import cn.world.liuhui.utils.FileUtil;
 import cn.world.liuhui.widget.NumberProgressBar;
 import fm.jiecao.jcvideoplayer_lib.JCVideoPlayerStandard;
+
+import static com.carporange.cloudmusic.R.id.et;
 
 /**
  * Created by liuhui on 2016/6/27.
  */
 public class AnchorRadioFragment extends BaseFragment implements MyAdapter.ItemClickListener {
-    @BindView(R.id.et)
+    @BindView(et)
     EditText mEditText;
     @BindView(R.id.view_pager)
     ViewPagerCycle mViewPagerCycle;
@@ -225,7 +228,19 @@ public class AnchorRadioFragment extends BaseFragment implements MyAdapter.ItemC
 
             @Override
             public void onClick(View v) {
-                T.showShort(mContext, "点");
+                /*DateDialogUtil.createDateDialog(mContext, new DatePickerDialog.OnDateSetListener() {
+                    @Override
+                    public void onDateSet(DatePicker datePicker, int i, int i1, int i2) {
+                        L.e(i+" ==  "+i1+"---"+i2);
+                    }
+                });*/
+
+                DateDialogUtil.createDateDialogSign(mContext, new DatePickerDialog.OnDatePickedListener() {
+                    @Override
+                    public void onDatePickCompleted(int year, int month, int day, String dateDesc) {
+                        L.e(year+"---"+month+"----"+dateDesc);
+                    }
+                });
             }
         });
         //popWindow消失监听方法
