@@ -26,7 +26,7 @@
         android:layout_marginBottom="5dp"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
-        android:text="第二个按钮"/>
+        android:text="日历选择"/>
 
     <Button
         android:id="@+id/third"
@@ -36,7 +36,7 @@
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
         android:background="@android:color/holo_red_light"
-        android:text="第三个按钮"/>
+        android:text="单选"/>
 
     <Button
         android:id="@+id/third4"

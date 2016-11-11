@@ -28,6 +28,7 @@ import cn.world.liuhui.utils.DialogUtil;
 public class PersonalRecommendationFragment extends BaseFragment {
     private Dialog mWaitDialog;
     private boolean canCancel = true;
+    private final String APK_URL = "http://surveyapp.fy.chaoxing.com/app/LauncherDemo5.apk";
     private Button top, bottom;
     private PopupWindow mPopupWindow;
 
@@ -93,19 +94,17 @@ public class PersonalRecommendationFragment extends BaseFragment {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
                 Intent intent = new Intent(mContext, DownloadService.class);
-                intent.putExtra("url", "http://surveyapp.fy.chaoxing.com/app/LauncherDemo5.apk");
+                intent.putExtra("url", APK_URL);
                 mContext.startService(intent);
             }
         }, "下次再说", null);
     }
 
     /**
-     * 让PopupWindow显示在控件上方
-     *
-     * @param v 要显示的控件
+     * @param v 显示在这个控件的相对位置
      */
     private void showPopupWindow(View v) {
-        L.e("hello, %s", "world");//, %s这样才能换行
+        L.e("hello, %s", "world");//, %s这样才能打印出分开的逗号
         View view = LayoutInflater.from(getContext()).inflate(R.layout.popwin_view, null);
         view.findViewById(R.id.text_size_big).setOnClickListener(onclick);
         view.findViewById(R.id.text_size_small).setOnClickListener(onclick);
@@ -115,11 +114,8 @@ public class PersonalRecommendationFragment extends BaseFragment {
         int high = view.getMeasuredHeight() + v.getHeight();
         // 设置popWindow的显示和消失动画
 //        popupWindow.setAnimationStyle(R.style.mypopwindow_anim_style);//默认动画为缩放动画
-        mPopupWindow.showAsDropDown(v,
-                0,
-                // 保证尺寸是根据屏幕像素密度来的
-                -high);
-
+        mPopupWindow.showAsDropDown(v, 0, -high);// 保证尺寸是根据屏幕像素密度来的,显示的控件上方
+//        mPopupWindow.showAsDropDown(v);//显示在控件下方
         // 使其聚集
         mPopupWindow.setFocusable(true);
         // 设置允许在外点击消失

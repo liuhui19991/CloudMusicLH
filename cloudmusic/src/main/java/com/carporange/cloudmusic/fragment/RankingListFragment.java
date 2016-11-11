@@ -34,7 +34,7 @@ public class RankingListFragment extends BaseFragment {
 //                ll.setVisibility(View.GONE);
 //            }
 //        }, 2000);
-        LoadingDialogUtil.showDialog(mContext);
+        LoadingDialogUtil.showLoadinghor(mContext);
         EventBus.getDefault().post(new TitleEvent("排行榜"));
     }
 

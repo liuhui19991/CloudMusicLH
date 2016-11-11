@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:background="#786557">
+                xmlns:tools="http://schemas.android.com/tools"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#786557">
 
     <LinearLayout
         android:id="@+id/container_picker"
@@ -23,14 +23,15 @@
                 android:layout_centerInParent="true"
                 android:text="选择日期"
                 android:textColor="#787657"
-                android:textSize="18sp" />
+                android:textSize="18sp"/>
 
 
         </RelativeLayout>
 
         <View
             android:layout_width="match_parent"
-            android:layout_height="1dp"/>
+            android:layout_height="1dp"
+            android:background="#436578"/>
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -54,7 +55,7 @@
                     android:layout_height="130dp"
                     android:layout_gravity="center_vertical"
                     android:layout_weight="1"
-                    android:paddingTop="15dp" />
+                    android:paddingTop="15dp"/>
 
                 <cn.world.liuhui.calendar.LoopView
                     android:id="@+id/picker_month"
@@ -63,7 +64,7 @@
                     android:layout_gravity="center_vertical"
                     android:layout_marginLeft="1dp"
                     android:layout_weight="1"
-                    android:paddingTop="15dp" />
+                    android:paddingTop="15dp"/>
 
                 <cn.world.liuhui.calendar.LoopView
                     android:id="@+id/picker_day"
@@ -72,12 +73,14 @@
                     android:layout_gravity="center_vertical"
                     android:layout_marginLeft="1dp"
                     android:layout_weight="1"
-                    android:paddingTop="15dp" />
+                    android:paddingTop="15dp"/>
             </LinearLayout>
         </RelativeLayout>
 
-        <View   android:layout_width="match_parent"
-                android:layout_height="1dp" />
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#436578"/>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -86,24 +89,28 @@
 
             <Button
                 android:id="@+id/btn_cancel"
+                style="?attr/buttonBarButtonStyle"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:textColor="#436784"
                 android:textSize="18sp"
-                tools:text="取消" />
+                tools:text="取消"/>
 
-            <View   android:layout_width="1dp"
-                    android:layout_height="match_parent" />
+            <View
+                android:layout_width="1dp"
+                android:layout_height="match_parent"
+                android:background="#436578"/>
 
             <Button
                 android:id="@+id/btn_confirm"
+                style="?attr/buttonBarButtonStyle"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:textColor="#f00"
                 android:textSize="18sp"
-                tools:text="确定" />
+                tools:text="确定"/>
 
         </LinearLayout>
     </LinearLayout>

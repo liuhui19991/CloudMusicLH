@@ -2,8 +2,10 @@ package cn.world.liuhui.utils;
 
 import android.app.Activity;
 import android.app.Dialog;
+import android.app.ProgressDialog;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.Window;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -26,7 +28,7 @@ public class LoadingDialogUtil {
      * @param msg        对话框显示内容
      * @param cancelable 对话框是否可以取消
      */
-    public static Dialog showDialog(Activity context, String msg, boolean cancelable) {
+    public static Dialog showLoading(Activity context, String msg, boolean cancelable) {
         View view = LayoutInflater.from(context).inflate(R.layout.dialog_loading, null);
         TextView loadingText = (TextView) view.findViewById(R.id.id_tv_loading_dialog_text);
         loadingText.setText(msg);
@@ -39,7 +41,7 @@ public class LoadingDialogUtil {
         return mLoadingDialog;
     }
 
-    public static Dialog showDialog(Activity context) {
+    public static Dialog showLoading(Activity context) {
         View view = LayoutInflater.from(context).inflate(R.layout.dialog_loading, null);
         TextView loadingText = (TextView) view.findViewById(R.id.id_tv_loading_dialog_text);
         loadingText.setText("加载中...");
@@ -58,4 +60,34 @@ public class LoadingDialogUtil {
     public static void hideDialog() {
         if (mLoadingDialog != null) mLoadingDialog.cancel();//这里cancle比dismiss要好,通常的hide只是设置对话框为不可见
     }
+
+    /**
+     * 水平排列
+     */
+    public static void showLoadinghor(Activity activity) {
+        ProgressDialog dialog = new ProgressDialog(activity);
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.setCanceledOnTouchOutside(false);
+        dialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+        dialog.setMessage("请求网络中...");
+        dialog.show();
+    }
+    /**
+     * 在基类中这样使用比较严密
+     */
+   /* public void showLoading() {
+        if (dialog != null && dialog.isShowing()) return;
+        dialog = new ProgressDialog(this);
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.setCanceledOnTouchOutside(false);
+        dialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+        dialog.setMessage("请求网络中...");
+        dialog.show();
+    }
+
+    public void dismissLoading() {
+        if (dialog != null && dialog.isShowing()) {
+            dialog.dismiss();
+        }
+    }*/
 }

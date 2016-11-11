@@ -14,7 +14,6 @@ import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.WindowManager;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.PopupWindow;
 import android.widget.TextView;
@@ -56,17 +55,19 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.OnClick;
 import cn.world.liuhui.calendar.DatePickerDialog;
-import cn.world.liuhui.utils.DateDialogUtil;
+import cn.world.liuhui.calendar.SignPickerDialog;
+import cn.world.liuhui.utils.DialogUtil;
 import cn.world.liuhui.utils.FileUtil;
 import cn.world.liuhui.widget.NumberProgressBar;
 import fm.jiecao.jcvideoplayer_lib.JCVideoPlayerStandard;
 
 import static com.carporange.cloudmusic.R.id.et;
+import static com.carporange.cloudmusic.R.id.third;
 
 /**
  * Created by liuhui on 2016/6/27.
  */
-public class AnchorRadioFragment extends BaseFragment implements MyAdapter.ItemClickListener {
+public class AnchorRadioFragment extends BaseFragment implements MyAdapter.ItemClickListener, View.OnClickListener {
     @BindView(et)
     EditText mEditText;
     @BindView(R.id.view_pager)
@@ -82,6 +83,7 @@ public class AnchorRadioFragment extends BaseFragment implements MyAdapter.ItemC
     private ViewBanner mViewBanner = new ViewBanner();
     private List<ViewBanner.BannersBean> mList;
     private DownloadRequest mMDownloadRequest;
+    private PopupWindow mPopupWindow;
 
     @Override
     public int getLayoutId() {
@@ -192,59 +194,32 @@ public class AnchorRadioFragment extends BaseFragment implements MyAdapter.ItemC
 
 // 下面是两种方法得到宽度和高度 getWindow().getDecorView().getWidth()
 
-        final PopupWindow window = new PopupWindow(view,
+        mPopupWindow = new PopupWindow(view,
                 WindowManager.LayoutParams.MATCH_PARENT,
                 WindowManager.LayoutParams.WRAP_CONTENT);
 
         // 设置popWindow弹出窗体可点击，这句话必须添加，并且是true
-        window.setFocusable(true);
+        mPopupWindow.setFocusable(true);
 
 
         // 实例化一个ColorDrawable颜色为半透明
         ColorDrawable dw = new ColorDrawable(0xb0000000);
-        window.setBackgroundDrawable(dw);
+        mPopupWindow.setBackgroundDrawable(dw);
 
 
         // 设置popWindow的显示和消失动画
-        window.setAnimationStyle(R.style.mypopwindow_anim_style);
+        mPopupWindow.setAnimationStyle(R.style.mypopwindow_anim_style);
         // 在底部显示
-        window.showAtLocation(getActivity().findViewById(R.id.popup),
+        mPopupWindow.showAtLocation(getActivity().findViewById(R.id.popup),
                 Gravity.BOTTOM, 0, 0);
 
         // 这里检验popWindow里的button是否可以点击
-        Button first = (Button) view.findViewById(R.id.first);
-        first.setOnClickListener(new View.OnClickListener() {
+        view.findViewById(R.id.first).setOnClickListener(this);
+        view.findViewById(R.id.second).setOnClickListener(this);
+        view.findViewById(R.id.third).setOnClickListener(this);
 
-            @Override
-            public void onClick(View v) {
-                if (window != null) {
-                    window.dismiss();//隐藏popupwindow
-                }
-                startActivity(new Intent(getActivity(), RefreshLoadMoreActivity.class));
-            }
-        });
-        Button second = (Button) view.findViewById(R.id.second);
-        second.setOnClickListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(View v) {
-                /*DateDialogUtil.createDateDialog(mContext, new DatePickerDialog.OnDateSetListener() {
-                    @Override
-                    public void onDateSet(DatePicker datePicker, int i, int i1, int i2) {
-                        L.e(i+" ==  "+i1+"---"+i2);
-                    }
-                });*/
-
-                DateDialogUtil.createDateDialogSign(mContext, new DatePickerDialog.OnDatePickedListener() {
-                    @Override
-                    public void onDatePickCompleted(int year, int month, int day, String dateDesc) {
-                        L.e(year+"---"+month+"----"+dateDesc);
-                    }
-                });
-            }
-        });
         //popWindow消失监听方法
-        window.setOnDismissListener(new PopupWindow.OnDismissListener() {
+        mPopupWindow.setOnDismissListener(new PopupWindow.OnDismissListener() {
 
             @Override
             public void onDismiss() {
@@ -353,6 +328,35 @@ public class AnchorRadioFragment extends BaseFragment implements MyAdapter.ItemC
         }
         if (mBottomSheetDialog != null)
             mBottomSheetDialog.dismiss();
+    }
+
+    @Override
+    public void onClick(View view) {
+        switch (view.getId()) {
+            case R.id.first:
+                if (mPopupWindow != null && mPopupWindow.isShowing()) {
+                    mPopupWindow.dismiss();//隐藏popupwindow
+                }
+                startActivity(new Intent(getActivity(), RefreshLoadMoreActivity.class));
+                break;
+            case R.id.second:
+                DialogUtil.showDateDialogSign(mContext, new DatePickerDialog.OnDatePickedListener() {
+                    @Override
+                    public void onDatePickCompleted(int year, int month, int day, String dateDesc) {
+                        L.e(year + "---" + month + "----" + day);
+                    }
+                });
+                break;
+            case third:
+                L.e("单选");
+                DialogUtil.showSignSlecter(mContext, new SignPickerDialog.OnDatePickedListener() {
+                    @Override
+                    public void onDatePickCompleted(String year, String month, String day, String dateDesc) {
+                        L.e(dateDesc);
+                    }
+                });
+                break;
+        }
     }
 }
 

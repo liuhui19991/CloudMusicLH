@@ -15,20 +15,17 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
-import java.util.Locale;
 
 import cn.world.liuhui.R;
 
 /**
+ * 用于几个条目单选
  * Created by liuhui on 16/3/2.
  */
-public class DatePickerDialog implements View.OnClickListener {
+public class SignPickerDialog implements View.OnClickListener {
     private static final int DEFAULT_MIN_YEAR = 1900;
     public Button cancelBtn;
     public Button confirmBtn;
@@ -38,8 +35,6 @@ public class DatePickerDialog implements View.OnClickListener {
     public View pickerContainerV;
     public View contentView;//root view
 
-    private int minYear; // min year
-    private int maxYear; // max year
     private int yearPos = 0;
     private int monthPos = 0;
     private int dayPos = 0;
@@ -75,21 +70,11 @@ public class DatePickerDialog implements View.OnClickListener {
         private int maxYear = Calendar.getInstance().get(Calendar.YEAR) + 1;
         private String textCancel = "取消";
         private String textConfirm = "确定";
-        private String dateChose = getStrDate();
+        private String dateChose;
         private int colorCancel = Color.parseColor("#333333");//@color/font_main1
         private int colorConfirm = Color.parseColor("#ff524f");//@color/red_1
         private int btnTextSize = 18;//text btnTextSize of cancel and confirm button
         private int viewTextSize = 16;
-
-        public Builder minYear(int minYear) {
-            this.minYear = minYear;
-            return this;
-        }
-
-        public Builder maxYear(int maxYear) {
-            this.maxYear = maxYear;
-            return this;
-        }
 
         public Builder textCancel(String textCancel) {
             this.textCancel = textCancel;
@@ -131,17 +116,15 @@ public class DatePickerDialog implements View.OnClickListener {
             return this;
         }
 
-        public DatePickerDialog build() {
+        public SignPickerDialog build() {
             if (minYear > maxYear) {
                 throw new IllegalArgumentException();
             }
-            return new DatePickerDialog(this);
+            return new SignPickerDialog(this);
         }
     }
 
-    public DatePickerDialog(Builder builder) {
-        this.minYear = builder.minYear;
-        this.maxYear = builder.maxYear;
+    public SignPickerDialog(Builder builder) {
         this.textCancel = builder.textCancel;
         this.textConfirm = builder.textConfirm;
         this.mContext = builder.context;
@@ -240,15 +223,18 @@ public class DatePickerDialog implements View.OnClickListener {
      * add setMinMonth and setMonthDay.
      */
     private void initPickerViews() {
-        int yearCount = maxYear - minYear;
-
-        for (int i = 0; i < yearCount; i++) {
-            yearList.add(format2LenStr(minYear + i) + "年");
-        }
-        for (int j = 0; j < 12; j++) {
-            monthList.add(format2LenStr(j + 1) + "月");
-        }
-
+        yearList.add("主目录1");
+        yearList.add("主目录2");
+        yearList.add("主目录3");
+        yearList.add("主目录4");
+        yearList.add("主目录5");
+        yearList.add("主目录6");
+        monthList.add("月目录1");
+        monthList.add("月目录2");
+        monthList.add("月目录3");
+        monthList.add("月目录4");
+        monthList.add("月目录5");
+        monthList.add("月目录6");
         yearLoopView.setArrayList((ArrayList) yearList);
         yearLoopView.setInitPosition(yearPos);
 
@@ -260,30 +246,14 @@ public class DatePickerDialog implements View.OnClickListener {
      * Init day item
      */
     private void initDayPickerView() {
-
-        int dayMaxInMonth;
-        Calendar calendar = Calendar.getInstance();
         dayList = new ArrayList<String>();
 
-        calendar.set(Calendar.YEAR, minYear + yearPos);
-        calendar.set(Calendar.MONTH, monthPos);
-        if (monthPos == 1) {//2月做特殊处理，这里显示有点问题。
-            if ((minYear + yearPos) % 400 == 0) {
-                dayMaxInMonth = 29;
-            } else if ((minYear + yearPos) % 4 == 0 && ((minYear + yearPos)) % 100 != 0) {
-                dayMaxInMonth = 29;
-            } else {
-                dayMaxInMonth = 28;
-            }
-
-        } else {
-            dayMaxInMonth = calendar.getActualMaximum(Calendar.DAY_OF_MONTH);
-        }
-
-        for (int i = 0; i < dayMaxInMonth; i++) {
-            dayList.add(format2LenStr(i + 1) + "日");
-        }
-
+        dayList.add("日1");
+        dayList.add("日2");
+        dayList.add("日3");
+        dayList.add("日4");
+        dayList.add("日5");
+        dayList.add("日6");
         dayLoopView.setArrayList((ArrayList) dayList);
         dayLoopView.setInitPosition(dayPos);
     }
@@ -295,44 +265,14 @@ public class DatePickerDialog implements View.OnClickListener {
      */
     public void setSelectedDate(String dateStr) {
         if (!TextUtils.isEmpty(dateStr)) {
-
-            long milliseconds = getLongFromyyyyMMdd(dateStr);
-            Calendar calendar = Calendar.getInstance(Locale.CHINA);
-
-            if (milliseconds != -1) {
+            String[] strings = dateStr.split("\\.");
+            if (strings != null) {
                 //init calendar data.
-                calendar.setTimeInMillis(milliseconds);
-                yearPos = calendar.get(Calendar.YEAR) - minYear;
-                monthPos = calendar.get(Calendar.MONTH) + 1;
-                dayPos = calendar.get(Calendar.DAY_OF_MONTH) - 1;
+                yearPos = Integer.parseInt(strings[0]);
+                monthPos = Integer.parseInt(strings[1]);
+                dayPos = Integer.parseInt(strings[2]);
             }
         }
-    }
-
-    /**
-     * get long from yyyy-MM-dd
-     *
-     * @param date
-     * @return
-     */
-    public static long getLongFromyyyyMMdd(String date) {
-        SimpleDateFormat mFormat = new SimpleDateFormat("yyyy.MM.dd", Locale.getDefault());
-        Date parse = null;
-        try {
-            parse = mFormat.parse(date);
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-        if (parse != null) {
-            return parse.getTime();
-        } else {
-            return -1;
-        }
-    }
-
-    public static String getStrDate() {
-        SimpleDateFormat dd = new SimpleDateFormat("yyyy-MM-dd", Locale.CHINA);
-        return dd.format(new Date());
     }
 
     /**
@@ -361,7 +301,7 @@ public class DatePickerDialog implements View.OnClickListener {
          * @param day
          * @param dateDesc yyyy.MM.dd
          */
-        void onDatePickCompleted(int year, int month, int day,
+        void onDatePickCompleted(String year, String month, String day,
                                  String dateDesc);
     }
 
@@ -372,54 +312,14 @@ public class DatePickerDialog implements View.OnClickListener {
             dismissDialog();
         } else if (v == confirmBtn) {
             if (null != mListener) {
-                switch (monthPos + 1) {
-                    case 1:
-                    case 3:
-                    case 5:
-                    case 7:
-                    case 8:
-                    case 10:
-                    case 12://31 at most
-                        if (dayPos + 1 > 31) {
-                            dayPos = 30;
-                        }
-                        break;
-                    case 2://28 or 29
-                        if ((minYear + yearPos) % 400 == 0) {
-                            if (dayPos + 1 > 29) {
-                                dayPos = 28;
-                            }
-                        } else if ((minYear + yearPos) % 4 == 0 && ((minYear + yearPos)) % 100 != 0) {
-                            if (dayPos + 1 > 29) {
-                                dayPos = 28;
-                            }
-                        } else {
-                            if (dayPos + 1 > 28) {
-                                dayPos = 27;
-                            }
-                        }
-                        break;
-                    case 4:
-                    case 6:
-                    case 9:
-                    case 11://30 at most
-                        if (dayPos + 1 > 30) {
-                            dayPos = 29;
-                        }
-                        break;
-                    default:
-                        break;
-                }
                 //get current date
-                int year = minYear + yearPos;
-                int month = monthPos + 1;
-                int day = dayPos + 1;
+                String year = yearList.get(yearPos);
+                String month = monthList.get(monthPos);
+                String day = dayList.get(dayPos);
                 StringBuffer sb = new StringBuffer();
-                sb.append(String.valueOf(year));
-                sb.append(".");
-                sb.append(format2LenStr(month));
-                sb.append(".");
-                sb.append(format2LenStr(day));
+               sb.append(year);
+                sb.append(month);
+                sb.append(day);
                 mListener.onDatePickCompleted(year, month, day, sb.toString());
             }
             dismissDialog();
