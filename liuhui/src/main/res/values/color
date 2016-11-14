@@ -1,0 +1,5 @@
+<resources>
+    <color name="black">#FF000000</color>
+    <color name="toast_white">#ffffff</color>
+    <color name="toast_stroke_gray">#99d4d4d4</color>
+</resources>

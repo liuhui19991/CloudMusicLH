@@ -32,9 +32,6 @@ public class PersonalRecommendationFragment extends BaseFragment {
     private Button top, bottom;
     private PopupWindow mPopupWindow;
 
-    public PersonalRecommendationFragment() {
-    }
-
     @Override
     public int getLayoutId() {
         return R.layout.fragment_personal_recommendation;

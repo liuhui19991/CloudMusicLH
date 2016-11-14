@@ -21,6 +21,7 @@ import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.listener.OnItemClickListener;
 
 import butterknife.BindView;
+import cn.world.liuhui.utils.ToastUtil;
 
 /**
  * Created by liuhui on 2016/9/13.
@@ -83,7 +84,7 @@ public class UniversalActivity extends BaseActivity implements BaseQuickAdapter.
 
             @Override
             public void SimpleOnItemClick(BaseQuickAdapter adapter, View view, int position) {
-                Toast.makeText(mContext, "" + Integer.toString(position), Toast.LENGTH_SHORT).show();
+                ToastUtil.showToastWithImg(mContext,"点击",0);
             }
 
             @Override
