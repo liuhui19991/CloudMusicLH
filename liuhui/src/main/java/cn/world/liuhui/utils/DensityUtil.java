@@ -1,5 +1,6 @@
 package cn.world.liuhui.utils;
 
+import android.app.Activity;
 import android.content.Context;
 
 /**
@@ -43,4 +44,7 @@ public class DensityUtil {
         return (int) (spValue * fontScale + 0.5f);
     }
 
+    public static int getDisplayWidth(Activity activity) {
+        return activity.getWindowManager().getDefaultDisplay().getWidth();
+    }
 }

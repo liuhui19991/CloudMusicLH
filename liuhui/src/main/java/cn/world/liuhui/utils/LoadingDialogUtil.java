@@ -72,22 +72,5 @@ public class LoadingDialogUtil {
         dialog.setMessage("请求网络中...");
         dialog.show();
     }
-    /**
-     * 在基类中这样使用比较严密
-     */
-   /* public void showLoading() {
-        if (dialog != null && dialog.isShowing()) return;
-        dialog = new ProgressDialog(this);
-        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-        dialog.setCanceledOnTouchOutside(false);
-        dialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
-        dialog.setMessage("请求网络中...");
-        dialog.show();
-    }
 
-    public void dismissLoading() {
-        if (dialog != null && dialog.isShowing()) {
-            dialog.dismiss();
-        }
-    }*/
 }
