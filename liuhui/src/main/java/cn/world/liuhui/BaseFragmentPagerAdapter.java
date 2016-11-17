@@ -13,13 +13,27 @@ import java.util.List;
  * Created by liuhui on 2015/8/8.
  */
 public class BaseFragmentPagerAdapter extends FragmentPagerAdapter {
-    List<Fragment> mFragmentList = new ArrayList<Fragment>();
-    private List<String> mTitles;
+    List<Fragment> mFragmentList = new ArrayList<>();
+    private List<String> mTitles = new ArrayList<>();
+
+    public BaseFragmentPagerAdapter(FragmentManager fm) {
+        super(fm);
+    }
+
+    public BaseFragmentPagerAdapter(FragmentManager fm, List<Fragment> fragmentList) {
+        super(fm);
+        mFragmentList = fragmentList;
+    }
 
     public BaseFragmentPagerAdapter(FragmentManager fm, List<Fragment> fragmentList, List<String> mTitles) {
         super(fm);
         mFragmentList = fragmentList;
         this.mTitles = mTitles;
+    }
+
+    public void addFragment(Fragment fragment, String title) {
+        mFragmentList.add(fragment);
+        mTitles.add(title);
     }
 
     @Override
