@@ -80,6 +80,11 @@ public abstract class BaseActivity<V, P extends BasePresenter<V>> extends AppCom
         }
     }
 
+    /*protected void initWindow(boolean transparent, int color) {
+        if (transparent) StatusBarCompat.translucentStatusBar(this);// 设置状态栏全透明
+        else StatusBarCompat.setStatusBarColor(this, ContextCompat.getColor(this, color));// 沉浸式状态栏
+    }*/
+
     protected void initToolBar() {
 //        mToolbar = findView(R.id.toolbar);
 //        mToolbar.setTitle("");
