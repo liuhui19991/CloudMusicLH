@@ -141,6 +141,23 @@ public class DialogUtil {
         pickerDialog.showDialog(context);
     }
 
+    /**
+     * 展示单选的弹窗
+     *
+     * @param title     标题
+     * @param activity  上下文
+     * @param signtrans 单选中间存储
+     * @param positive  确定监听
+     */
+    public static void showSignSelectDialog(Activity activity, String title, final String[] strings, DialogInterface.OnClickListener signtrans, DialogInterface.OnClickListener positive) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(activity);
+        builder.setTitle(title)
+                .setSingleChoiceItems(strings, 0, signtrans)
+                .setPositiveButton("确定", positive)
+                .setNegativeButton("取消", null)
+                .show();
+    }
+
     public static void showSignSlecter(Activity context, SignPickerDialog.OnDatePickedListener listener) {
         SignPickerDialog pickerDialog = new SignPickerDialog.Builder(context, listener)
 
@@ -180,6 +197,7 @@ public class DialogUtil {
         }
         context.startActivity(localIntent);
     }
+
    /* dateOld = dateCurr;
     //调用日期选择器
     if (TextUtils.isEmpty(mTxtDateSelect.getText().toString().trim())) {
