@@ -84,7 +84,7 @@ public class UniversalActivity extends BaseActivity implements BaseQuickAdapter.
 
             @Override
             public void SimpleOnItemClick(BaseQuickAdapter adapter, View view, int position) {
-                ToastUtil.showToastWithImg(mContext,"点击",0);
+                ToastUtil.showToastWithImg(mContext, "点击", 0);
             }
 
             @Override
@@ -102,12 +102,10 @@ public class UniversalActivity extends BaseActivity implements BaseQuickAdapter.
                 }
             }
 
-
             @Override
             public void onItemLongClick(BaseQuickAdapter adapter, View view, int position) {
                 super.onItemLongClick(adapter, view, position);
                 Toast.makeText(mContext, "The " + Integer.toString(position) + " Item is LongClick ", Toast.LENGTH_SHORT).show();
-
             }
 
             @Override
