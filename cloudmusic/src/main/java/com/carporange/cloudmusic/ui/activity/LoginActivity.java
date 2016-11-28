@@ -32,8 +32,9 @@ import cn.world.liuhui.utils.DialogUtil;
 /**
  * Created by liuhui on 2016/6/15.
  */
+//这个页面的输入内容必须使用相同类型,然后在页面创建的时候再动态设置,要不然会出现屏幕上下闪动,顶部栏不能使用透明状态栏,
+// 要不然会无法监听到键盘的弹起或者隐藏
 public class LoginActivity extends BaseActivity implements OnClickListener, View.OnLayoutChangeListener {
-
     private ScrollView mScrollView;
     private LinearLayout mForgetLayout;
     private Handler mHandler;
