@@ -13,7 +13,7 @@ import com.carporange.cloudmusic.R;
 import com.carporange.cloudmusic.util.SpUtil;
 
 import butterknife.ButterKnife;
-import me.majiajie.swipeback.SwipeBackActivity;
+import cn.world.liuhui.swipeback.SwipeBackActivity;
 
 /**
  * Created by liuhui on 2016/6/27.

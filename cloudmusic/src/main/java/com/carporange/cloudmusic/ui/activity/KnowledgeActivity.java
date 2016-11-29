@@ -37,13 +37,11 @@ public class KnowledgeActivity extends BaseActivity {
     @Override
     public void initViews() {
         // 知识地图相关
-         MapView commonMapView = (MapView) findViewById(R.id.map);
+        MapView commonMapView = (MapView) findViewById(R.id.map);
 
         Resources res = getResources();
-        NodeService.close = BitmapFactory.decodeResource(res,
-                R.mipmap.common_node_close);
-        NodeService.open = BitmapFactory.decodeResource(res,
-                R.mipmap.common_node_open);
+        NodeService.close = BitmapFactory.decodeResource(res, R.mipmap.common_node_close);
+        NodeService.open = BitmapFactory.decodeResource(res, R.mipmap.common_node_open);
 
         DisplayMetrics dm = UIUtils.getDisplayMetrics(mContext);
         MapService service = new MapService(commonMapView, null, dm);
@@ -52,7 +50,7 @@ public class KnowledgeActivity extends BaseActivity {
         if ("down".equals(getIntent().getStringExtra("down"))) {//下载文件打开
             service.startEngineFromString(FileUtil.getFileUTF8(resourceUrl));
         } else service.startEngineFromUrl(resourceUrl);
-        L.e("缓存"+AppCacheUtil.getInstance(mContext).getString("liuhui"));//这里的缓存是登录页设置的
+        L.e("缓存" + AppCacheUtil.getInstance(mContext).getString("liuhui"));//这里的缓存是登录页设置的
     }
 
     @OnClick(R.id.tv_down)

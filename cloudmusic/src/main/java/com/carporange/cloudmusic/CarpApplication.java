@@ -5,7 +5,8 @@ import android.app.Application;
 import com.yolanda.nohttp.Logger;
 import com.yolanda.nohttp.NoHttp;
 
-import me.majiajie.swipeback.utils.ActivityStack;
+import cn.world.liuhui.swipeback.ActivityStack;
+
 
 /**
  * Created by Liyuchen on 2016/6/14.
