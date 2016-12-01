@@ -31,10 +31,8 @@ public abstract class BaseFragment<V, P extends BasePresenter<V>> extends Fragme
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        mPresenter = initPresenter();
-        if (mContentView == null) {
-            mContentView = inflater.inflate(getLayoutId(), container, false);
-        }
+        if (mContentView == null) mContentView = inflater.inflate(getLayoutId(), container, false);
+
         if (mContentView.getParent() != null) {//重要
             ViewGroup parent = (ViewGroup) mContentView.getParent();
             parent.removeView(mContentView);
@@ -58,6 +56,7 @@ public abstract class BaseFragment<V, P extends BasePresenter<V>> extends Fragme
             return;
         }
         isFirstLoad = false;
+        mPresenter = initPresenter();
         initView();
         initListener();
     }
