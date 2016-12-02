@@ -1,6 +1,9 @@
 package cn.world.liuhui.utils;
 
+import android.app.Activity;
+import android.content.ComponentName;
 import android.content.Context;
+import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 
@@ -31,5 +34,17 @@ public class NetWorkUtil {
                 = ((ConnectivityManager) context.getSystemService(
                 Context.CONNECTIVITY_SERVICE)).getActiveNetworkInfo();
         return networkInfo != null ? networkInfo.getState() : null;
+    }
+
+    /**
+     * 跳转到打开网络的界面
+     */
+    public static void goConnection(Activity activity) {
+        Intent intent = new Intent();
+        intent.setAction(Intent.ACTION_MAIN);
+        intent.addCategory("android.intent.category.LAUNCHER");
+        intent.setFlags(0x10200000);
+        intent.setComponent(new ComponentName("com.android.settings", "com.android.settings.Settings"));
+        activity.startActivity(intent);
     }
 }
