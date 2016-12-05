@@ -2,12 +2,66 @@ package cn.world.liuhui.utils;
 
 import android.app.Activity;
 import android.content.Context;
+import android.os.Build;
+import android.util.DisplayMetrics;
+import android.view.Display;
 
 /**
  * 单位转换
  * Created by liuhui on 2015/7/27.
  */
 public class DensityUtil {
+
+    private static boolean isInitialize = false;
+    /**
+     * 屏幕宽度
+     **/
+    public static int screenWidth;
+    /**
+     * 屏幕高度
+     **/
+    public static int screenHeight;
+    /**
+     * 屏幕密度
+     **/
+    public static int screenDpi;
+    /**
+     * 逻辑密度, 屏幕缩放因子
+     */
+    public static float density = 1;
+    /**
+     * 字体缩放因子
+     */
+    public static float scaledDensity;
+
+    /**
+     * 初始化屏幕宽度和高度
+     */
+    public static void initScreen(Activity activity) {
+        if (isInitialize) return;
+        isInitialize = true;
+        Display display = activity.getWindowManager().getDefaultDisplay();
+        DisplayMetrics metric = new DisplayMetrics();
+
+        if (Build.VERSION.SDK_INT >= 17) {
+            display.getRealMetrics(metric);
+        } else {
+            display.getMetrics(metric);
+        }
+
+        screenWidth = metric.widthPixels;
+        screenHeight = metric.heightPixels;
+        screenDpi = metric.densityDpi;
+        density = metric.density;
+        scaledDensity = metric.scaledDensity;
+    }
+
+    /**
+     * 是否是横屏
+     */
+    public static boolean isHorizontal() {
+        return screenWidth > screenHeight;
+    }
 
     /**
      * dp转换px

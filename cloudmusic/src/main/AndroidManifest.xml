@@ -64,6 +64,7 @@
         <activity android:name=".ui.activity.RecyclerSwipeActivity"/>
         <activity android:name=".ui.activity.UniversalActivity"/>
         <activity android:name=".ui.activity.PhonePersion"/>
+        <activity android:name=".ui.activity.RefreshAnimationActivity"/>
 
         <service android:name=".service.DownloadService"/>
         <!-- <service

@@ -40,6 +40,11 @@
             style="@style/textview"
             android:text="@string/update"/>
 
+        <TextView
+            android:id="@+id/refresh"
+            style="@style/textview"
+            android:text="@string/refresh"/>
+
     </LinearLayout>
 
     <RelativeLayout

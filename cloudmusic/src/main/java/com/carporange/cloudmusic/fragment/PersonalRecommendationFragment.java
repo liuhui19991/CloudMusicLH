@@ -14,6 +14,7 @@ import android.widget.PopupWindow;
 import com.carporange.cloudmusic.R;
 import com.carporange.cloudmusic.service.DownloadService;
 import com.carporange.cloudmusic.ui.activity.PhonePersion;
+import com.carporange.cloudmusic.ui.activity.RefreshAnimationActivity;
 import com.carporange.cloudmusic.ui.activity.UniversalActivity;
 import com.carporange.cloudmusic.ui.base.BaseFragment;
 import com.carporange.cloudmusic.util.L;
@@ -65,36 +66,35 @@ public class PersonalRecommendationFragment extends BaseFragment {
 
     }
 
-    @OnClick(R.id.top)
-    void top() {
-        showPopupWindow(top);
-    }
-
-    @OnClick(R.id.bottom)
-    void bottom() {
-        showPopupWindow(bottom);
-    }
-
-    @OnClick(R.id.universaladapter)
-    void universalAdapter() {
-        startActivity(new Intent(mContext, UniversalActivity.class));
-    }
-
-    @OnClick(R.id.phone_persion)
-    void phonePersion() {
-        startActivity(new Intent(mContext, PhonePersion.class));
-    }
-
-    @OnClick(R.id.update)
-    void updateApp() {
-        DialogUtil.showAlert(mContext, "更新软件", "这是一个新的版本", "立即更新", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialogInterface, int i) {
-                Intent intent = new Intent(mContext, DownloadService.class);
-                intent.putExtra("url", APK_URL);
-                mContext.startService(intent);
-            }
-        }, "下次再说", null);
+    @OnClick({R.id.refresh, R.id.top, R.id.bottom, R.id.universaladapter, R.id.phone_persion, R.id.update})
+    void click(View view) {
+        switch (view.getId()) {
+            case R.id.refresh:
+                startActivity(new Intent(mContext,RefreshAnimationActivity.class));
+                break;
+            case R.id.top:
+                showPopupWindow(top);
+                break;
+            case R.id.bottom:
+                showPopupWindow(bottom);
+                break;
+            case R.id.universaladapter:
+                startActivity(new Intent(mContext, UniversalActivity.class));
+                break;
+            case R.id.phone_persion:
+                startActivity(new Intent(mContext, PhonePersion.class));
+                break;
+            case R.id.update:
+                DialogUtil.showAlert(mContext, "更新软件", "这是一个新的版本", "立即更新", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        Intent intent = new Intent(mContext, DownloadService.class);
+                        intent.putExtra("url", APK_URL);
+                        mContext.startService(intent);
+                    }
+                }, "下次再说", null);
+                break;
+        }
     }
 
     /**
