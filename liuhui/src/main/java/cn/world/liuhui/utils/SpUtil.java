@@ -9,20 +9,22 @@ import cn.world.liuhui.BaseApplication;
  * Created by liuhui on 2015/6/27.
  */
 public class SpUtil {
+    public static final String SP_NAME = "data";
+
     public static void put(String key, String value) {
-        BaseApplication.getInstance().getSharedPreferences("data", Context.MODE_PRIVATE).edit().putString(key, value).apply();
+        BaseApplication.getInstance().getSharedPreferences(SP_NAME, Context.MODE_PRIVATE).edit().putString(key, value).apply();
     }
 
     public static void put(String key, boolean value) {
-        BaseApplication.getInstance().getSharedPreferences("data", Context.MODE_PRIVATE).edit().putBoolean(key, value).apply();
+        BaseApplication.getInstance().getSharedPreferences(SP_NAME, Context.MODE_PRIVATE).edit().putBoolean(key, value).apply();
     }
 
     public static boolean getBoolean(String key, boolean defValue) {
-        return BaseApplication.getInstance().getSharedPreferences("data", Context.MODE_PRIVATE).getBoolean(key, defValue);
+        return BaseApplication.getInstance().getSharedPreferences(SP_NAME, Context.MODE_PRIVATE).getBoolean(key, defValue);
     }
 
     public static String getString(String key, String defValue) {
-        return BaseApplication.getInstance().getSharedPreferences("data", Context.MODE_PRIVATE).getString(key, defValue);
+        return BaseApplication.getInstance().getSharedPreferences(SP_NAME, Context.MODE_PRIVATE).getString(key, defValue);
     }
 
 
