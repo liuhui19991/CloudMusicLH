@@ -19,8 +19,7 @@ public class NetWorkUtil {
      * @return 当前网络是否已经链接
      */
     public static boolean isConnectedByState(Context context) {
-        return getCurrentNetworkState(context) ==
-                NetworkInfo.State.CONNECTED;
+        return getCurrentNetworkState(context) == NetworkInfo.State.CONNECTED;
     }
 
     /**
@@ -30,9 +29,7 @@ public class NetWorkUtil {
      * @return 当前网络的状态。具体类型可参照NetworkInfo.State.CONNECTED、NetworkInfo.State.CONNECTED.DISCONNECTED等字段。当前没有网络连接时返回null
      */
     public static NetworkInfo.State getCurrentNetworkState(Context context) {
-        NetworkInfo networkInfo
-                = ((ConnectivityManager) context.getSystemService(
-                Context.CONNECTIVITY_SERVICE)).getActiveNetworkInfo();
+        NetworkInfo networkInfo = ((ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE)).getActiveNetworkInfo();
         return networkInfo != null ? networkInfo.getState() : null;
     }
 
