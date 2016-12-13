@@ -24,7 +24,6 @@ public class GsonUtil {
             return t;
         } catch (Exception e) {
             e.printStackTrace();
-            System.out.println("GSON EX ++++++++++++" + e.toString());
             return null;
         }
     }
