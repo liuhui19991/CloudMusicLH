@@ -84,6 +84,7 @@ public class MyLoadMoreAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
                 }
             }
         });
+        //recyclerview 的动画在这里设置
         setItemAppearAnimation(holder, position, R.anim.anim_item_in);
     }
 
