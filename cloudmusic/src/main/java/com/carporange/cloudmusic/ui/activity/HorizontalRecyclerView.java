@@ -19,6 +19,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
+import cn.world.liuhui.utils.LogUtil;
 import cn.world.liuhui.utils.ToastUtil;
 
 /**
@@ -119,7 +120,7 @@ public class HorizontalRecyclerView extends BaseActivity {
             } else if (holder instanceof ItemViewHolder) {
                 holder.refreshData(data.verticalData.get(position - 2), position - 2);
             }
-
+            LogUtil.e(position + "位置" + data.verticalData.size());
         }
 
         @Override
@@ -149,12 +150,14 @@ public class HorizontalRecyclerView extends BaseActivity {
 
         @Override
         public int getItemViewType(int position) {
-            if (position == 0) return HORIZONTAL_VIEW;
+            if (position == 0) return HORIZONTAL_VIEW;//(position == 0 || (position - 3) % 3 == 0)
             if (position == 1) return GRID_VIEW;
             return VERTICAL_VIEW;
+//            if(position == 0 || (position - 3) % 3 == 0)//第一列
+//                if(position == 1 || (position - 3) % 3 == 1)//第二列
+//                    if(position == 2 || (position - 3) % 3 == 2)//第三列
         }
     }
-
 
     //----------------------Holder----------------------------
 
