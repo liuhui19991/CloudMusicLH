@@ -6,6 +6,7 @@ import android.support.v7.widget.RecyclerView;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.util.TypedValue;
+import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
@@ -18,6 +19,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
+import cn.world.liuhui.utils.ToastUtil;
 
 /**
  * RecyclerView嵌套RecyclerView
@@ -219,7 +221,13 @@ public class HorizontalRecyclerView extends BaseActivity {
             }
 
             @Override
-            public void onBindViewHolder(BaseHolder holder, int position) {
+            public void onBindViewHolder(BaseHolder holder, final int position) {
+                ((ItemViewHolder) holder).imageview_item.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        ToastUtil.show(mContext, "点击" + position);
+                    }
+                });
                 holder.refreshData(data.get(position), position);
             }
 
@@ -298,7 +306,7 @@ public class HorizontalRecyclerView extends BaseActivity {
      */
     private class ItemViewHolder extends BaseHolder<Integer> {
 
-        private ImageView imageview_item;
+        protected ImageView imageview_item;
 
         public ItemViewHolder(int viewId, ViewGroup parent, int viewType) {
             super(viewId, parent, viewType);
