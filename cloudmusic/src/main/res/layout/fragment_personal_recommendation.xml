@@ -45,6 +45,11 @@
             style="@style/textview"
             android:text="@string/refresh"/>
 
+        <TextView
+            android:id="@+id/music"
+            style="@style/textview"
+            android:text="@string/music"/>
+
     </LinearLayout>
 
     <RelativeLayout

@@ -13,6 +13,7 @@ import android.widget.PopupWindow;
 
 import com.carporange.cloudmusic.R;
 import com.carporange.cloudmusic.service.DownloadService;
+import com.carporange.cloudmusic.ui.activity.MusicActivity;
 import com.carporange.cloudmusic.ui.activity.PhonePersion;
 import com.carporange.cloudmusic.ui.activity.RefreshAnimationActivity;
 import com.carporange.cloudmusic.ui.activity.UniversalActivity;
@@ -66,11 +67,11 @@ public class PersonalRecommendationFragment extends BaseFragment {
 
     }
 
-    @OnClick({R.id.refresh, R.id.top, R.id.bottom, R.id.universaladapter, R.id.phone_persion, R.id.update})
+    @OnClick({R.id.refresh, R.id.top, R.id.bottom, R.id.universaladapter, R.id.phone_persion, R.id.update, R.id.music})
     void click(View view) {
         switch (view.getId()) {
             case R.id.refresh:
-                startActivity(new Intent(mContext,RefreshAnimationActivity.class));
+                startActivity(new Intent(mContext, RefreshAnimationActivity.class));
                 break;
             case R.id.top:
                 showPopupWindow(top);
@@ -93,6 +94,10 @@ public class PersonalRecommendationFragment extends BaseFragment {
                         mContext.startService(intent);
                     }
                 }, "下次再说", null);
+                break;
+            case R.id.music:
+//                http://65res.gbxxzyzx.com/audio/songs/2016/7/14/20160714070713096.mp3
+            startActivity(new Intent(mContext, MusicActivity.class));
                 break;
         }
     }
