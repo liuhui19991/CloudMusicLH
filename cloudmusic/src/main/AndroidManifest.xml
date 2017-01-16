@@ -78,6 +78,8 @@
         -->
         <activity android:name=".ui.activity.MusicActivity">
         </activity>
+        <activity android:name=".ui.activity.DetailActivity"/>
+        <activity android:name=".ui.activity.UseInFragmentActivity"/>
 
         <service
             android:name=".service.MusicService"
