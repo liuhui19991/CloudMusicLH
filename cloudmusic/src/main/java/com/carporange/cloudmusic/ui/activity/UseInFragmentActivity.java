@@ -34,7 +34,7 @@ public class UseInFragmentActivity extends BaseActivity {
         mVpHome = (ViewPager) findViewById(R.id.vp_home);
         mBottomNavigationBar = (BottomNavigationBar) findViewById(R.id.bottom_navigation_bar);
         mBottomNavigationBar.addItem(new BottomNavigationItem(R.drawable.ic_favorite, "One"))
-                .addItem(new BottomNavigationItem(R.drawable.ic_gavel, "Two"))
+                .addItem(new BottomNavigationItem(R.drawable.ic_gavel, "Two").setActiveColor(R.color.colorAccent))//通过这里的set可以设置底部栏的颜色
                 .addItem(new BottomNavigationItem(R.drawable.ic_grade, "Three"))
                 .addItem(new BottomNavigationItem(R.drawable.ic_group_work, "Four"))
                 .setMode(BottomNavigationBar.MODE_FIXED)//0不带字,1带字

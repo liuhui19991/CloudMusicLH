@@ -15,4 +15,8 @@ public class DetailActivity extends BaseActivity{
     public void initViews() {
 
     }
+
+    @Override
+    public void initActionBar() {
+    }
 }

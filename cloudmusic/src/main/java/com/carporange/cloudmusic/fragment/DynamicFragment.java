@@ -37,20 +37,24 @@ public class DynamicFragment extends BaseFragment {
 
     @Override
     protected void initViews() {
-        mList.add("详情页");//在这里添加要点击的条目
-        mList.add("Fragment带侧边栏");
+        String[] stringArray = getResources().getStringArray(R.array.detail);
+        for (int i = 0; i < stringArray.length; i++) mList.add(stringArray[i]);
+
         mRecyclerView.setLayoutManager(new GridLayoutManager(mContext, 2));
         ListAdapter listAdapter = new ListAdapter(mList);
         mRecyclerView.setAdapter(listAdapter);
         listAdapter.setOnClicklistener(new ItemClickListener() {
             @Override
-            public void onClick(int position) {
+            public void onClick(int position, View v) {
                 switch (position) {
                     case 0:
-                        startActivity(new Intent(mContext,DetailActivity.class));
+                        startActivity(new Intent(mContext, DetailActivity.class));
                         break;
                     case 1:
-                        startActivity(new Intent(mContext,UseInFragmentActivity.class));
+                        startActivity(new Intent(mContext, UseInFragmentActivity.class));
+                        break;
+                    case 2:
+//                        startActivity(new Intent(mContext, .class));
                         break;
                 }
                 ToastUtil.show(mContext, "dianji " + position);
@@ -83,7 +87,7 @@ public class DynamicFragment extends BaseFragment {
             holder.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    mItemClickListener.onClick(position);
+                    mItemClickListener.onClick(position,v);
                 }
             });
         }
@@ -105,6 +109,6 @@ public class DynamicFragment extends BaseFragment {
     }
 
     public interface ItemClickListener {
-        void onClick(int position);
+        void onClick(int position, View v);
     }
 }
