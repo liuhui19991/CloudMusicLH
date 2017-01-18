@@ -25,8 +25,6 @@ import cn.world.liuhui.utils.ToastUtil;
  * Created by liuhui on 2016/6/27.
  */
 public class DynamicFragment extends BaseFragment {
-
-
     @BindView(R.id.dynamic_rc)
     RecyclerView mRecyclerView;
     List<String> mList = new ArrayList<>();
