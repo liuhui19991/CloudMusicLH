@@ -5,19 +5,20 @@ import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.TextView;
+import android.widget.ViewFlipper;
 
 import com.carporange.cloudmusic.R;
+import com.carporange.cloudmusic.adapter.DynamicAdapter;
 import com.carporange.cloudmusic.ui.activity.DetailActivity;
 import com.carporange.cloudmusic.ui.activity.UseInFragmentActivity;
 import com.carporange.cloudmusic.ui.base.BaseFragment;
+import com.chad.library.adapter.base.BaseQuickAdapter;
+import com.chad.library.adapter.base.listener.OnItemClickListener;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import cn.world.liuhui.utils.ToastUtil;
 
 /**
@@ -41,12 +42,18 @@ public class DynamicFragment extends BaseFragment {
         for (int i = 0; i < stringArray.length; i++) mList.add(stringArray[i]);
 
         mRecyclerView.setLayoutManager(new GridLayoutManager(mContext, 2));
-        ListAdapter listAdapter = new ListAdapter(mList);
-        mRecyclerView.setAdapter(listAdapter);
-        listAdapter.setOnClicklistener(new ItemClickListener() {
+        DynamicAdapter dynamicAdapter = new DynamicAdapter(R.layout.item, mList);
+        View view = LayoutInflater.from(getActivity()).inflate(R.layout.marq_head, null);
+        ViewFlipper vff = (ViewFlipper) view.findViewById(R.id.vf);
+        vff.addView(View.inflate(mContext, R.layout.view_advertisement01, null));
+        vff.addView(View.inflate(mContext, R.layout.view_advertisement02, null));
+        vff.addView(View.inflate(mContext, R.layout.view_advertisement03, null));//如果没有这三行代码,viewflipper这个控件将不占位
+        dynamicAdapter.addHeaderView(view);//此处添加头布局上下滚动的跑马灯
+        mRecyclerView.setAdapter(dynamicAdapter);
+        mRecyclerView.addOnItemTouchListener(new OnItemClickListener() {
             @Override
-            public void onClick(int position, View v) {
-                switch (position) {
+            public void SimpleOnItemClick(BaseQuickAdapter baseQuickAdapter, View view, int i) {
+                switch (i) {
                     case 0:
                         startActivity(new Intent(mContext, DetailActivity.class));
                         break;
@@ -57,58 +64,8 @@ public class DynamicFragment extends BaseFragment {
 //                        startActivity(new Intent(mContext, .class));
                         break;
                 }
-                ToastUtil.show(mContext, "dianji " + position);
+                ToastUtil.show(mContext, "dianji " + i);
             }
         });
-
-    }
-
-    class ListAdapter extends RecyclerView.Adapter<ListAdapter.ListViewHolder> {
-        List<String> mList;
-        ItemClickListener mItemClickListener;
-
-        public ListAdapter(List<String> list) {
-            mList = list;
-        }
-
-        @Override
-        public ListViewHolder onCreateViewHolder(ViewGroup parent, int vype) {
-            View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item, parent, false);
-            return new ListViewHolder(view);
-        }
-
-        public void setOnClicklistener(ItemClickListener itemClickListener) {
-            mItemClickListener = itemClickListener;
-        }
-
-        @Override
-        public void onBindViewHolder(ListViewHolder holder, final int position) {
-            holder.mTextView.setText(mList.get(position));
-            holder.itemView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    mItemClickListener.onClick(position,v);
-                }
-            });
-        }
-
-        @Override
-        public int getItemCount() {
-            return mList.size();
-        }
-
-        class ListViewHolder extends RecyclerView.ViewHolder {
-            @BindView(R.id.tv_title)
-            TextView mTextView;
-
-            public ListViewHolder(View itemView) {
-                super(itemView);
-                ButterKnife.bind(this, itemView);
-            }
-        }
-    }
-
-    public interface ItemClickListener {
-        void onClick(int position, View v);
     }
 }

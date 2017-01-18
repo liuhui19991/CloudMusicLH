@@ -72,6 +72,7 @@ public class UniversalActivity extends BaseActivity implements BaseQuickAdapter.
         mQuickAdapter.openLoadAnimation(new CustomAnimation());
         mQuickAdapter.isFirstOnly(false);
         mQuickAdapter.openLoadMore(PAGE_SIZE);
+        mQuickAdapter.addHeaderView(getLayoutInflater().inflate(R.layout.item,null));
         //这句话可以设置自定义的加载进度条
         mQuickAdapter.setLoadingView(getLayoutInflater().inflate(R.layout.loadmore_footer, (ViewGroup) mRecyclerView.getParent(), false));
         mRecyclerView.setAdapter(mQuickAdapter);
