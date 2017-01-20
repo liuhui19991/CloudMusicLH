@@ -4,18 +4,21 @@ package com.carporange.cloudmusic.ui.activity;
 import android.app.Dialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.webkit.JavascriptInterface;
 import android.webkit.WebChromeClient;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.ProgressBar;
+import android.widget.Toast;
 
 import com.carporange.cloudmusic.R;
 import com.carporange.cloudmusic.ui.base.BaseActivity;
+
+import cn.world.liuhui.utils.ToastUtil;
 
 
 /**
@@ -29,6 +32,7 @@ public class WebPageActivity extends BaseActivity {
     private ProgressBar bar;
     private WebView webView;
     private Dialog mWaitDialog;
+
     @Override
     protected int getLayoutId() {
         return R.layout.activity_webpage;
@@ -66,6 +70,7 @@ public class WebPageActivity extends BaseActivity {
 //        settings.setBuiltInZoomControls(true);// 显示缩放按钮(wap网页不支持)
         settings.setUseWideViewPort(true);// 支持双击缩放(wap网页不支持)
         settings.setJavaScriptEnabled(true);//设置支持js功能
+        webView.addJavascriptInterface(new HeightGetter(), "jo");//增加webview的高度测量
         settings.setUseWideViewPort(true);// 这个很关键  自适应大小
         settings.setLoadWithOverviewMode(true);
 
@@ -82,13 +87,14 @@ public class WebPageActivity extends BaseActivity {
         public void onPageStarted(WebView view, String url, Bitmap favicon) {
             super.onPageStarted(view, url, favicon);
             mWaitDialog.show();
+            ToastUtil.show(mContext, webView.getHeight() + "start");
         }
 
         //所有链接跳转会走此方法
         @Override
         public boolean shouldOverrideUrlLoading(WebView view, String url) {
-            view.loadUrl(url);//这句话的意思是在跳转view时强制在当前view中加载
-            return true;
+//            view.loadUrl(url);//这句话的意思是在跳转view时强制在当前view中加载
+            return false;
         }
 
         //网页加载结束
@@ -97,6 +103,7 @@ public class WebPageActivity extends BaseActivity {
             super.onPageFinished(view, url);
             bar.setVisibility(View.GONE);
             mWaitDialog.dismiss();
+            webView.loadUrl("javascript:window.jo.run(document.documentElement.scrollHeight+'');");
         }
     }
 
@@ -144,6 +151,7 @@ public class WebPageActivity extends BaseActivity {
 
     /**
      * 重写这个方法就能在toolbar上面出现菜单按钮
+     *
      * @param menu
      * @return
      */
@@ -172,6 +180,17 @@ public class WebPageActivity extends BaseActivity {
             return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    private class HeightGetter {
+        @JavascriptInterface
+        public void run(final String height) {
+            runOnUiThread(new Runnable() {
+                public void run() {
+                    Toast.makeText(getApplicationContext(), height, Toast.LENGTH_SHORT).show();
+                }
+            });
+        }
     }
 }
 
