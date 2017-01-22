@@ -149,6 +149,15 @@ public class WebPageActivity extends BaseActivity {
         finish();
     }
 
+    @Override
+    protected void onDestroy() {
+        webView.removeView(webView);//用完时候好像需要移除才可以 ...// TODO: 2017/1/22  
+        webView.clearCache(true);
+        webView.destroy();
+        super.onDestroy();
+
+    }
+
     /**
      * 重写这个方法就能在toolbar上面出现菜单按钮
      *
