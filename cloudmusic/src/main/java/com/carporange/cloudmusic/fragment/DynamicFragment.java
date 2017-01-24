@@ -1,5 +1,6 @@
 package com.carporange.cloudmusic.fragment;
 
+import android.content.ComponentName;
 import android.content.Intent;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -60,6 +61,27 @@ public class DynamicFragment extends BaseFragment {
                         break;
                     case 2:
 //                        startActivity(new Intent(mContext, .class));
+                        String packageName = "";
+                        String className = "";
+//                        String className = "com.jaydenxiao.androidfire.ui.news.activity.NewsDetailActivity";
+                      /*  Intent intent = new Intent();  /这一段可以启动一个应用
+                        PackageManager packageManager = mContext.getPackageManager();
+                        intent = packageManager.getLaunchIntentForPackage(packageName);
+                        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK|Intent.FLAG_ACTIVITY_RESET_TASK_IF_NEEDED | Intent.FLAG_ACTIVITY_CLEAR_TOP) ;
+                        startActivity(intent);*/
+
+//                        ComponentName comp = new ComponentName(packageName,className);
+//                        Intent intent = new Intent();
+//                        intent.setComponent(comp);
+//                        intent.setAction("android.intent.action.VIEW");
+//                        startActivity(intent);
+
+
+                        Intent intent = new Intent(Intent.ACTION_MAIN);
+                        intent.addCategory(Intent.CATEGORY_LAUNCHER);
+                        ComponentName cn = new ComponentName(packageName, className);
+                        intent.setComponent(cn);
+                        startActivity(intent);
                         break;
                 }
                 ToastUtil.show(mContext, "dianji " + i);
