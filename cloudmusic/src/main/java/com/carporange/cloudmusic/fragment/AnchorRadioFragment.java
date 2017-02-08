@@ -61,14 +61,13 @@ import cn.world.liuhui.utils.FileUtil;
 import cn.world.liuhui.widget.NumberProgressBar;
 import fm.jiecao.jcvideoplayer_lib.JCVideoPlayerStandard;
 
-import static com.carporange.cloudmusic.R.id.et;
 import static com.carporange.cloudmusic.R.id.third;
 
 /**
  * Created by liuhui on 2016/6/27.
  */
 public class AnchorRadioFragment extends BaseFragment implements MyAdapter.ItemClickListener, View.OnClickListener {
-    @BindView(et)
+    @BindView(R.id.et)
     EditText mEditText;
     @BindView(R.id.view_pager)
     ViewPagerCycle mViewPagerCycle;
