@@ -49,6 +49,10 @@
             android:id="@+id/music"
             style="@style/textview"
             android:text="@string/music"/>
+        <TextView
+            android:id="@+id/wvandlv"
+            style="@style/textview"
+            android:text="@string/wvandlv"/>
 
     </LinearLayout>
 

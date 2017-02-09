@@ -17,6 +17,7 @@ import com.carporange.cloudmusic.ui.activity.MusicActivity;
 import com.carporange.cloudmusic.ui.activity.PhonePersion;
 import com.carporange.cloudmusic.ui.activity.RefreshAnimationActivity;
 import com.carporange.cloudmusic.ui.activity.UniversalActivity;
+import com.carporange.cloudmusic.ui.activity.WebAndListViewActivity;
 import com.carporange.cloudmusic.ui.base.BaseFragment;
 import com.carporange.cloudmusic.util.L;
 import com.carporange.cloudmusic.util.T;
@@ -67,7 +68,7 @@ public class PersonalRecommendationFragment extends BaseFragment {
 
     }
 
-    @OnClick({R.id.refresh, R.id.top, R.id.bottom, R.id.universaladapter, R.id.phone_persion, R.id.update, R.id.music})
+    @OnClick({R.id.refresh, R.id.top, R.id.bottom, R.id.universaladapter, R.id.phone_persion, R.id.update, R.id.music, R.id.wvandlv})
     void click(View view) {
         switch (view.getId()) {
             case R.id.refresh:
@@ -85,6 +86,9 @@ public class PersonalRecommendationFragment extends BaseFragment {
             case R.id.phone_persion:
                 startActivity(new Intent(mContext, PhonePersion.class));
                 break;
+            case R.id.wvandlv:
+                startActivity(new Intent(mContext, WebAndListViewActivity.class));
+                break;
             case R.id.update:
                 DialogUtil.showAlert(mContext, "更新软件", "这是一个新的版本", "立即更新", new DialogInterface.OnClickListener() {
                     @Override
@@ -97,7 +101,7 @@ public class PersonalRecommendationFragment extends BaseFragment {
                 break;
             case R.id.music:
 //                http://65res.gbxxzyzx.com/audio/songs/2016/7/14/20160714070713096.mp3
-            startActivity(new Intent(mContext, MusicActivity.class));
+                startActivity(new Intent(mContext, MusicActivity.class));
                 break;
         }
     }
