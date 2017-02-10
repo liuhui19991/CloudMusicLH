@@ -295,13 +295,12 @@ public class WebAndListViewActivity extends AppCompatActivity {
 
 
     private int getListViewHeight() {
-
-        int value = getResources().getDisplayMetrics().heightPixels - getTopAndBottomHeight();
+        int value = getResources().getDisplayMetrics().heightPixels - getTopAndBottomHeight();//+ getTopHeight()添加这句后可实现顶部没有webview残留占据顶部栏
         return value;
     }
 
-    private int getTopHeight() {
-        return dip2px(getApplicationContext(), 50 + 25);
+    private int getTopHeight() {//这块的高度会使listview上面相等高度不能滑动
+        return dip2px(getApplicationContext(), 50 + 25);//后面数字原来为50 + 25,改为0或者修改getListViewHeight()解决问题
         //状态栏+标题栏
     }
 

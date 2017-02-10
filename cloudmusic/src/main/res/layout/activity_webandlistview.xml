@@ -37,10 +37,11 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
-            <TextView
-                android:text="评论"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="评论"/>
                 </LinearLayout>
 
                 <com.carporange.cloudmusic.widget.DetailListView

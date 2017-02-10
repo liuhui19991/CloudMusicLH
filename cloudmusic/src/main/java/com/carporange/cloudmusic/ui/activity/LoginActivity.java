@@ -237,7 +237,7 @@ public class LoginActivity extends BaseActivity implements OnClickListener, View
                                int oldRight, int oldBottom) {
         Message msg = Message.obtain();
         if (oldBottom != 0 && bottom != 0 && (oldBottom - bottom > keyHeight)) {
-            msg.what = KEYBOARD_SHOW;
+            msg.what = KEYBOARD_SHOW;//此处必须通过handler来更新ui
         } else if (oldBottom != 0 && bottom != 0 && (bottom - oldBottom > keyHeight)) {
             msg.what = KEYBOARD_HIDDEN;
         }
