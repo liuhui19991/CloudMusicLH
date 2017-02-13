@@ -19,6 +19,7 @@ import android.widget.Toast;
 import com.carporange.cloudmusic.R;
 import com.carporange.cloudmusic.widget.DetailListView;
 import com.carporange.cloudmusic.widget.DetailScrollView;
+import com.carporange.cloudmusic.widget.DetailWebView;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -30,7 +31,7 @@ public class WebAndListViewActivity extends AppCompatActivity {
     String[] from = {"name", "id"};              //这里是ListView显示内容每一列的列名
     int[] to = {R.id.user_name, R.id.user_id};   //这里是ListView显示每一列对应的list_item中控件的id
     private DetailScrollView mScrollView;
-    private WebView mWebView;
+    private DetailWebView mWebView;
     private DetailListView mListView;
     private SimpleAdapter mAdapter;
     private int mListScrollState = AbsListView.OnScrollListener.SCROLL_STATE_IDLE;
@@ -66,7 +67,7 @@ public class WebAndListViewActivity extends AppCompatActivity {
         setContentView(R.layout.activity_webandlistview);
         mScreenHeight = getResources().getDisplayMetrics().heightPixels;
         mScrollView = (DetailScrollView) findViewById(R.id.scrollView);
-        mWebView = (WebView) findViewById(R.id.webview);
+        mWebView = (DetailWebView) findViewById(R.id.webview);
         mListView = (DetailListView) findViewById(R.id.list_view);
         tvReply = (TextView) findViewById(R.id.tvReply);
         initWebView();
@@ -295,7 +296,7 @@ public class WebAndListViewActivity extends AppCompatActivity {
 
 
     private int getListViewHeight() {
-        int value = getResources().getDisplayMetrics().heightPixels - getTopAndBottomHeight();//+ getTopHeight()添加这句后可实现顶部没有webview残留占据顶部栏
+        int value = getResources().getDisplayMetrics().heightPixels - getTopAndBottomHeight() + getTopHeight();//+ getTopHeight()添加这句后可实现顶部没有webview残留占据顶部栏
         return value;
     }
 
