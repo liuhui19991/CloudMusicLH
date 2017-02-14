@@ -1,5 +1,6 @@
 package com.carporange.cloudmusic.ui.activity;
 
+import android.annotation.TargetApi;
 import android.content.Context;
 import android.os.Build;
 import android.os.Bundle;
@@ -236,6 +237,7 @@ public class WebAndListViewActivity extends AppCompatActivity {
         mScrollView.setMoveListener(new DetailScrollView.onMoveListener() {
             //当按下scrollview的时候,如果listview还在fling,强制重置它的位置,并抢夺事件;
             @Override
+            @TargetApi(21)
             public void onDown() {
 
                 if (mListView != null && mListScrollState == AbsListView.OnScrollListener.SCROLL_STATE_FLING) {
@@ -270,6 +272,7 @@ public class WebAndListViewActivity extends AppCompatActivity {
             }
 
             @Override
+            @TargetApi(21)
             public void onMove(float distance) {
                 if (mListView != null && mListScrollState == AbsListView.OnScrollListener.SCROLL_STATE_FLING) {
                     Log.d(TAG, "onMove listView还在fling,重置它的位置");
