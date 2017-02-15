@@ -4,7 +4,9 @@ package com.carporange.cloudmusic.fragment;
 import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
+import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.WindowManager;
@@ -21,9 +23,16 @@ import com.carporange.cloudmusic.ui.activity.WebAndListViewActivity;
 import com.carporange.cloudmusic.ui.base.BaseFragment;
 import com.carporange.cloudmusic.util.L;
 import com.carporange.cloudmusic.util.T;
+import com.carporange.cloudmusic.widget.CircleImageView;
 
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.InputStream;
+
+import butterknife.BindView;
 import butterknife.OnClick;
 import cn.world.liuhui.utils.DialogUtil;
+import cn.world.liuhui.utils.ToastUtil;
 
 /**
  * Created by liuhui on 2016/6/27.
@@ -34,7 +43,8 @@ public class PersonalRecommendationFragment extends BaseFragment {
     private final String APK_URL = "http://surveyapp.fy.chaoxing.com/app/LauncherDemo5.apk";
     private Button top, bottom;
     private PopupWindow mPopupWindow;
-
+    @BindView(R.id.photo)
+    CircleImageView mCircleImageView;
     @Override
     public int getLayoutId() {
         return R.layout.fragment_personal_recommendation;
@@ -68,7 +78,8 @@ public class PersonalRecommendationFragment extends BaseFragment {
 
     }
 
-    @OnClick({R.id.refresh, R.id.top, R.id.bottom, R.id.universaladapter, R.id.phone_persion, R.id.update, R.id.music, R.id.wvandlv})
+    @OnClick({R.id.refresh, R.id.top, R.id.bottom, R.id.universaladapter, R.id.phone_persion, R.id.update,
+            R.id.music, R.id.wvandlv, R.id.photo})
     void click(View view) {
         switch (view.getId()) {
             case R.id.refresh:
@@ -102,6 +113,12 @@ public class PersonalRecommendationFragment extends BaseFragment {
             case R.id.music:
 //                http://65res.gbxxzyzx.com/audio/songs/2016/7/14/20160714070713096.mp3
                 startActivity(new Intent(mContext, MusicActivity.class));
+                break;
+            case R.id.photo:
+                Intent intent1 = new Intent(
+                        Intent.ACTION_PICK);
+                intent1.setType("image/*");
+                startActivityForResult(intent1, PHOTO_REQUEST_GALLERY);
                 break;
         }
     }
@@ -147,4 +164,69 @@ public class PersonalRecommendationFragment extends BaseFragment {
             }
         }
     };
+
+
+    private static final int PHOTO_REQUEST_GALLERY = 2;// 从相册中选择
+    private static final int PHOTO_REQUEST_CUT = 3;// 结果
+    private Bitmap bitmap;
+
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == PHOTO_REQUEST_GALLERY) {
+            if (data != null) {
+                // 得到图片的全路径
+                Uri uri = data.getData();
+                crop(uri);
+            }
+
+        } else if (requestCode == PHOTO_REQUEST_CUT) {
+            try {
+                bitmap = data.getParcelableExtra("data");
+                sendImage(bitmap);
+
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+        }
+        super.onActivityResult(requestCode, resultCode, data);
+    }
+
+    /**
+     * 裁剪图片
+     *
+     * @param uri
+     */
+    private void crop(Uri uri) {
+        // 裁剪图片意图
+        Intent intent = new Intent("com.android.camera.action.CROP");
+        intent.setDataAndType(uri, "image/*");
+        intent.putExtra("crop", "true");
+        // 裁剪框的比例，1：1
+        intent.putExtra("aspectX", 1);
+        intent.putExtra("aspectY", 1);
+        // 裁剪后输出图片的尺寸大小
+        intent.putExtra("outputX", 250);
+        intent.putExtra("outputY", 250);
+        // 图片格式
+        intent.putExtra("outputFormat", "JPEG");
+        intent.putExtra("noFaceDetection", true);// 取消人脸识别
+        intent.putExtra("return-data", true);// true:不返回uri，false：返回uri
+        startActivityForResult(intent, PHOTO_REQUEST_CUT);
+    }
+
+    /**
+     * 上传头像
+     *
+     * @param bm
+     */
+    private void sendImage(Bitmap bm) {
+        ByteArrayOutputStream stream = new ByteArrayOutputStream();
+        bm.compress(Bitmap.CompressFormat.PNG, 60, stream);
+        byte[] bytes = stream.toByteArray();
+        InputStream sbs = new ByteArrayInputStream(bytes);//在这里把流上传到服务器
+        ToastUtil.show(mContext, "上传头像");
+        mCircleImageView.setImageBitmap(bm);
+    }
 }

@@ -1,91 +1,104 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-             xmlns:tools="http://schemas.android.com/tools"
-             android:layout_width="match_parent"
-             android:layout_height="match_parent"
-             tools:context="com.carporange.cloudmusic.fragment.PersonalRecommendationFragment">
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
+    <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                 xmlns:tools="http://schemas.android.com/tools"
+                 android:layout_width="match_parent"
+                 android:layout_height="match_parent"
+                 tools:context="com.carporange.cloudmusic.fragment.PersonalRecommendationFragment">
 
-        <com.carporange.cloudmusic.widget.CircleImageView
-            android:layout_width="66dp"
-            android:layout_height="66dp"
-            android:layout_marginLeft="@dimen/dp_35"
-            android:layout_marginTop="@dimen/dp_8"
-            android:src="@mipmap/circlepicture"
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <com.carporange.cloudmusic.widget.CircleImageView
+                android:layout_width="66dp"
+                android:layout_height="66dp"
+                android:layout_marginLeft="@dimen/dp_35"
+                android:layout_marginTop="@dimen/dp_8"
+                android:src="@mipmap/circlepicture"
+                />
+
+            <Button
+                android:id="@+id/btn_bottom_dialog_control"
+                style="?attr/buttonBarButtonStyle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp_8"
+                android:text="Dialog 显示/隐藏"/>
+
+            <TextView
+                android:id="@+id/universaladapter"
+                style="@style/textview"
+                android:text="@string/universaladapter"/>
+
+            <TextView
+                android:id="@+id/phone_persion"
+                style="@style/textview"
+                android:text="@string/phone_persion"/>
+
+            <TextView
+                android:id="@+id/update"
+                style="@style/textview"
+                android:text="@string/update"/>
+
+            <TextView
+                android:id="@+id/refresh"
+                style="@style/textview"
+                android:text="@string/refresh"/>
+
+            <TextView
+                android:id="@+id/music"
+                style="@style/textview"
+                android:text="@string/music"/>
+
+            <TextView
+                android:id="@+id/wvandlv"
+                style="@style/textview"
+                android:text="@string/wvandlv"/>
+
+            <com.carporange.cloudmusic.widget.CircleImageView
+                android:id="@+id/photo"
+                android:src="@mipmap/b"
+                android:layout_width="@dimen/dp_80"
+                android:layout_height="@dimen/dp_80"/>
+        </LinearLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <Button
+                android:id="@+id/bottom"
+                style="?attr/buttonBarButtonStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentRight="true"
+                android:text="win"/>
+
+            <Button
+                android:id="@+id/top"
+                style="?attr/buttonBarButtonStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:text="win"/>
+
+        </RelativeLayout>
+
+        <com.carporange.cloudmusic.widget.LoadingView
+            android:id="@+id/lodingView"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="76dp"
+            android:background="@drawable/loading"
             />
 
-        <Button
-            android:id="@+id/btn_bottom_dialog_control"
-            style="?attr/buttonBarButtonStyle"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/dp_8"
-            android:text="Dialog 显示/隐藏"/>
-
-        <TextView
-            android:id="@+id/universaladapter"
-            style="@style/textview"
-            android:text="@string/universaladapter"/>
-
-        <TextView
-            android:id="@+id/phone_persion"
-            style="@style/textview"
-            android:text="@string/phone_persion"/>
-
-        <TextView
-            android:id="@+id/update"
-            style="@style/textview"
-            android:text="@string/update"/>
-
-        <TextView
-            android:id="@+id/refresh"
-            style="@style/textview"
-            android:text="@string/refresh"/>
-
-        <TextView
-            android:id="@+id/music"
-            style="@style/textview"
-            android:text="@string/music"/>
-        <TextView
-            android:id="@+id/wvandlv"
-            style="@style/textview"
-            android:text="@string/wvandlv"/>
-
-    </LinearLayout>
-
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-        <Button
-            android:id="@+id/bottom"
-            style="?attr/buttonBarButtonStyle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:layout_alignParentRight="true"
-            android:text="win"/>
-
-        <Button
-            android:id="@+id/top"
-            style="?attr/buttonBarButtonStyle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:text="win"/>
-
-    </RelativeLayout>
-
-    <com.carporange.cloudmusic.widget.LoadingView
-        android:id="@+id/lodingView"
-        android:layout_width="60dp"
-        android:layout_height="60dp"
-        android:layout_gravity="center"
-        android:layout_marginTop="76dp"
-        android:background="@drawable/loading"
-        />
-
-</FrameLayout>
+    </FrameLayout>
+</ScrollView>

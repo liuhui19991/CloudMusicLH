@@ -38,7 +38,10 @@ import android.widget.ImageView;
 
 import com.carporange.cloudmusic.R;
 
-
+/**
+ * 圆形图片资源使用src才是圆形,选择之后可以通过设置bitmap来继续保证圆形
+ * Created by liuhui on 2016/6/27.
+ */
 public class CircleImageView extends ImageView {
 
     private static final ScaleType SCALE_TYPE = ScaleType.CENTER_CROP;
