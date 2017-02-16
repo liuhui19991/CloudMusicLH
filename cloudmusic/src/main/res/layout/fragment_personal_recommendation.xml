@@ -63,9 +63,22 @@
 
             <com.carporange.cloudmusic.widget.CircleImageView
                 android:id="@+id/photo"
-                android:src="@mipmap/b"
                 android:layout_width="@dimen/dp_80"
-                android:layout_height="@dimen/dp_80"/>
+                android:layout_height="@dimen/dp_80"
+                android:src="@mipmap/b"/>
+
+            <TextView
+                android:id="@+id/photo_album"
+                style="@style/textview"
+                android:text="@string/photo_album"/>
+            <!--下面是不能滑动的gridview-->
+            <com.lzy.widget.ExpandGridView
+                android:id="@+id/gridView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:horizontalSpacing="3dp"
+                android:numColumns="3"
+                android:verticalSpacing="3dp"/>
         </LinearLayout>
 
         <RelativeLayout

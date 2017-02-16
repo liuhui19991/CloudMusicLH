@@ -12,11 +12,12 @@ import com.bumptech.glide.Priority;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.request.target.SizeReadyCallback;
 import com.carporange.cloudmusic.R;
+import com.lzy.imagepicker.loader.ImageLoader;
 
 /**
  * Created by liuhui on 2016/7/19.
  */
-public class GlideUtil {
+public class GlideUtil implements ImageLoader {
     private static final String TAG = "GlideUtil";
 
     /**
@@ -134,5 +135,21 @@ public class GlideUtil {
                 .asGif()
                 .error(resource)
                 .into(iv);
+    }
+
+    @Override
+    public void displayImage(Activity activity, String path, ImageView imageView, int width, int height) {
+        Glide.with(activity)
+                .load(path)
+                .diskCacheStrategy(DiskCacheStrategy.RESULT)
+                .crossFade()
+                .dontAnimate()
+                .centerCrop()
+                .into(imageView);
+    }
+
+    @Override
+    public void clearMemoryCache() {
+
     }
 }

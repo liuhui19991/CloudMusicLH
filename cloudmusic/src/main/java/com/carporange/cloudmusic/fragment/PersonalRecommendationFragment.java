@@ -9,9 +9,15 @@ import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.WindowManager;
+import android.widget.BaseAdapter;
 import android.widget.Button;
+import android.widget.FrameLayout;
+import android.widget.ImageView;
 import android.widget.PopupWindow;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.carporange.cloudmusic.R;
 import com.carporange.cloudmusic.service.DownloadService;
@@ -21,13 +27,24 @@ import com.carporange.cloudmusic.ui.activity.RefreshAnimationActivity;
 import com.carporange.cloudmusic.ui.activity.UniversalActivity;
 import com.carporange.cloudmusic.ui.activity.WebAndListViewActivity;
 import com.carporange.cloudmusic.ui.base.BaseFragment;
+import com.carporange.cloudmusic.util.GlideUtil;
 import com.carporange.cloudmusic.util.L;
 import com.carporange.cloudmusic.util.T;
 import com.carporange.cloudmusic.widget.CircleImageView;
+import com.carporange.cloudmusic.widget.ProgressPieView;
+import com.lzy.imagepicker.ImagePicker;
+import com.lzy.imagepicker.bean.ImageItem;
+import com.lzy.imagepicker.ui.ImageGridActivity;
+import com.lzy.okserver.download.DownloadManager;
+import com.lzy.okserver.upload.UploadInfo;
+import com.lzy.okserver.upload.UploadManager;
+import com.lzy.widget.ExpandGridView;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -43,8 +60,13 @@ public class PersonalRecommendationFragment extends BaseFragment {
     private final String APK_URL = "http://surveyapp.fy.chaoxing.com/app/LauncherDemo5.apk";
     private Button top, bottom;
     private PopupWindow mPopupWindow;
+    private ImagePicker imagePicker;
+    private ArrayList<ImageItem> images;
     @BindView(R.id.photo)
     CircleImageView mCircleImageView;
+    @BindView(R.id.gridView)
+    ExpandGridView gridView;
+
     @Override
     public int getLayoutId() {
         return R.layout.fragment_personal_recommendation;
@@ -79,7 +101,7 @@ public class PersonalRecommendationFragment extends BaseFragment {
     }
 
     @OnClick({R.id.refresh, R.id.top, R.id.bottom, R.id.universaladapter, R.id.phone_persion, R.id.update,
-            R.id.music, R.id.wvandlv, R.id.photo})
+            R.id.music, R.id.wvandlv, R.id.photo, R.id.photo_album})
     void click(View view) {
         switch (view.getId()) {
             case R.id.refresh:
@@ -119,6 +141,15 @@ public class PersonalRecommendationFragment extends BaseFragment {
                         Intent.ACTION_PICK);
                 intent1.setType("image/*");
                 startActivityForResult(intent1, PHOTO_REQUEST_GALLERY);
+                break;
+            case R.id.photo_album:
+                imagePicker = ImagePicker.getInstance();
+                imagePicker.setImageLoader(new GlideUtil());
+                imagePicker.setShowCamera(true);
+                imagePicker.setSelectLimit(9);
+                imagePicker.setCrop(false);
+                Intent intent = new Intent(mContext, ImageGridActivity.class);
+                startActivityForResult(intent, 100);
                 break;
         }
     }
@@ -170,29 +201,6 @@ public class PersonalRecommendationFragment extends BaseFragment {
     private static final int PHOTO_REQUEST_CUT = 3;// 结果
     private Bitmap bitmap;
 
-
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (requestCode == PHOTO_REQUEST_GALLERY) {
-            if (data != null) {
-                // 得到图片的全路径
-                Uri uri = data.getData();
-                crop(uri);
-            }
-
-        } else if (requestCode == PHOTO_REQUEST_CUT) {
-            try {
-                bitmap = data.getParcelableExtra("data");
-                sendImage(bitmap);
-
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-
-        }
-        super.onActivityResult(requestCode, resultCode, data);
-    }
-
     /**
      * 裁剪图片
      *
@@ -228,5 +236,125 @@ public class PersonalRecommendationFragment extends BaseFragment {
         InputStream sbs = new ByteArrayInputStream(bytes);//在这里把流上传到服务器
         ToastUtil.show(mContext, "上传头像");
         mCircleImageView.setImageBitmap(bm);
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == ImagePicker.RESULT_CODE_ITEMS) {
+            if (data != null && requestCode == 100) {
+                images = (ArrayList<ImageItem>) data.getSerializableExtra(ImagePicker.EXTRA_RESULT_ITEMS);
+                MyAdapter adapter = new MyAdapter(images);
+                gridView.setAdapter(adapter);
+            } else {
+                Toast.makeText(mContext, "没有数据", Toast.LENGTH_SHORT).show();
+            }
+        }
+        if (requestCode == PHOTO_REQUEST_GALLERY) {
+            if (data != null) {
+                // 得到图片的全路径
+                Uri uri = data.getData();
+                crop(uri);
+            }
+
+        } else if (requestCode == PHOTO_REQUEST_CUT) {
+            try {
+                bitmap = data.getParcelableExtra("data");
+                sendImage(bitmap);
+
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+        }
+    }
+
+    private class MyAdapter extends BaseAdapter {
+
+        private List<ImageItem> items;
+
+        public MyAdapter(List<ImageItem> items) {
+            this.items = items;
+        }
+
+        public void setData(List<ImageItem> items) {
+            this.items = items;
+            notifyDataSetChanged();
+        }
+
+        @Override
+        public int getCount() {
+            return items.size();
+        }
+
+        @Override
+        public ImageItem getItem(int position) {
+            return items.get(position);
+        }
+
+        @Override
+        public long getItemId(int position) {
+            return position;
+        }
+
+        @Override
+        public View getView(int position, View convertView, ViewGroup parent) {
+            int size = gridView.getWidth() / 3;
+            ViewHolder holder;
+            if (convertView == null) {
+                convertView = View.inflate(mContext, R.layout.item_upload_manager, null);
+                holder = new ViewHolder(convertView);
+                convertView.setTag(holder);
+            } else {
+                holder = (ViewHolder) convertView.getTag();
+            }
+            imagePicker.getImageLoader().displayImage(mContext, getItem(position).path, holder.imageView, size, size);
+            return convertView;
+        }
+    }
+
+    private class ViewHolder {
+
+        private ImageView imageView;
+        private TextView tvProgress;
+        private ProgressPieView civ;
+        private View mask;
+
+        public ViewHolder(View convertView) {
+            imageView = (ImageView) convertView.findViewById(R.id.imageView);
+            FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, gridView.getWidth() / 3);
+            imageView.setLayoutParams(params);
+            tvProgress = (TextView) convertView.findViewById(R.id.tvProgress);
+            mask = convertView.findViewById(R.id.mask);
+            civ = (ProgressPieView) convertView.findViewById(R.id.civ);
+            tvProgress.setText("请上传");
+            civ.setText("请上传");
+        }
+
+        public void refresh(UploadInfo uploadInfo) {
+            if (uploadInfo.getState() == DownloadManager.NONE) {
+                tvProgress.setText("请上传");
+                civ.setText("请上传");
+            } else if (uploadInfo.getState() == UploadManager.ERROR) {
+                tvProgress.setText("上传出错");
+                civ.setText("错误");
+            } else if (uploadInfo.getState() == UploadManager.WAITING) {
+                tvProgress.setText("等待中");
+                civ.setText("等待");
+            } else if (uploadInfo.getState() == UploadManager.FINISH) {
+                tvProgress.setText("上传成功");
+                civ.setText("成功");
+            } else if (uploadInfo.getState() == UploadManager.UPLOADING) {
+                tvProgress.setText("上传中");
+                civ.setProgress((int) (uploadInfo.getProgress() * 100));
+                civ.setText((Math.round(uploadInfo.getProgress() * 10000) * 1.0f / 100) + "%");
+            }
+        }
+
+        public void finish() {
+            tvProgress.setText("上传成功");
+            civ.setVisibility(View.GONE);
+            mask.setVisibility(View.GONE);
+        }
     }
 }
