@@ -7,6 +7,9 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
+import android.os.Environment;
+import android.provider.MediaStore;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -43,6 +46,7 @@ import com.lzy.widget.ExpandGridView;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
+import java.io.File;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
@@ -51,6 +55,7 @@ import butterknife.BindView;
 import butterknife.OnClick;
 import cn.world.liuhui.utils.DialogUtil;
 import cn.world.liuhui.utils.ToastUtil;
+import cn.world.liuhui.widget.SelectPicPopupWindow;
 
 /**
  * Created by liuhui on 2016/6/27.
@@ -67,6 +72,7 @@ public class PersonalRecommendationFragment extends BaseFragment {
     CircleImageView mCircleImageView;
     @BindView(R.id.gridView)
     ExpandGridView gridView;
+    private SelectPicPopupWindow mSelectPicPopupWindow;
 
     @Override
     public int getLayoutId() {
@@ -138,10 +144,24 @@ public class PersonalRecommendationFragment extends BaseFragment {
                 startActivity(new Intent(mContext, MusicActivity.class));
                 break;
             case R.id.photo:
-                Intent intent1 = new Intent(
+                mSelectPicPopupWindow = new SelectPicPopupWindow(mContext, new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        switch (v.getId()) {
+                            case R.id.btn_pick_photo:
+                                gallery();
+                                break;
+                            case R.id.btn_take_photo:
+                                camera();
+                                break;
+                        }
+                    }
+                });
+                mSelectPicPopupWindow.showAtLocation(mContext.findViewById(R.id.sc), Gravity.BOTTOM | Gravity.CENTER_HORIZONTAL, 0, 0);
+                /*Intent intent1 = new Intent(
                         Intent.ACTION_PICK);
-                intent1.setType("image/*");
-                startActivityForResult(intent1, PHOTO_REQUEST_GALLERY);
+                intent1.setType("image*//*");
+                startActivityForResult(intent1, PHOTO_REQUEST_GALLERY);*/
                 break;
             case R.id.photo_album:
                 imagePicker = ImagePicker.getInstance();
@@ -154,6 +174,39 @@ public class PersonalRecommendationFragment extends BaseFragment {
                 Intent intent = new Intent(mContext, ImageGridActivity.class);
                 startActivityForResult(intent, 100);
                 break;
+        }
+    }
+
+    /*
+     * 从相册获取
+	 */
+    public void gallery() {
+        // 激活系统图库，选择一张图片
+        Intent intent = new Intent(Intent.ACTION_PICK);
+        intent.setType("image/*");
+        startActivityForResult(intent, PHOTO_REQUEST_GALLERY);
+    }
+
+    /*
+         * 从相机获取
+         */
+    public void camera() {
+        Intent intent = new Intent("android.media.action.IMAGE_CAPTURE");
+        // 判断存储卡是否可以用，可用进行存储
+        if (hasSdcard()) {
+            intent.putExtra(MediaStore.EXTRA_OUTPUT,
+                    Uri.fromFile(new File(Environment
+                            .getExternalStorageDirectory(), PHOTO_FILE_NAME)));
+        }
+        startActivityForResult(intent, PHOTO_REQUEST_CAMERA);
+    }
+
+    private boolean hasSdcard() {
+        if (Environment.getExternalStorageState().equals(
+                Environment.MEDIA_MOUNTED)) {
+            return true;
+        } else {
+            return false;
         }
     }
 
@@ -198,10 +251,11 @@ public class PersonalRecommendationFragment extends BaseFragment {
             }
         }
     };
-
-
+    private static final String PHOTO_FILE_NAME = "temp_photo.jpg";//头像名称
+    private static final int PHOTO_REQUEST_CAMERA = 1;// 拍照
     private static final int PHOTO_REQUEST_GALLERY = 2;// 从相册中选择
     private static final int PHOTO_REQUEST_CUT = 3;// 结果
+    private File tempFile;
     private Bitmap bitmap;
 
     /**
@@ -258,11 +312,27 @@ public class PersonalRecommendationFragment extends BaseFragment {
                 // 得到图片的全路径
                 Uri uri = data.getData();
                 crop(uri);
+            } else {
+                mSelectPicPopupWindow.dismiss();
+            }
+
+        } else if (requestCode == PHOTO_REQUEST_CAMERA) {
+            if (hasSdcard()) {
+                tempFile = new File(Environment.getExternalStorageDirectory(),
+                        PHOTO_FILE_NAME);
+                crop(Uri.fromFile(tempFile));
+            } else {
+                mSelectPicPopupWindow.dismiss();
+                ToastUtil.show(mContext, "未找到存储卡，无法存储照片！");
             }
 
         } else if (requestCode == PHOTO_REQUEST_CUT) {
             try {
+                mSelectPicPopupWindow.dismiss();
                 bitmap = data.getParcelableExtra("data");
+                if (null != tempFile) {
+                    boolean delete = tempFile.delete();
+                }
                 sendImage(bitmap);
 
             } catch (Exception e) {

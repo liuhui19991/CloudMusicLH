@@ -1,6 +1,7 @@
 <ScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/sc"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -65,6 +66,7 @@
                 android:id="@+id/photo"
                 android:layout_width="@dimen/dp_80"
                 android:layout_height="@dimen/dp_80"
+                android:layout_gravity="center_horizontal"
                 android:src="@mipmap/b"/>
 
             <TextView
