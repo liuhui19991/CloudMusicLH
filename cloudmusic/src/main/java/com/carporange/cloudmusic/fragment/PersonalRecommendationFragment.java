@@ -177,9 +177,9 @@ public class PersonalRecommendationFragment extends BaseFragment {
         }
     }
 
-    /*
+    /**
      * 从相册获取
-	 */
+     */
     public void gallery() {
         // 激活系统图库，选择一张图片
         Intent intent = new Intent(Intent.ACTION_PICK);
@@ -187,9 +187,9 @@ public class PersonalRecommendationFragment extends BaseFragment {
         startActivityForResult(intent, PHOTO_REQUEST_GALLERY);
     }
 
-    /*
-         * 从相机获取
-         */
+    /**
+     * 从相机获取
+     */
     public void camera() {
         Intent intent = new Intent("android.media.action.IMAGE_CAPTURE");
         // 判断存储卡是否可以用，可用进行存储
@@ -205,9 +205,7 @@ public class PersonalRecommendationFragment extends BaseFragment {
         if (Environment.getExternalStorageState().equals(
                 Environment.MEDIA_MOUNTED)) {
             return true;
-        } else {
-            return false;
-        }
+        } else return false;
     }
 
     /**
