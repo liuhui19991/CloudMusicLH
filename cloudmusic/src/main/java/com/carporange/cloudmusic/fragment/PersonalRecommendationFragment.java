@@ -312,10 +312,7 @@ public class PersonalRecommendationFragment extends BaseFragment {
                 // 得到图片的全路径
                 Uri uri = data.getData();
                 crop(uri);
-            } else {
-                mSelectPicPopupWindow.dismiss();
-            }
-
+            } else mSelectPicPopupWindow.dismiss();
         } else if (requestCode == PHOTO_REQUEST_CAMERA) {
             if (hasSdcard()) {
                 tempFile = new File(Environment.getExternalStorageDirectory(),
@@ -328,17 +325,15 @@ public class PersonalRecommendationFragment extends BaseFragment {
 
         } else if (requestCode == PHOTO_REQUEST_CUT) {
             try {
-                mSelectPicPopupWindow.dismiss();
+                mSelectPicPopupWindow.dismiss();//在此处为选择图片正确使用后关闭
                 bitmap = data.getParcelableExtra("data");
                 if (null != tempFile) {
                     boolean delete = tempFile.delete();
                 }
                 sendImage(bitmap);
-
             } catch (Exception e) {
                 e.printStackTrace();
             }
-
         }
     }
 
