@@ -303,9 +303,7 @@ public class PersonalRecommendationFragment extends BaseFragment {
                 images = (ArrayList<ImageItem>) data.getSerializableExtra(ImagePicker.EXTRA_RESULT_ITEMS);
                 MyAdapter adapter = new MyAdapter(images);
                 gridView.setAdapter(adapter);
-            } else {
-                Toast.makeText(mContext, "没有数据", Toast.LENGTH_SHORT).show();
-            }
+            } else Toast.makeText(mContext, "没有数据", Toast.LENGTH_SHORT).show();
         }
         if (requestCode == PHOTO_REQUEST_GALLERY) {
             if (data != null) {
