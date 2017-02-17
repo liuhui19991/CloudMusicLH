@@ -35,6 +35,7 @@ import com.carporange.cloudmusic.widget.ProgressPieView;
 import com.lzy.imagepicker.ImagePicker;
 import com.lzy.imagepicker.bean.ImageItem;
 import com.lzy.imagepicker.ui.ImageGridActivity;
+import com.lzy.imagepicker.view.CropImageView;
 import com.lzy.okserver.download.DownloadManager;
 import com.lzy.okserver.upload.UploadInfo;
 import com.lzy.okserver.upload.UploadManager;
@@ -146,8 +147,10 @@ public class PersonalRecommendationFragment extends BaseFragment {
                 imagePicker = ImagePicker.getInstance();
                 imagePicker.setImageLoader(new GlideUtil());
                 imagePicker.setShowCamera(true);
+                imagePicker.setCrop(true);        //允许裁剪（单选才有效）
+                imagePicker.setSaveRectangle(true); //是否按矩形区域保存
+                imagePicker.setStyle(CropImageView.Style.CIRCLE);  //裁剪框的形状
                 imagePicker.setSelectLimit(9);
-                imagePicker.setCrop(false);
                 Intent intent = new Intent(mContext, ImageGridActivity.class);
                 startActivityForResult(intent, 100);
                 break;

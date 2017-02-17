@@ -166,6 +166,11 @@ public class DialogUtil {
         pickerDialog.showDialog(context);
     }
 
+    /**
+     * 这里可以跳转到去设置页面
+     * @param activity  上下文
+     * @param content 要显示的内容
+     */
     public static void showSettingPermission(final Activity activity, String content) {
         Dialog deleteDialog = new AlertDialog.Builder(activity)
                 .setTitle("提示")
