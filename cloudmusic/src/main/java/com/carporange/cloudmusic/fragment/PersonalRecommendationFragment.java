@@ -80,15 +80,12 @@ public class PersonalRecommendationFragment extends BaseFragment {
     }
 
     private void initWaitDialog() {//展示我自定义的等待对话框
-        if (mWaitDialog == null) {
-            mWaitDialog = new Dialog(mContext, R.style.TRANSDIALOG);
-        }
+        if (mWaitDialog == null) mWaitDialog = new Dialog(mContext, R.style.TRANSDIALOG);
+
         mWaitDialog.setContentView(R.layout.trans_dialog);
         mWaitDialog.getWindow().setBackgroundDrawableResource(R.color.transparent);
         mWaitDialog.setCancelable(canCancel);
-        if (mWaitDialog != null) {
-            mWaitDialog.show();
-        }
+        if (mWaitDialog != null) mWaitDialog.show();
     }
 
     @Override
