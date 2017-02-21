@@ -33,10 +33,10 @@ public class UseInFragmentActivity extends BaseActivity {
 //        StatusBarUtil.setTranslucentForImageViewInFragment(UseInFragmentActivity.this,0, null);
         mVpHome = (ViewPager) findViewById(R.id.vp_home);
         mBottomNavigationBar = (BottomNavigationBar) findViewById(R.id.bottom_navigation_bar);
-        mBottomNavigationBar.addItem(new BottomNavigationItem(R.drawable.ic_favorite, "One"))
-                .addItem(new BottomNavigationItem(R.drawable.ic_gavel, "Two").setActiveColor(R.color.colorAccent))//通过这里的set可以设置底部栏的颜色
-                .addItem(new BottomNavigationItem(R.drawable.ic_grade, "Three"))
-                .addItem(new BottomNavigationItem(R.drawable.ic_group_work, "Four"))
+        mBottomNavigationBar.addItem(new BottomNavigationItem(R.drawable.ic_favorite, "One").setActiveColorResource(R.color.viewfinder_frame))
+                .addItem(new BottomNavigationItem(R.drawable.ic_gavel, "Two").setActiveColorResource(R.color.colorAccent))//通过这里的set可以设置底部栏的颜色
+                .addItem(new BottomNavigationItem(R.drawable.ic_grade, "Three").setActiveColorResource(R.color.bg_color))
+                .addItem(new BottomNavigationItem(R.drawable.ic_group_work, "Four").setActiveColorResource(R.color.divider_color))
                 .setMode(BottomNavigationBar.MODE_FIXED)//0不带字,1带字
                 .setBackgroundStyle(BottomNavigationBar.BACKGROUND_STYLE_RIPPLE)
                 .initialise();

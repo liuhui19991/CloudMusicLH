@@ -33,7 +33,7 @@ public class DetailActivity extends BaseActivity{
         mRecyclerView.setLayoutManager(new LinearLayoutManager(mContext));
         DynamicAdapter dynamicAdapter = new DynamicAdapter(R.layout.item, mList);
         View view = getLayoutInflater().inflate(R.layout.item, null);
-        dynamicAdapter.addHeaderView(view);//此处添加头布局上下滚动的跑马灯
+        dynamicAdapter.addHeaderView(view);//此处添加头布局
         mRecyclerView.setAdapter(dynamicAdapter);
 
     }
