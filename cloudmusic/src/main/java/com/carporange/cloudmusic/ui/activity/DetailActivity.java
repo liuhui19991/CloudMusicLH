@@ -16,10 +16,11 @@ import butterknife.BindView;
 /**
  * Created by liuhui on 2017/1/16.
  */
-public class DetailActivity extends BaseActivity{
+public class DetailActivity extends BaseActivity {
     @BindView(R.id.dynamic_rc)
     RecyclerView mRecyclerView;
     List<String> mList = new ArrayList<>();
+
     @Override
     protected int getLayoutId() {
         return R.layout.fragment_dynamic;
