@@ -160,7 +160,7 @@ public class LoginActivity extends BaseActivity implements OnClickListener, View
                         SpUtil.put("isRemberPassword", false);
                     }
                     startActivity(new Intent(mContext, MainActivity.class));
-                    AppCacheUtil.getInstance(mContext).put("liuhui","LIUHU");//设置缓存数据
+                    AppCacheUtil.getInstance(mContext).put("liuhui", "LIUHU");//设置缓存数据
                     finish();
                 } else {
                     Snackbar.make(username, "密码不正确", Snackbar.LENGTH_SHORT).show();
@@ -203,16 +203,12 @@ public class LoginActivity extends BaseActivity implements OnClickListener, View
         }
     };
 
-    private void callPhone() {
+    @PermissionYes(98)
+    private void getCallPhoneYes() {
         String number = "1871081";
         //用intent启动拨打电话
         Intent intent = new Intent(Intent.ACTION_CALL, Uri.parse("tel:" + number));
         startActivity(intent);
-    }
-
-    @PermissionYes(98)
-    private void getCallPhoneYes() {
-        callPhone();
     }
 
     @PermissionNo(98)
