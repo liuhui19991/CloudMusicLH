@@ -2,21 +2,20 @@
 
     <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <!-- Customize your theme here. -->
-        <item name="colorPrimary">@color/colorPrimary</item>
-        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorPrimary">@color/colorPrimary</item> <!--colorPrimary 对应ActionBar的颜色-->
+        <!--经过实测,可以通过设置colorPrimaryDark的颜色为透明然后再在代码中通过设置顶部栏为透明,可以实现当顶部栏为viewpager
+        的图片并可以滑动上去显示toolbar的时候,顶部一直是和所显示的东西颜色一致. 通常情况下只需要在代码中设置就好了-->
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>   <!--colorPrimaryDark对应状态栏的颜色-->
         <item name="colorAccent">@color/colorAccent</item>
+        <!--colorAccent 对应EditText编辑时、RadioButton选中、CheckBox等选中时的颜色-->
         <item name="android:actionMenuTextColor">@android:color/white</item>
         <item name="alertDialogTheme">@style/Theme.AppCompat.Light.Dialog.Alert.Self</item>
         <!-- 设置背景透明背景，右滑时才能看到上一个界面，否则会看到黑屏效果,添加转场动画变为缩放动画,去掉为平移动画
-        为了解决这个问题采用代码设置转场动画
-        -->
+        为了解决这个问题采用代码设置转场动画-->
         <!--<item name="android:windowIsTranslucent">true</item>-->
         <!--<item name="android:windowAnimationStyle">@style/Animation.Activity</item>-->
         <!--这句代码会让窗口的背景变透明-->
         <!--<item name="android:windowBackground">@android:color/transparent</item>-->
-        <!--colorPrimary 对应ActionBar的颜色。
-        colorPrimaryDark对应状态栏的颜色
-        colorAccent 对应EditText编辑时、RadioButton选中、CheckBox等选中时的颜色。-->
         <!-- 好像这里设置的转场动画当设置<item name="android:windowIsTranslucent">true</item>的时候没有用-->
         <item name="android:windowAnimationStyle">@style/activityAnimation</item>
     </style>
