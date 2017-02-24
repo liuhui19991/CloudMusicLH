@@ -95,35 +95,3 @@
         android:onClick="onBtnScroll"
         android:text="滚动咯"/>
 </RelativeLayout>
-    <!-- </com.seeker.tony.myapplication.VerticalLayout>-->
-
-    <!--<LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:orientation="horizontal">
-
-        <Button
-            android:id="@+id/tv_pre"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="去上一页"/>
-
-        <Button
-            android:id="@+id/tv_next"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="去评论页"/>
-
-
-        <Button
-            android:id="@+id/tv_webview"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="纯WebView效果"/>
-    </LinearLayout>
-
-</RelativeLayout>-->
