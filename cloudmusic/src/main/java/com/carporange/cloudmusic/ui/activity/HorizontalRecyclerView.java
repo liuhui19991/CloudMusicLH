@@ -48,6 +48,7 @@ public class HorizontalRecyclerView extends BaseActivity {
         initData();
         mRecycler.setLayoutManager(new LinearLayoutManager(mContext));
         mRecycler.setAdapter(new RecyclerViewAdapter());
+
     }
 
     /**
@@ -112,13 +113,19 @@ public class HorizontalRecyclerView extends BaseActivity {
         }
 
         @Override
-        public void onBindViewHolder(BaseHolder holder, int position) {
+        public void onBindViewHolder(BaseHolder holder, final int position) {
             if (holder instanceof HorizontalViewHolder) {
                 holder.refreshData(data.horizontalData, position);
             } else if (holder instanceof GridViewHolder) {
                 holder.refreshData(data.gridData, position);
             } else if (holder instanceof ItemViewHolder) {
                 holder.refreshData(data.verticalData.get(position - 2), position - 2);
+                ((ItemViewHolder) holder).imageview_item.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {//此处要-2才是确定的位置
+                        ToastUtil.show(mContext, "竖直的点击" + position);
+                    }
+                });
             }
             LogUtil.e(position + "位置" + data.verticalData.size());
         }
@@ -290,7 +297,13 @@ public class HorizontalRecyclerView extends BaseActivity {
             }
 
             @Override
-            public void onBindViewHolder(BaseHolder holder, int position) {
+            public void onBindViewHolder(BaseHolder holder, final int position) {
+                holder.itemView.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        ToastUtil.show(mContext, position + "被点击");
+                    }
+                });
                 holder.refreshData(data.get(position), position);
             }
 
@@ -323,6 +336,7 @@ public class HorizontalRecyclerView extends BaseActivity {
         public void refreshData(Integer data, int position) {
             super.refreshData(data, position);
             imageview_item.setBackgroundResource(data);
+
         }
     }
 
