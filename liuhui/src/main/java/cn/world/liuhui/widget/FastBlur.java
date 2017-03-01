@@ -3,6 +3,7 @@ package cn.world.liuhui.widget;
 import android.graphics.Bitmap;
 
 /**
+ * Created by liuhui on 2017/2/22.
  * 图片模糊的类
  */
 public class FastBlur {

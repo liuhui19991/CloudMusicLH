@@ -28,11 +28,8 @@ import cn.world.liuhui.utils.ToastUtil;
  */
 public class HorizontalRecyclerView extends BaseActivity {
     private RecyclerView recylcerview;//外层recyclerview
-
     private DataInfor data;//假数据
-
     private int screenWidth;//屏幕宽度
-
     private int HORIZONTAL_VIEW_X = 0;//水平RecyclerView滑动的距离
     @BindView(R.id.recycler)
     RecyclerView mRecycler;
