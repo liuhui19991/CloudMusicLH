@@ -1,7 +1,6 @@
 package com.carporange.cloudmusic.fragment;
 
 
-import android.Manifest;
 import android.app.Dialog;
 import android.content.Intent;
 import android.graphics.Color;
@@ -10,6 +9,7 @@ import android.view.View;
 
 import com.carporange.cloudmusic.R;
 import com.carporange.cloudmusic.event.ProgressVideoPlayer;
+import com.carporange.cloudmusic.ui.activity.AlphaHeaderActivity;
 import com.carporange.cloudmusic.ui.activity.BeautfulActivity;
 import com.carporange.cloudmusic.ui.activity.HorizontalRecyclerView;
 import com.carporange.cloudmusic.ui.activity.MyRecyclerViewLoadActivity;
@@ -135,9 +135,19 @@ public class SongMenuFragment extends BaseFragment {
         startActivity(new Intent(mContext, RecyclerSwipeActivity.class));
     }
 
-    @OnClick(R.id.baidumap)
-    void goBaiduMap() {
-        startActivity(new Intent(mContext, HorizontalRecyclerView.class));
+    @OnClick({R.id.swipalpha, R.id.baidumap})
+    void goBaiduMap(View view) {
+        switch (view.getId()) {
+            case R.id.swipalpha:
+                startActivity(new Intent(mContext, AlphaHeaderActivity.class));
+                break;
+            case R.id.baidumap:
+                startActivity(new Intent(mContext, HorizontalRecyclerView.class));
+                break;
+            default:
+
+                break;
+        }
         /*if (Build.VERSION.SDK_INT >= 23) {
             if (ContextCompat.checkSelfPermission(mContext,
                     Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {//没有权限
@@ -149,10 +159,10 @@ public class SongMenuFragment extends BaseFragment {
             startActivity(new Intent(mContext, BaiduMapActivity.class));
         }*/
 
-        AndPermission.with(this)
+       /* AndPermission.with(this)
                 .requestCode(99)
                 .permission(Manifest.permission.ACCESS_COARSE_LOCATION)
-                .send();
+                .send();*/
     }
 
     @Override

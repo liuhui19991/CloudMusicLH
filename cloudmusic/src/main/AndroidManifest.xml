@@ -81,6 +81,7 @@
         <activity android:name=".ui.activity.DetailActivity"/>
         <activity android:name=".ui.activity.UseInFragmentActivity"/>
         <activity android:name=".ui.activity.WebAndListViewActivity"/>
+        <activity android:name=".ui.activity.AlphaHeaderActivity"/>
 
         <service
             android:name=".service.MusicService"

@@ -71,6 +71,11 @@
                 android:id="@+id/baidumap"
                 style="@style/textview"
                 android:text="@string/baidumap"/>
+
+            <TextView
+                android:id="@+id/swipalpha"
+                style="@style/textview"
+                android:text="@string/alpha"/>
         </LinearLayout>
     </FrameLayout>
 </ScrollView>
