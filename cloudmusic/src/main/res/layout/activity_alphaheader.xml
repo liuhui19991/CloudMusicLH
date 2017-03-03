@@ -15,12 +15,12 @@
             android:layout_width="match_parent"
             android:layout_height="200dp">
 
-            <ImageView
-                android:id="@+id/iv_header"
+            <com.bigkoo.convenientbanner.ConvenientBanner
+                android:id="@+id/vp_header"
                 android:layout_width="match_parent"
                 android:layout_height="200dp"
-                android:background="@mipmap/b"
-                />
+                app:canLoop="true"
+                />  <!--  app:canLoop="true"控制循环与否-->
 
         </RelativeLayout>
 

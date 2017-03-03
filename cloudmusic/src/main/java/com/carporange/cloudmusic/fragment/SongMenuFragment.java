@@ -135,7 +135,7 @@ public class SongMenuFragment extends BaseFragment {
         startActivity(new Intent(mContext, RecyclerSwipeActivity.class));
     }
 
-    @OnClick({R.id.swipalpha, R.id.baidumap, R.id.swipalphabehavior})
+    @OnClick({R.id.swipalpha, R.id.baidumap})
     void goBaiduMap(View view) {
         switch (view.getId()) {
             case R.id.swipalpha:
@@ -143,9 +143,6 @@ public class SongMenuFragment extends BaseFragment {
                 break;
             case R.id.baidumap:
                 startActivity(new Intent(mContext, HorizontalRecyclerView.class));
-                break;
-            case R.id.swipalphabehavior:
-//                startActivity(new Intent(mContext, AlphaBehaviorActivity.class));
                 break;
             default:
 

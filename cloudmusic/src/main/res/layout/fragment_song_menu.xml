@@ -77,10 +77,6 @@
                 style="@style/textview"
                 android:text="@string/alpha"/>
 
-            <TextView
-                android:id="@+id/swipalphabehavior"
-                style="@style/textview"
-                android:text="@string/alpha２"/>
         </LinearLayout>
     </FrameLayout>
 </ScrollView>

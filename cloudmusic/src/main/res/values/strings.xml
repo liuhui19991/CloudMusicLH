@@ -18,7 +18,6 @@
     <string name="swiperecycler">侧滑删除</string>
     <string name="baidumap">RecyclerView嵌套RecyclerView</string>
     <string name="alpha">下拉放大的上拉渐变的页面</string>
-    <string name="alpha２">下拉放大的上拉渐变的页面２</string>
     <string name="recyclerload">自己完成的recycler上拉加载下拉刷新</string>
     <string name="popup">PopupWindow</string>
     <string name="jsactivity">JSActivity</string>

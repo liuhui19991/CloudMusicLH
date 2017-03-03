@@ -1,8 +1,8 @@
 apply plugin: 'com.android.application'
 apply plugin: 'android-apt'
-def supportVersion = "24.2.1"
-def buildSdkVersion = 24
-def buildToolVersion = "24.0.2"
+def supportVersion = "25.0.1"
+def buildSdkVersion = 25
+def buildToolVersion = "25.0.1"
 
 android {
     compileSdkVersion buildSdkVersion
@@ -129,6 +129,8 @@ dependencies {
     compile 'com.lzy.widget:imagepicker:0.3.2'
     //自定义view
     compile 'com.lzy.widget:view-core:0.2.3'
+    //轮播图
+    compile 'com.bigkoo:convenientbanner:2.0.5'
     /*   //If you can not start app, you cancel the annotation
            //如果app无法启动,请取消下面的注释
            //Other ABIs: optional

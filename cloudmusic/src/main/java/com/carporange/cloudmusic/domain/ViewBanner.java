@@ -7,11 +7,6 @@ import java.util.List;
  */
 public class ViewBanner {
 
-    /**
-     * url :
-     * banner : http://103.244.67.241/images/xxzg/banner.jpg
-     */
-
     private List<BannersBean> banners;
 
     public List<BannersBean> getBanners() {
