@@ -130,7 +130,7 @@ dependencies {
     //自定义view
     compile 'com.lzy.widget:view-core:0.2.3'
     //轮播图
-    compile 'com.bigkoo:convenientbanner:2.0.5'
+    compile 'com.youth.banner:banner:1.4.9'
     /*   //If you can not start app, you cancel the annotation
            //如果app无法启动,请取消下面的注释
            //Other ABIs: optional

@@ -6,24 +6,22 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
-import android.view.View;
 import android.widget.ImageView;
 
-import com.bigkoo.convenientbanner.ConvenientBanner;
-import com.bigkoo.convenientbanner.holder.CBViewHolderCreator;
-import com.bigkoo.convenientbanner.holder.Holder;
+import com.bumptech.glide.Glide;
 import com.carporange.cloudmusic.R;
 import com.carporange.cloudmusic.alphaswip.HeaderViewPagerFragment;
 import com.carporange.cloudmusic.alphaswip.RecyclerViewFragment;
 import com.carporange.cloudmusic.ui.base.BaseActivity;
 import com.lzy.widget.HeaderViewPager;
+import com.youth.banner.Banner;
+import com.youth.banner.loader.ImageLoader;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 import butterknife.BindView;
-import cn.world.liuhui.utils.ImageLoaderUtil;
 
 import static com.carporange.cloudmusic.R.id.scrollableLayout;
 
@@ -38,8 +36,8 @@ public class AlphaHeaderActivity extends BaseActivity {
     AppBarLayout mAppBarLayout;
     @BindView(R.id.viewPager)
     ViewPager mViewPager;
-    @BindView(R.id.vp_header)
-    ConvenientBanner mViewPagerHeader;
+    @BindView(R.id.banner)
+    Banner mViewPagerHeader;
     public List<HeaderViewPagerFragment> fragments;//必须要用继承headerviewpagerfragment的类
     private List<String> networkImages;
     private String[] images = {"http://img2.imgtn.bdimg.com/it/u=3093785514,1341050958&fm=21&gp=0.jpg",
@@ -65,18 +63,12 @@ public class AlphaHeaderActivity extends BaseActivity {
     @Override
     public void initViews() {
         networkImages = Arrays.asList(images);
-        mViewPagerHeader.setPages(new CBViewHolderCreator<NetworkImageHolderView>() {
-            @Override
-            public NetworkImageHolderView createHolder() {
-                return new NetworkImageHolderView();
-            }
-        }, networkImages)
-                //设置两个点图片作为翻页指示器，不设置则没有指示器，可以根据自己需求自行配合自己的指示器,不需要圆点指示器可用不设
-                .setPageIndicator(new int[]{R.drawable.shape_point_gre, R.drawable.shape_point_red})
-                //设置指示器的方向
-                .setPageIndicatorAlign(ConvenientBanner.PageIndicatorAlign.ALIGN_PARENT_RIGHT)
-                .setCanLoop(true);
-        mViewPagerHeader.setCanLoop(true);
+        //设置图片加载器
+        mViewPagerHeader.setImageLoader(new GlideImageLoader())
+        //设置图片集合
+        .setImages(networkImages)
+        //banner设置方法全部调用完毕时最后调用
+        .start();
 
         mAppBarLayout.setAlpha(0.0f);
         fragments = new ArrayList<>();
@@ -120,20 +112,26 @@ public class AlphaHeaderActivity extends BaseActivity {
         }
     }
 
-    public class NetworkImageHolderView implements Holder<String> {
-        private ImageView imageView;
-
+    public class GlideImageLoader extends ImageLoader {
         @Override
-        public View createView(Context context) {
-            //你可以通过layout文件来创建，也可以像我一样用代码创建，不一定是Image，任何控件都可以进行翻页
-            imageView = new ImageView(context);
-            imageView.setScaleType(ImageView.ScaleType.FIT_XY);
-            return imageView;
-        }
+        public void displayImage(Context context, Object path, ImageView imageView) {
+            /**
+             注意：
+             1.图片加载器由自己选择，这里不限制，只是提供几种使用方法
+             2.返回的图片路径为Object类型，由于不能确定你到底使用的那种图片加载器，
+             传输的到的是什么格式，那么这种就使用Object接收和返回，你只需要强转成你传输的类型就行，
+             切记不要胡乱强转！
+             */
 
-        @Override
-        public void UpdateUI(Context context, int position, String data) {
-            ImageLoaderUtil.display(imageView, data);
+            //Glide 加载图片简单用法
+            Glide.with(context).load(path).into(imageView);
+
+//            //Picasso 加载图片简单用法
+//            Picasso.with(context).load(path).into(imageView);
+
+//            //用fresco加载图片简单用法，记得要写下面的createImageView方法
+//            Uri uri = Uri.parse((String) path);
+//            imageView.setImageURI(uri);
         }
     }
 }
