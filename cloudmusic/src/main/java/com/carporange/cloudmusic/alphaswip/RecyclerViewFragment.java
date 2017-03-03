@@ -32,7 +32,7 @@ public class RecyclerViewFragment extends HeaderViewPagerFragment {
         mRecyclerView = (RecyclerView) view.findViewById(R.id.recyclerView);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
         mRecyclerView.setLayoutManager(linearLayoutManager);
-        mRecyclerView.setAdapter(new RecyclerAdapter());
+        mRecyclerView.setAdapter(new RecyclerAdapter());//在这里不能使用BaseRecyclerViewAdapterHelper
         return view;
     }
 

@@ -19,12 +19,13 @@
                 android:id="@+id/iv_header"
                 android:layout_width="match_parent"
                 android:layout_height="200dp"
+                android:background="@mipmap/b"
                 />
 
         </RelativeLayout>
 
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/recycler_alpha"
+        <android.support.v4.view.ViewPager
+            android:id="@+id/viewPager"
             android:layout_width="match_parent"
             android:layout_height="match_parent"/>
     </com.lzy.widget.HeaderViewPager>

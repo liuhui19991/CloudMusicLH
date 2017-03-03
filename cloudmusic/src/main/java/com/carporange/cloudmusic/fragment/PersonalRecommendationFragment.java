@@ -54,6 +54,7 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.OnClick;
 import cn.world.liuhui.utils.DialogUtil;
+import cn.world.liuhui.utils.LogUtil;
 import cn.world.liuhui.utils.ToastUtil;
 import cn.world.liuhui.widget.SelectPicPopupWindow;
 
@@ -90,6 +91,7 @@ public class PersonalRecommendationFragment extends BaseFragment {
 
     @Override
     protected void initViews() {
+        LogUtil.e("个人中心");
         top = findView(R.id.top);
         bottom = findView(R.id.bottom);
 //        initWaitDialog();  //现在这个方法执行的时候会出现创建Dialog时候空指针
