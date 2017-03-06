@@ -1,48 +1,36 @@
-package com.carporange.cloudmusic.ui.activity;
+package com.carporange.cloudmusic.fragment;
 
-import android.support.design.widget.TabLayout;
+import android.content.Context;
+import android.support.design.widget.AppBarLayout;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.widget.ImageView;
 
+import com.bumptech.glide.Glide;
 import com.carporange.cloudmusic.R;
-import com.carporange.cloudmusic.adapter.CarpFragmentPagerAdapter;
-import com.carporange.cloudmusic.fragment.AlphaHeaderFragment;
-import com.carporange.cloudmusic.fragment.RankingListFragment;
-import com.carporange.cloudmusic.ui.base.BaseActivity;
+import com.carporange.cloudmusic.alphaswip.HeaderViewPagerFragment;
+import com.carporange.cloudmusic.alphaswip.RecyclerViewFragment;
+import com.carporange.cloudmusic.ui.base.BaseFragment;
+import com.lzy.widget.HeaderViewPager;
+import com.youth.banner.Banner;
+import com.youth.banner.loader.ImageLoader;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 import butterknife.BindView;
 
+import static com.carporange.cloudmusic.R.id.scrollableLayout;
+
 /**
- * Created by liuhui on 2017/3/2.
+ * Created by liuhui on 2017/3/6.
  */
 
-public class AlphaHeaderActivity extends BaseActivity {
-    @BindView(R.id.viewPager_discovery)
-    ViewPager mViewPager;
-    @BindView(R.id.tabLayout)
-    TabLayout mTabLayout;
-
-    @Override
-    protected int getLayoutId() {
-        return R.layout.fragment_alphaheader;
-    }
-
-    @Override
-    public void initActionBar() {
-    }
-
-    @Override
-    public void initViews() {
-        CarpFragmentPagerAdapter fpa = new CarpFragmentPagerAdapter(getSupportFragmentManager());
-        fpa.addFragment(new AlphaHeaderFragment(), "滑动渐变");
-        fpa.addFragment(new RankingListFragment(), "排行榜");
-        mViewPager.setAdapter(fpa);
-        mViewPager.setOffscreenPageLimit(fpa.getCount());
-        mTabLayout.setSelectedTabIndicatorColor(0xff324567);//设置tablayout的指示颜色
-        mTabLayout.setTabTextColors(0xff0ff0FF, 0xfff000FF);//字体标准颜色和选中颜色   这两句代码都可以在布局文件中设置
-        mTabLayout.setupWithViewPager(mViewPager);
-    }
-
-   /* @BindView(scrollableLayout)
+public class AlphaHeaderFragment extends BaseFragment {
+    @BindView(scrollableLayout)
     HeaderViewPager mHeaderViewPager;
     @BindView(R.id.appbar)
     AppBarLayout mAppBarLayout;
@@ -65,28 +53,21 @@ public class AlphaHeaderActivity extends BaseActivity {
     protected int getLayoutId() {
         return R.layout.activity_alphaheader;
     }
-
-    @Override
-    public void initActionBar() {
-        super.initActionBar();
-        toolbar.setTitle("滑动渐变");
-    }
-
     @Override
     public void initViews() {
         networkImages = Arrays.asList(images);
         //设置图片加载器
         mViewPagerHeader.setImageLoader(new GlideImageLoader())
-        //设置图片集合
-        .setImages(networkImages)
-        //banner设置方法全部调用完毕时最后调用
-        .start();
+                //设置图片集合
+                .setImages(networkImages)
+                //banner设置方法全部调用完毕时最后调用
+                .start();
 
         mAppBarLayout.setAlpha(0.0f);
         fragments = new ArrayList<>();
         fragments.add(RecyclerViewFragment.newInstance());
         mHeaderViewPager.setCurrentScrollableContainer(fragments.get(0));
-        mViewPager.setAdapter(new ContentAdapter(getSupportFragmentManager()));
+        mViewPager.setAdapter(new ContentAdapter(getFragmentManager()));
         mHeaderViewPager.setOnScrollListener(new HeaderViewPager.OnScrollListener() {
             @Override
             public void onScroll(int currentY, int maxY) {
@@ -97,9 +78,9 @@ public class AlphaHeaderActivity extends BaseActivity {
         });
     }
 
-    *//**
+    /**
      * 内容页的适配器
-     *//*
+    */
     private class ContentAdapter extends FragmentPagerAdapter {
 
         public ContentAdapter(FragmentManager fm) {
@@ -127,13 +108,13 @@ public class AlphaHeaderActivity extends BaseActivity {
     public class GlideImageLoader extends ImageLoader {
         @Override
         public void displayImage(Context context, Object path, ImageView imageView) {
-            *//**
-     注意：
-     1.图片加载器由自己选择，这里不限制，只是提供几种使用方法
-     2.返回的图片路径为Object类型，由于不能确定你到底使用的那种图片加载器，
-     传输的到的是什么格式，那么这种就使用Object接收和返回，你只需要强转成你传输的类型就行，
-     切记不要胡乱强转！
-     *//*
+
+           /* 注意：
+            1.图片加载器由自己选择，这里不限制，只是提供几种使用方法
+            2.返回的图片路径为Object类型，由于不能确定你到底使用的那种图片加载器，
+            传输的到的是什么格式，那么这种就使用Object接收和返回，你只需要强转成你传输的类型就行，
+            切记不要胡乱强转！*/
+
 
             //Glide 加载图片简单用法
             Glide.with(context).load(path).into(imageView);
@@ -145,5 +126,5 @@ public class AlphaHeaderActivity extends BaseActivity {
 //            Uri uri = Uri.parse((String) path);
 //            imageView.setImageURI(uri);
         }
-    }*/
+    }
 }
