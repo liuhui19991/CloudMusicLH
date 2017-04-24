@@ -36,6 +36,7 @@ import com.carporange.cloudmusic.ui.base.BaseFragment;
 import com.carporange.cloudmusic.ui.dialog.WaitDialog;
 import com.carporange.cloudmusic.util.GsonUtil;
 import com.carporange.cloudmusic.util.L;
+import com.carporange.cloudmusic.widget.CustomDialog;
 import com.carporange.cloudmusic.widget.ViewPagerCycle;
 import com.yanzhenjie.permission.AndPermission;
 import com.yanzhenjie.permission.PermissionNo;
@@ -174,9 +175,20 @@ public class AnchorRadioFragment extends BaseFragment implements MyAdapter.ItemC
         startActivity(new Intent(getContext(), WebviewActivity.class));
     }
 
-    @OnClick(R.id.popup)
-    void showPopupWindow() {
-        showPopwindow();
+    @OnClick({R.id.popup,R.id.show_dialog})
+    void showPopupWindow(View view) {
+        switch (view.getId()) {
+            case R.id.popup:
+                showPopwindow();
+                break;
+            case R.id.show_dialog:
+                showDialog();
+                break;
+        }
+    }
+
+    private void showDialog() {
+        new CustomDialog(mContext,R.style.TRANSDIALOG).show();
     }
 
     @OnClick(R.id.jsactivity)
