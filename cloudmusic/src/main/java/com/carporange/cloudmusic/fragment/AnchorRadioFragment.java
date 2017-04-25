@@ -188,9 +188,9 @@ public class AnchorRadioFragment extends BaseFragment implements MyAdapter.ItemC
     }
 
     private void showDialog() {
-        new CustomDialog(mContext, R.style.TRANSDIALOG).show();
-//        customDialog.setCanceledOnTouchOutside(false);
-//        customDialog.show();
+        CustomDialog customDialog = new CustomDialog(mContext, R.style.TRANSDIALOG);
+        customDialog.setCanceledOnTouchOutside(false);
+        customDialog.show();
     }
 
     @OnClick(R.id.jsactivity)

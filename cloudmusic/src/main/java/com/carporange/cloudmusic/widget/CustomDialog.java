@@ -52,6 +52,6 @@ public class CustomDialog extends Dialog implements View.OnClickListener {
     @Override
     public void onClick(View v) {
         ToastUtil.show(mContext, "dialog被点击了");
-        dismiss();
+        cancel();
     }
 }
