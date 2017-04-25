@@ -175,7 +175,7 @@ public class AnchorRadioFragment extends BaseFragment implements MyAdapter.ItemC
         startActivity(new Intent(getContext(), WebviewActivity.class));
     }
 
-    @OnClick({R.id.popup,R.id.show_dialog})
+    @OnClick({R.id.popup, R.id.show_dialog})
     void showPopupWindow(View view) {
         switch (view.getId()) {
             case R.id.popup:
@@ -188,7 +188,9 @@ public class AnchorRadioFragment extends BaseFragment implements MyAdapter.ItemC
     }
 
     private void showDialog() {
-        new CustomDialog(mContext,R.style.TRANSDIALOG).show();
+        new CustomDialog(mContext, R.style.TRANSDIALOG).show();
+//        customDialog.setCanceledOnTouchOutside(false);
+//        customDialog.show();
     }
 
     @OnClick(R.id.jsactivity)
@@ -207,22 +209,32 @@ public class AnchorRadioFragment extends BaseFragment implements MyAdapter.ItemC
 
         mPopupWindow = new PopupWindow(view,
                 WindowManager.LayoutParams.MATCH_PARENT,
-                WindowManager.LayoutParams.WRAP_CONTENT);
+                WindowManager.LayoutParams.WRAP_CONTENT);//popupwindow展示全屏的时候不能点击隐藏
 
         // 设置popWindow弹出窗体可点击，这句话必须添加，并且是true
         mPopupWindow.setFocusable(true);
-
+       /* mPopupWindow.setTouchInterceptor(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                System.out.println(mPopupWindow.isFocusable() + "时间" + event.getAction());
+                if (event.getAction() == MotionEvent.ACTION_OUTSIDE && !mPopupWindow.isFocusable()) {
+                    //如果焦点不在popupWindow上，且点击了外面，不再往下dispatch事件：
+                    //不做任何响应,不 dismiss popupWindow
+                    return true;
+                }
+                return false;
+            }
+        });*/
 
         // 实例化一个ColorDrawable颜色为半透明
         ColorDrawable dw = new ColorDrawable(0xb0000000);
-        mPopupWindow.setBackgroundDrawable(dw);
-
+//        mPopupWindow.setBackgroundDrawable(dw);//此处不设置点击返回按钮无效
 
         // 设置popWindow的显示和消失动画
         mPopupWindow.setAnimationStyle(R.style.mypopwindow_anim_style);
         // 在底部显示
         mPopupWindow.showAtLocation(getActivity().findViewById(R.id.popup),
-                Gravity.BOTTOM, 0, 0);
+                Gravity.CENTER, 0, 0);
 
         // 这里检验popWindow里的button是否可以点击
         view.findViewById(R.id.first).setOnClickListener(this);

@@ -33,6 +33,7 @@ public class CustomDialog extends Dialog implements View.OnClickListener {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         View view = LayoutInflater.from(mContext).inflate(R.layout.poplayout, null);
+        setContentView(view);//这个应该先设置要不然下面设置宽度将不起作用
         Window window = getWindow();
         window.setGravity(Gravity.CENTER); // 此处可以设置dialog显示的位置
 //        <item name="android:windowAnimationStyle">@style/mypopwindow_anim_style</item>
@@ -42,11 +43,10 @@ public class CustomDialog extends Dialog implements View.OnClickListener {
         if (params == null) {//dialog获取的params为null,应该是将布局文件宽高均按照wrap_content处理
             params = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
         } else {
-//            params.width = window.getWindowManager().getDefaultDisplay().getWidth();//可以在此动态设置dialog的宽度
+            params.width = window.getWindowManager().getDefaultDisplay().getWidth();//可以在此动态设置dialog的宽度
         }
-        view.findViewById(R.id.third).setOnClickListener(this);
         view.setLayoutParams(params);
-        setContentView(view);
+        view.findViewById(R.id.third).setOnClickListener(this);
     }
 
     @Override
